@@ -1,0 +1,19 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import App from "../../App.jsx";
+import { projects } from "../../data.js";
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+const { project } = Astro.props;
+---
+
+<SiteLayout
+  title={`${project.client} case study | Andrew Fonseka`}
+  description={project.summary}
+>
+  <App projectId={project.id} client:load />
+</SiteLayout>
