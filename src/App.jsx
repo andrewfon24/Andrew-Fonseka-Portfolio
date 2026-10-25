@@ -193,7 +193,9 @@ export default function App({ projectId = null }) {
             <div className="hero-art">
               <div className="portrait-frame">
                 <img
-                  src="/images/andrew-fonseka.jpg"
+                  src="/images/andrew-fonseka-800.webp"
+                  srcSet="/images/andrew-fonseka-240.webp 240w, /images/andrew-fonseka-800.webp 800w"
+                  sizes="(max-width: 640px) 88px, 440px"
                   alt="Andrew Fonseka, Paid Media and Performance Marketing Specialist"
                   fetchPriority="high"
                   width="1122"
