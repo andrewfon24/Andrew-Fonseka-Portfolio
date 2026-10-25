@@ -217,7 +217,7 @@ export const capabilities = [
 
 export const experience = [
   {
-    company: "Independent",
+    company: "Independent, Self-employed (project-based)",
     role: "Paid Media Consultant",
     date: "2026 – Present",
     type: "Part-time",
