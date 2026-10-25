@@ -215,6 +215,45 @@ export const capabilities = [
   },
 ];
 
+export const stackGroups = [
+  {
+    id: "paid",
+    name: "Paid media platforms",
+    tools: ["Google Ads", "Meta Ads", "Microsoft Advertising", "LinkedIn Ads", "TikTok Ads"],
+  },
+  {
+    id: "analytics",
+    name: "Analytics & tracking",
+    tools: [
+      "Google Analytics 4",
+      "Google Search Console",
+      "Google Tag Manager",
+      "Microsoft Clarity",
+      "Looker Studio",
+      "BrightLocal",
+      "Ahrefs",
+      "SEMrush",
+      "Zapier",
+      "Screaming Frog",
+    ],
+  },
+  {
+    id: "productivity",
+    name: "Productivity, systems & project management",
+    tools: ["Airtable", "Microsoft 365", "Google Workspace", "Asana", "ClickUp", "Notion", "Supermetrics"],
+  },
+  {
+    id: "email",
+    name: "Email & CRM",
+    tools: ["HubSpot", "Mailchimp", "Klaviyo", "Drip"],
+  },
+  {
+    id: "cms",
+    name: "CMS, e-commerce & design",
+    tools: ["WordPress", "Wix", "Shopify", "Canva"],
+  },
+];
+
 export const experience = [
   {
     company: "Independent, Self-employed (project-based)",

@@ -20,7 +20,7 @@ import {
   CircleCheck,
   ScanLine,
 } from "lucide-react";
-import { projects, capabilities, experience, testimonials } from "./data";
+import { projects, stackGroups, experience, testimonials } from "./data";
 import CaseStudyPage from "./CaseStudyPage";
 import ContactSection from "./ContactSection";
 import BrandIcon from "./BrandIcon";
@@ -51,7 +51,6 @@ export default function App({ projectId = null }) {
   const [menu, setMenu] = useState(false);
   const [filter, setFilter] = useState("All work");
   const caseProject = projects.find((p) => p.id === projectId);
-  const [capability, setCapability] = useState(0);
   const [testimonial, setTestimonial] = useState(0);
   const [active, setActive] = useState("");
   useEffect(() => {
@@ -90,8 +89,6 @@ export default function App({ projectId = null }) {
     document.addEventListener("keydown", close);
     return () => document.removeEventListener("keydown", close);
   }, [menu]);
-  const current = capabilities[capability];
-  const CapabilityIcon = icons[current.icon];
   const quote = testimonials[testimonial];
   return (
     <>
@@ -511,68 +508,20 @@ export default function App({ projectId = null }) {
                   <br /> and systems that make growth work.
                 </p>
               </div>
-              <div className="expertise-layout">
-                <div
-                  className="capability-buttons"
-                  aria-label="Explore capabilities"
-                >
-                  {capabilities.map((c, i) => {
-                    const Icon = icons[c.icon];
-                    return (
-                      <button
-                        key={c.name}
-                        aria-pressed={i === capability}
-                        onClick={() => setCapability(i)}
-                      >
-                        <Icon size={20} />
-                        <span>{c.name}</span>
-                        <ArrowUpRight size={19} />
-                      </button>
-                    );
-                  })}
-                </div>
-                <div className="capability-panel" key={current.name}>
-                  <div className="capability-heading">
-                    <div className="capability-icon">
-                      <CapabilityIcon size={29} />
-                    </div>
-                    <span>
-                      {String(capability + 1).padStart(2, "0")} /{" "}
-                      {String(capabilities.length).padStart(2, "0")}
-                    </span>
+              <div className="stack-grid">
+                {stackGroups.map((g) => (
+                  <div className={`stack-group stack-${g.id}`} key={g.id}>
+                    <h3>{g.name}</h3>
+                    <ul>
+                      {g.tools.map((t) => (
+                        <li key={t}>
+                          <BrandIcon tool={t} />
+                          <span>{t}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <h3>{current.title}</h3>
-                  <p>{current.description}</p>
-                  <div className="tool-tags">
-                    {current.tools.map((t) => (
-                      <span key={t}>
-                        <BrandIcon tool={t} />
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  {current.supporting && (
-                    <div className="capability-supporting">
-                      <h4>{current.supporting.label}</h4>
-                      <div className="tool-tags">
-                        {current.supporting.tools.map((tool) => (
-                          <span key={tool}>
-                            <BrandIcon tool={tool} />
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  <div className="capability-points">
-                    {current.points.map((p) => (
-                      <span key={p}>
-                        <Check size={14} />
-                        {p}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </div>
               <div className="certifications">
                 <div className="cert-heading">

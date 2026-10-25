@@ -32,6 +32,17 @@ const toolBrands = {
   "Microsoft 365": "microsoft.com",
   "Google Workspace": "workspace.google.com",
   Canva: "canva.com",
+  "Google Analytics 4": "google.com",
+  "Google Search Console": "google.com",
+  "Microsoft Clarity": "microsoft.com",
+  BrightLocal: "brightlocal.com",
+  SEMrush: "semrush.com",
+  "Screaming Frog": "screamingfrog.co.uk",
+  Airtable: "airtable.com",
+  Supermetrics: "supermetrics.com",
+  Drip: "drip.com",
+  WordPress: "wordpress.org",
+  Wix: "wix.com",
 };
 
 const localMarks = {
@@ -60,6 +71,7 @@ const productMarks = {
   "Google Workspace": "google-icon",
   "Google Ads": "google-ads",
   GA4: "google-analytics",
+  "Google Analytics 4": "google-analytics",
   "Google Tag Manager": "google-tag-manager",
   "Enhanced Conversions": "google-ads",
   "Apps Script": "google-apps-script",
@@ -87,6 +99,8 @@ export default function BrandIcon({ tool, domain, className = "" }) {
           loading="lazy"
           onError={() => setFailed(true)}
         />
+      ) : tool ? (
+        <b className="brand-letter">{tool.replace(/^(Google|Microsoft) /, "")[0]}</b>
       ) : (
         <BadgeCheck size={20} />
       )}

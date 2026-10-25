@@ -106,10 +106,15 @@ test("brand icons, recommendations and career expansion work", async ({
   context,
 }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Measurement", exact: true }).click();
-  await expect(page.locator(".capability-panel")).toContainText(
-    "Google Tag Manager",
-  );
+  await expect(page.locator(".stack-group h3")).toHaveText([
+    "Paid media platforms",
+    "Analytics & tracking",
+    "Productivity, systems & project management",
+    "Email & CRM",
+    "CMS, e-commerce & design",
+  ]);
+  await expect(page.locator(".stack-group li")).toHaveCount(30);
+  await expect(page.locator(".stack-analytics")).toContainText("Screaming Frog");
   await page.getByRole("button", { name: "Next recommendation" }).click();
   await expect(page.locator(".quote-person")).toContainText(
     "Hashan Nalinda Fernando",
@@ -124,21 +129,11 @@ test("brand icons, recommendations and career expansion work", async ({
   await kites.locator("summary").click();
   await expect(kites.locator(".experience-detail")).toBeVisible();
   await expect(kites).toContainText("Led four client accounts");
-  await expect(page.locator(".capability-buttons button")).toHaveCount(4);
-  for (const name of [
-    "Paid media",
-    "Measurement",
-    "Automation",
-    "CRM & lifecycle",
-  ]) {
-    await page.getByRole("button", { name, exact: true }).click();
-    const imgs = page.locator(".tool-tags .brand-icon img");
-    expect(await imgs.count()).toBeGreaterThan(0);
-    for (const img of await imgs.all())
-      await expect(img).toHaveAttribute(
-        "src",
-        /cdn\.brandfetch\.io|\/images\/brands\//,
-      );
+  for (const li of await page.locator(".stack-group li").all()) {
+    const img = li.locator(".brand-icon img");
+    if (await img.count())
+      await expect(img).toHaveAttribute("src", /cdn\.brandfetch\.io|\/images\/brands\//);
+    else await expect(li.locator(".brand-letter")).toHaveCount(1);
   }
   await expect(page.locator(".cert-grid .brand-icon")).toHaveCount(6);
   await expect(page.locator(".testimonial-linkedin")).toHaveAttribute(
