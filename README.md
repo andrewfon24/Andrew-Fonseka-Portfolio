@@ -44,7 +44,7 @@ The build uses `https://andrewfonseka.com` for canonical links, per-page social 
 - `docs/design-and-sources.md`: content and asset provenance.
 - `docs/impeccable-review.md`: Impeccable review scope and decisions.
 
-Selected work features Aegon, the private Saudi university and Pan Asia Bank in that order, followed by smaller Petmart and DATS cards. All five studies have dedicated pages. The compact career timeline keeps employers, institutions, dates and roles visible, with supporting details available on expansion.
+Selected work features the private Saudi university, Pan Asia Bank and Aegon as three infographic story cards, followed by smaller Petmart and DATS cards. Every card links to its full case study. All five studies have dedicated pages. The compact career timeline keeps employers, institutions, dates and roles visible, with supporting details available on expansion.
 
 Brand identities were researched through Brandfetch. Locally hosted product marks and fallbacks preserve recognizability; other marks use the exact Brandfetch display URLs. The Data Analysis credential has a neutral icon because its issuer was not supplied. Marks do not imply endorsement.
 

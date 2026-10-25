@@ -76,3 +76,9 @@ The résumé download was replaced with the user-uploaded “Andrew Fonseka Resu
 Navbar sizing restored to the earlier compact design while retaining the current links. The hero name and complete role now align inline on desktop, with natural mobile wrapping. The portrait favicon embeds the original unmodified JPEG in an SVG viewport focused on the face; the new favicon URL avoids stale monogram caches.
 
 Navbar clarification: retained the larger 88px desktop bar and 48px link targets, with Approach, Systems, Results, References and Contact in the middle. Paragraph typography remains unchanged pending discussion.
+
+## Featured story cards and Drive résumé
+
+Selected Work now follows the user’s supplied reference: university, Pan Asia Bank and Aegon in three equal-width cards, followed by Petmart and DATS. Every card has an explicit Read the case study link and arrow. Mini graphics reuse the documented 125 versus 17 priority-college enrolments, US$15K/US$10K media split and reported Aegon relative changes. The new −13% cost per lead and +18% completed-application figures, SOL attribution and account-ownership descriptions come directly from the user-provided reference image. No absolute Aegon acquisition figures or unprovided reporting periods are inferred. The full Aegon narrative includes the new relative outcomes.
+
+Résumé replaced with the PDF downloaded through the authenticated Google Drive connection from file 1x_UrUejTH4t4T_Wdb5qr2ePsnV0hs78i, preserving its original bytes.

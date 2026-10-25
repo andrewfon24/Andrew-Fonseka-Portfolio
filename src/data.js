@@ -4,7 +4,7 @@ export const projects = [
     category: "Education",
     client: "Private university · Saudi Arabia",
     period: "May–Aug 2026",
-    context: "Independent · via partner agency",
+    context: "Contract · via partner agency SOL",
     title: "From interest to intake.",
     summary: "A sharper signal. A stronger student pipeline.",
     metric: "312",
@@ -126,7 +126,7 @@ export const projects = [
       "Connected HubSpot offline conversions, implemented GA4 and server-side GTM, improved event deduplication, and built an Apps Script campaign builder with naming, UTM and compliance controls.",
     learning:
       "Trustworthy conversion signals and repeatable operations make better decisions possible at scale.",
-    note: "Only figures approved for public discussion are included. Absolute budgets and performance metrics are confidential. Event Match Quality is a relative improvement. Approximately 12 working days saved annually is an estimate associated with the campaign builder.",
+    note: "Relative changes in cost per lead (−13%) and completed applications (+18%) were supplied in Andrew’s updated case-study reference. Absolute budgets and performance figures remain confidential. Event Match Quality is a relative improvement. Approximately 12 working days saved annually is an estimate associated with the campaign builder.",
     stats: [
       ["50+", "Business-unit ad accounts"],
       ["−60%", "Compliance review time"],

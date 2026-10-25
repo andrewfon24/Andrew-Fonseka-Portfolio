@@ -24,6 +24,7 @@ import { projects, capabilities, experience, testimonials } from "./data";
 import CaseStudyPage from "./CaseStudyPage";
 import ContactSection from "./ContactSection";
 import BrandIcon from "./BrandIcon";
+import WorkCard from "./WorkCard";
 import { Systems } from "./FeaturedSections";
 
 const resume = "/documents/Andrew_Fonseka_Resume.pdf";
@@ -43,51 +44,8 @@ function Label({ children, light = false }) {
   );
 }
 
-const featuredWorkIds = ["aegon", "university", "panasia"];
+const featuredWorkIds = ["university", "panasia", "aegon"];
 const additionalWorkIds = ["petmart", "dats"];
-const workSummaries = {
-  aegon:
-    "Connected conversion signals and automated campaign checks across 50+ US and Canadian ad accounts.",
-  university:
-    "Connected Meta campaigns to admissions outcomes, then focused on the programs that needed students most.",
-  panasia:
-    "Used lead quality to allocate a fixed media budget across Meta and Google, measuring success in funded loans.",
-  petmart:
-    "Connected Google Shopping and Performance Max acquisition to repeat purchases and subscriptions.",
-  dats: "Rebuilt campaigns and the enquiry journey to generate more qualified leads on the same media budget.",
-};
-
-function WorkCard({ project, compact = false, number }) {
-  return (
-    <article
-      className={`project-card ${compact ? "work-small-card" : "work-feature-row"}`}
-    >
-      <a className="project-open" href={`/case-studies/${project.id}/`}>
-        <div className="work-row-copy">
-          <div className="project-client">
-            {project.client}
-            <span>{project.category}</span>
-          </div>
-          <h3>{project.title}</h3>
-          <p>{workSummaries[project.id]}</p>
-          <span className="project-case-link">
-            Read the case study <ArrowRight size={16} aria-hidden="true" />
-          </span>
-        </div>
-        <div className="work-row-result">
-          {!compact && (
-            <span className="work-row-index" aria-hidden="true">
-              0{number}
-            </span>
-          )}
-          <strong>{project.metric}</strong>
-          <span>{project.metricLabel}</span>
-          {!compact && <small>{project.context}</small>}
-        </div>
-      </a>
-    </article>
-  );
-}
 
 export default function App({ projectId = null }) {
   const [menu, setMenu] = useState(false);
@@ -368,11 +326,11 @@ export default function App({ projectId = null }) {
                 ))}
               </div>
               <div className="work-feature-list">
-                {featuredWorkIds.map((id, index) => {
+                {featuredWorkIds.map((id) => {
                   const p = projects.find((project) => project.id === id);
                   return (
                     (filter === "All work" || p.category === filter) && (
-                      <WorkCard key={id} project={p} number={index + 1} />
+                      <WorkCard key={id} project={p} />
                     )
                   );
                 })}

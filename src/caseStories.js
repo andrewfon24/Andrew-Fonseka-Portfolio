@@ -137,8 +137,9 @@ export const caseStories = {
       ],
     ],
     result: [
+      "Reported acquisition outcomes include a 13% reduction in cost per lead and an 18% increase in completed applications. These are relative changes; absolute figures remain confidential.",
       "The campaign builder reduced compliance review time by 60%, with an estimated 12 working days saved annually. Measurement work improved Meta Event Match Quality by 25% relative to the previous level, rather than by 25 percentage points.",
-      "These are the operational and measurement figures approved for public discussion. Absolute budgets, pipeline values and acquisition performance remain confidential; the diagrams below explain the work without exposing internal dashboards or inventing substitute data.",
+      "These are the operational and measurement figures approved for public discussion. Absolute budgets, pipeline values and acquisition figures remain confidential; the diagrams below explain the work without exposing internal dashboards or inventing substitute data.",
     ],
     takeaway:
       "Reliable signals and consistent execution give a large program a stronger basis for decisions.",
