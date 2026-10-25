@@ -1,673 +1,438 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { ArrowRight, Mail, MapPin, Plus, Minus } from "lucide-react";
 import {
-  ArrowUpRight,
-  ArrowRight,
-  ArrowDown,
-  ArrowLeft,
-  Download,
-  MapPin,
-  Menu,
-  X,
-  Target,
-  ChartNoAxesCombined,
-  Zap,
-  Workflow,
-  Check,
-  ArrowUp,
-  Plus,
-  Minus,
-  GraduationCap,
-  CircleCheck,
-  ScanLine,
-} from "lucide-react";
-import { projects, capabilities, experience, testimonials } from "./data";
+  projects,
+  experience,
+  testimonials,
+  toolkit,
+  certifications,
+  questions,
+  email,
+} from "./data";
 import CaseStudyPage from "./CaseStudyPage";
-import ContactSection from "./ContactSection";
 import BrandIcon from "./BrandIcon";
-import { Systems } from "./FeaturedSections";
+import { Header, Contact, Footer } from "./Shell";
+import { HeroFunnel, CompareBars, SplitBar, DeltaBars, DotMatrix } from "./Charts";
 
-const resume = "/documents/Andrew_Fonseka_Resume.pdf";
-const icons = {
-  target: Target,
-  chart: ChartNoAxesCombined,
-  zap: Zap,
-  workflow: Workflow,
+const byId = (id) => projects.find((p) => p.id === id);
+
+const cardViz = {
+  university: () => (
+    <CompareBars
+      rows={[
+        { label: "Dedicated priority campaign", value: 125, display: "125", highlight: true },
+        { label: "Broad campaign, same colleges", value: 17, display: "17" },
+      ]}
+      caption="Enrolments for the two lowest-intake colleges"
+    />
+  ),
+  panasia: () => (
+    <SplitBar
+      parts={[
+        { label: "Meta", value: 60, amount: "US$15K" },
+        { label: "Google Ads", value: 40, amount: "US$10K" },
+      ]}
+      caption="Split set on lead quality, judged on funded loans"
+    />
+  ),
+  aegon: () => (
+    <DeltaBars
+      rows={[
+        { label: "Cost per lead", value: -13 },
+        { label: "Completed applications", value: 18 },
+        { label: "Meta Event Match Quality", value: 25 },
+        { label: "Compliance review time", value: -60 },
+      ]}
+      caption="Relative change. Absolute figures stay under NDA."
+    />
+  ),
 };
 
-function Label({ children, light = false }) {
+function CaseCard({ p }) {
+  const Viz = cardViz[p.id];
   return (
-    <div className={`eyebrow ${light ? "light" : ""}`}>
-      <span />
-      {children}
-    </div>
-  );
-}
-
-const featuredWorkIds = ["aegon", "university", "panasia"];
-const additionalWorkIds = ["petmart", "dats"];
-const workSummaries = {
-  aegon:
-    "Connected conversion signals and automated campaign checks across 50+ US and Canadian ad accounts.",
-  university:
-    "Connected Meta campaigns to admissions outcomes, then focused on the programs that needed students most.",
-  panasia:
-    "Used lead quality to allocate a fixed media budget across Meta and Google, measuring success in funded loans.",
-  petmart:
-    "Connected Google Shopping and Performance Max acquisition to repeat purchases and subscriptions.",
-  dats: "Rebuilt campaigns and the enquiry journey to generate more qualified leads on the same media budget.",
-};
-
-function WorkCard({ project, compact = false, number }) {
-  return (
-    <article
-      className={`project-card ${compact ? "work-small-card" : "work-feature-row"}`}
-    >
-      <a className="project-open" href={`/case-studies/${project.id}/`}>
-        <div className="work-row-copy">
-          <div className="project-client">
-            {project.client}
-            <span>{project.category}</span>
-          </div>
-          <h3>{project.title}</h3>
-          <p>{workSummaries[project.id]}</p>
-          <span className="project-case-link">
-            Read the case study <ArrowRight size={16} aria-hidden="true" />
-          </span>
+    <article className="case-card">
+      <header className="cc-head">
+        <span className="cc-client">{p.client}</span>
+        <span className="cc-context">{p.context}</span>
+      </header>
+      <h3>
+        <a href={`/case-studies/${p.id}/`} data-track="case_open" data-case={p.id}>
+          {p.title}
+        </a>
+      </h3>
+      <div className="cc-metrics">
+        <div>
+          <strong>{p.metric}</strong>
+          <span>{p.metricLabel}</span>
         </div>
-        <div className="work-row-result">
-          {!compact && (
-            <span className="work-row-index" aria-hidden="true">
-              0{number}
-            </span>
-          )}
-          <strong>{project.metric}</strong>
-          <span>{project.metricLabel}</span>
-          {!compact && <small>{project.context}</small>}
+        <div>
+          <strong>{p.secondary}</strong>
+          <span>{p.secondaryLabel}</span>
         </div>
-      </a>
+      </div>
+      <div className="cc-viz">
+        <Viz />
+      </div>
+      <p className="cc-role">
+        <b>My role.</b> {p.role}
+      </p>
+      <span className="cc-link" aria-hidden="true">
+        Read the case <ArrowRight size={16} />
+      </span>
     </article>
   );
 }
 
+function MiniCase({ p }) {
+  return (
+    <a className="mini-case" href={`/case-studies/${p.id}/`} data-track="case_open" data-case={p.id}>
+      <div>
+        <span className="cc-client">{p.client}</span>
+        <h3>{p.title}</h3>
+        <p>{p.summary}</p>
+      </div>
+      <div className="mini-metric">
+        <strong>{p.metric}</strong>
+        <span>{p.metricLabel}</span>
+      </div>
+    </a>
+  );
+}
+
+const steps = [
+  {
+    title: "Fix the signal",
+    body: "Tracking, CRM fields and deduplication before any budget moves.",
+    proof: "Removed double-counted GTM conversions at Aegon; the corrected data reset reported CPA.",
+  },
+  {
+    title: "Optimize to what the business counts",
+    body: "Bid on qualified leads, enrolments or funded loans, not form fills.",
+    proof: "HubSpot offline conversions into Smart Bidding: CPL −13%, completed applications +18%.",
+  },
+  {
+    title: "Test, then reallocate",
+    body: "Separate what needs its own budget, and move money on evidence.",
+    proof: "A dedicated priority-college campaign converted 77.6% of leads into enrolments.",
+  },
+  {
+    title: "Report and systemize",
+    body: "Clear dashboards, and tools so the next launch is faster.",
+    proof: "Looker Studio client dashboards; an Apps Script builder cut compliance review 60%.",
+  },
+];
+
+function Approach() {
+  return (
+    <section className="section approach" id="approach" aria-labelledby="approach-title">
+      <div className="wrap">
+        <div className="section-head">
+          <p className="kicker">How I work</p>
+          <h2 id="approach-title">Signal first. Budget follows evidence.</h2>
+        </div>
+        <ol className="steps">
+          {steps.map((s, i) => (
+            <li key={s.title} className="step">
+              <span className="step-n" aria-hidden="true">
+                {i + 1}
+              </span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+              <p className="step-proof">{s.proof}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function Range() {
+  return (
+    <section className="section range" aria-labelledby="range-title">
+      <div className="wrap range-grid">
+        <div>
+          <p className="kicker">Range</p>
+          <h2 id="range-title">Built for agency pace.</h2>
+          <p className="lede">One dot per ad account at Aegon. Plus a contract book and an agency past.</p>
+          <dl className="range-stats">
+            <div>
+              <dt>7</dt>
+              <dd>contract clients in 2026, across four industries</dd>
+            </div>
+            <div>
+              <dt>4 + 5</dt>
+              <dd>accounts led and supported at once at Kites Global</dd>
+            </div>
+            <div>
+              <dt>6</dt>
+              <dd>markets: Canada, US, Saudi Arabia, Sri Lanka, Singapore, Malaysia</dd>
+            </div>
+          </dl>
+        </div>
+        <DotMatrix owned={50} shared={100} />
+      </div>
+    </section>
+  );
+}
+
+function Ask() {
+  const [i, setI] = useState(0);
+  return (
+    <section className="section ask" id="questions" aria-labelledby="ask-title">
+      <div className="wrap ask-grid">
+        <div>
+          <p className="kicker">Before you call</p>
+          <h2 id="ask-title">Questions hiring managers ask me.</h2>
+          <div className="ask-chips">
+            {questions.map((item, n) => (
+              <React.Fragment key={item.q}>
+                <button
+                  aria-expanded={i === n}
+                  aria-controls={`ask-inline-${n}`}
+                  onClick={() => setI(i === n && window.matchMedia("(max-width: 899px)").matches ? -1 : n)}
+                  data-track="question_open"
+                  data-question={n + 1}
+                >
+                  {item.q}
+                </button>
+                {i === n && (
+                  <div className="ask-inline" id={`ask-inline-${n}`}>
+                    {item.a}
+                  </div>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+        <div className="ask-answer" aria-live="polite">
+          <p className="ask-q">{questions[Math.max(i, 0)].q}</p>
+          <p className="ask-a" key={i}>
+            {questions[Math.max(i, 0)].a}
+          </p>
+          <a className="ask-more" href={`mailto:${email}`} data-track="email_click" data-where="questions">
+            Ask me something else
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Toolkit() {
+  return (
+    <section className="section toolkit" aria-labelledby="toolkit-title">
+      <div className="wrap">
+        <div className="section-head">
+          <p className="kicker">Toolkit</p>
+          <h2 id="toolkit-title">Hands-on, not just listed.</h2>
+        </div>
+        <div className="tool-groups">
+          {toolkit.map((g) => (
+            <div className="tool-group" key={g.group}>
+              <h3>{g.group}</h3>
+              <ul className="tool-list">
+                {g.tools.map((t) => (
+                  <li key={t}>
+                    <BrandIcon tool={t} />
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              <p>{g.skills}</p>
+            </div>
+          ))}
+        </div>
+        <ul className="certs" aria-label="Certifications">
+          {certifications.map(([name, issuer, domain]) => (
+            <li key={name}>
+              <BrandIcon domain={domain} />
+              <span>
+                <b>{name}</b>
+                <small>{issuer}</small>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function References() {
+  return (
+    <section className="section references" id="references" aria-labelledby="refs-title">
+      <div className="wrap">
+        <div className="section-head">
+          <p className="kicker">References</p>
+          <h2 id="refs-title">From people who managed the work.</h2>
+        </div>
+        <div className="quotes">
+          {testimonials.map((t) => (
+            <figure className="quote" key={t.name}>
+              <blockquote>{t.quote}</blockquote>
+              <figcaption>
+                <span className="q-initials" aria-hidden="true">
+                  {t.initials}
+                </span>
+                <span>
+                  <b>{t.name}</b>
+                  <small>{t.role}</small>
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <a
+          className="text-link"
+          href="https://www.linkedin.com/in/andrewfonseka/details/recommendations/"
+          target="_blank"
+          rel="noreferrer"
+          data-track="linkedin_click"
+          data-where="references"
+        >
+          Verbatim LinkedIn recommendations
+        </a>
+      </div>
+    </section>
+  );
+}
+
+function About() {
+  return (
+    <section className="section about" id="about" aria-labelledby="about-title">
+      <div className="wrap about-grid">
+        <div className="about-copy">
+          <div>
+            <p className="kicker">About</p>
+            <h2 id="about-title">From Colombo agencies to Vancouver.</h2>
+            <p>
+              I started on agency teams in Colombo, did a full-time MBA in Vancouver, and now run paid media in-house
+              at Aegon alongside a small contract book. The constant: I want to know what happened after the click.
+            </p>
+            <p className="about-loc">
+              <MapPin size={16} aria-hidden="true" /> Greater Vancouver, BC. Authorized to work in Canada.
+            </p>
+          </div>
+        </div>
+        <ol className="timeline" aria-label="Career timeline">
+          {experience.map((e) => (
+            <li key={e.company + e.date} className={`tl-item kind-${e.kind.toLowerCase()}`}>
+              <details className="experience-item">
+                <summary>
+                  <span className="tl-date">{e.date}</span>
+                  <span className="tl-main">
+                    <b>{e.company}</b>
+                    <span>{e.role}</span>
+                  </span>
+                  <span className="tl-kind">{e.kind}</span>
+                  <Plus className="tl-plus" size={18} aria-hidden="true" />
+                  <Minus className="tl-minus" size={18} aria-hidden="true" />
+                </summary>
+                <p className="experience-detail">{e.detail}</p>
+              </details>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function Home() {
+  return (
+    <main id="main">
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="wrap hero-grid">
+          <div className="hero-copy">
+            <div className="hero-id">
+              <img src="/images/andrew-fonseka-avatar.webp" alt="" width="192" height="192" fetchPriority="high" />
+              <span>
+                <b>Andrew Fonseka</b>
+                <span>Paid Media Specialist, Greater Vancouver</span>
+              </span>
+            </div>
+            <h1 id="hero-title">Paid media judged on customers, not clicks.</h1>
+            <p className="hero-sub">
+              I plan, build and optimize Google, Meta, LinkedIn and Microsoft Ads to what the business counts: qualified
+              leads, enrolments, funded loans.
+            </p>
+            <div className="hero-actions">
+              <a className="btn btn-gold" href={`mailto:${email}`} data-track="email_click" data-where="hero">
+                <Mail size={18} aria-hidden="true" /> Email me
+              </a>
+              <a className="btn btn-outline-light" href="#work">
+                See the work
+              </a>
+            </div>
+          </div>
+          <HeroFunnel />
+        </div>
+        <div className="wrap">
+          <dl className="proof">
+            <div>
+              <dt>Since 2022</dt>
+              <dd>agency, in-house and contract</dd>
+            </div>
+            <div>
+              <dt>7-figure</dt>
+              <dd>annual program at Aegon</dd>
+            </div>
+            <div>
+              <dt>50 + ~100</dt>
+              <dd>accounts owned and co-managed</dd>
+            </div>
+            <div>
+              <dt>6 markets</dt>
+              <dd>North America, Middle East, Asia</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section className="section work" id="work" aria-labelledby="work-title">
+        <div className="wrap">
+          <div className="section-head">
+            <p className="kicker">Selected work</p>
+            <h2 id="work-title">Three accounts. Three business outcomes.</h2>
+          </div>
+          <div className="case-grid">
+            {["university", "panasia", "aegon"].map((id) => (
+              <CaseCard key={id} p={byId(id)} />
+            ))}
+          </div>
+          <div className="more-work">
+            <h3 className="more-title">More work</h3>
+            {["petmart", "dats"].map((id) => (
+              <MiniCase key={id} p={byId(id)} />
+            ))}
+          </div>
+          <p className="fine">Real campaigns. Sources and measurement notes are inside every case.</p>
+        </div>
+      </section>
+
+      <Range />
+      <Approach />
+      <Ask />
+      <Toolkit />
+      <References />
+      <About />
+    </main>
+  );
+}
+
 export default function App({ projectId = null }) {
-  const [menu, setMenu] = useState(false);
-  const [filter, setFilter] = useState("All work");
-  const caseProject = projects.find((p) => p.id === projectId);
-  const [capability, setCapability] = useState(0);
-  const [testimonial, setTestimonial] = useState(0);
-  const [active, setActive] = useState("");
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-          }
-        });
-      },
-      { threshold: 0.08 },
-    );
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-    const navObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
-      },
-      { rootMargin: "-20% 0px -60% 0px" },
-    );
-    document
-      .querySelectorAll("section[id]")
-      .forEach((el) => navObserver.observe(el));
-    return () => {
-      observer.disconnect();
-      navObserver.disconnect();
-    };
-  }, []);
-  useEffect(() => {
-    if (!menu) return;
-    const close = (e) => {
-      if (e.key === "Escape") setMenu(false);
-    };
-    document.addEventListener("keydown", close);
-    return () => document.removeEventListener("keydown", close);
-  }, [menu]);
-  const current = capabilities[capability];
-  const CapabilityIcon = icons[current.icon];
-  const quote = testimonials[testimonial];
+  const caseProject = projectId ? byId(projectId) : null;
   return (
     <>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <header className="header">
-        <div className="nav-shell">
-          <a href="/" className="brand">
-            <span className="brand-monogram">
-              A<span>F</span>
-            </span>
-            <span>
-              Andrew Fonseka<span className="brand-dot">.</span>
-            </span>
-          </a>
-          <nav
-            className={menu ? "navigation open" : "navigation"}
-            aria-label="Main navigation"
-            id="main-navigation"
-          >
-            {[
-              ["approach", "Approach"],
-              ["systems", "Systems"],
-              ["work", "Results"],
-              ["references", "References"],
-              ["contact", "Contact"],
-            ].map(([id, label]) => (
-              <a
-                className={active === id ? "active" : ""}
-                key={id}
-                href={`${caseProject && id !== "contact" ? "/" : ""}#${id}`}
-                onClick={() => setMenu(false)}
-              >
-                {label}
-              </a>
-            ))}
-            <a href={resume} download className="mobile-resume">
-              Résumé <Download size={14} />
-            </a>
-          </nav>
-          <a className="nav-contact" href={resume} download>
-            Download résumé <Download size={15} />
-          </a>
-          <button
-            className="menu-toggle icon-button"
-            aria-label={menu ? "Close navigation" : "Open navigation"}
-            aria-expanded={menu}
-            aria-controls="main-navigation"
-            onClick={() => setMenu(!menu)}
-          >
-            {menu ? <X /> : <Menu />}
-          </button>
-        </div>
-      </header>
-      {caseProject ? (
-        <CaseStudyPage project={caseProject} />
-      ) : (
-        <main id="main">
-          <section className="hero container" aria-labelledby="hero-title">
-            <div className="hero-copy">
-              <div className="eyebrow">
-                OPEN TO PAID MEDIA & PERFORMANCE MARKETING ROLES
-              </div>
-              <h1 id="hero-title">
-                Paid media judged
-                <br />
-                on customers,
-                <br />
-                <span>not clicks.</span>
-              </h1>
-              <p className="hero-role">
-                <span className="hero-role-name">Andrew Fonseka</span>
-                <span className="hero-role-title">
-                  Paid Media &amp; Performance Marketing Specialist
-                </span>
-              </p>
-              <p className="hero-description">
-                I connect media, measurement and the customer journey.
-                <br className="desktop-break" /> The goal: qualified leads,
-                enrolled students, funded loans
-                <br className="desktop-break" /> and customers who come back.
-              </p>
-              <div className="hero-actions">
-                <a className="button primary" href={resume} download>
-                  Download résumé <Download size={17} />
-                </a>
-                <a className="button secondary" href="#work">
-                  Explore the results <ArrowDown size={17} />
-                </a>
-              </div>
-              <div className="hero-note">
-                <MapPin size={14} />
-                <span>
-                  MBA · Greater Vancouver, BC · Authorized to work in Canada
-                </span>
-              </div>
-            </div>
-            <div className="hero-art">
-              <div className="portrait-frame">
-                <img
-                  src="/images/andrew-fonseka.jpg"
-                  alt="Andrew Fonseka, Paid Media and Performance Marketing Specialist"
-                  fetchPriority="high"
-                  width="1122"
-                  height="1402"
-                />
-              </div>
-            </div>
-          </section>
-          <div className="metric-band">
-            <div className="container stats-strip">
-              {[
-                ["3+", "years in agency & in-house"],
-                ["7-figure", "budget managed at Aegon"],
-                ["50+", "business units managed at Aegon"],
-                [
-                  "6 markets",
-                  "Singapore · Malaysia · Sri Lanka · Saudi Arabia · US · Canada",
-                ],
-              ].map(([value, label]) => (
-                <div key={label}>
-                  {value === "6 markets" && (
-                    <small className="metric-prefix">Across</small>
-                  )}
-                  <strong>{value}</strong>
-                  <span>{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <section className="approach-section section" id="approach">
-            <div className="container">
-              <div className="section-heading reveal">
-                <div>
-                  <Label>APPROACH</Label>
-                  <h2>
-                    Signal first.
-                    <br />
-                    <span>Budget follows evidence.</span>
-                  </h2>
-                </div>
-                <p className="section-intro">
-                  Good performance starts before the first ad.
-                  <br /> Here’s how I connect strategy to execution.
-                </p>
-              </div>
-              <div className="process-grid">
-                {[
-                  [
-                    ScanLine,
-                    "01",
-                    "Audit the signal",
-                    "Tracking, CRM fields, creative and search terms. Start with data you can trust.",
-                    "WEEK 1",
-                  ],
-                  [
-                    Target,
-                    "02",
-                    "Define the outcome",
-                    "Agree the business goal. Build the channel mix and a focused test plan.",
-                    "WEEKS 2–4",
-                  ],
-                  [
-                    Zap,
-                    "03",
-                    "Test. Learn. Reallocate.",
-                    "Test audiences, offers and creative. Let the evidence guide the next move.",
-                    "MONTH 2 ON",
-                  ],
-                  [
-                    ChartNoAxesCombined,
-                    "04",
-                    "Report what matters",
-                    "Cost per customer, pipeline quality and a clear recommendation for what’s next.",
-                    "EVERY MONTH",
-                  ],
-                ].map(([Icon, n, title, body, timing]) => (
-                  <div className="process-card reveal" key={n}>
-                    <div className="process-top">
-                      <Icon size={25} />
-                      <span>{n}</span>
-                    </div>
-                    <h3>{title}</h3>
-                    <p>{body}</p>
-                    <small>{timing}</small>
-                  </div>
-                ))}
-              </div>
-              <div className="approach-bottom">
-                <span className="live-dot" />
-                <span>The goal isn’t more data. It’s a better decision.</span>
-              </div>
-            </div>
-          </section>
-
-          <Systems />
-          <section className="work-section section" id="work">
-            <div className="container">
-              <div className="section-heading reveal">
-                <div>
-                  <Label>RESULTS · SELECTED WORK</Label>
-                  <h2>
-                    The accounts.
-                    <br />
-                    <span>The decisions. The results.</span>
-                  </h2>
-                </div>
-                <div className="section-intro">
-                  <p>
-                    Different industries. Different challenges.
-                    <br /> One standard: a result that matters.
-                  </p>
-                </div>
-              </div>
-              <div className="filters" aria-label="Filter case studies">
-                {[
-                  "All work",
-                  "Education",
-                  "E-commerce",
-                  "Financial services",
-                ].map((name) => (
-                  <button
-                    key={name}
-                    aria-pressed={filter === name}
-                    onClick={() => setFilter(name)}
-                  >
-                    {name}
-                    {name === "All work" && <span>05</span>}
-                  </button>
-                ))}
-              </div>
-              <div className="work-feature-list">
-                {featuredWorkIds.map((id, index) => {
-                  const p = projects.find((project) => project.id === id);
-                  return (
-                    (filter === "All work" || p.category === filter) && (
-                      <WorkCard key={id} project={p} number={index + 1} />
-                    )
-                  );
-                })}
-              </div>
-              {additionalWorkIds.some(
-                (id) =>
-                  filter === "All work" ||
-                  projects.find((p) => p.id === id).category === filter,
-              ) && (
-                <div className="work-more">
-                  <div className="work-more-heading">
-                    <h3>More work</h3>
-                    <span>More ways I’ve put the approach to work.</span>
-                  </div>
-                  <div className="work-more-grid">
-                    {additionalWorkIds.map((id) => {
-                      const p = projects.find((project) => project.id === id);
-                      return (
-                        (filter === "All work" || p.category === filter) && (
-                          <WorkCard key={id} project={p} compact />
-                        )
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-              <p className="work-footnote">
-                <CircleCheck size={14} /> Real campaigns. Source notes and
-                attribution context inside every case study.
-              </p>
-            </div>
-          </section>
-
-          <section className="testimonials-section section" id="references">
-            <div className="container testimonial-layout">
-              <div>
-                <Label light>REFERENCES</Label>
-                <h2>
-                  What colleagues say
-                  <br />
-                  <span>about the work.</span>
-                </h2>
-                <div className="quote-controls">
-                  <button
-                    className="icon-button"
-                    aria-label="Previous recommendation"
-                    onClick={() =>
-                      setTestimonial(
-                        (testimonial + testimonials.length - 1) %
-                          testimonials.length,
-                      )
-                    }
-                  >
-                    <ArrowLeft size={18} />
-                  </button>
-                  <span>0{testimonial + 1} / 02</span>
-                  <button
-                    className="icon-button"
-                    aria-label="Next recommendation"
-                    onClick={() =>
-                      setTestimonial((testimonial + 1) % testimonials.length)
-                    }
-                  >
-                    <ArrowRight size={18} />
-                  </button>
-                </div>
-              </div>
-              <div className="quote-panel" aria-live="polite">
-                <span className="quote-mark">“</span>
-                <blockquote key={quote.name}>{quote.quote}</blockquote>
-                <div className="quote-person">
-                  <span>{quote.initials}</span>
-                  <div>
-                    <b>{quote.name}</b>
-                    <small>{quote.role}</small>
-                  </div>
-                  <a
-                    className="testimonial-linkedin"
-                    href="https://www.linkedin.com/in/andrewfonseka/details/recommendations/"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`Read LinkedIn recommendations for Andrew, including ${quote.name}`}
-                  >
-                    <BrandIcon domain="linkedin.com" />
-                  </a>
-                </div>
-                <p className="quote-source">Verbatim LinkedIn recommendation</p>
-              </div>
-            </div>
-          </section>
-
-          <section className="about-section section" id="about">
-            <div className="container about-grid">
-              <div className="about-copy reveal">
-                <Label>THE PERSON BEHIND THE WORK</Label>
-                <h2>
-                  From Colombo to Vancouver.
-                  <br />
-                  Still asking better questions.
-                </h2>
-                <p>
-                  I’m Andrew, and I love figuring out what makes a campaign
-                  work. I started in Colombo’s agency teams after studying
-                  Management &amp; Digital Innovation at the University of
-                  London. Working with clients across banking, retail and
-                  education got me excited about connecting marketing to real
-                  business results.
-                </p>
-                <p>
-                  That curiosity brought me to Vancouver for my MBA at
-                  University Canada West. Today, I work in-house at Aegon across
-                  US and Canadian accounts, while also supporting clients as an
-                  independent paid media consultant. I enjoy getting involved in
-                  the whole process, from the first campaign idea to the systems
-                  and reporting behind it.
-                </p>
-                <p>
-                  What keeps me excited is seeing the work make a difference: a
-                  student enrolling, a lead becoming a customer, or a team
-                  getting hours back in their week. I’m always keen to learn,
-                  ask better questions and find the next thing we can improve.
-                </p>
-                <div className="about-location">
-                  <MapPin size={17} />
-                  <span>
-                    Greater Vancouver, BC
-                    <br />
-                    <small>
-                      Authorized to work in Canada · No sponsorship required
-                    </small>
-                  </span>
-                </div>
-                <a className="text-link" href={resume} download>
-                  The full story, in my résumé <ArrowUpRight size={17} />
-                </a>
-              </div>
-              <div className="experience-list">
-                <div className="timeline-label">
-                  THE JOURNEY SO FAR <span>2019 – NOW</span>
-                </div>
-                {experience.map((e) => (
-                  <details className="experience-item" key={e.company}>
-                    <summary>
-                      <div className="timeline-dot" />
-                      <div>
-                        <div className="experience-date">
-                          {e.date}
-                          <span>{e.type}</span>
-                        </div>
-                        <h3>{e.company}</h3>
-                        <p>{e.role}</p>
-                      </div>
-                      <Plus size={19} className="expand-plus" />
-                      <Minus size={19} className="expand-minus" />
-                    </summary>
-                    <div className="experience-detail">
-                      <p>{e.description}</p>
-                      {e.location && (
-                        <small>
-                          <MapPin size={12} />
-                          {e.location}
-                        </small>
-                      )}
-                      <div className="project-tags">
-                        {e.tags.map((t) => (
-                          <span key={t}>{t}</span>
-                        ))}
-                      </div>
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section className="expertise-section section" id="toolkit">
-            <div className="container">
-              <div className="section-heading reveal">
-                <div>
-                  <Label>STACK & CREDENTIALS</Label>
-                  <h2>
-                    The tools behind
-                    <br />
-                    <span>the outcomes.</span>
-                  </h2>
-                </div>
-                <p className="section-intro">
-                  Hands-on across the platforms, signals
-                  <br /> and systems that make growth work.
-                </p>
-              </div>
-              <div className="expertise-layout">
-                <div
-                  className="capability-buttons"
-                  aria-label="Explore capabilities"
-                >
-                  {capabilities.map((c, i) => {
-                    const Icon = icons[c.icon];
-                    return (
-                      <button
-                        key={c.name}
-                        aria-pressed={i === capability}
-                        onClick={() => setCapability(i)}
-                      >
-                        <Icon size={20} />
-                        <span>{c.name}</span>
-                        <ArrowUpRight size={19} />
-                      </button>
-                    );
-                  })}
-                </div>
-                <div className="capability-panel" key={current.name}>
-                  <div className="capability-heading">
-                    <div className="capability-icon">
-                      <CapabilityIcon size={29} />
-                    </div>
-                    <span>
-                      {String(capability + 1).padStart(2, "0")} /{" "}
-                      {String(capabilities.length).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3>{current.title}</h3>
-                  <p>{current.description}</p>
-                  <div className="tool-tags">
-                    {current.tools.map((t) => (
-                      <span key={t}>
-                        <BrandIcon tool={t} />
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  {current.supporting && (
-                    <div className="capability-supporting">
-                      <h4>{current.supporting.label}</h4>
-                      <div className="tool-tags">
-                        {current.supporting.tools.map((tool) => (
-                          <span key={tool}>
-                            <BrandIcon tool={tool} />
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  <div className="capability-points">
-                    {current.points.map((p) => (
-                      <span key={p}>
-                        <Check size={14} />
-                        {p}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="certifications">
-                <div className="cert-heading">
-                  <GraduationCap size={22} />
-                  <h3>Learning that shows up in the work.</h3>
-                </div>
-                <div className="cert-grid">
-                  {[
-                    ["Google Ads Search", "Google · 2026", "google.com"],
-                    ["Google Ads Measurement", "Google · 2026", "google.com"],
-                    ["Meta Marketing Analytics", "Meta · Coursera", "meta.com"],
-                    ["Google AI Essentials", "Google", "google.com"],
-                    [
-                      "Data Analysis with Spreadsheets and SQL",
-                      "Professional development",
-                    ],
-                    ["Email Marketing", "HubSpot", "hubspot.com"],
-                  ].map(([title, issuer, domain]) => (
-                    <div key={title}>
-                      <BrandIcon domain={domain} />
-                      <span>
-                        <b>{title}</b>
-                        <small>{issuer}</small>
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-        </main>
-      )}
-      <ContactSection />
-      <footer className="reference-footer">
-        <div className="reference-footer-inner">
-          <small>© {new Date().getFullYear()} Andrew Fonseka</small>
-          <span>Paid media · Business growth · Account ownership</span>
-          <a href="#">
-            Back to top <ArrowUp size={13} />
-          </a>
-        </div>
-      </footer>
+      <Header onCase={Boolean(caseProject)} />
+      {caseProject ? <CaseStudyPage project={caseProject} /> : <Home />}
+      <Contact />
+      <Footer />
     </>
   );
 }

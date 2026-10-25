@@ -1,23 +1,21 @@
 ---
-import "@fontsource/inter/latin-400.css";
-import "@fontsource/inter/latin-500.css";
-import "@fontsource/inter/latin-600.css";
-import "@fontsource/archivo/latin-600.css";
-import "@fontsource/archivo/latin-700.css";
-import "@fontsource/archivo/latin-800.css";
-import "../styles.css";
-import "../refinements.css";
+import "@fontsource-variable/inter/index.css";
+import "@fontsource-variable/archivo/wdth.css";
+import "../site.css";
+import Analytics from "@vercel/analytics/astro";
+
 const {
-  title = "Andrew Fonseka | Paid Media & Performance Marketing",
-  description = "Paid Media & Performance Marketing Specialist in Greater Vancouver. Explore campaign results across education, banking, e-commerce and financial services.",
+  title = "Andrew Fonseka | Paid Media Specialist, Vancouver",
+  description = "Paid media specialist in Greater Vancouver. Google, Meta, LinkedIn and Microsoft Ads optimized to qualified leads, enrolments and funded loans.",
   noindex = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ga4 = import.meta.env.PUBLIC_GA4_ID;
 const person = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Andrew Fonseka",
-  jobTitle: "Paid Media & Performance Marketing Specialist",
+  jobTitle: "Paid Media Specialist",
   url: Astro.site.href,
   sameAs: ["https://www.linkedin.com/in/andrewfonseka/"],
   email: "rafandrewf@gmail.com",
@@ -36,7 +34,7 @@ const person = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#10273f" />
+    <meta name="theme-color" content="#0c2136" />
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
     <meta property="og:title" content={title} />
@@ -44,18 +42,51 @@ const person = {
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={person.image} />
-    <meta
-      property="og:image:alt"
-      content="Andrew Fonseka, Paid Media & Performance Marketing Specialist"
-    />
+    <meta property="og:image:alt" content="Andrew Fonseka, Paid Media Specialist" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href="/favicon-portrait.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>document.documentElement.classList.add("js");</script>
     <script type="application/ld+json" set:html={JSON.stringify(person)} />
+    {
+      ga4 && (
+        <>
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4}`} />
+          <script is:inline define:vars={{ ga4 }}>
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () {
+              dataLayer.push(arguments);
+            };
+            gtag("js", new Date());
+            gtag("config", ga4);
+          </script>
+        </>
+      )
+    }
     <title>{title}</title>
   </head>
-  <body>
+  <body id="top">
     <slot />
+    <Analytics />
+    <script>
+      import { track } from "@vercel/analytics";
+      // One listener for every [data-track] link or button: resume downloads,
+      // email and LinkedIn clicks, case opens, question opens.
+      document.addEventListener("click", (event) => {
+        const el = (event.target as Element)?.closest?.("[data-track]") as HTMLElement | null;
+        if (!el) return;
+        const name = el.dataset.track as string;
+        const data: Record<string, string> = { page: location.pathname };
+        for (const [key, value] of Object.entries(el.dataset)) {
+          if (key !== "track" && value) data[key] = value;
+        }
+        try {
+          track(name, data);
+        } catch {}
+        const gtag = (window as any).gtag;
+        if (typeof gtag === "function") gtag("event", name, data);
+      });
+    </script>
   </body>
 </html>

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { BadgeCheck } from "lucide-react";
+import { BadgeCheck, ShoppingCart } from "lucide-react";
 import assets from "./brandAssets.json";
 
 const toolBrands = {
   "Google Ads": "google.com",
+  "Google Ads Editor": "google.com",
+  "Merchant Center": "google.com",
   GA4: "google.com",
   "Google Tag Manager": "google.com",
   "Enhanced Conversions": "google.com",
@@ -64,6 +66,7 @@ const productMarks = {
   "Enhanced Conversions": "google-ads",
   "Apps Script": "google-apps-script",
   "Google Ads scripts": "google-ads",
+  "Google Ads Editor": "google-ads",
   "Power BI": "microsoft-power-bi",
   "Looker Studio": "looker-icon",
 };
@@ -76,6 +79,12 @@ export default function BrandIcon({ tool, domain, className = "" }) {
   const local = productMarks[tool] || localMarks[brand];
   const fallback = local ? `/images/brands/${local}.svg` : undefined;
   const src = productMarks[tool] || failed ? fallback : assets[brand];
+  if (tool === "Amazon Ads")
+    return (
+      <span className={`brand-icon ${className}`} aria-hidden="true">
+        <ShoppingCart size={18} />
+      </span>
+    );
   return (
     <span className={`brand-icon ${className}`} aria-hidden="true">
       {src ? (

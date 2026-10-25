@@ -3,21 +3,16 @@ import SiteLayout from "../layouts/SiteLayout.astro";
 ---
 
 <SiteLayout title="Page not found | Andrew Fonseka" noindex>
-  <main class="container section" id="main">
-    <a class="brand" href="/">
-      Andrew Fonseka.
+  <main class="wrap not-found" id="main">
+    <a class="brand" href="/" style="color: var(--navy)">
+      <span class="brand-monogram" aria-hidden="true">A<span>F</span></span>
+      <span>Andrew Fonseka</span>
     </a>
-    <h1 class="not-found-title">Let’s get you back to the work.</h1>
-    <p>
-      This page may have moved. Explore my case studies or contact me directly.
-    </p>
+    <h1>Let’s get you back to the work.</h1>
+    <p>This page may have moved. The case studies are one click away.</p>
     <div class="hero-actions">
-      <a class="button primary" href="/#work">
-        Explore the case studies
-      </a>
-      <a class="button secondary" href="mailto:rafandrewf@gmail.com">
-        Email Andrew
-      </a>
+      <a class="btn btn-gold" href="/#work">Explore the case studies</a>
+      <a class="btn btn-outline-light" href="mailto:rafandrewf@gmail.com">Email Andrew</a>
     </div>
   </main>
 </SiteLayout>

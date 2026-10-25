@@ -1,226 +1,123 @@
-import React, { useEffect, useState } from "react";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Check,
-  FileCheck2,
-  Users,
-  GraduationCap,
-  Clock3,
-  CircleDollarSign,
-  Target,
-  ChartNoAxesCombined,
-} from "lucide-react";
+import React, { useState } from "react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, FileCheck2 } from "lucide-react";
 import { caseStories, universityCampaigns } from "./caseStories";
+import { projects } from "./data";
+import { CompareBars, SplitBar, DeltaBars } from "./Charts";
 
-function StatStrip({ stats }) {
+function Flow({ steps, label }) {
   return (
-    <div className="dialog-stats infographic-stats">
-      {stats.map(([value, label]) => {
-        const Icon = /enrol/i.test(label)
-          ? GraduationCap
-          : /time|response|period|year/i.test(label)
-            ? Clock3
-            : /spend|cost|budget|principal|ROAS|Sales/i.test(label)
-              ? CircleDollarSign
-              : /leads|accounts|subscriptions/i.test(label)
-                ? Users
-                : /quality/i.test(label)
-                  ? Target
-                  : ChartNoAxesCombined;
-        return (
-          <div key={label}>
-            <Icon
-              className="stat-symbol"
-              aria-hidden="true"
-              strokeWidth={1.4}
-            />
-            <strong>{value}</strong>
-            <span>{label}</span>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-function Bars({ rows, note }) {
-  return (
-    <figure className="case-bars">
-      {rows.map(({ label, value, width, detail }) => (
-        <div className="case-bar-row" key={label}>
-          <div>
-            <span>{label}</span>
-            <strong>{value}</strong>
-          </div>
-          <div className="case-bar-track">
-            <i style={{ width: `${width}%` }} />
-          </div>
-          {detail && <small>{detail}</small>}
-        </div>
-      ))}
-      <figcaption>{note}</figcaption>
-    </figure>
-  );
-}
-
-function Workflow({ steps, label }) {
-  return (
-    <ol className="case-workflow" aria-label={label}>
+    <ol className="flow" aria-label={label}>
       {steps.map(([title, body], i) => (
         <li key={title}>
-          <span className="workflow-count">0{i + 1}</span>
-          <h4>{title}</h4>
-          <p>{body}</p>
-          {i < steps.length - 1 && <ArrowRight aria-hidden="true" size={18} />}
+          <span className="flow-n" aria-hidden="true">
+            {i + 1}
+          </span>
+          <b>{title}</b>
+          <span>{body}</span>
         </li>
       ))}
     </ol>
   );
 }
 
-function UniversityDashboard() {
-  const [selectedIndex, setSelectedIndex] = useState(-1);
-  const all = selectedIndex === -1;
-  const selected = all
-    ? {
-        leads: 821,
-        enrolled: 312,
-        rate: "38.0%",
-        cpl: "US$7.61",
-        cpe: "US$20.02",
-      }
-    : universityCampaigns[selectedIndex];
+function UniversityEvidence() {
+  const [sel, setSel] = useState(-1);
+  const all = { name: "All campaigns", leads: 821, enrolled: 312, rate: "38.0%", cpl: "US$7.61", cpe: "US$20.02" };
+  const c = sel === -1 ? all : universityCampaigns[sel];
   return (
     <>
-      <div className="dashboard-header">
-        <div>
-          <span className="case-kicker">ADMISSIONS PERFORMANCE</span>
-          <h4>From enquiry to a fee-paid place.</h4>
-        </div>
+      <div className="ev-head">
+        <h3>From enquiry to a fee-paid place</h3>
         <span>May–Aug 2026</span>
       </div>
-      <div className="campaign-picker" aria-label="Choose campaign group">
-        {["All campaigns", ...universityCampaigns.map((c) => c.name)].map(
-          (name, i) => (
-            <button
-              key={name}
-              aria-pressed={selectedIndex === i - 1}
-              onClick={() => setSelectedIndex(i - 1)}
-            >
-              {name}
-            </button>
-          ),
-        )}
+      <div className="picker" role="group" aria-label="Choose campaign">
+        {[all, ...universityCampaigns].map((x, i) => (
+          <button key={x.name} aria-pressed={sel === i - 1} onClick={() => setSel(i - 1)}>
+            {x.name}
+          </button>
+        ))}
       </div>
-      <div aria-live="polite" className="dashboard-live">
+      <div className="ev-live" aria-live="polite">
         <div className="campaign-results">
           <div>
-            <strong>{selected.leads}</strong>
+            <strong>{c.leads}</strong>
             <span>Meta leads</span>
           </div>
-          <ArrowRight aria-hidden="true" />
           <div>
-            <strong>{selected.enrolled}</strong>
+            <strong>{c.enrolled}</strong>
             <span>Fee-paid enrolments</span>
           </div>
           <div>
-            <strong>{selected.rate}</strong>
-            <span>Lead → enrolment</span>
+            <strong>{c.rate}</strong>
+            <span>Lead to enrolment</span>
           </div>
         </div>
-        <Bars
+        <CompareBars
+          key={c.name}
+          max={c.leads}
           rows={
-            all
+            sel === -1
               ? [
-                  { label: "Meta leads", value: "821", width: 100 },
-                  {
-                    label: "CRM-qualified leads",
-                    value: "430",
-                    width: (430 / 821) * 100,
-                  },
-                  {
-                    label: "Fee-paid enrolments",
-                    value: "312",
-                    width: (312 / 821) * 100,
-                  },
+                  { label: "Meta leads", value: 821 },
+                  { label: "CRM-qualified", value: 430 },
+                  { label: "Fee-paid enrolments", value: 312, highlight: true },
                 ]
               : [
-                  {
-                    label: "Meta leads",
-                    value: String(selected.leads),
-                    width: 100,
-                  },
-                  {
-                    label: "Fee-paid enrolments",
-                    value: String(selected.enrolled),
-                    width: (selected.enrolled / selected.leads) * 100,
-                  },
+                  { label: "Meta leads", value: c.leads },
+                  { label: "Fee-paid enrolments", value: c.enrolled, highlight: true },
                 ]
           }
-          note="Funnel widths show the share of leads reaching each reported stage. Qualification is available for the all-campaign total."
+          caption="Bar length is the share of leads reaching each stage. Qualification is reported for the all-campaign total only."
         />
-        <div className="campaign-costs">
+        <div className="cost-pair">
           <span>
-            Cost per lead <b>{selected.cpl}</b>
+            Cost per lead <b>{c.cpl}</b>
           </span>
           <span>
-            Cost per enrolment <b>{selected.cpe}</b>
+            Cost per enrolment <b>{c.cpe}</b>
           </span>
         </div>
       </div>
-      <div
-        className="case-table-scroll"
-        tabIndex={0}
-        role="region"
-        aria-label="Campaign comparison table, scroll horizontally"
-      >
-        <table className="case-table">
-          <caption>Campaign comparison · reported figures</caption>
+      <div className="table-scroll" tabIndex={0} role="region" aria-label="Campaign comparison table, scroll horizontally">
+        <table className="data-table">
+          <caption>Campaign comparison, reported figures</caption>
           <thead>
             <tr>
               <th scope="col">Campaign</th>
               <th scope="col">Leads</th>
               <th scope="col">Enrolled</th>
-              <th scope="col">Conversion</th>
-              <th scope="col">Cost / enrolment</th>
+              <th scope="col">Rate</th>
+              <th scope="col">CPL</th>
+              <th scope="col">Per enrolment</th>
             </tr>
           </thead>
           <tbody>
-            {universityCampaigns.map((c) => (
-              <tr key={c.name}>
-                <th scope="row">{c.name}</th>
-                <td>{c.leads}</td>
-                <td>{c.enrolled}</td>
-                <td>{c.rate}</td>
-                <td>{c.cpe}</td>
+            {universityCampaigns.map((x) => (
+              <tr key={x.name}>
+                <th scope="row">{x.name}</th>
+                <td>{x.leads}</td>
+                <td>{x.enrolled}</td>
+                <td>{x.rate}</td>
+                <td>{x.cpl}</td>
+                <td>{x.cpe}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <figure className="case-source-image">
-        <a
-          href="/images/university-ads-results.png"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Open original Meta Ads Manager screenshot"
-        >
+      <figure className="evidence-img">
+        <a href="/images/university-ads-results.png" target="_blank" rel="noreferrer">
           <img
             src="/images/university-ads-results.png"
-            alt="Anonymized Meta Ads Manager evidence for the three university campaigns, showing 821 leads and SAR 23,421.20 spend"
+            alt="Anonymized Meta Ads Manager view of the three university campaigns, showing 821 leads and SAR 23,421.20 spend"
             loading="lazy"
           />
         </a>
         <figcaption>
-          <FileCheck2 size={16} aria-hidden="true" /> Original Meta Ads Manager
-          screenshot. Enrolments are from the admissions CRM.{" "}
-          <a
-            href="/images/university-ads-results.png"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Inspect full size <ArrowUpRight size={14} />
+          <FileCheck2 size={16} aria-hidden="true" /> Original Meta Ads Manager screenshot. Enrolments come from the
+          admissions CRM.{" "}
+          <a href="/images/university-ads-results.png" target="_blank" rel="noreferrer">
+            Full size <ArrowUpRight size={14} aria-hidden="true" />
           </a>
         </figcaption>
       </figure>
@@ -228,129 +125,22 @@ function UniversityDashboard() {
   );
 }
 
-function PetmartDashboard() {
+function BankEvidence() {
   return (
     <>
-      <div className="dashboard-header">
-        <div>
-          <span className="case-kicker">COMMERCE SNAPSHOT</span>
-          <h4>A first order, and a reason to return.</h4>
-        </div>
-        <span>Apr–Jun 2023</span>
+      <div className="ev-head">
+        <h3>Follow the quality signal</h3>
+        <span>2023, Kites Global</span>
       </div>
-      <div className="case-commerce">
-        <div className="case-roas">
-          <strong>4:1</strong>
-          <span>First-order ROAS</span>
-          <small>Google Shopping + Performance Max</small>
-        </div>
-        <Bars
-          rows={[
-            {
-              label: "Sales",
-              value: "+40%",
-              width: 100,
-              detail: "Reported growth over the period",
-            },
-            {
-              label: "Subscriptions",
-              value: "+30%",
-              width: 75,
-              detail: "Reported growth over the period",
-            },
-          ]}
-          note="Bar lengths compare the two growth percentages. These are client-reported changes, not a causal attribution model."
-        />
-      </div>
-      <Workflow
-        label="Petmart acquisition strategy"
-        steps={[
-          ["Structure", "Restructured Google Shopping and Performance Max."],
-          ["Support", "Complementary Meta campaigns in the acquisition mix."],
-          [
-            "Assess",
-            "Read first-order return alongside sales and subscriptions.",
-          ],
+      <SplitBar
+        parts={[
+          { label: "Meta", value: 60, amount: "US$15,000" },
+          { label: "Google Ads", value: 40, amount: "US$10,000" },
         ]}
+        caption="Allocation of the fixed US$25,000 media budget."
       />
-      <figure className="case-source-image petmart-evidence">
-        <a
-          href="/images/petmart-valentines.jpg"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            src="/images/petmart-valentines.jpg"
-            alt="Petmart and Sugar Beach Pawfect Partner Valentine’s campaign creative with a golden retriever and dinner giveaway"
-            loading="lazy"
-          />
-        </a>
-        <figcaption>
-          Creative example from my original portfolio. This Valentine’s campaign
-          image illustrates the brand work; it does not substantiate the
-          April–June performance figures.
-        </figcaption>
-      </figure>
-    </>
-  );
-}
-
-function BankDashboard() {
-  const [channel, setChannel] = useState("Total budget");
-  const selected =
-    channel === "Meta"
-      ? ["US$15,000", "60% of total media budget"]
-      : channel === "Google Ads"
-        ? ["US$10,000", "40% of total media budget"]
-        : ["US$25,000", "Total media budget"];
-  return (
-    <>
-      <div className="dashboard-header">
-        <div>
-          <span className="case-kicker">ALLOCATION & OUTCOME</span>
-          <h4>Follow the quality signal.</h4>
-        </div>
-        <span>2023 · Kites Global</span>
-      </div>
-      <div className="case-bank">
-        <div>
-          <div className="bank-donut">
-            <div>
-              <strong>259</strong>
-              <span>funded gold loans</span>
-            </div>
-          </div>
-          <p className="case-chart-caption">
-            Budget split: Meta 60% · Google Ads 40%
-          </p>
-        </div>
-        <div>
-          <div
-            className="campaign-picker"
-            aria-label="Inspect budget allocation"
-          >
-            {["Total budget", "Meta", "Google Ads"].map((name) => (
-              <button
-                key={name}
-                aria-pressed={channel === name}
-                onClick={() => setChannel(name)}
-              >
-                {name}
-              </button>
-            ))}
-          </div>
-          <div className="allocation-insight" aria-live="polite">
-            <strong>{selected[0]}</strong>
-            <span>{selected[1]}</span>
-          </div>
-          <p className="case-body">
-            The split follows cost and lead quality. Budget amounts are
-            calculated from the reported US$25,000 spend and 60/40 allocation.
-          </p>
-        </div>
-      </div>
-      <div className="case-calculation">
-        <span>MEDIA COST PER FUNDED LOAN</span>
+      <div className="calc">
+        <span className="calc-label">Media cost per funded loan</span>
         <div>
           <b>US$25,000</b>
           <span>÷</span>
@@ -358,268 +148,204 @@ function BankDashboard() {
           <span>=</span>
           <strong>US$96.53</strong>
         </div>
-        <small>Rounded to approximately US$97 per funded loan.</small>
       </div>
-      <Workflow
-        label="Lead quality to lending outcome"
-        steps={[
-          ["Compare", "Meta delivered higher-quality leads at a lower CPL."],
-          ["Allocate", "60% Meta and 40% Google Ads on a fixed budget."],
-          [
-            "Evaluate",
-            "259 client-reported funded loans; US$500K principal lent.",
-          ],
-        ]}
-      />
-      <p className="case-evidence-note">
-        Results are from the supplied portfolio. Channel-level funded-loan
-        counts and the bank’s internal dashboard were not supplied. Loan
-        principal is not revenue or profit.
+      <p className="ev-note">
+        Channel-level funded-loan counts were not supplied. Loan principal is the amount lent, not revenue or profit.
       </p>
     </>
   );
 }
 
-function DatsDashboard() {
+function AegonEvidence() {
   return (
     <>
-      <div className="dashboard-header">
+      <div className="ev-head">
+        <h3>Trust the signal. Simplify the work.</h3>
+        <span>US and Canada</span>
+      </div>
+      <DeltaBars
+        rows={[
+          { label: "Cost per lead", value: -13 },
+          { label: "Completed applications", value: 18 },
+          { label: "Meta Event Match Quality", value: 25 },
+          { label: "Compliance review time", value: -60 },
+        ]}
+        caption="Relative changes. Blue marks the good direction."
+      />
+      <div className="two-flows">
         <div>
-          <span className="case-kicker">ACQUISITION + EXPERIENCE</span>
-          <h4>More qualified leads. Same budget.</h4>
+          <h4>Conversion signals</h4>
+          <Flow
+            label="Conversion signals"
+            steps={[
+              ["Capture", "GA4, server-side GTM, Enhanced Conversions, Meta CAPI"],
+              ["Clean", "Deduplicated events; double counting removed"],
+              ["Optimize", "Offline outcomes feed Smart Bidding and Meta"],
+            ]}
+          />
         </div>
+        <div>
+          <h4>Campaign operations</h4>
+          <Flow
+            label="Campaign operations"
+            steps={[
+              ["Standardize", "Builder applies naming and UTM rules"],
+              ["Check", "Compliance QA built into setup"],
+              ["Repeat", "Adopted team-wide; ~12 working days saved a year"],
+            ]}
+          />
+        </div>
+      </div>
+      <p className="ev-note">
+        Diagrams explain the systems; they are not screenshots of internal tools. Absolute budgets and acquisition
+        figures remain confidential.
+      </p>
+    </>
+  );
+}
+
+function PetmartEvidence() {
+  return (
+    <>
+      <div className="ev-head">
+        <h3>A first order, and a reason to return</h3>
+        <span>Apr–Jun 2023</span>
+      </div>
+      <DeltaBars
+        rows={[
+          { label: "Paid-attributed sales, QoQ", value: 40 },
+          { label: "Subscriptions", value: 30 },
+        ]}
+        caption="Client-reported growth over the period, alongside 4:1 first-order ROAS from Shopping and Performance Max."
+      />
+      <figure className="evidence-img petmart-evidence">
+        <a href="/images/petmart-valentines.jpg" target="_blank" rel="noreferrer">
+          <img
+            src="/images/petmart-valentines.jpg"
+            alt="Petmart and Sugar Beach Valentine’s campaign creative with a golden retriever and a dinner giveaway"
+            loading="lazy"
+          />
+        </a>
+        <figcaption>Creative example from the account. It illustrates the brand work, not the Apr–Jun figures.</figcaption>
+      </figure>
+    </>
+  );
+}
+
+function DatsEvidence() {
+  return (
+    <>
+      <div className="ev-head">
+        <h3>More qualified leads, same budget</h3>
         <span>Feb 2026–present</span>
       </div>
-      <Bars
+      <CompareBars
         rows={[
-          {
-            label: "Before the rebuild",
-            value: "100",
-            width: (100 / 120) * 100,
-          },
-          { label: "After the rebuild", value: "120", width: 100 },
+          { label: "Before the rebuild", value: 100 },
+          { label: "After the rebuild", value: 120, highlight: true },
         ]}
-        note="CRM-qualified leads indexed to 100 before the rebuild. A 20% increase produces an index of 120. These are not raw lead counts."
+        caption="CRM-qualified leads indexed to 100 before the rebuild. Indices, not raw counts."
       />
-      <Workflow
-        label="DATS enquiry experience"
-        steps={[
-          [
-            "Find",
-            "Google Ads, Meta and Microsoft Advertising bring prospects in.",
-          ],
-          ["Enquire", "A rebuilt Lovable landing page and simpler lead form."],
-          ["Respond", "An AI assistant answers enquiries around the clock."],
-        ]}
-      />
-      <div className="case-two-insights">
+      <div className="insights">
         <div>
-          <span>CHANNEL CONTRIBUTION</span>
           <strong>40%</strong>
-          <p>
-            of 212 leads came from Microsoft Advertising in my second quarter on
-            the account.
-          </p>
+          <span>of 212 leads came from Microsoft Advertising in the second quarter</span>
         </div>
         <div>
-          <span>ENQUIRY RESPONSE</span>
-          <strong>4× faster</strong>
-          <p>
-            AI assistant response versus manual replies, including after hours.
-          </p>
+          <strong>4×</strong>
+          <span>faster replies from the AI assistant than manual responses</span>
         </div>
       </div>
-      <p className="case-evidence-note">
-        Client-reported, before-and-after comparison at approximately US$900 per
-        month. The channel share and qualified-lead improvement describe
-        different measures. No controlled lift study or original CRM dashboard
-        is available here.
-      </p>
     </>
   );
 }
 
-function AegonDashboard() {
-  const [system, setSystem] = useState("Conversion signals");
-  const measurement = system === "Conversion signals";
-  return (
-    <>
-      <div className="dashboard-header">
-        <div>
-          <span className="case-kicker">MEASUREMENT & OPERATIONS</span>
-          <h4>Trust the signal. Simplify the work.</h4>
-        </div>
-        <span>US & Canada</span>
-      </div>
-      <div className="campaign-picker" aria-label="Explore Aegon systems">
-        {["Conversion signals", "Campaign operations"].map((name) => (
-          <button
-            key={name}
-            aria-pressed={system === name}
-            onClick={() => setSystem(name)}
-          >
-            {name}
-          </button>
-        ))}
-      </div>
-      <div className="aegon-system" aria-live="polite">
-        <Workflow
-          label={system}
-          steps={
-            measurement
-              ? [
-                  [
-                    "Capture",
-                    "GA4, server-side GTM, Enhanced Conversions and Meta CAPI.",
-                  ],
-                  [
-                    "Validate",
-                    "Deduplicated events and HubSpot offline conversion outcomes.",
-                  ],
-                  [
-                    "Optimize",
-                    "Qualified leads, booked calls and applications inform bidding.",
-                  ],
-                ]
-              : [
-                  [
-                    "Standardise",
-                    "Apps Script builder applies naming and UTM conventions.",
-                  ],
-                  [
-                    "Review",
-                    "Compliance controls are built into campaign setup.",
-                  ],
-                  [
-                    "Repeat",
-                    "Team-wide adoption supports consistent campaign operations.",
-                  ],
-                ]
-          }
-        />
-        <div className="case-system-outcome">
-          <Check size={22} aria-hidden="true" />
-          <div>
-            <strong>{measurement ? "+25%" : "−60%"}</strong>
-            <span>
-              {measurement
-                ? "Meta Event Match Quality · relative improvement"
-                : "Compliance review time · estimated ~12 working days saved annually"}
-            </span>
-          </div>
-        </div>
-      </div>
-      <Bars
-        rows={[
-          { label: "Compliance review · before", value: "100", width: 100 },
-          { label: "Compliance review · after", value: "40", width: 40 },
-        ]}
-        note="Illustrative index calculated from the reported 60% reduction in review time. The baseline of 100 is an index, not hours or days."
-      />
-      <p className="case-evidence-note">
-        Process diagrams explain the implemented systems; they are not
-        screenshots of Aegon’s internal tools. Only approved public figures
-        appear. Absolute budgets and acquisition performance remain
-        confidential.
-      </p>
-    </>
-  );
-}
-
-const dashboards = {
-  university: UniversityDashboard,
-  petmart: PetmartDashboard,
-  panasia: BankDashboard,
-  dats: DatsDashboard,
-  aegon: AegonDashboard,
+const evidence = {
+  university: UniversityEvidence,
+  panasia: BankEvidence,
+  aegon: AegonEvidence,
+  petmart: PetmartEvidence,
+  dats: DatsEvidence,
 };
+
+const order = ["university", "panasia", "aegon", "petmart", "dats"];
 
 export default function CaseStudyPage({ project }) {
   const story = caseStories[project.id];
-  const Dashboard = dashboards[project.id];
-  useEffect(() => {
-    document.title = `${project.client} case study | Andrew Fonseka`;
-  }, [project]);
+  const Evidence = evidence[project.id];
+  const next = projects.find((p) => p.id === order[(order.indexOf(project.id) + 1) % order.length]);
   return (
-    <main id="main" className="case-page case-story-dialog">
-      <article className="dialog-content" aria-labelledby="case-title">
-        <div className="dialog-top">
-          <a className="text-link" href="/#work">
-            ← Selected work
-          </a>
-          <span>CASE STUDY / {project.category}</span>
-        </div>
-        <div className="eyebrow">
-          <span />
-          {project.client}
-        </div>
-        <h1 id="case-title">{project.title}</h1>
-        <p className="dialog-context">
-          {project.context}
-          <span>·</span>
-          {project.period}
-        </p>
-        <p className="case-intro">{story.intro}</p>
-        <nav className="case-jump-links" aria-label="Case study sections">
-          <a href="#case-problem">The problem</a>
-          <a href="#case-action">What I did</a>
-          <a href="#case-result">The result</a>
-          <a href="#case-evidence">
-            Results & evidence <ArrowRight size={15} />
-          </a>
-        </nav>
-        <StatStrip stats={project.stats} />
-        <div className="case-narrative">
-          <section className="case-chapter" aria-labelledby="case-problem">
-            <span className="chapter-number">01 / CONTEXT</span>
-            <h2 id="case-problem">The problem</h2>
-            {story.problem.map((p) => (
-              <p key={p}>{p}</p>
+    <main id="main" className="case-page">
+      <article className="wrap case-wrap" aria-labelledby="case-title">
+        <a className="back-link" href="/#work">
+          <ArrowLeft size={16} aria-hidden="true" /> Back to selected work
+        </a>
+        <header className="case-hero">
+          <p className="case-meta">
+            <b>{project.client}</b>
+            <span>{project.context}</span>
+            <span>{project.period}</span>
+          </p>
+          <h1 id="case-title">{project.title}</h1>
+          <p className="case-summary">{project.summary}</p>
+          <p className="case-role">
+            <b>My role.</b> {project.role}
+          </p>
+          <ul className="case-channels" aria-label="Channels">
+            {project.channels.map((c) => (
+              <li key={c}>{c}</li>
             ))}
+          </ul>
+        </header>
+        <dl className="case-stats">
+          {project.stats.map(([v, l]) => (
+            <div key={l}>
+              <dt>{v}</dt>
+              <dd>{l}</dd>
+            </div>
+          ))}
+        </dl>
+        <div className="case-story">
+          <section aria-labelledby="case-problem">
+            <h2 id="case-problem">The problem</h2>
+            <p>{story.problem}</p>
           </section>
-          <section className="case-chapter" aria-labelledby="case-action">
-            <span className="chapter-number">02 / EXECUTION</span>
+          <section aria-labelledby="case-action">
             <h2 id="case-action">What I did</h2>
-            <ol className="case-actions">
-              {story.actions.map(([title, body], i) => (
-                <li key={title}>
-                  <span>0{i + 1}</span>
-                  <div>
-                    <h3>{title}</h3>
-                    <p>{body}</p>
-                  </div>
+            <ol className="actions">
+              {story.actions.map(([t, b]) => (
+                <li key={t}>
+                  <b>{t}.</b> {b}
                 </li>
               ))}
             </ol>
           </section>
-          <section className="case-chapter" aria-labelledby="case-result">
-            <span className="chapter-number">03 / OUTCOME</span>
+          <section aria-labelledby="case-result">
             <h2 id="case-result">The result</h2>
-            {story.result.map((p) => (
-              <p key={p}>{p}</p>
-            ))}
+            <p>{story.result}</p>
           </section>
         </div>
-        <section
-          id="case-evidence"
-          className="case-dashboard"
-          aria-label={`${project.client} results dashboard`}
-        >
-          <Dashboard />
+        <section className="case-evidence" aria-label={`${project.client} results`}>
+          <Evidence />
         </section>
-        <aside className="case-takeaway">
-          <span>WHAT THIS CHANGED</span>
+        <aside className="takeaway">
           <p>{story.takeaway}</p>
         </aside>
         <div className="case-source">
-          <h2>Sources & measurement</h2>
+          <h2>Sources and measurement</h2>
           <p>{project.note}</p>
         </div>
-        <div className="case-dialog-bottom">
-          <a className="text-link" href="/#work">
-            Back to selected work <ArrowRight size={16} />
+        <nav className="case-next" aria-label="More case studies">
+          <a className="back-link" href="/#work">
+            All work
           </a>
-        </div>
+          <a className="next-link" href={`/case-studies/${next.id}/`} data-track="case_open" data-case={next.id}>
+            <span>Next case</span>
+            <b>
+              {next.client} <ArrowRight size={16} aria-hidden="true" />
+            </b>
+          </a>
+        </nav>
       </article>
     </main>
   );
