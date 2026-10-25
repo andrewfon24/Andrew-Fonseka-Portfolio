@@ -114,7 +114,7 @@ export const projects = [
     period: "Jan 2025–present",
     context: "In-house · US & Canada",
     title: "Better signals. Smarter scale.",
-    summary: "Measurement and operations across 50+ ad accounts.",
+    summary: "Measurement and operations across 50 owned and ~100 co-managed ad accounts.",
     metric: "−60%",
     metricLabel: "compliance review time",
     secondary: "+25%",
@@ -128,7 +128,7 @@ export const projects = [
       "Trustworthy conversion signals and repeatable operations make better decisions possible at scale.",
     note: "Relative changes in cost per lead (−13%) and completed applications (+18%) were supplied in Andrew’s updated case-study reference. Absolute budgets and performance figures remain confidential. Event Match Quality is a relative improvement. Approximately 12 working days saved annually is an estimate associated with the campaign builder.",
     stats: [
-      ["50+", "Business-unit ad accounts"],
+      ["50 + ~100", "Ad accounts owned + co-managed"],
       ["−60%", "Compliance review time"],
       ["~12 days", "Working time saved / year"],
       ["+25%", "Meta Event Match Quality"],
@@ -223,7 +223,7 @@ export const experience = [
     type: "Part-time",
     location: "Greater Vancouver, BC",
     description:
-      "Paid media for seven clients across education, landscaping, automotive and restaurants, alongside my full-time role. Some engagements are delivered through a partner agency.",
+      "Paid media for seven clients across education, local services, automotive and hospitality, alongside my full-time role. Some engagements are delivered through a partner agency.",
     tags: ["7 clients", "4 industries", "Lead generation"],
   },
   {
@@ -233,7 +233,7 @@ export const experience = [
     type: "In-house",
     location: "Langley, BC",
     description:
-      "Own bidding, budget allocation and campaign structure across 50+ US and Canadian ad accounts. Guide two agency partners and report biweekly to the CMO.",
+      "Own bidding and campaign structure for 50 US and Canadian business-unit ad accounts and co-manage ~100 more; forecast channel allocations for Director sign-off. Supervise two external agency partners and present biweekly performance reports to the CMO.",
     tags: ["Financial services", "LinkedIn ABM", "Measurement"],
   },
   {

@@ -311,9 +311,9 @@ test("navigation spans the viewport, AF monogram stays circular, metrics and edu
   ).toBeLessThan(2);
   expect(geometry.width - geometry.resume.right).toBeLessThan(50);
   await expect(page.locator(".stats-strip strong")).toHaveText([
-    "3+",
+    "Since 2022",
     "7-figure",
-    "50+",
+    "50 + ~100",
     "6 markets",
   ]);
   await expect(page.locator(".stats-strip")).toContainText(
@@ -387,4 +387,43 @@ test("Astro delivers complete HTML, unique metadata, and useful missing-page nav
   ).toHaveAttribute("href", "/#work");
   await context.close();
   expect((await request.get("/sitemap.xml")).status()).toBe(200);
+});
+
+test("retired claims never appear on any page", async ({ request }) => {
+  for (const path of [
+    "/",
+    ...["university", "panasia", "aegon", "petmart", "dats"].map((c) => `/case-studies/${c}/`),
+  ]) {
+    const html = await (await request.get(path)).text();
+    for (const banned of [
+      "Open to",
+      "OPEN TO",
+      "3+",
+      "50+",
+      "No sponsorship",
+      "no sponsorship",
+      "bidding, budget allocation",
+      "100×",
+      "≈100",
+      "10 clients",
+      "set the channel split",
+    ]) {
+      expect(html, `${path} contains "${banned}"`).not.toContain(banned);
+    }
+  }
+});
+
+test("work comes first and analytics hooks are on the conversion links", async ({ page }) => {
+  await page.goto("/");
+  const order = await page.evaluate(() =>
+    [...document.querySelectorAll("main section[id]")].map((s) => s.id),
+  );
+  expect(order.slice(0, 3)).toEqual(["work", "approach", "systems"]);
+  const firstCardTop = await page.evaluate(
+    () => document.querySelector(".story-card").getBoundingClientRect().top + scrollY,
+  );
+  expect(firstCardTop).toBeLessThan(1400);
+  for (const name of ["resume_download", "email_click", "linkedin_click", "case_open", "portfolio_download"]) {
+    await expect(page.locator(`[data-track="${name}"]`)).not.toHaveCount(0);
+  }
 });

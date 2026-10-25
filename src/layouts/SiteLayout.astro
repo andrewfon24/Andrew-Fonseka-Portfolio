@@ -7,12 +7,15 @@ import "@fontsource/archivo/latin-700.css";
 import "@fontsource/archivo/latin-800.css";
 import "../styles.css";
 import "../refinements.css";
+import "../overrides.css";
+import Analytics from "@vercel/analytics/astro";
 const {
   title = "Andrew Fonseka | Paid Media & Performance Marketing",
   description = "Paid Media & Performance Marketing Specialist in Greater Vancouver. Explore campaign results across education, banking, e-commerce and financial services.",
   noindex = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ga4 = import.meta.env.PUBLIC_GA4_ID;
 const person = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -53,9 +56,44 @@ const person = {
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon-portrait.svg" />
     <script type="application/ld+json" set:html={JSON.stringify(person)} />
+    {
+      ga4 && (
+        <>
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4}`} />
+          <script is:inline define:vars={{ ga4 }}>
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () {
+              dataLayer.push(arguments);
+            };
+            gtag("js", new Date());
+            gtag("config", ga4);
+          </script>
+        </>
+      )
+    }
     <title>{title}</title>
   </head>
   <body>
     <slot />
+    <Analytics />
+    <script>
+      import { track } from "@vercel/analytics";
+      // One delegated listener for every [data-track] link: résumé and
+      // portfolio downloads, email and LinkedIn clicks, case opens.
+      document.addEventListener("click", (event) => {
+        const el = (event.target as Element)?.closest?.("[data-track]") as HTMLElement | null;
+        if (!el) return;
+        const name = el.dataset.track as string;
+        const data: Record<string, string> = { page: location.pathname };
+        for (const [key, value] of Object.entries(el.dataset)) {
+          if (key !== "track" && value) data[key] = value;
+        }
+        try {
+          track(name, data);
+        } catch {}
+        const gtag = (window as any).gtag;
+        if (typeof gtag === "function") gtag("event", name, data);
+      });
+    </script>
   </body>
 </html>

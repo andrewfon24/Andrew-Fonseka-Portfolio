@@ -119,7 +119,7 @@ export const caseStories = {
     intro:
       "Making the conversion data trustworthy and the campaign workflow repeatable across a large account remit.",
     problem: [
-      "At Aegon, my remit spans bidding, budget allocation and campaign structure across 50+ US and Canadian business-unit ad accounts. A program at that scale needs reliable conversion signals and consistent campaign operations.",
+      "At Aegon, I own bidding and campaign structure for 50 US and Canadian business-unit ad accounts and co-manage about 100 more, forecasting channel allocations for Director sign-off. A program at that scale needs reliable conversion signals and consistent campaign operations.",
       "Overlapping GTM tags and triggers had caused double-counted events and conversions. At the same time, campaign setup needed consistent naming, UTMs and compliance controls. Both issues affected how confidently the team could operate and interpret performance.",
     ],
     actions: [
@@ -133,7 +133,7 @@ export const caseStories = {
       ],
       [
         "Make execution repeatable",
-        "I built a Google Apps Script campaign builder with naming, UTM and compliance controls. It was adopted team-wide. I also direct two agency partners and report biweekly to the CMO.",
+        "I built a Google Apps Script campaign builder with naming, UTM and compliance controls. It was adopted team-wide. I also supervise two external agency partners (strategy, build and optimization reviews) and present biweekly performance reports to the CMO.",
       ],
     ],
     result: [

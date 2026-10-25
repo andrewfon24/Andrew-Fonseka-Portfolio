@@ -1,0 +1,210 @@
+/* Compact homepage: work first, then short approach and systems strips. */
+
+/* ---- shared compact heading ---- */
+.compact-head {
+  margin-bottom: 26px;
+}
+.compact-head h2 {
+  font-size: clamp(26px, 3.4vw, 40px);
+  line-height: 1.15;
+  margin: 10px 0 0;
+}
+.compact-head h2 span {
+  color: var(--blue);
+}
+.systems-compact .compact-head h2 {
+  color: #fff;
+}
+
+/* ---- approach: one list, four rows ---- */
+.approach-compact {
+  padding-block: 64px;
+  background: var(--pale);
+}
+.approach-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.approach-steps li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  row-gap: 8px;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.approach-steps li > svg {
+  color: var(--blue-ink, #2469af);
+  margin-top: 2px;
+}
+.approach-steps b {
+  display: block;
+  font-size: 15px;
+  color: var(--ink);
+}
+.approach-steps span {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.approach-steps small {
+  grid-column: 2;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-ink, #946516);
+}
+
+/* ---- systems: four metric tiles ---- */
+.systems-compact {
+  padding-block: 64px;
+}
+.systems-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.system-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  border: 1px solid #ffffff1f;
+  border-radius: 14px;
+  background: #ffffff0d;
+}
+.system-card small {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #cbd6e4;
+}
+.system-card strong {
+  font: 700 34px/1.1 "Archivo", sans-serif;
+  letter-spacing: -0.03em;
+  color: var(--gold-light);
+}
+.system-card span {
+  font-size: 13px;
+  color: #e4ebf4;
+}
+.system-card p {
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #b7c4d6;
+}
+.systems-note {
+  margin: 18px 0 0;
+  font-size: 12px;
+  color: #b7c4d6;
+}
+
+/* ---- cards: method line, supporting-change styling ---- */
+.story-method {
+  margin: 12px 0 0;
+  padding: 8px 0 8px 12px;
+  border-left: 3px solid var(--blue-light);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.preview-subhead {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--subtle, #54677e);
+}
+.preview-change em {
+  display: block;
+  font-style: normal;
+  font-size: 11px;
+  color: var(--subtle, #54677e);
+}
+
+/* ---- mobile: small portrait, tighter rhythm ---- */
+@media (max-width: 1000px) {
+  .approach-steps,
+  .systems-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .hero {
+    min-height: 0 !important;
+    padding-block: 28px 36px !important;
+    gap: 22px !important;
+  }
+  .hero-art {
+    order: -1;
+    max-width: none !important;
+    margin: 0 !important;
+    width: 88px !important;
+  }
+  .portrait-frame {
+    padding: 5px !important;
+    border-radius: 50% !important;
+  }
+  .portrait-frame img {
+    height: 78px !important;
+    width: 78px !important;
+    border-radius: 50% !important;
+    object-position: 50% 28% !important;
+    box-shadow: none !important;
+  }
+  .hero .eyebrow {
+    margin-bottom: 14px !important;
+    line-height: 1.5;
+  }
+  .hero h1 {
+    font-size: clamp(38px, 11.5vw, 48px) !important;
+  }
+  .approach-compact,
+  .systems-compact {
+    padding-block: 40px;
+  }
+  .approach-steps,
+  .systems-grid {
+    gap: 10px;
+  }
+  .approach-steps li {
+    grid-template-columns: 1fr;
+    padding: 14px;
+    row-gap: 6px;
+  }
+  .approach-steps li > svg {
+    margin: 0;
+  }
+  .approach-steps small {
+    grid-column: 1;
+  }
+  .system-card {
+    padding: 14px;
+  }
+  .system-card strong {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 640px) {
+  .stats-strip > div {
+    min-width: 0;
+  }
+  .stats-strip strong {
+    font-size: clamp(22px, 7.2vw, 30px) !important;
+    white-space: nowrap;
+  }
+}

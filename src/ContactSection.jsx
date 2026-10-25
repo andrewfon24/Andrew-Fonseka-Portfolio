@@ -24,19 +24,20 @@ export default function ContactSection() {
             href="https://www.linkedin.com/in/andrewfonseka/"
             target="_blank"
             rel="noreferrer"
+            data-track="linkedin_click"
           >
             <BrandIcon domain="linkedin.com" />
             Connect on LinkedIn
           </a>
-          <a href={`mailto:${email}`}>
+          <a href={`mailto:${email}`} data-track="email_click">
             <Mail size={17} />
             {email}
           </a>
-          <a href={resume} download>
+          <a href={resume} download data-track="resume_download" data-where="contact">
             <FileText size={17} />
             Download résumé
           </a>
-          <a href={portfolio} download>
+          <a href={portfolio} download data-track="portfolio_download">
             <Download size={17} />
             Portfolio PDF
           </a>

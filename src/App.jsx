@@ -114,9 +114,9 @@ export default function App({ projectId = null }) {
             id="main-navigation"
           >
             {[
+              ["work", "Results"],
               ["approach", "Approach"],
               ["systems", "Systems"],
-              ["work", "Results"],
               ["references", "References"],
               ["contact", "Contact"],
             ].map(([id, label]) => (
@@ -129,11 +129,11 @@ export default function App({ projectId = null }) {
                 {label}
               </a>
             ))}
-            <a href={resume} download className="mobile-resume">
+            <a href={resume} download className="mobile-resume" data-track="resume_download" data-where="menu">
               Résumé <Download size={14} />
             </a>
           </nav>
-          <a className="nav-contact" href={resume} download>
+          <a className="nav-contact" href={resume} download data-track="resume_download" data-where="header">
             Download résumé <Download size={15} />
           </a>
           <button
@@ -154,7 +154,7 @@ export default function App({ projectId = null }) {
           <section className="hero container" aria-labelledby="hero-title">
             <div className="hero-copy">
               <div className="eyebrow">
-                OPEN TO PAID MEDIA & PERFORMANCE MARKETING ROLES
+                PAID MEDIA · FINANCIAL SERVICES · EDUCATION · E-COMMERCE
               </div>
               <h1 id="hero-title">
                 Paid media judged
@@ -176,7 +176,7 @@ export default function App({ projectId = null }) {
                 <br className="desktop-break" /> and customers who come back.
               </p>
               <div className="hero-actions">
-                <a className="button primary" href={resume} download>
+                <a className="button primary" href={resume} download data-track="resume_download" data-where="hero">
                   Download résumé <Download size={17} />
                 </a>
                 <a className="button secondary" href="#work">
@@ -205,9 +205,9 @@ export default function App({ projectId = null }) {
           <div className="metric-band">
             <div className="container stats-strip">
               {[
-                ["3+", "years in agency & in-house"],
-                ["7-figure", "budget managed at Aegon"],
-                ["50+", "business units managed at Aegon"],
+                ["Since 2022", "in paid media: agency, in-house, contract"],
+                ["7-figure", "annual paid media program at Aegon"],
+                ["50 + ~100", "Aegon ad accounts: owned + co-managed"],
                 [
                   "6 markets",
                   "Singapore · Malaysia · Sri Lanka · Saudi Arabia · US · Canada",
@@ -224,72 +224,6 @@ export default function App({ projectId = null }) {
             </div>
           </div>
 
-          <section className="approach-section section" id="approach">
-            <div className="container">
-              <div className="section-heading reveal">
-                <div>
-                  <Label>APPROACH</Label>
-                  <h2>
-                    Signal first.
-                    <br />
-                    <span>Budget follows evidence.</span>
-                  </h2>
-                </div>
-                <p className="section-intro">
-                  Good performance starts before the first ad.
-                  <br /> Here’s how I connect strategy to execution.
-                </p>
-              </div>
-              <div className="process-grid">
-                {[
-                  [
-                    ScanLine,
-                    "01",
-                    "Audit the signal",
-                    "Tracking, CRM fields, creative and search terms. Start with data you can trust.",
-                    "WEEK 1",
-                  ],
-                  [
-                    Target,
-                    "02",
-                    "Define the outcome",
-                    "Agree the business goal. Build the channel mix and a focused test plan.",
-                    "WEEKS 2–4",
-                  ],
-                  [
-                    Zap,
-                    "03",
-                    "Test. Learn. Reallocate.",
-                    "Test audiences, offers and creative. Let the evidence guide the next move.",
-                    "MONTH 2 ON",
-                  ],
-                  [
-                    ChartNoAxesCombined,
-                    "04",
-                    "Report what matters",
-                    "Cost per customer, pipeline quality and a clear recommendation for what’s next.",
-                    "EVERY MONTH",
-                  ],
-                ].map(([Icon, n, title, body, timing]) => (
-                  <div className="process-card reveal" key={n}>
-                    <div className="process-top">
-                      <Icon size={25} />
-                      <span>{n}</span>
-                    </div>
-                    <h3>{title}</h3>
-                    <p>{body}</p>
-                    <small>{timing}</small>
-                  </div>
-                ))}
-              </div>
-              <div className="approach-bottom">
-                <span className="live-dot" />
-                <span>The goal isn’t more data. It’s a better decision.</span>
-              </div>
-            </div>
-          </section>
-
-          <Systems />
           <section className="work-section section" id="work">
             <div className="container">
               <div className="section-heading reveal">
@@ -363,6 +297,59 @@ export default function App({ projectId = null }) {
               </p>
             </div>
           </section>
+
+          <section
+            className="approach-section approach-compact section"
+            id="approach"
+          >
+            <div className="container">
+              <div className="compact-head reveal">
+                <Label>HOW I WORK</Label>
+                <h2>
+                  Signal first. <span>Budget follows evidence.</span>
+                </h2>
+              </div>
+              <ol className="approach-steps">
+                {[
+                  [
+                    ScanLine,
+                    "Audit the signal",
+                    "Tracking, CRM fields, creative, search terms.",
+                    "Week 1",
+                  ],
+                  [
+                    Target,
+                    "Define the outcome",
+                    "Agree the business goal, channel mix and test plan.",
+                    "Weeks 2–4",
+                  ],
+                  [
+                    Zap,
+                    "Test. Learn. Reallocate.",
+                    "Audiences, offers and creative; evidence guides budget.",
+                    "Month 2 on",
+                  ],
+                  [
+                    ChartNoAxesCombined,
+                    "Report what matters",
+                    "Cost per customer, pipeline quality, next move.",
+                    "Every month",
+                  ],
+                ].map(([Icon, title, body, timing]) => (
+                  <li key={title} className="reveal">
+                    <Icon size={20} aria-hidden="true" />
+                    <div>
+                      <b>{title}</b>
+                      <span>{body}</span>
+                    </div>
+                    <small>{timing}</small>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+
+          <Systems />
 
           <section className="testimonials-section section" id="references">
             <div className="container testimonial-layout">
@@ -459,11 +446,11 @@ export default function App({ projectId = null }) {
                     Greater Vancouver, BC
                     <br />
                     <small>
-                      Authorized to work in Canada · No sponsorship required
+                      Authorized to work in Canada
                     </small>
                   </span>
                 </div>
-                <a className="text-link" href={resume} download>
+                <a className="text-link" href={resume} download data-track="resume_download" data-where="about">
                   The full story, in my résumé <ArrowUpRight size={17} />
                 </a>
               </div>
