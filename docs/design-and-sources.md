@@ -86,6 +86,6 @@ Résumé replaced with the PDF downloaded through the authenticated Google Drive
 
 ### October 2026 stack refresh
 
-Navigation retains Results, Approach, References and Contact. Systems content remains on the page. The stack removes Supermetrics, BrightLocal, Airtable, Drip, WordPress and Wix, and adds Dynamics 365 and Jira. Logo slots increase to 28px while reduced chip padding preserves row heights. Across 320, 390, 768, 1024 and 1440px viewports, the stack and page remain the same height or become shorter.
+Navigation retains Results, Approach, References and Contact. Systems content remains on the page. The stack removes Supermetrics, BrightLocal, Airtable, Drip, WordPress and Wix, and adds Dynamics 365 and Jira. The original logo dimensions, chip padding and spacing are restored at the user’s request. Tool additions, removals and corrected logo assets remain.
 
 Brandfetch verified Jira, Dynamics/Microsoft, Klaviyo and Screaming Frog. Its returned display URLs remain verbatim in the asset map; local SVGs avoid dependence on third-party image requests. Dynamics resolves to the Microsoft parent brand in Brandfetch, so the local product-specific mark is used. New local marks: Jira, Bing and Google Search Console from SVG Logos/Iconify 1.2.13; Dynamics 365 from Simple Icons 11.15.0; Klaviyo from DeskproApps/klaviyo `icon.svg`; Screaming Frog from AnthonyGleason/Portfolio-Site `src/assets/skills/screamingFrog.svg` at 5f2948cd5f459e6866c2302c644698b4c2aea461. Trademarks remain their owners’ property.
