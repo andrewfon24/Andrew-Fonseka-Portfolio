@@ -19,6 +19,7 @@ import {
   GraduationCap,
   CircleCheck,
   ScanLine,
+  Mail,
 } from "lucide-react";
 import { projects, stackGroups, experience, testimonials } from "./data";
 import CaseStudyPage from "./CaseStudyPage";
@@ -28,6 +29,7 @@ import WorkCard from "./WorkCard";
 import { Systems } from "./FeaturedSections";
 
 const resume = "/documents/Andrew_Fonseka_Resume.pdf";
+const mailto = `mailto:rafandrewf@gmail.com?subject=${encodeURIComponent("Paid media role · Andrew Fonseka")}`;
 const icons = {
   target: Target,
   chart: ChartNoAxesCombined,
@@ -129,8 +131,8 @@ export default function App({ projectId = null }) {
               Résumé <Download size={14} />
             </a>
           </nav>
-          <a className="nav-contact" href={resume} download data-track="resume_download" data-where="header">
-            Download résumé <Download size={15} />
+          <a className="nav-contact" href={mailto} data-track="email_click" data-where="header">
+            Email me <Mail size={15} />
           </a>
           <button
             className="menu-toggle icon-button"

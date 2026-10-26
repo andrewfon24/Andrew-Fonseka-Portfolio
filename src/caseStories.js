@@ -90,7 +90,7 @@ export const caseStories = {
     intro:
       "Improving the traffic and the enquiry experience before asking for a bigger budget.",
     problem: [
-      "DIMO Academy of Technical Studies needed more enrolment-ready prospects without increasing an approximately US$900 monthly media budget. Raw form fills were not enough to show whether acquisition was attracting the right students.",
+      "DIMO Academy for Technical Studies needed more enrolment-ready prospects without increasing an approximately US$900 monthly media budget. Raw form fills were not enough to show whether acquisition was attracting the right students.",
       "CRM-qualified leads in Microsoft Dynamics 365 provided a more useful signal. The opportunity was to improve both the channel mix and the path from an ad click to a useful conversation with the academy.",
     ],
     actions: [

@@ -4,7 +4,7 @@ export const projects = [
     category: "Education",
     client: "Private university · Saudi Arabia",
     period: "May–Aug 2026",
-    context: "Contract · via partner agency SOL",
+    context: "Contract · via partner agency",
     title: "From interest to intake.",
     summary: "A sharper signal. A stronger student pipeline.",
     metric: "312",
@@ -37,7 +37,7 @@ export const projects = [
     metric: "4:1",
     metricLabel: "first-order ROAS",
     secondary: "+40%",
-    secondaryLabel: "sales growth",
+    secondaryLabel: "paid-attributed sales",
     channels: ["Google Shopping", "Performance Max", "Meta"],
     problem:
       "The pet-supplies retailer needed stronger acquisition and more subscription customers. Campaigns did not clearly separate prospecting from returning-customer activity.",
@@ -48,7 +48,7 @@ export const projects = [
     note: "Client-reported results over April–June 2023. 4:1 first-order ROAS for Google Shopping and Performance Max. Sales and subscription changes are not measures of incremental lift.",
     stats: [
       ["4:1", "First-order ROAS"],
-      ["+40%", "Sales"],
+      ["+40%", "Paid-attributed sales"],
       ["+30%", "Subscriptions"],
       ["3 months", "Reporting period"],
     ],
@@ -83,9 +83,9 @@ export const projects = [
   {
     id: "dats",
     category: "Education",
-    client: "DIMO Academy of Technical Studies",
+    client: "DIMO Academy for Technical Studies",
     period: "Feb 2026–present",
-    context: "Independent · trades education",
+    context: "Contract · trades education",
     title: "More qualified. Same budget.",
     summary: "Better acquisition, a simpler path to enrolment.",
     metric: "+20%",
@@ -255,14 +255,14 @@ export const stackGroups = [
 
 export const experience = [
   {
-    company: "Independent, Self-employed (project-based)",
-    role: "Paid Media Consultant",
+    company: "Independent",
+    role: "Paid Media Consultant (contract)",
     date: "2026 – Present",
     type: "Part-time",
     location: "Greater Vancouver, BC",
     description:
-      "Paid media for seven clients across education, local services, automotive and hospitality, alongside my full-time role. Some engagements are delivered through a partner agency.",
-    tags: ["7 clients", "4 industries", "Lead generation"],
+      "Paid media for seven clients since January 2026, two of them active today, across education, local services, automotive and hospitality. Runs alongside my full-time role; some engagements are delivered through a partner agency.",
+    tags: ["7 clients since 2026", "2 active", "4 industries"],
   },
   {
     company: "Aegon",
@@ -286,7 +286,7 @@ export const experience = [
   },
   {
     company: "Kites Global",
-    role: "Digital Marketing Strategist",
+    role: "Marketing Strategist",
     date: "Jan – Aug 2023",
     type: "Agency",
     location: "Colombo, Sri Lanka",

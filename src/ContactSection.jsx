@@ -29,7 +29,7 @@ export default function ContactSection() {
             <BrandIcon domain="linkedin.com" />
             Connect on LinkedIn
           </a>
-          <a href={`mailto:${email}`} data-track="email_click">
+          <a href={`mailto:${email}?subject=${encodeURIComponent("Paid media role · Andrew Fonseka")}`} data-track="email_click">
             <Mail size={17} />
             {email}
           </a>

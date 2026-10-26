@@ -24,7 +24,7 @@ npx playwright install chromium
 npm test
 ```
 
-Ten Playwright checks cover documents, filters, direct page navigation, browser back and refresh, responsive layouts, the AF monogram, education dates, interactive dashboards, shared contact sections, automated WCAG 2.1 AA checks, server-rendered HTML and 404 recovery. Chromium is read from `CHROMIUM_PATH` or `/usr/bin/chromium`. Automated accessibility checks supplement visual and keyboard review.
+Nine Playwright checks cover documents, the email-first CTA (copy and call fallbacks), case-page navigation, figures and facts against the résumé, mobile layout and the CTA dock, reduced motion, automated WCAG 2.1 AA checks, server-rendered HTML, 404 recovery and retired claims. Chromium is read from `CHROMIUM_PATH` or `/usr/bin/chromium`. Automated accessibility checks supplement visual and keyboard review.
 
 ## Publish
 
@@ -36,7 +36,8 @@ The build uses `https://andrewfonseka.com` for canonical links, per-page social 
 
 - `src/pages/`: native Astro routes and sitemap generation.
 - `src/layouts/SiteLayout.astro`: metadata, structured data, fonts and global styles.
-- `src/App.jsx`: homepage, shared navigation and page shell.
+- `src/Home.jsx` and `src/home.css`: the homepage, a data-story page built on the design-system tokens. Email is the primary call to action (prefilled subject, copy-email and tap-to-call fallbacks). Figures animate once on scroll; the server renders final values and reduced-motion users see them immediately.
+- `src/App.jsx`: case-study page shell and navigation (still styled by the legacy `styles.css`, `refinements.css` and `overrides.css`, which load only on case-study and 404 pages).
 - `src/CaseStudyPage.jsx`: case narratives, dashboards and evidence.
 - `src/ContactSection.jsx`: the same contact section on every page.
 - `src/data.js` and `src/caseStories.js`: career history, credentials, campaign figures, narratives and measurement qualifications.
