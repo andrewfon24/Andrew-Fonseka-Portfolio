@@ -113,7 +113,6 @@ export default function App({ projectId = null }) {
             {[
               ["work", "Results"],
               ["approach", "Approach"],
-              ["systems", "Systems"],
               ["references", "References"],
               ["contact", "Contact"],
             ].map(([id, label]) => (

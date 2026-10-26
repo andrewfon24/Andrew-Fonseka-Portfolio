@@ -43,7 +43,7 @@ test("contact matches the reference and measurement and allocation sections are 
   await expect(
     page.locator(".measurement-section, .allocation-section"),
   ).toHaveCount(0);
-  await expect(page.locator('nav a[href="#systems"]')).toHaveCount(1);
+  await expect(page.locator('nav a[href="#systems"]')).toHaveCount(0);
   await expect(page.locator("#systems")).toBeVisible();
   const contact = page.locator("#contact");
   await expect(
@@ -113,8 +113,23 @@ test("brand icons, recommendations and career expansion work", async ({
     "Email & CRM",
     "CMS, e-commerce & design",
   ]);
-  await expect(page.locator(".stack-group li")).toHaveCount(30);
+  await expect(page.locator(".stack-group li")).toHaveCount(26);
   await expect(page.locator(".stack-analytics")).toContainText("Screaming Frog");
+  await expect(page.locator('.navigation a[href^="#"]')).toHaveText([
+    "Results", "Approach", "References", "Contact",
+  ]);
+  const stack = page.locator(".stack-grid");
+  for (const tool of ["Dynamics 365", "Jira"]) {
+    await expect(stack.getByText(tool, { exact: true })).toBeVisible();
+  }
+  for (const tool of ["Supermetrics", "Drip", "BrightLocal", "Airtable", "WordPress", "Wix"]) {
+    await expect(stack.getByText(tool, { exact: true })).toHaveCount(0);
+  }
+  await stack.scrollIntoViewIfNeeded();
+  await expect.poll(() => stack.locator("img").evaluateAll(
+    (images) => images.every((img) => img.complete && img.naturalWidth > 0),
+  )).toBe(true);
+  await expect(stack.locator(".brand-letter")).toHaveCount(0);
   await page.getByRole("button", { name: "Next recommendation" }).click();
   await expect(page.locator(".quote-person")).toContainText(
     "Hashan Nalinda Fernando",

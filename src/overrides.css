@@ -303,3 +303,11 @@
   color: var(--blue-ink, #2469af);
   font: 700 12px/1 "Inter", sans-serif;
 }
+
+/* Clearer marks within the existing compact tool rows. */
+.stack-group li { padding: 6px 12px 6px 10px; gap: 8px; }
+.stack-group li .brand-icon { width: 28px; height: 28px; padding: 0; background: transparent; }
+.stack-group li .brand-icon img { width: 28px; height: 28px; border-radius: 0; }
+@media (max-width: 640px) {
+ .stack-group li { padding: 5px 9px; }
+}

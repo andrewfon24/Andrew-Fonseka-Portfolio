@@ -12,7 +12,8 @@ const toolBrands = {
   "Microsoft Advertising": "microsoft.com",
   "Power BI": "microsoft.com",
   "Microsoft Clarity": "microsoft.com",
-  "Dynamics 365": "microsoft.com",
+  "Dynamics 365": "dynamics.microsoft.com",
+  Jira: "jira.com",
   "Meta Ads": "meta.com",
   "Meta CAPI": "meta.com",
   "LinkedIn Ads": "linkedin.com",
@@ -46,6 +47,10 @@ const toolBrands = {
 };
 
 const localMarks = {
+  "jira.com": "jira",
+  "dynamics.microsoft.com": "dynamics-365",
+  "klaviyo.com": "klaviyo",
+  "screamingfrog.co.uk": "screaming-frog",
   "notion.so": "notion-icon",
   "clickup.com": "clickup",
   "asana.com": "asana-icon",
@@ -67,6 +72,10 @@ const localMarks = {
   "looker.com": "looker-icon",
 };
 const productMarks = {
+  Jira: "jira",
+  "Dynamics 365": "dynamics-365",
+  "Google Search Console": "google-search-console",
+  "Microsoft Advertising": "bing",
   "Microsoft 365": "microsoft-365",
   "Google Workspace": "google-icon",
   "Google Ads": "google-ads",
@@ -81,13 +90,13 @@ const productMarks = {
 };
 
 // Brandfetch's display CDN URLs are embedded verbatim, as required by its policy.
-// Product names retain their exact labels; marks identify the owning brand.
+// Prefer local product marks for crisp, reliable rendering; use the brand CDN as fallback.
 export default function BrandIcon({ tool, domain, className = "" }) {
-  const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const brand = domain || toolBrands[tool];
   const local = productMarks[tool] || localMarks[brand];
   const fallback = local ? `/images/brands/${local}.svg` : undefined;
-  const src = productMarks[tool] || failed ? fallback : assets[brand];
+  const src = [fallback, assets[brand]].filter(Boolean)[attempt];
   return (
     <span className={`brand-icon ${className}`} aria-hidden="true">
       {src ? (
@@ -97,7 +106,7 @@ export default function BrandIcon({ tool, domain, className = "" }) {
           width="24"
           height="24"
           loading="lazy"
-          onError={() => setFailed(true)}
+          onError={() => setAttempt((value) => value + 1)}
         />
       ) : tool ? (
         <b className="brand-letter">{tool.replace(/^(Google|Microsoft) /, "")[0]}</b>

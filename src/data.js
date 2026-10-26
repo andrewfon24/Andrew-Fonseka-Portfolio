@@ -230,7 +230,6 @@ export const stackGroups = [
       "Google Tag Manager",
       "Microsoft Clarity",
       "Looker Studio",
-      "BrightLocal",
       "Ahrefs",
       "SEMrush",
       "Zapier",
@@ -240,17 +239,17 @@ export const stackGroups = [
   {
     id: "productivity",
     name: "Productivity, systems & project management",
-    tools: ["Airtable", "Microsoft 365", "Google Workspace", "Asana", "ClickUp", "Notion", "Supermetrics"],
+    tools: ["Microsoft 365", "Google Workspace", "Asana", "ClickUp", "Notion", "Dynamics 365", "Jira"],
   },
   {
     id: "email",
     name: "Email & CRM",
-    tools: ["HubSpot", "Mailchimp", "Klaviyo", "Drip"],
+    tools: ["HubSpot", "Mailchimp", "Klaviyo"],
   },
   {
     id: "cms",
     name: "CMS, e-commerce & design",
-    tools: ["WordPress", "Wix", "Shopify", "Canva"],
+    tools: ["Shopify", "Canva"],
   },
 ];
 

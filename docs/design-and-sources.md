@@ -82,3 +82,10 @@ Navbar clarification: retained the larger 88px desktop bar and 48px link targets
 Selected Work now follows the user’s supplied reference: university, Pan Asia Bank and Aegon in three equal-width cards, followed by Petmart and DATS. Every card has an explicit Read the case study link and arrow. Mini graphics reuse the documented 125 versus 17 priority-college enrolments, US$15K/US$10K media split and reported Aegon relative changes. The new −13% cost per lead and +18% completed-application figures, SOL attribution and account-ownership descriptions come directly from the user-provided reference image. No absolute Aegon acquisition figures or unprovided reporting periods are inferred. The full Aegon narrative includes the new relative outcomes.
 
 Résumé replaced with the PDF downloaded through the authenticated Google Drive connection from file 1x_UrUejTH4t4T_Wdb5qr2ePsnV0hs78i, preserving its original bytes.
+
+
+### October 2026 stack refresh
+
+Navigation retains Results, Approach, References and Contact. Systems content remains on the page. The stack removes Supermetrics, BrightLocal, Airtable, Drip, WordPress and Wix, and adds Dynamics 365 and Jira. Logo slots increase to 28px while reduced chip padding preserves row heights. Across 320, 390, 768, 1024 and 1440px viewports, the stack and page remain the same height or become shorter.
+
+Brandfetch verified Jira, Dynamics/Microsoft, Klaviyo and Screaming Frog. Its returned display URLs remain verbatim in the asset map; local SVGs avoid dependence on third-party image requests. Dynamics resolves to the Microsoft parent brand in Brandfetch, so the local product-specific mark is used. New local marks: Jira, Bing and Google Search Console from SVG Logos/Iconify 1.2.13; Dynamics 365 from Simple Icons 11.15.0; Klaviyo from DeskproApps/klaviyo `icon.svg`; Screaming Frog from AnthonyGleason/Portfolio-Site `src/assets/skills/screamingFrog.svg` at 5f2948cd5f459e6866c2302c644698b4c2aea461. Trademarks remain their owners’ property.
