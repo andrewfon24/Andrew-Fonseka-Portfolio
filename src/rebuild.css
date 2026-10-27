@@ -1382,6 +1382,7 @@
 .result-row .project-case-link svg {
   transition: transform 0.2s ease-out;
 }
+/* purgecss start ignore: preserve pseudo-only interaction selectors */
 .result-card
   .project-open:is(:hover, :focus-visible)
   .card-data-track
@@ -1403,6 +1404,7 @@
 .project-open:is(:hover, :focus-visible) .project-case-link svg {
   transform: translateX(4px);
 }
+/* purgecss end ignore */
 .card-after,
 .card-budget-bar > span,
 .result-numbers strong {
@@ -1523,10 +1525,12 @@
   background: #286fb5;
   transition: background 0.2s;
 }
+/* purgecss start ignore */
 .result-row .project-open:is(:hover, :focus-visible) .return-visual > span i,
 .result-row .project-open:is(:hover, :focus-visible) .growth-visual i + i {
   background: #155795;
 }
+/* purgecss end ignore */
 @media (min-width: 761px) {
   .result-card .card-data {
     min-height: 165px;

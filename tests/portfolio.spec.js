@@ -456,3 +456,32 @@ test("1.5-second entrances run once, preserve data and respect reduced motion", 
     await expect(page.locator(".experience-item[open]")).toHaveCount(0);
   }
 });
+
+test("homepage delivers content and interactions without framework hydration or blocking CSS", async ({
+  page,
+}) => {
+  const scripts = [];
+  page.on("response", async (response) => {
+    if (
+      response.request().resourceType() === "script" &&
+      response.url().includes("127.0.0.1")
+    ) {
+      scripts.push(response.url());
+    }
+  });
+  await page.goto("/", { waitUntil: "networkidle" });
+  await expect(page.locator("astro-island")).toHaveCount(0);
+  await expect(page.locator('link[rel="stylesheet"]')).toHaveCount(0);
+  expect(scripts.some((url) => /\/(?:App|client|react)\./.test(url))).toBe(
+    false,
+  );
+  await expect(page.locator('link[rel="preload"][as="font"]')).toHaveCount(2);
+  await page.getByRole("button", { name: "Next recommendation" }).click();
+  await expect(page.locator(".combined-person")).toContainText(
+    "Hashan Nalinda Fernando",
+  );
+  await page.getByRole("button", { name: "Next recommendation" }).click();
+  await expect(page.locator(".combined-person")).toContainText(
+    "Don Chanaka Perera",
+  );
+});

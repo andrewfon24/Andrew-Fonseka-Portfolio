@@ -4,5 +4,10 @@ import App from "../App.jsx";
 ---
 
 <SiteLayout>
-  <App client:load />
+  <App />
 </SiteLayout>
+
+<script>
+  import { initHomepage } from "../homepage";
+  initHomepage();
+</script>

@@ -106,10 +106,13 @@ export default function BrandIcon({ tool, domain, className = "" }) {
           width="24"
           height="24"
           loading="lazy"
+          data-fallback={attempt === 0 && fallback ? assets[brand] : undefined}
           onError={() => setAttempt((value) => value + 1)}
         />
       ) : tool ? (
-        <b className="brand-letter">{tool.replace(/^(Google|Microsoft) /, "")[0]}</b>
+        <b className="brand-letter">
+          {tool.replace(/^(Google|Microsoft) /, "")[0]}
+        </b>
       ) : (
         <BadgeCheck size={20} />
       )}
