@@ -180,6 +180,7 @@ test("desktop navigation is centred and phone navigation is brand plus resume", 
   await page.goto("/");
   await expect(page.locator(".navigation a")).toHaveText([
     "Results",
+    "Approach",
     "References",
     "About",
     "Contact",
@@ -199,6 +200,13 @@ test("desktop navigation is centred and phone navigation is brand plus resume", 
     Math.abs(geometry.nav.x + geometry.nav.width / 2 - geometry.width / 2),
   ).toBeLessThan(2);
   expect(geometry.width - geometry.resume.right).toBeLessThan(50);
+  expect((await page.locator(".header").boundingBox()).height).toBe(96);
+  for (const link of await page.locator(".navigation a").all()) {
+    expect((await link.boundingBox()).height).toBeGreaterThanOrEqual(56);
+  }
+  await page.locator('.navigation a[href="#approach"]').click();
+  await expect(page).toHaveURL(/#approach$/);
+  await expect(page.locator("#approach-title")).toBeInViewport();
   for (const width of [320, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 844 });
     expect(
@@ -411,6 +419,11 @@ test("1.5-second entrances run once, preserve data and respect reduced motion", 
     await expect(metric).toHaveClass(/motion-arrived/);
     expect(
       await metric.evaluate((e) => getComputedStyle(e).animationDuration),
+    ).toBe("1.5s");
+    expect(
+      await metric
+        .locator("strong")
+        .evaluate((e) => getComputedStyle(e).animationDuration),
     ).toBe("1.5s");
     const card = page.locator(".result-card").first();
     await card.scrollIntoViewIfNeeded();

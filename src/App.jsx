@@ -43,7 +43,7 @@ export default function App({ projectId = null }) {
       { rootMargin: "-10% 0px -40% 0px" },
     );
     document
-      .querySelectorAll("section[id], .reveal")
+      .querySelectorAll("section[id], #approach, .reveal")
       .forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
@@ -65,6 +65,7 @@ export default function App({ projectId = null }) {
           <nav className="navigation" aria-label="Main navigation">
             {[
               ["work", "Results"],
+              ["approach", "Approach"],
               ["references", "References"],
               ["about", "About"],
               ["contact", "Contact"],

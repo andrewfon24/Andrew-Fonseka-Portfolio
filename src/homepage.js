@@ -20,7 +20,7 @@ export function initHomepage() {
       { rootMargin: "-10% 0px -40% 0px" },
     );
     document
-      .querySelectorAll("section[id], .reveal")
+      .querySelectorAll("section[id], #approach, .reveal")
       .forEach((el) => observer.observe(el));
   }
 
