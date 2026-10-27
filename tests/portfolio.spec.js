@@ -28,6 +28,25 @@ test("homepage follows the short result-first brief and has one email primary ac
       .evaluateAll((es) => es.map((e) => e.getAttribute("href"))),
   ).toEqual(slugs.map((s) => `/case-studies/${s}/`));
   await expect(page.locator(".result-row")).toHaveCount(2);
+  await expect(
+    page.locator(".result-row .more-card-metric > strong"),
+  ).toHaveText(["4:1", "+20%"]);
+  const moreBoxes = await page
+    .locator(".result-row")
+    .evaluateAll((es) => es.map((e) => e.getBoundingClientRect().toJSON()));
+  expect(Math.abs(moreBoxes[0].top - moreBoxes[1].top)).toBeLessThan(2);
+  expect(moreBoxes[1].left).toBeGreaterThan(moreBoxes[0].right);
+  await expect(page.locator(".card-data")).toHaveCount(3);
+  const firstCard = page.locator(".result-card .project-open").first();
+  await firstCard.focus();
+  await expect
+    .poll(() =>
+      page
+        .locator(".card-data-track i")
+        .first()
+        .evaluate((e) => getComputedStyle(e, "::after").opacity),
+    )
+    .toBe("1");
   await expect(page.locator(".project-case-link")).toHaveCount(5);
   await expect(page.locator(".rebuild-stats strong")).toHaveText([
     "7-figure",
@@ -72,11 +91,9 @@ test("homepage follows the short result-first brief and has one email primary ac
   await expect(page.locator(".experience-list")).toContainText(
     "Sep 2019 – Jun 2022",
   );
-  const kites = page
-    .locator(".experience-item")
-    .filter({
-      has: page.getByRole("heading", { name: "Kites Global", exact: true }),
-    });
+  const kites = page.locator(".experience-item").filter({
+    has: page.getByRole("heading", { name: "Kites Global", exact: true }),
+  });
   await kites.locator("summary").click();
   await expect(kites.locator(".experience-detail")).toBeVisible();
   await kites.locator("summary").click();
@@ -270,6 +287,16 @@ test("expanded evidence retains the dashboards and their attribution safeguards"
   );
   await page.goto("/case-studies/panasia/");
   await page.locator("summary").click();
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 844 });
+    const ring = await page.locator(".bank-donut > div").boundingBox();
+    const value = await page.locator(".bank-donut strong").boundingBox();
+    expect(value.x).toBeGreaterThanOrEqual(ring.x + 12);
+    expect(value.x + value.width).toBeLessThanOrEqual(ring.x + ring.width - 12);
+    expect(
+      Math.abs(value.x + value.width / 2 - ring.x - ring.width / 2),
+    ).toBeLessThan(1);
+  }
   await page.getByRole("button", { name: "Meta", exact: true }).click();
   await expect(page.locator(".allocation-insight")).toContainText("US$15,000");
   await page.getByRole("button", { name: "Google Ads", exact: true }).click();

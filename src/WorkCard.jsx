@@ -44,6 +44,78 @@ const previews = {
   },
 };
 
+function CardDataVisual({ id }) {
+  if (id === "university")
+    return (
+      <figure className="card-data card-funnel">
+        <div className="card-data-rows">
+          {[
+            ["Leads", 821],
+            ["Qualified", 430],
+            ["Enrolled", 312],
+          ].map(([label, value]) => (
+            <div className="card-funnel-row" key={label}>
+              <span>{label}</span>
+              <span className="card-data-track" aria-hidden="true">
+                <i style={{ width: `${(value / 821) * 100}%` }} />
+              </span>
+              <strong>{value}</strong>
+            </div>
+          ))}
+        </div>
+        <figcaption>From Meta lead to fee-paid enrolment.</figcaption>
+      </figure>
+    );
+  if (id === "aegon")
+    return (
+      <figure className="card-data card-comparison">
+        {[
+          ["Cost per lead", 87],
+          ["Applications", 118],
+        ].map(([label, value]) => (
+          <div className="card-comparison-row" key={label}>
+            <div>
+              <span>{label}</span>
+              <strong>100 → {value}</strong>
+            </div>
+            <div className="card-compare-tracks" aria-hidden="true">
+              <i
+                className="card-before"
+                style={{ width: `${(100 / 118) * 100}%` }}
+              />
+              <i
+                className="card-after"
+                style={{ width: `${(value / 118) * 100}%` }}
+              />
+            </div>
+          </div>
+        ))}
+        <figcaption>Before → after · Each baseline = 100.</figcaption>
+      </figure>
+    );
+  return (
+    <figure className="card-data card-budget">
+      <p className="card-data-title">US$25K media budget</p>
+      <div
+        className="card-budget-bar"
+        aria-label="Meta 60 percent, Google Ads 40 percent"
+      >
+        <span>60%</span>
+        <span>40%</span>
+      </div>
+      <div className="card-budget-labels">
+        <span>
+          Meta<strong>US$15K</strong>
+        </span>
+        <span>
+          Google Ads<strong>US$10K</strong>
+        </span>
+      </div>
+      <figcaption>Spend allocation, guided by lead quality.</figcaption>
+    </figure>
+  );
+}
+
 export default function WorkCard({ project, compact = false }) {
   const story = previews[project.id];
   return (
@@ -56,12 +128,36 @@ export default function WorkCard({ project, compact = false }) {
       >
         {compact ? (
           <>
-            <div>
-              <h3 className="project-client">
-                {project.id === "dats" ? "DIMO Academy" : project.client}
-                <span> · {story.context}</span>
-              </h3>
+            <div className="more-card-copy">
+              <p className="more-card-client">{project.client}</p>
+              <h3 className="project-client">{project.title}</h3>
               <p>{story.summary}</p>
+            </div>
+            <div className="more-card-metric">
+              <strong>{project.metric}</strong>
+              <span>{project.metricLabel}</span>
+              {project.id === "petmart" ? (
+                <div
+                  className="return-visual"
+                  aria-label="One unit of ad spend returns four units of first-order sales"
+                >
+                  <i aria-hidden="true" />
+                  <ArrowRight size={12} aria-hidden="true" />
+                  <span aria-hidden="true">
+                    {[1, 2, 3, 4].map((n) => (
+                      <i key={n} />
+                    ))}
+                  </span>
+                </div>
+              ) : (
+                <div
+                  className="growth-visual"
+                  aria-label="Qualified leads increased from a baseline index of 100 to 120"
+                >
+                  <i style={{ width: "83.333%" }} />
+                  <i style={{ width: "100%" }} />
+                </div>
+              )}
             </div>
           </>
         ) : (
@@ -81,6 +177,7 @@ export default function WorkCard({ project, compact = false }) {
                 </div>
               ))}
             </div>
+            <CardDataVisual id={project.id} />
             <p className="result-method">{story.method}</p>
             <p className="result-role">
               <strong>My role.</strong> {story.role}
