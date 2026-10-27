@@ -11,8 +11,6 @@ import {
   Target,
   ChartNoAxesCombined,
   Zap,
-  Workflow,
-  Check,
   ArrowUp,
   Plus,
   Minus,
@@ -26,14 +24,9 @@ import ContactSection from "./ContactSection";
 import BrandIcon from "./BrandIcon";
 import WorkCard from "./WorkCard";
 import { Systems } from "./FeaturedSections";
+import { ABMStory, ClientPartnership } from "./NarrativeVisuals";
 
 const resume = "/documents/Andrew_Fonseka_Resume.pdf";
-const icons = {
-  target: Target,
-  chart: ChartNoAxesCombined,
-  zap: Zap,
-  workflow: Workflow,
-};
 
 function Label({ children, light = false }) {
   return (
@@ -125,11 +118,23 @@ export default function App({ projectId = null }) {
                 {label}
               </a>
             ))}
-            <a href={resume} download className="mobile-resume" data-track="resume_download" data-where="menu">
+            <a
+              href={resume}
+              download
+              className="mobile-resume"
+              data-track="resume_download"
+              data-where="menu"
+            >
               Résumé <Download size={14} />
             </a>
           </nav>
-          <a className="nav-contact" href={resume} download data-track="resume_download" data-where="header">
+          <a
+            className="nav-contact"
+            href={resume}
+            download
+            data-track="resume_download"
+            data-where="header"
+          >
             Download résumé <Download size={15} />
           </a>
           <button
@@ -150,30 +155,33 @@ export default function App({ projectId = null }) {
           <section className="hero container" aria-labelledby="hero-title">
             <div className="hero-copy">
               <div className="eyebrow">
-                PAID MEDIA · FINANCIAL SERVICES · EDUCATION · E-COMMERCE
+                PAID MEDIA SPECIALIST · AGENCY EXPERIENCE, IN-HOUSE SCALE
               </div>
               <h1 id="hero-title">
-                Paid media judged
+                Know the account.
                 <br />
-                on customers,
+                Own the work.
                 <br />
-                <span>not clicks.</span>
+                <span>Move it forward.</span>
               </h1>
               <p className="hero-role">
                 <span className="hero-role-name">Andrew Fonseka</span>
-                <span className="hero-role-title">
-                  Paid Media &amp; Performance Marketing Specialist
-                </span>
+                <span className="hero-role-title">Paid Media Specialist</span>
               </p>
               <p className="hero-description">
-                I connect media, measurement and the customer journey.
-                <br className="desktop-break" /> The goal: qualified leads,
-                enrolled students, funded loans
-                <br className="desktop-break" /> and customers who come back.
+                I’m Andrew, a Paid Media Specialist with agency, in-house and
+                international experience. I get close to the business, connect
+                campaign data to CRM outcomes and turn what I find into better
+                targeting, budgets and client conversations.
               </p>
               <div className="hero-actions">
-                <a className="button primary" href={resume} download data-track="resume_download" data-where="hero">
-                  Download résumé <Download size={17} />
+                <a
+                  className="button primary"
+                  href="mailto:rafandrewf@gmail.com"
+                  data-track="email_click"
+                  data-where="hero"
+                >
+                  Let’s talk about your team <ArrowUpRight size={17} />
                 </a>
                 <a className="button secondary" href="#work">
                   Explore the results <ArrowDown size={17} />
@@ -204,7 +212,7 @@ export default function App({ projectId = null }) {
             <div className="container stats-strip">
               {[
                 ["Since 2022", "in paid media: agency, in-house, contract"],
-                ["7-figure", "annual paid media program at Aegon"],
+                ["7-figure", "annual budget co-managed at Aegon"],
                 ["50 + ~100", "Aegon ad accounts: owned + co-managed"],
                 [
                   "6 markets",
@@ -228,15 +236,16 @@ export default function App({ projectId = null }) {
                 <div>
                   <Label>RESULTS · SELECTED WORK</Label>
                   <h2>
-                    The accounts.
+                    Every account has a challenge.
                     <br />
-                    <span>The decisions. The results.</span>
+                    <span>Here’s how I worked through it.</span>
                   </h2>
                 </div>
                 <div className="section-intro">
                   <p>
-                    Different industries. Different challenges.
-                    <br /> One standard: a result that matters.
+                    Enrolments, funded loans, applications and repeat customers.
+                    Each story connects a campaign decision to the business it
+                    served.
                   </p>
                 </div>
               </div>
@@ -275,7 +284,9 @@ export default function App({ projectId = null }) {
                 <div className="work-more">
                   <div className="work-more-heading">
                     <h3>More work</h3>
-                    <span>More ways I’ve put the approach to work.</span>
+                    <span>
+                      The same curiosity, applied to a different brief.
+                    </span>
                   </div>
                   <div className="work-more-grid">
                     {additionalWorkIds.map((id) => {
@@ -304,34 +315,34 @@ export default function App({ projectId = null }) {
               <div className="compact-head reveal">
                 <Label>HOW I WORK</Label>
                 <h2>
-                  Signal first. <span>Budget follows evidence.</span>
+                  Understand the business. <span>Follow the evidence.</span>
                 </h2>
               </div>
               <ol className="approach-steps">
                 {[
                   [
                     ScanLine,
-                    "Audit the signal",
-                    "Tracking, CRM fields, creative, search terms.",
-                    "Week 1",
+                    "Find the constraint",
+                    "Get into the account, tracking, creative and CRM. Understand what is holding the business back.",
+                    "Understand",
                   ],
                   [
                     Target,
-                    "Define the outcome",
-                    "Agree the business goal, channel mix and test plan.",
-                    "Weeks 2–4",
+                    "Build the case",
+                    "Define success, forecast the plan and explain the recommendation clearly to the client.",
+                    "Agree",
                   ],
                   [
                     Zap,
-                    "Test. Learn. Reallocate.",
-                    "Audiences, offers and creative; evidence guides budget.",
-                    "Month 2 on",
+                    "Work the account",
+                    "Test audiences, creative and conversion paths. Let qualified outcomes guide the next move.",
+                    "Improve",
                   ],
                   [
                     ChartNoAxesCombined,
-                    "Report what matters",
-                    "Cost per customer, pipeline quality, next move.",
-                    "Every month",
+                    "Make the next step clear",
+                    "Explain what changed, what the evidence supports and what I recommend doing next.",
+                    "Communicate",
                   ],
                 ].map(([Icon, title, body, timing]) => (
                   <li key={title} className="reveal">
@@ -344,10 +355,12 @@ export default function App({ projectId = null }) {
                   </li>
                 ))}
               </ol>
+              <ABMStory />
             </div>
           </section>
 
           <Systems />
+          <ClientPartnership />
 
           <section className="testimonials-section section" id="references">
             <div className="container testimonial-layout">
@@ -417,38 +430,42 @@ export default function App({ projectId = null }) {
                   Still asking better questions.
                 </h2>
                 <p>
-                  I’m Andrew, and I love figuring out what makes a campaign
-                  work. I started in Colombo’s agency teams after studying
-                  Management &amp; Digital Innovation at the University of
-                  London. Working with clients across banking, retail and
-                  education got me excited about connecting marketing to real
-                  business results.
+                  I love getting into the numbers and understanding why an
+                  account behaves the way it does. Paid media caught my
+                  attention during my bachelor’s in Management &amp; Digital
+                  Innovation. Working in Colombo’s agency teams gave me the
+                  chance to turn that interest into campaigns across banking,
+                  retail and education.
                 </p>
                 <p>
-                  That curiosity brought me to Vancouver for my MBA at
-                  University Canada West. Today, I work in-house at Aegon across
-                  US and Canadian accounts, while also supporting clients as an
-                  independent paid media consultant. I enjoy getting involved in
-                  the whole process, from the first campaign idea to the systems
-                  and reporting behind it.
+                  I moved to Canada for my MBA at University Canada West, then
+                  joined Aegon. Today, I work across US and Canadian accounts
+                  and take on independent projects alongside that role. Moving
+                  between industries and markets has taught me to get to know
+                  the business before deciding what its campaigns need.
                 </p>
                 <p>
-                  What keeps me excited is seeing the work make a difference: a
-                  student enrolling, a lead becoming a customer, or a team
-                  getting hours back in their week. I’m always keen to learn,
-                  ask better questions and find the next thing we can improve.
+                  The part I enjoy most is finding something we can improve,
+                  explaining it clearly and putting it to work. That might mean
+                  a better audience, a more useful report or a tool that gives
+                  the team time back. I’m looking to bring that analytical
+                  curiosity and hands-on ownership to my next agency team.
                 </p>
                 <div className="about-location">
                   <MapPin size={17} />
                   <span>
                     Greater Vancouver, BC
                     <br />
-                    <small>
-                      Authorized to work in Canada
-                    </small>
+                    <small>Authorized to work in Canada</small>
                   </span>
                 </div>
-                <a className="text-link" href={resume} download data-track="resume_download" data-where="about">
+                <a
+                  className="text-link"
+                  href={resume}
+                  download
+                  data-track="resume_download"
+                  data-where="about"
+                >
                   The full story, in my résumé <ArrowUpRight size={17} />
                 </a>
               </div>
@@ -497,14 +514,14 @@ export default function App({ projectId = null }) {
                 <div>
                   <Label>STACK & CREDENTIALS</Label>
                   <h2>
-                    The tools behind
+                    The platforms I use.
                     <br />
-                    <span>the outcomes.</span>
+                    <span>The thinking comes first.</span>
                   </h2>
                 </div>
                 <p className="section-intro">
-                  Hands-on across the platforms, signals
-                  <br /> and systems that make growth work.
+                  Paid search, paid social, measurement and the tools that help
+                  me keep the account and the team connected.
                 </p>
               </div>
               <div className="stack-grid">
@@ -535,7 +552,8 @@ export default function App({ projectId = null }) {
                     ["Google AI Essentials", "Google", "google.com"],
                     [
                       "Data Analysis with Spreadsheets and SQL",
-                      "Professional development",
+                      "Coursera",
+                      "coursera.org",
                     ],
                     ["Email Marketing", "HubSpot", "hubspot.com"],
                   ].map(([title, issuer, domain]) => (

@@ -9,7 +9,7 @@ test("renders the portfolio without browser errors and serves the real documents
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Paid media judged",
+    "Know the account.",
   );
   await expect(page.locator(".project-card")).toHaveCount(5);
   await expect(page.locator(".hero-art img")).toBeVisible();
@@ -114,21 +114,39 @@ test("brand icons, recommendations and career expansion work", async ({
     "CMS, e-commerce & design",
   ]);
   await expect(page.locator(".stack-group li")).toHaveCount(26);
-  await expect(page.locator(".stack-analytics")).toContainText("Screaming Frog");
+  await expect(page.locator(".stack-analytics")).toContainText(
+    "Screaming Frog",
+  );
   await expect(page.locator('.navigation a[href^="#"]')).toHaveText([
-    "Results", "Approach", "References", "Contact",
+    "Results",
+    "Approach",
+    "References",
+    "Contact",
   ]);
   const stack = page.locator(".stack-grid");
   for (const tool of ["Dynamics 365", "Jira"]) {
     await expect(stack.getByText(tool, { exact: true })).toBeVisible();
   }
-  for (const tool of ["Supermetrics", "Drip", "BrightLocal", "Airtable", "WordPress", "Wix"]) {
+  for (const tool of [
+    "Supermetrics",
+    "Drip",
+    "BrightLocal",
+    "Airtable",
+    "WordPress",
+    "Wix",
+  ]) {
     await expect(stack.getByText(tool, { exact: true })).toHaveCount(0);
   }
   await stack.scrollIntoViewIfNeeded();
-  await expect.poll(() => stack.locator("img").evaluateAll(
-    (images) => images.every((img) => img.complete && img.naturalWidth > 0),
-  )).toBe(true);
+  await expect
+    .poll(() =>
+      stack
+        .locator("img")
+        .evaluateAll((images) =>
+          images.every((img) => img.complete && img.naturalWidth > 0),
+        ),
+    )
+    .toBe(true);
   await expect(stack.locator(".brand-letter")).toHaveCount(0);
   await page.getByRole("button", { name: "Next recommendation" }).click();
   await expect(page.locator(".quote-person")).toContainText(
@@ -147,7 +165,10 @@ test("brand icons, recommendations and career expansion work", async ({
   for (const li of await page.locator(".stack-group li").all()) {
     const img = li.locator(".brand-icon img");
     if (await img.count())
-      await expect(img).toHaveAttribute("src", /cdn\.brandfetch\.io|\/images\/brands\//);
+      await expect(img).toHaveAttribute(
+        "src",
+        /cdn\.brandfetch\.io|\/images\/brands\//,
+      );
     else await expect(li.locator(".brand-letter")).toHaveCount(1);
   }
   await expect(page.locator(".cert-grid .brand-icon")).toHaveCount(6);
@@ -232,7 +253,7 @@ test("all case studies tell the problem, action and result with source-backed da
     "Private university · Saudi Arabia",
     "Petmart.lk",
     "Pan Asia Bank",
-    "DIMO Academy of Technical Studies",
+    "DIMO Academy for Technical Studies",
     "Aegon",
   ];
   for (const client of clients) {
@@ -379,7 +400,7 @@ test("Astro delivers complete HTML, unique metadata, and useful missing-page nav
       expect(html).toContain("The result");
     } else {
       expect(html).toContain(
-        "I’m Andrew, and I love figuring out what makes a campaign work.",
+        "I love getting into the numbers and understanding why an account",
       );
     }
   }
@@ -402,7 +423,9 @@ test("Astro delivers complete HTML, unique metadata, and useful missing-page nav
 test("retired claims never appear on any page", async ({ request }) => {
   for (const path of [
     "/",
-    ...["university", "panasia", "aegon", "petmart", "dats"].map((c) => `/case-studies/${c}/`),
+    ...["university", "panasia", "aegon", "petmart", "dats"].map(
+      (c) => `/case-studies/${c}/`,
+    ),
   ]) {
     const html = await (await request.get(path)).text();
     for (const banned of [
@@ -423,17 +446,81 @@ test("retired claims never appear on any page", async ({ request }) => {
   }
 });
 
-test("work comes first and analytics hooks are on the conversion links", async ({ page }) => {
+test("work comes first and analytics hooks are on the conversion links", async ({
+  page,
+}) => {
   await page.goto("/");
   const order = await page.evaluate(() =>
     [...document.querySelectorAll("main section[id]")].map((s) => s.id),
   );
   expect(order.slice(0, 3)).toEqual(["work", "approach", "systems"]);
   const firstCardTop = await page.evaluate(
-    () => document.querySelector(".story-card").getBoundingClientRect().top + scrollY,
+    () =>
+      document.querySelector(".story-card").getBoundingClientRect().top +
+      scrollY,
   );
   expect(firstCardTop).toBeLessThan(1400);
-  for (const name of ["resume_download", "email_click", "linkedin_click", "case_open", "portfolio_download"]) {
+  for (const name of [
+    "resume_download",
+    "email_click",
+    "linkedin_click",
+    "case_open",
+    "portfolio_download",
+  ]) {
     await expect(page.locator(`[data-track="${name}"]`)).not.toHaveCount(0);
   }
+});
+
+test("interview stories preserve attribution, confidentiality and human review", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.locator(".hero .button.primary")).toHaveAttribute(
+    "href",
+    "mailto:rafandrewf@gmail.com",
+  );
+  await expect(page.locator(".decision-story")).toContainText("HubSpot");
+  await expect(page.locator(".decision-story")).toContainText(
+    "influenced customers",
+  );
+  await expect(page.locator(".client-partnership")).toContainText(
+    "before launch",
+  );
+  await expect(page.locator(".client-partnership")).toContainText(
+    "extended the contract",
+  );
+  const systems = page.locator("#systems");
+  await expect(systems).toContainText("templates and rules");
+  await expect(systems).toContainText("Director approval");
+  await systems
+    .getByRole("button", { name: "Enquiry assistant", exact: true })
+    .click();
+  await expect(systems).toContainText("Fin");
+  await expect(systems).toContainText("during working hours");
+  await expect(systems.locator(".enquiry-workflow")).toBeVisible();
+  const assistantA11y = await new AxeBuilder({ page })
+    .include("#systems")
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+    .analyze();
+  expect(assistantA11y.violations).toEqual([]);
+  await systems
+    .getByRole("button", { name: "Campaign builder", exact: true })
+    .click();
+  await expect(systems.locator(".automation-workflow")).toBeVisible();
+  await page.goto("/case-studies/aegon/#linkedin-abm");
+  const abm = page.locator("#linkedin-abm");
+  await expect(abm).toContainText("Thought Leader Ads and carousel creative");
+  await expect(abm).toContainText(
+    "Campaign results, targets, budget and performance metrics remain confidential",
+  );
+  expect(await abm.innerText()).not.toMatch(
+    /[$€£]|\d\s*%|\b(?:million|ROAS|overshot|exceeded)\b/i,
+  );
+  await expect(page.locator(".aegon-acquisition")).toContainText(
+    "GOOGLE & META",
+  );
+  await page.goto("/case-studies/dats/");
+  await expect(page.locator(".enquiry-workflow")).toContainText(
+    "during working hours",
+  );
 });

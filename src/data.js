@@ -45,10 +45,10 @@ export const projects = [
       "Restructured Google Shopping and Performance Max, with complementary Meta campaigns supporting the acquisition mix.",
     learning:
       "Acquisition becomes more valuable when the strategy also makes room for repeat purchases and subscriptions.",
-    note: "Client-reported results over April–June 2023. 4:1 first-order ROAS for Google Shopping and Performance Max. Sales and subscription changes are not measures of incremental lift.",
+    note: "Client-reported April–June 2023 results. 4:1 first-order ROAS for Google Shopping and Performance Max; paid-attributed sales growth is quarter over quarter. Sales and subscription changes are not measures of incremental lift.",
     stats: [
       ["4:1", "First-order ROAS"],
-      ["+40%", "Sales"],
+      ["+40%", "Paid-attributed sales"],
       ["+30%", "Subscriptions"],
       ["3 months", "Reporting period"],
     ],
@@ -83,7 +83,7 @@ export const projects = [
   {
     id: "dats",
     category: "Education",
-    client: "DIMO Academy of Technical Studies",
+    client: "DIMO Academy for Technical Studies",
     period: "Feb 2026–present",
     context: "Independent · trades education",
     title: "More qualified. Same budget.",
@@ -99,7 +99,7 @@ export const projects = [
       "Rebuilt Google and Meta lead generation, added Microsoft Advertising, and rebuilt the landing page with a simpler form and an AI assistant for around-the-clock enquiries.",
     learning:
       "Improve the traffic and the conversion path together before asking for more budget.",
-    note: "Lead counts and response times supplied by the client. Before-and-after comparison, not a controlled test. Microsoft Advertising delivered 40% of 212 leads in the second quarter on the account.",
+    note: "Client-reported before-and-after figures, not a controlled test. The 4× response comparison is AI versus human replies during working hours. Microsoft Advertising delivered 40% of 212 leads in the engagement’s second quarter.",
     stats: [
       ["+20%", "CRM-qualified leads"],
       ["4×", "Faster response"],
@@ -114,7 +114,8 @@ export const projects = [
     period: "Jan 2025–present",
     context: "In-house · US & Canada",
     title: "Better signals. Smarter scale.",
-    summary: "Measurement and operations across 50 owned and ~100 co-managed ad accounts.",
+    summary:
+      "Measurement and operations across 50 owned and ~100 co-managed ad accounts.",
     metric: "−60%",
     metricLabel: "compliance review time",
     secondary: "+25%",
@@ -126,7 +127,7 @@ export const projects = [
       "Connected HubSpot offline conversions, implemented GA4 and server-side GTM, improved event deduplication, and built an Apps Script campaign builder with naming, UTM and compliance controls.",
     learning:
       "Trustworthy conversion signals and repeatable operations make better decisions possible at scale.",
-    note: "Relative changes in cost per lead (−13%) and completed applications (+18%) were supplied in Andrew’s updated case-study reference. Absolute budgets and performance figures remain confidential. Event Match Quality is a relative improvement. Approximately 12 working days saved annually is an estimate associated with the campaign builder.",
+    note: "Google and Meta acquisition: H1 2026 relative changes at unchanged spend, reported in the supplied résumé and portfolio. Event Match Quality is a relative improvement. Approximately 12 working days saved annually is an estimate. LinkedIn ABM results, targets, budget and performance metrics are confidential and are excluded.",
     stats: [
       ["50 + ~100", "Ad accounts owned + co-managed"],
       ["−60%", "Compliance review time"],
@@ -219,7 +220,13 @@ export const stackGroups = [
   {
     id: "paid",
     name: "Paid media platforms",
-    tools: ["Google Ads", "Meta Ads", "Microsoft Advertising", "LinkedIn Ads", "TikTok Ads"],
+    tools: [
+      "Google Ads",
+      "Meta Ads",
+      "Microsoft Advertising",
+      "LinkedIn Ads",
+      "TikTok Ads",
+    ],
   },
   {
     id: "analytics",
@@ -239,7 +246,15 @@ export const stackGroups = [
   {
     id: "productivity",
     name: "Productivity, systems & project management",
-    tools: ["Microsoft 365", "Google Workspace", "Asana", "ClickUp", "Notion", "Dynamics 365", "Jira"],
+    tools: [
+      "Microsoft 365",
+      "Google Workspace",
+      "Asana",
+      "ClickUp",
+      "Notion",
+      "Dynamics 365",
+      "Jira",
+    ],
   },
   {
     id: "email",
@@ -261,8 +276,8 @@ export const experience = [
     type: "Part-time",
     location: "Greater Vancouver, BC",
     description:
-      "Paid media for seven clients across education, local services, automotive and hospitality, alongside my full-time role. Some engagements are delivered through a partner agency.",
-    tags: ["7 clients", "4 industries", "Lead generation"],
+      "Paid media projects across education, local services, automotive and hospitality, alongside my full-time role. Some engagements are delivered through a partner agency. Active engagements will transition to a partner agency for my next full-time role.",
+    tags: ["Project-based", "4 industries", "Lead generation"],
   },
   {
     company: "Aegon",
@@ -271,7 +286,7 @@ export const experience = [
     type: "In-house",
     location: "Langley, BC",
     description:
-      "Own bidding and campaign structure for 50 US and Canadian business-unit ad accounts and co-manage ~100 more; forecast channel allocations for Director sign-off. Supervise two external agency partners and present biweekly performance reports to the CMO.",
+      "Own bidding and campaign structure for 50 US and Canadian business-unit ad accounts and co-manage ~100 more; forecast channel allocations for Director sign-off. Coordinate two external partners: one supports paid media for selected US business units, and the other handles SaaS licences and products. Present biweekly performance reports to the CMO.",
     tags: ["Financial services", "LinkedIn ABM", "Measurement"],
   },
   {

@@ -23,19 +23,19 @@ const previews = {
   aegon: {
     context: "In-house, US and Canada · Jan 2025–present",
     method:
-      "After moving optimization to HubSpot offline conversions and restructuring Google Ads. Reporting period and absolute figures are confidential.",
+      "Google and Meta acquisition · H1 2026 · unchanged media spend. LinkedIn ABM is discussed separately in the case study.",
     problem:
-      "Across 50 owned and ~100 co-managed ad accounts, unreliable conversion signals and repetitive setup made scale harder. I rebuilt measurement and the campaign workflow.",
-    role: "I run the accounts I own day to day, with my Director reviewing the work. The measurement rebuild and campaign builder are my work.",
+      "I connected bidding to HubSpot outcomes, cleaned up conversion tracking and built a repeatable campaign workflow across a large account remit.",
+    role: "I own the account work day to day, forecast allocations for Director sign-off and built the measurement and campaign workflows.",
     note: "Better acquisition signals and faster reviews. Explore the systems behind the reported improvements.",
   },
   petmart: {
     summary:
-      "Restructured Google Shopping and Performance Max, with Meta in support, and tracked subscriptions alongside first orders.",
+      "Separated new and returning customers in Google Shopping and Performance Max, with Meta supporting the retail brief.",
   },
   dats: {
     summary:
-      "Rebuilt Google and Meta campaigns, added Microsoft Advertising and a new landing page with a 24/7 AI assistant, at flat spend.",
+      "Rebuilt acquisition at flat spend and integrated Fin to answer enquiries and help hand them over to admissions.",
   },
 };
 
@@ -58,7 +58,8 @@ function PreviewGraphic({ id }) {
           </div>
         ))}
         <figcaption>
-          Fee-paid enrolments, two lowest-intake colleges. A dedicated vs broad campaign comparison, not a controlled test.
+          Fee-paid enrolments, two lowest-intake colleges. A dedicated vs broad
+          campaign comparison, not a controlled test.
         </figcaption>
       </figure>
     );
@@ -105,7 +106,10 @@ function PreviewGraphic({ id }) {
           <strong>{value}</strong>
         </div>
       ))}
-      <figcaption>Relative changes.</figcaption>
+      <figcaption>
+        Relative changes in signal quality and review time. Separate from the
+        acquisition results above.
+      </figcaption>
     </figure>
   );
 }

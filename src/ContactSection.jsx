@@ -14,9 +14,10 @@ export default function ContactSection() {
       <div className="contact-reference-inner">
         <h2 id="contact-heading">Let’s talk paid media</h2>
         <p>
-          Hiring for a paid media role, or want to talk through one of the case
-          studies? Email me or
-          <br className="contact-line-break" /> connect on LinkedIn.
+          Looking for a Paid Media Specialist who can get into the account,
+          explain the recommendation and own the follow-through?
+          <br className="contact-line-break" /> I’d love to hear about your
+          agency and its clients.
         </p>
         <div className="contact-reference-actions">
           <a
@@ -33,7 +34,12 @@ export default function ContactSection() {
             <Mail size={17} />
             {email}
           </a>
-          <a href={resume} download data-track="resume_download" data-where="contact">
+          <a
+            href={resume}
+            download
+            data-track="resume_download"
+            data-where="contact"
+          >
             <FileText size={17} />
             Download résumé
           </a>

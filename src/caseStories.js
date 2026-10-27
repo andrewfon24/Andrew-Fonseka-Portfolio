@@ -1,149 +1,152 @@
 export const caseStories = {
   university: {
     intro:
-      "A university intake campaign where the most useful result was hidden behind the cheapest lead.",
+      "The account was generating enquiries. The admissions challenge was more specific: fill places in the two colleges with the lowest intakes. I built the campaign around that priority and followed the leads through to fee-paid enrolment.",
+    role: "Independent delivery through partner agency SOL. I owned strategy, campaign build, creative testing, optimization and CRM reporting; SOL brought the client.",
     problem: [
-      "The university needed to fill places in two colleges with the lowest intakes. Broad undergraduate targeting brought in enquiries, but the distribution of those enquiries did not match the admissions team’s priorities.",
-      "The broad campaign looked attractive on cost per lead. Yet it produced only 17 enrolments for the two priority colleges. That made a blended CPL an incomplete measure of success: the account needed students in specific programs, not just more names in a lead list.",
+      "The broad undergraduate campaign produced only 17 enrolments for the two priority colleges. Its low cost per lead looked encouraging, but that figure did not explain whether we were filling the places the university needed to fill.",
+      "I needed to give those colleges a clearer acquisition plan and make admissions outcomes part of the campaign review.",
     ],
     actions: [
       [
-        "Separate the priority",
-        "I gave the two colleges a dedicated campaign and their own budget, rather than relying on the broad undergraduate campaign to fill every program.",
+        "Give the priority its own campaign",
+        "I separated the two colleges into a dedicated campaign with its own budget. That made the audience, creative and results easier to evaluate against the intake brief.",
       ],
       [
-        "Ask for stronger intent",
-        "I used high-intent Meta lead forms and A/B-tested creative, giving the priority campaign a clearer acquisition brief.",
+        "Make the enquiry more deliberate",
+        "I used a higher-intent Meta lead form, tightened placements and targeting, and A/B-tested creative. The aim was to attract prospective students who were more likely to complete the admissions journey.",
       ],
       [
-        "Close the loop with admissions",
-        "I connected campaign reporting to admissions CRM outcomes and compared campaigns on fee-paid enrolments, alongside lead costs.",
+        "Follow the lead into admissions",
+        "I matched enrolments in the university CRM using name, phone and student ID, and deduplicated against existing applicants. Campaign reporting could now connect the enquiry to a fee-paid place.",
       ],
     ],
     result: [
-      "The priority-colleges campaign generated 125 fee-paid enrolments from 161 leads: a 77.6% lead-to-enrolment rate at US$28.06 per enrolment. Its US$21.79 CPL was more than six times the broad campaign’s US$3.49, but it delivered the intake the university needed.",
-      "Across all three campaigns, 821 Meta leads became 430 CRM-qualified leads and 312 fee-paid enrolments, at US$20.02 per enrolment. The priority campaign and broad campaign served different intake needs, so their rates should be read in that context.",
+      "The dedicated campaign delivered 125 fee-paid enrolments from 161 leads. The broad campaign delivered 17 enrolments for those same priority colleges. This is a comparison between campaigns with different targeting, rather than a controlled lift test.",
+      "Across the three campaigns, 821 Meta leads became 430 qualified leads and 312 fee-paid enrolments, at approximately US$20 per enrolment. The priority campaign had a higher CPL, but it addressed the admissions need the blended lead figure had obscured.",
     ],
     takeaway:
-      "A cheap lead only helps if it becomes the student the institution needs.",
-    sourcePage: 5,
-  },
-  petmart: {
-    intro:
-      "Connecting first-order acquisition to a retail business that also depends on customers coming back.",
-    problem: [
-      "Petmart.lk needed stronger e-commerce acquisition and more subscription customers. The campaign structure did not clearly distinguish prospecting from returning-customer activity, leaving room to make the role of each campaign clearer.",
-      "The task was to support both first purchases and repeat commerce. A single acquisition figure would not tell the whole story, so the outcome needed to include sales and subscription growth alongside first-order advertising return.",
-    ],
-    actions: [
-      [
-        "Rebuild the acquisition structure",
-        "At Kites Global, I restructured Google Shopping and Performance Max to address the retailer’s acquisition challenge.",
-      ],
-      [
-        "Support the channel mix",
-        "I ran complementary Meta campaigns alongside the Google activity, connecting paid search and social to the wider retail brief.",
-      ],
-      [
-        "Read beyond the first order",
-        "I assessed the work using first-order ROAS together with the client’s sales and subscription results over the three-month reporting period.",
-      ],
-    ],
-    result: [
-      "From April to June 2023, the client reported 4:1 first-order ROAS from Google Shopping and Performance Max, 40% sales growth and 30% subscription growth.",
-      "Those figures describe the reported business performance over the period. They do not isolate how much growth advertising caused, and the first-order ROAS figure does not represent lifetime customer value.",
-    ],
-    takeaway:
-      "Acquisition is more useful when the strategy also makes room for the next purchase.",
-    sourcePage: 4,
+      "Start with the intake the university needs. Then decide which lead is worth paying for.",
   },
   panasia: {
     intro:
-      "A fixed media budget, a competitive lending market, and a decision grounded in the quality of the lead.",
+      "A gold-loan campaign has to do more than collect forms. At Pan Asia Bank, I used lead quality to guide the channel mix and kept funded loans at the centre of the account conversation.",
+    role: "Account lead at Kites Global. I designed and presented the Meta video strategy pitch, managed the campaign and ran client calls through delivery.",
     problem: [
-      "Pan Asia Bank needed to win borrowers in Sri Lanka’s competitive gold-loan market with a fixed US$25,000 media budget. Generating enquiries was only the beginning: the business needed those enquiries to become funded loans.",
-      "Channel selection therefore had to account for lead quality as well as cost. Meta was producing higher-quality leads at a lower CPL than Google Ads, creating a practical signal for how to allocate the budget.",
+      "Pan Asia Bank needed to win borrowers in Sri Lanka’s competitive gold-loan market with a fixed US$25,000 media budget. The brief required both acquisition and a clear way to judge the value of the enquiries.",
+      "Meta was producing higher-quality leads at a lower CPL than Google Ads. That gave me a practical basis for the allocation recommendation, while funded loans provided the business measure for reviewing it.",
     ],
     actions: [
       [
-        "Read the quality signal",
-        "Working at Kites Global, I used the difference in cost and lead quality between Meta and Google Ads to guide the media mix.",
+        "Put the recommendation in front of the client",
+        "I designed and presented the Meta video strategy pitch, connecting the creative approach to the bank’s acquisition goal. I stayed involved in client calls through delivery.",
       ],
       [
-        "Allocate to the evidence",
-        "I set a 60% Meta / 40% Google Ads split. On the US$25,000 budget, that represents US$15,000 and US$10,000 respectively.",
+        "Allocate around lead quality",
+        "I used a 60% Meta and 40% Google Ads allocation: US$15,000 and US$10,000 respectively. Cost and quality informed the mix.",
       ],
       [
-        "Judge the business outcome",
-        "I evaluated the campaign against funded gold loans rather than treating every form submission as an equally valuable result.",
+        "Review the outcome each week",
+        "I judged performance on funded loans matched to campaign leads. That kept the discussion connected to lending outcomes as well as the platforms’ cost-per-lead reports.",
       ],
     ],
     result: [
-      "The client reported 259 funded gold loans and US$500,000 in loan principal lent from US$25,000 in media spend. Dividing media spend by funded loans gives approximately US$96.53 per funded loan, rounded to US$97.",
-      "Loan principal is the amount lent to borrowers. It is not bank revenue or profit, so the loan-value-to-media ratio is not presented as ROAS. The supplied results do not break funded loans down by channel.",
+      "The client reported 259 funded gold loans from US$25,000 in media spend, equivalent to approximately US$97 in media cost per funded loan.",
+      "The associated US$500,000 is loan principal lent, not bank revenue or profit. Funded-loan counts were not supplied by channel, so the allocation chart shows spend share only.",
     ],
     takeaway:
-      "Keep CPL in the report. Let funded outcomes guide the allocation decision.",
-    sourcePage: 3,
+      "A useful account report explains where the budget went, what came back and what the result actually means.",
+  },
+  petmart: {
+    intro:
+      "For a pet-supplies retailer, the first purchase is one part of the relationship. I restructured acquisition around new and returning customers and read the results alongside subscriptions.",
+    role: "Paid media delivery at Kites Global across Google Shopping, Performance Max and supporting Meta campaigns.",
+    problem: [
+      "Petmart.lk needed stronger acquisition and more subscription customers. The campaign structure did not clearly separate new-customer activity from returning-customer activity.",
+      "I wanted the account to reflect both needs: bring customers into the business and support the repeat purchases that matter in pet supplies.",
+    ],
+    actions: [
+      [
+        "Clarify the role of each campaign",
+        "I restructured Google Shopping and Performance Max to separate new and returning customers, giving acquisition a clearer place in the account.",
+      ],
+      [
+        "Connect search and social",
+        "I ran complementary Meta campaigns alongside Google activity, keeping the media mix connected to the retailer’s wider brief.",
+      ],
+      [
+        "Look beyond the first order",
+        "I reviewed first-order ROAS alongside paid-attributed sales and subscriptions over April–June 2023. These measures describe different parts of the customer relationship.",
+      ],
+    ],
+    result: [
+      "The client reported 4:1 first-order ROAS for Google Shopping and Performance Max, 40% growth in paid-attributed sales quarter over quarter and 30% subscription growth.",
+      "These are reported performance changes. They do not establish incremental lift, and first-order ROAS does not include lifetime customer value.",
+    ],
+    takeaway:
+      "Build the account around how customers buy, including what happens after the first order.",
   },
   dats: {
     intro:
-      "Improving the traffic and the enquiry experience before asking for a bigger budget.",
+      "DIMO Academy needed more qualified prospects within the same media budget. I worked on the campaign mix and the enquiry experience together, so the next step became easier for prospective students and the admissions team.",
+    role: "Independent paid media delivery, landing-page work and integration of a Fin-powered enquiry assistant.",
     problem: [
-      "DIMO Academy of Technical Studies needed more enrolment-ready prospects without increasing an approximately US$900 monthly media budget. Raw form fills were not enough to show whether acquisition was attracting the right students.",
-      "CRM-qualified leads in Microsoft Dynamics 365 provided a more useful signal. The opportunity was to improve both the channel mix and the path from an ad click to a useful conversation with the academy.",
+      "With approximately US$900 a month in media spend, increasing the budget was not the starting point. The question was how to get more useful enquiries from the resources already available.",
+      "Dynamics 365 qualified-lead data helped me assess acquisition. The next opportunity was the response journey: a prospective student should be able to get help even when the admissions team is away.",
     ],
     actions: [
       [
-        "Rebuild the traffic mix",
-        "I rebuilt Google Ads and Meta lead generation and added Microsoft Advertising to the acquisition mix.",
+        "Rework acquisition within the budget",
+        "I rebuilt Google Ads and Meta campaigns and introduced Microsoft Advertising as an additional source of intent.",
       ],
       [
-        "Simplify the enquiry",
-        "I rebuilt the landing page in Lovable and simplified the lead form, addressing the conversion experience alongside campaign performance.",
+        "Simplify the path to an enquiry",
+        "I rebuilt the landing page in Lovable and simplified the lead form. Campaign changes and conversion experience were part of the same piece of work.",
       ],
       [
-        "Keep enquiries moving",
-        "I added an AI assistant that answers enquiries around the clock, including after hours, and used CRM-qualified leads to assess the outcome.",
+        "Connect the assistant to admissions",
+        "I integrated Fin to answer questions, including after hours, and support appointment booking into the college calendar. Email notifications and reminders help admissions pick up the conversation.",
       ],
     ],
     result: [
-      "The client reported a 20% increase in CRM-qualified leads at approximately unchanged spend. Indexed to 100 before the rebuild, that becomes 120 afterward; these are comparison indices, not raw lead counts.",
-      "The AI assistant replied four times faster than manual staff responses. Microsoft Advertising contributed 40% of 212 leads in my second quarter on the account. That share describes all leads in the reported quarter, rather than a breakdown of the CRM-qualified improvement.",
+      "The client reported 20% more CRM-qualified leads at unchanged media spend. Microsoft Advertising contributed 40% of 212 leads in my second quarter on the account. The channel share and qualified-lead improvement are separate measures.",
+      "During working hours, AI replies were reported as four times faster than human replies. After-hours availability is an additional benefit. The comparison measures response time, rather than resolution time or enrolment conversion.",
     ],
     takeaway:
-      "Better media and a clearer conversion path can work together within the same budget.",
-    sourcePage: 6,
+      "Improve the account and the handoff together. A useful enquiry needs a useful next step.",
   },
   aegon: {
     intro:
-      "Making the conversion data trustworthy and the campaign workflow repeatable across a large account remit.",
+      "Across a large financial-services account remit, the daily work connects media, measurement, stakeholders and review. I get into the data, build the campaign and explain what should change next.",
+    role: "I own bidding and campaign structure for 50 US and Canadian business-unit ad accounts and co-manage approximately 100 more. I help manage a seven-figure annual media budget, forecast allocations for Director sign-off and report biweekly to the CMO.",
     problem: [
-      "At Aegon, I own bidding and campaign structure for 50 US and Canadian business-unit ad accounts and co-manage about 100 more, forecasting channel allocations for Director sign-off. A program at that scale needs reliable conversion signals and consistent campaign operations.",
-      "Overlapping GTM tags and triggers had caused double-counted events and conversions. At the same time, campaign setup needed consistent naming, UTMs and compliance controls. Both issues affected how confidently the team could operate and interpret performance.",
+      "Campaigns were optimizing toward form fills, while the business needed qualified applicants. Overlapping GTM tags also double-counted events and conversions, making it harder to interpret reported performance.",
+      "Alongside that measurement work, campaign setup needed a consistent process for structure, naming, UTMs and review. Financial-services advertising also required a clear route from a potential issue to human review and final approval.",
     ],
     actions: [
       [
-        "Make the signal trustworthy",
-        "I implemented GA4, server-side GTM, Enhanced Conversions and Meta CAPI, improved browser-to-server event deduplication, and removed double-counted conversions.",
+        "Connect optimization to the CRM",
+        "I fed HubSpot stages, including qualified leads, booked calls and completed applications, back as offline conversions. I restructured Google Ads, tightened targeting, refined forms and landing pages, and reallocated budget using those outcomes.",
       ],
       [
-        "Move bidding down the funnel",
-        "I connected HubSpot offline conversions, including qualified leads, booked calls and completed applications, to Google Ads Smart Bidding and Meta optimization. I also built LinkedIn ABM activity using Matched Audiences, Thought Leader Ads and carousel creative.",
+        "Clean up the measurement",
+        "I rebuilt tracking using GA4, server-side Google Tag Manager, Enhanced Conversions and Meta CAPI. I removed overlapping tags and improved browser-server event deduplication so the team could make decisions from cleaner data.",
       ],
       [
-        "Make execution repeatable",
-        "I built a Google Apps Script campaign builder with naming, UTM and compliance controls. It was adopted team-wide. I also supervise two external agency partners (strategy, build and optimization reviews) and present biweekly performance reports to the CMO.",
+        "Build a repeatable setup workflow",
+        "I developed a Google Sheets and Apps Script campaign builder with Claude’s assistance, then refined its templates and rules. It assembles campaign structure and copy, applies naming and UTM conventions, and flags potential compliance issues for people to review. My Director gives final approval before launch.",
+      ],
+      [
+        "Keep partners and stakeholders aligned",
+        "I support forecasting, budget pacing and senior-management reporting. Of the two external partners I supervise, one supports paid media for selected US business units; the other handles SaaS licences and products.",
       ],
     ],
     result: [
-      "Reported acquisition outcomes include a 13% reduction in cost per lead and an 18% increase in completed applications. These are relative changes; absolute figures remain confidential.",
-      "The campaign builder reduced compliance review time by 60%, with an estimated 12 working days saved annually. Measurement work improved Meta Event Match Quality by 25% relative to the previous level, rather than by 25 percentage points.",
-      "These are the operational and measurement figures approved for public discussion. Absolute budgets, pipeline values and acquisition figures remain confidential; the diagrams below explain the work without exposing internal dashboards or inventing substitute data.",
+      "For the Google and Meta acquisition work in H1 2026, reported cost per lead fell 13% and completed applications rose 18% at unchanged media spend. These figures describe that acquisition work, separately from the LinkedIn ABM program below.",
+      "The measurement work improved Meta Event Match Quality by 25% relative to the previous level. The team-adopted campaign builder reduced compliance review time by 60%, with approximately 12 working days saved annually.",
     ],
     takeaway:
-      "Reliable signals and consistent execution give a large program a stronger basis for decisions.",
-    sourcePage: 7,
+      "Get the signal right, make the work repeatable and give the people responsible a clear basis for their next decision.",
   },
 };
 

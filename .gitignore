@@ -12,3 +12,6 @@ work/
 .env.*
 !.env.example
 .vercel/
+
+# Local interview working brief
+/PRODUCT.md

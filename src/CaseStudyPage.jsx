@@ -12,6 +12,12 @@ import {
   ChartNoAxesCombined,
 } from "lucide-react";
 import { caseStories, universityCampaigns } from "./caseStories";
+import { projects } from "./data";
+import {
+  ABMJourney,
+  CampaignWorkflow,
+  EnquiryWorkflow,
+} from "./NarrativeVisuals";
 
 function StatStrip({ stats }) {
   return (
@@ -247,16 +253,16 @@ function PetmartDashboard() {
         <Bars
           rows={[
             {
-              label: "Sales",
+              label: "Paid-attributed sales",
               value: "+40%",
               width: 100,
-              detail: "Reported growth over the period",
+              detail: "Client-reported change",
             },
             {
               label: "Subscriptions",
               value: "+30%",
               width: 75,
-              detail: "Reported growth over the period",
+              detail: "Client-reported change",
             },
           ]}
           note="Bar lengths compare the two growth percentages. These are client-reported changes, not a causal attribution model."
@@ -316,8 +322,8 @@ function BankDashboard() {
         <div>
           <div className="bank-donut">
             <div>
-              <strong>259</strong>
-              <span>funded gold loans</span>
+              <strong>US$25K</strong>
+              <span>media budget</span>
             </div>
           </div>
           <p className="case-chart-caption">
@@ -401,17 +407,7 @@ function DatsDashboard() {
         ]}
         note="CRM-qualified leads indexed to 100 before the rebuild. A 20% increase produces an index of 120. These are not raw lead counts."
       />
-      <Workflow
-        label="DATS enquiry experience"
-        steps={[
-          [
-            "Find",
-            "Google Ads, Meta and Microsoft Advertising bring prospects in.",
-          ],
-          ["Enquire", "A rebuilt Lovable landing page and simpler lead form."],
-          ["Respond", "An AI assistant answers enquiries around the clock."],
-        ]}
-      />
+      <EnquiryWorkflow />
       <div className="case-two-insights">
         <div>
           <span>CHANNEL CONTRIBUTION</span>
@@ -425,7 +421,8 @@ function DatsDashboard() {
           <span>ENQUIRY RESPONSE</span>
           <strong>4× faster</strong>
           <p>
-            AI assistant response versus manual replies, including after hours.
+            Fin response versus human replies during working hours. After-hours
+            availability is a separate benefit.
           </p>
         </div>
       </div>
@@ -444,12 +441,46 @@ function AegonDashboard() {
   const measurement = system === "Conversion signals";
   return (
     <>
+      <div className="aegon-acquisition">
+        <span className="case-kicker">GOOGLE & META · H1 2026</span>
+        <h4>Acquisition outcomes at unchanged spend.</h4>
+        <div className="case-result-pair">
+          <div>
+            <strong>−13%</strong>
+            <span>cost per lead</span>
+          </div>
+          <div>
+            <strong>+18%</strong>
+            <span>completed applications</span>
+          </div>
+        </div>
+        <Bars
+          rows={[
+            {
+              label: "Cost per lead · before",
+              value: "100",
+              width: 100 / 1.18,
+            },
+            { label: "Cost per lead · after", value: "87", width: 87 / 1.18 },
+            {
+              label: "Completed applications · before",
+              value: "100",
+              width: 100 / 1.18,
+            },
+            {
+              label: "Completed applications · after",
+              value: "118",
+              width: 100,
+            },
+          ]}
+          note="Each measure is indexed to its own baseline of 100. These are relative comparisons, not costs or application counts. They describe Google and Meta acquisition, separately from LinkedIn ABM."
+        />
+      </div>
       <div className="dashboard-header">
         <div>
           <span className="case-kicker">MEASUREMENT & OPERATIONS</span>
-          <h4>Trust the signal. Simplify the work.</h4>
+          <h4>Make the signal useful. Make the work repeatable.</h4>
         </div>
-        <span>US & Canada</span>
       </div>
       <div className="campaign-picker" aria-label="Explore Aegon systems">
         {["Conversion signals", "Campaign operations"].map((name) => (
@@ -463,40 +494,27 @@ function AegonDashboard() {
         ))}
       </div>
       <div className="aegon-system" aria-live="polite">
-        <Workflow
-          label={system}
-          steps={
-            measurement
-              ? [
-                  [
-                    "Capture",
-                    "GA4, server-side GTM, Enhanced Conversions and Meta CAPI.",
-                  ],
-                  [
-                    "Validate",
-                    "Deduplicated events and HubSpot offline conversion outcomes.",
-                  ],
-                  [
-                    "Optimize",
-                    "Qualified leads, booked calls and applications inform bidding.",
-                  ],
-                ]
-              : [
-                  [
-                    "Standardise",
-                    "Apps Script builder applies naming and UTM conventions.",
-                  ],
-                  [
-                    "Review",
-                    "Compliance controls are built into campaign setup.",
-                  ],
-                  [
-                    "Repeat",
-                    "Team-wide adoption supports consistent campaign operations.",
-                  ],
-                ]
-          }
-        />
+        {measurement ? (
+          <Workflow
+            label="Conversion signals"
+            steps={[
+              [
+                "Capture",
+                "GA4, server-side Google Tag Manager, Enhanced Conversions and Meta CAPI.",
+              ],
+              [
+                "Validate",
+                "Remove duplicate events and connect HubSpot offline conversion outcomes.",
+              ],
+              [
+                "Optimize",
+                "Use qualified leads, booked calls and applications to inform bidding.",
+              ],
+            ]}
+          />
+        ) : (
+          <CampaignWorkflow />
+        )}
         <div className="case-system-outcome">
           <Check size={22} aria-hidden="true" />
           <div>
@@ -504,25 +522,72 @@ function AegonDashboard() {
             <span>
               {measurement
                 ? "Meta Event Match Quality · relative improvement"
-                : "Compliance review time · estimated ~12 working days saved annually"}
+                : "Compliance review time · approximately 12 working days saved annually"}
             </span>
           </div>
         </div>
+        {!measurement && (
+          <Bars
+            rows={[
+              {
+                label: "Compliance review time · before",
+                value: "100",
+                width: 100,
+              },
+              {
+                label: "Compliance review time · after",
+                value: "40",
+                width: 40,
+              },
+            ]}
+            note="Review time indexed to 100 before the builder. A reported 60% reduction gives an index of 40 afterward. These are not hours or days."
+          />
+        )}
       </div>
-      <Bars
-        rows={[
-          { label: "Compliance review · before", value: "100", width: 100 },
-          { label: "Compliance review · after", value: "40", width: 40 },
-        ]}
-        note="Illustrative index calculated from the reported 60% reduction in review time. The baseline of 100 is an index, not hours or days."
-      />
       <p className="case-evidence-note">
-        Process diagrams explain the implemented systems; they are not
-        screenshots of Aegon’s internal tools. Only approved public figures
-        appear. Absolute budgets and acquisition performance remain
-        confidential.
+        Process diagrams illustrate the implemented workflows. Internal
+        dashboards and absolute performance figures are confidential.
       </p>
     </>
+  );
+}
+
+function LinkedInStory() {
+  return (
+    <section
+      className="case-briefing"
+      id="linkedin-abm"
+      aria-labelledby="abm-title"
+    >
+      <h2 id="abm-title">Inside the LinkedIn investor program.</h2>
+      <p>
+        I owned the strategy and execution of a high-net-worth investor program
+        across the US and Canada in H1 2026. I organized custom priority
+        audiences in Google Sheets using job titles, seniority, company
+        attributes and account lists. Matched Audiences, Thought Leader Ads and
+        carousel creative were the main formats.
+      </p>
+      <p>
+        My Director challenged the initial recommendation. I built a visual
+        presentation and forecast to explain the approach and secure support.
+        That conversation made the reasoning behind the plan as important as the
+        campaign setup.
+      </p>
+      <p>
+        I integrated HubSpot with LinkedIn Campaign Manager so I could examine
+        qualified enquiries alongside campaign activity. One US region was
+        producing fewer qualified enquiries than other regions. I used that
+        evidence to revise targeting and reallocate budget toward the stronger
+        regions.
+      </p>
+      <p>
+        The customer journey continued through an adviser meeting, document
+        exchange and account funding. HubSpot supported revenue-attribution
+        analysis of LinkedIn’s influence within that journey. Campaign results,
+        targets, budget and performance metrics remain confidential.
+      </p>
+      <ABMJourney />
+    </section>
   );
 }
 
@@ -537,6 +602,10 @@ const dashboards = {
 export default function CaseStudyPage({ project }) {
   const story = caseStories[project.id];
   const Dashboard = dashboards[project.id];
+  const next =
+    projects[
+      (projects.findIndex((p) => p.id === project.id) + 1) % projects.length
+    ];
   useEffect(() => {
     document.title = `${project.client} case study | Andrew Fonseka`;
   }, [project]);
@@ -560,10 +629,16 @@ export default function CaseStudyPage({ project }) {
           {project.period}
         </p>
         <p className="case-intro">{story.intro}</p>
+        <p className="case-role-note">
+          <strong>My role.</strong> {story.role}
+        </p>
         <nav className="case-jump-links" aria-label="Case study sections">
           <a href="#case-problem">The problem</a>
           <a href="#case-action">What I did</a>
           <a href="#case-result">The result</a>
+          {project.id === "aegon" && (
+            <a href="#linkedin-abm">LinkedIn strategy</a>
+          )}
           <a href="#case-evidence">
             Results & evidence <ArrowRight size={15} />
           </a>
@@ -592,6 +667,13 @@ export default function CaseStudyPage({ project }) {
               ))}
             </ol>
           </section>
+          <section
+            id="case-evidence"
+            className="case-dashboard"
+            aria-label={`${project.client} results dashboard`}
+          >
+            <Dashboard />
+          </section>
           <section className="case-chapter" aria-labelledby="case-result">
             <span className="chapter-number">03 / OUTCOME</span>
             <h2 id="case-result">The result</h2>
@@ -600,13 +682,8 @@ export default function CaseStudyPage({ project }) {
             ))}
           </section>
         </div>
-        <section
-          id="case-evidence"
-          className="case-dashboard"
-          aria-label={`${project.client} results dashboard`}
-        >
-          <Dashboard />
-        </section>
+
+        {project.id === "aegon" && <LinkedInStory />}
         <aside className="case-takeaway">
           <span>WHAT THIS CHANGED</span>
           <p>{story.takeaway}</p>
@@ -614,6 +691,16 @@ export default function CaseStudyPage({ project }) {
         <div className="case-source">
           <h2>Sources & measurement</h2>
           <p>{project.note}</p>
+        </div>
+        <div className="case-next">
+          <span>Another account. Another decision.</span>
+          <a
+            href={`/case-studies/${next.id}/`}
+            data-track="case_open"
+            data-case={next.id}
+          >
+            {next.client} <ArrowRight size={16} aria-hidden="true" />
+          </a>
         </div>
         <div className="case-dialog-bottom">
           <a className="text-link" href="/#work">
