@@ -23,7 +23,6 @@ import CaseStudyPage from "./CaseStudyPage";
 import ContactSection from "./ContactSection";
 import BrandIcon from "./BrandIcon";
 import WorkCard from "./WorkCard";
-import { ABMStory } from "./NarrativeVisuals";
 
 const resume = "/documents/Andrew_Fonseka_Resume.pdf";
 
@@ -354,7 +353,6 @@ export default function App({ projectId = null }) {
                   </li>
                 ))}
               </ol>
-              <ABMStory />
             </div>
           </section>
 

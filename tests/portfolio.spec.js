@@ -479,10 +479,7 @@ test("interview stories preserve attribution, confidentiality and human review",
     "href",
     "mailto:rafandrewf@gmail.com",
   );
-  await expect(page.locator(".decision-story")).toContainText("HubSpot");
-  await expect(page.locator(".decision-story")).toContainText(
-    "influenced customers",
-  );
+  await expect(page.locator(".decision-story")).toHaveCount(0);
   await expect(page.locator(".client-partnership")).toHaveCount(0);
   await page.goto("/case-studies/aegon/#linkedin-abm");
   const abm = page.locator("#linkedin-abm");
