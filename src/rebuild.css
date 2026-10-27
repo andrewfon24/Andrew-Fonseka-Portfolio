@@ -1585,3 +1585,48 @@
     font-size: 30px;
   }
 }
+
+/* A single 1.5-second arrival: readable figures, then gently settling bars.
+   No hidden initial state, loops, layout changes, or delayed controls. */
+@media (prefers-reduced-motion: no-preference) {
+  .motion-arrived {
+    animation: metric-arrival 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .motion-arrived
+    :is(
+      .card-data-track > i,
+      .card-compare-tracks > i,
+      .growth-visual > i,
+      .overview-track > i,
+      .funnel-track > i,
+      .case-bar-track > i
+    ) {
+    transform-origin: left center;
+    animation: chart-settle 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .motion-arrived:focus-within {
+    animation: none;
+  }
+}
+
+@keyframes metric-arrival {
+  from {
+    opacity: 0.82;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chart-settle {
+  from {
+    transform: scaleX(0.82);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

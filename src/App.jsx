@@ -12,6 +12,7 @@ import ContactSection from "./ContactSection";
 import BrandIcon from "./BrandIcon";
 import WorkCard from "./WorkCard";
 import { ApproachReferences, PersonBehindWork } from "./ProfileSections";
+import useEntranceMotion from "./useEntranceMotion";
 
 const resume = "/documents/Andrew_Fonseka_Resume.pdf";
 const email =
@@ -26,6 +27,7 @@ function Label({ children }) {
 }
 
 export default function App({ projectId = null }) {
+  useEntranceMotion();
   const caseProject = projects.find((p) => p.id === projectId);
   const [active, setActive] = useState("");
   useEffect(() => {

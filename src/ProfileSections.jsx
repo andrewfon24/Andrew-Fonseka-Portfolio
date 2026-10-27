@@ -198,8 +198,8 @@ export function PersonBehindWork() {
           <div className="timeline-label">
             The journey so far <span>2019 – NOW</span>
           </div>
-          {experience.map((e, i) => (
-            <details className="experience-item" key={e.company} open={i < 3}>
+          {experience.map((e) => (
+            <details className="experience-item" key={e.company}>
               <summary>
                 <div className="timeline-dot" />
                 <div>

@@ -84,7 +84,7 @@ test("homepage follows the short result-first brief and has one email primary ac
     "Don Chanaka Perera",
   );
   await expect(page.locator(".experience-item")).toHaveCount(6);
-  await expect(page.locator(".experience-item[open]")).toHaveCount(3);
+  await expect(page.locator(".experience-item[open]")).toHaveCount(0);
   await expect(page.locator(".experience-list")).toContainText(
     "Aug 2023 – Oct 2024",
   );
@@ -397,4 +397,62 @@ test("Astro renders complete pages and evidence remains usable without JavaScrip
   ).toHaveAttribute("href", "/#work");
   await context.close();
   expect((await request.get("/sitemap.xml")).status()).toBe(200);
+});
+
+test("1.5-second entrances run once, preserve data and respect reduced motion", async ({
+  page,
+}) => {
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await page.goto("/");
+    const metric = page.locator(".rebuild-stats > div").first();
+    await metric.scrollIntoViewIfNeeded();
+    await expect(metric).toHaveClass(/motion-arrived/);
+    expect(
+      await metric.evaluate((e) => getComputedStyle(e).animationDuration),
+    ).toBe("1.5s");
+    const card = page.locator(".result-card").first();
+    await card.scrollIntoViewIfNeeded();
+    await expect(card).toHaveClass(/motion-arrived/);
+    const bar = card.locator(".card-data-track i").first();
+    expect(
+      await bar.evaluate((e) => getComputedStyle(e).animationDuration),
+    ).toBe("1.5s");
+    await card.evaluate(async (e) => {
+      await Promise.all(
+        e.getAnimations({ subtree: true }).map((a) => a.finished),
+      );
+    });
+    await expect(card.locator(".result-numbers strong")).toHaveText([
+      "312",
+      "~US$20",
+    ]);
+    await page.locator("#about").scrollIntoViewIfNeeded();
+    await expect(page.locator(".experience-item[open]")).toHaveCount(0);
+    const entry = page.locator(".experience-item").first();
+    await entry.locator("summary").focus();
+    await page.keyboard.press("Enter");
+    await expect(entry).toHaveAttribute("open");
+    await page.keyboard.press("Enter");
+    await expect(entry).not.toHaveAttribute("open");
+    await card.scrollIntoViewIfNeeded();
+    expect(
+      await card.evaluate(
+        (e) =>
+          e
+            .getAnimations({ subtree: true })
+            .filter((a) => a.playState === "running").length,
+      ),
+    ).toBe(0);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await expect(card).not.toHaveClass(/motion-arrived/);
+    await page.reload();
+    await card.scrollIntoViewIfNeeded();
+    await expect(card).toBeVisible();
+    expect(
+      await card.evaluate((e) => e.getAnimations({ subtree: true }).length),
+    ).toBe(0);
+    await expect(page.locator(".experience-item[open]")).toHaveCount(0);
+  }
 });
