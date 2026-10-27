@@ -48,11 +48,9 @@ test("homepage follows the short result-first brief and has one email primary ac
     )
     .toBe("1");
   await expect(page.locator(".project-case-link")).toHaveCount(5);
-  await expect(page.locator(".rebuild-stats strong")).toHaveText([
-    "7-figure",
-    "50",
-    "3 years",
-  ]);
+  await expect(page.locator(".rebuild-stats .metric-count-display")).toHaveText(
+    ["7-figure", "50", "3 years"],
+  );
   await expect(page.locator(".rebuild-stats")).toContainText(
     "business units managed at Aegon",
   );
@@ -407,7 +405,7 @@ test("Astro renders complete pages and evidence remains usable without JavaScrip
   expect((await request.get("/sitemap.xml")).status()).toBe(200);
 });
 
-test("1.5-second entrances run once, preserve data and respect reduced motion", async ({
+test("chart animations run once while containers stay still and respect reduced motion", async ({
   page,
 }) => {
   for (const width of [390, 1440]) {
@@ -418,13 +416,13 @@ test("1.5-second entrances run once, preserve data and respect reduced motion", 
     await metric.scrollIntoViewIfNeeded();
     await expect(metric).toHaveClass(/motion-arrived/);
     expect(
-      await metric.evaluate((e) => getComputedStyle(e).animationDuration),
-    ).toBe("1.5s");
+      await metric.evaluate((e) => getComputedStyle(e).animationName),
+    ).toBe("none");
     expect(
       await metric
         .locator("strong")
-        .evaluate((e) => getComputedStyle(e).animationDuration),
-    ).toBe("1.5s");
+        .evaluate((e) => getComputedStyle(e).animationName),
+    ).toBe("none");
     const card = page.locator(".result-card").first();
     await card.scrollIntoViewIfNeeded();
     await expect(card).toHaveClass(/motion-arrived/);
@@ -503,4 +501,57 @@ test("homepage delivers content and interactions without framework hydration or 
   await expect(page.locator(".combined-person")).toContainText(
     "Don Chanaka Perera",
   );
+});
+
+test("hero metrics count up for 1.5 seconds without moving their containers", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 350 });
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/", { waitUntil: "networkidle" });
+  const metric = page.locator('[data-count-to="50"]');
+  const result = await metric.evaluate(
+    (number) =>
+      new Promise((resolve) => {
+        const display = number.querySelector(".metric-count-display");
+        const values = [];
+        const started = performance.now();
+        const observer = new MutationObserver(() => {
+          values.push(Number(display.textContent));
+          if (display.textContent === "50" && !number.dataset.counting) {
+            observer.disconnect();
+            resolve({ values, elapsed: performance.now() - started });
+          }
+        });
+        observer.observe(display, {
+          childList: true,
+          characterData: true,
+          subtree: true,
+        });
+        number.scrollIntoView({ behavior: "instant", block: "center" });
+      }),
+  );
+  expect(result.values[0]).toBe(0);
+  expect(result.values.some((value) => value > 0 && value < 50)).toBe(true);
+  expect(result.values.at(-1)).toBe(50);
+  expect(result.elapsed).toBeGreaterThanOrEqual(1400);
+  expect(result.elapsed).toBeLessThan(3000);
+  await expect(metric.locator(".metric-count-display")).toHaveAttribute(
+    "aria-hidden",
+    "true",
+  );
+  await expect(metric.locator(".metric-count-label")).toHaveText("50");
+  expect(
+    await metric.evaluate(
+      (e) => getComputedStyle(e.parentElement).animationName,
+    ),
+  ).toBe("none");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.reload();
+  await expect(page.locator(".metric-count-display")).toHaveText([
+    "7-figure",
+    "50",
+    "3 years",
+  ]);
+  await expect(page.locator("[data-counting]")).toHaveCount(0);
 });

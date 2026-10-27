@@ -1590,13 +1590,8 @@
   }
 }
 
-/* A single 1.5-second arrival: readable figures, then gently settling bars.
-   No hidden initial state, loops, layout changes, or delayed controls. */
+/* Only chart marks animate; page sections and cards appear immediately. */
 @media (prefers-reduced-motion: no-preference) {
-  .motion-arrived {
-    animation: metric-arrival 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
   .motion-arrived
     :is(
       .card-data-track > i,
@@ -1612,17 +1607,6 @@
 
   .motion-arrived:focus-within {
     animation: none;
-  }
-}
-
-@keyframes metric-arrival {
-  from {
-    opacity: 0.82;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -1679,19 +1663,24 @@ html {
     font-size: 13px;
   }
 }
-@media (prefers-reduced-motion: no-preference) {
-  .rebuild-stats > .motion-arrived > strong {
-    transform-origin: left center;
-    animation: metric-emphasis 1.5s cubic-bezier(0.2, 0.6, 0.3, 1);
-  }
+/* The final value remains available to assistive technology throughout counting. */
+.rebuild-stats strong .metric-count-display {
+  display: inline;
+  margin: 0;
+  max-width: none;
+  font: inherit;
+  color: inherit;
 }
-@keyframes metric-emphasis {
-  from {
-    opacity: 0.7;
-    transform: translateY(3px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+.rebuild-stats strong .metric-count-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.reveal.revealed {
+  animation: none;
 }

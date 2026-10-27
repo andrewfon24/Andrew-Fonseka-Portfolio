@@ -26,6 +26,21 @@ function Label({ children }) {
   );
 }
 
+function MetricValue({ value, suffix = "" }) {
+  return (
+    <strong data-count-to={value} data-count-suffix={suffix}>
+      <span className="metric-count-display" aria-hidden="true">
+        {value}
+        {suffix}
+      </span>
+      <span className="metric-count-label">
+        {value}
+        {suffix}
+      </span>
+    </strong>
+  );
+}
+
 export default function App({ projectId = null }) {
   useEntranceMotion();
   const caseProject = projects.find((p) => p.id === projectId);
@@ -143,15 +158,15 @@ export default function App({ projectId = null }) {
           <div className="metric-band">
             <div className="container rebuild-stats">
               <div>
-                <strong>7-figure</strong>
+                <MetricValue value={7} suffix="-figure" />
                 <span>annual ad budget co-managed at Aegon</span>
               </div>
               <div>
-                <strong>50</strong>
+                <MetricValue value={50} />
                 <span>business units managed at Aegon</span>
               </div>
               <div>
-                <strong>3 years</strong>
+                <MetricValue value={3} suffix=" years" />
                 <span>in Paid Media</span>
               </div>
             </div>
