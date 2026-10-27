@@ -276,7 +276,7 @@ export const experience = [
     type: "Part-time",
     location: "Greater Vancouver, BC",
     description:
-      "Paid media projects across education, local services, automotive and hospitality, alongside my full-time role. Some engagements are delivered through a partner agency. Active engagements will transition to a partner agency for my next full-time role.",
+      "Paid media projects across education, local services, automotive and hospitality, alongside my full-time role. Some engagements are delivered through a partner agency.",
     tags: ["Project-based", "4 industries", "Lead generation"],
   },
   {
@@ -301,7 +301,7 @@ export const experience = [
   },
   {
     company: "Kites Global",
-    role: "Digital Marketing Strategist",
+    role: "Marketing Strategist",
     date: "Jan – Aug 2023",
     type: "Agency",
     location: "Colombo, Sri Lanka",

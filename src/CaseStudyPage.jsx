@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { caseStories, universityCampaigns } from "./caseStories";
 import { projects } from "./data";
+import { caseBriefs } from "./caseBriefs";
+import CaseOverviewGraphic from "./CaseOverviewGraphic";
 import {
   ABMJourney,
   CampaignWorkflow,
@@ -601,99 +603,113 @@ const dashboards = {
 
 export default function CaseStudyPage({ project }) {
   const story = caseStories[project.id];
+  const brief = caseBriefs[project.id];
   const Dashboard = dashboards[project.id];
-  const next =
-    projects[
-      (projects.findIndex((p) => p.id === project.id) + 1) % projects.length
-    ];
+  const order = ["university", "aegon", "panasia", "petmart", "dats"];
+  const next = projects.find(
+    (p) => p.id === order[(order.indexOf(project.id) + 1) % order.length],
+  );
   useEffect(() => {
-    document.title = `${project.client} case study | Andrew Fonseka`;
-  }, [project]);
+    const revealHash = () => {
+      const id = decodeURIComponent(location.hash.slice(1));
+      const target = document.getElementById(id);
+      if (!target) return;
+      let parent = target.parentElement;
+      while (parent) {
+        if (parent.tagName === "DETAILS") parent.open = true;
+        parent = parent.parentElement;
+      }
+      if (id === "linkedin-abm") target.scrollIntoView();
+    };
+    revealHash();
+    window.addEventListener("hashchange", revealHash);
+    return () => window.removeEventListener("hashchange", revealHash);
+  }, [project.id]);
   return (
-    <main id="main" className="case-page case-story-dialog">
+    <main id="main" className="case-page case-story-dialog compact-case">
       <article className="dialog-content" aria-labelledby="case-title">
-        <div className="dialog-top">
-          <a className="text-link" href="/#work">
-            ← Selected work
-          </a>
-          <span>CASE STUDY / {project.category}</span>
-        </div>
-        <div className="eyebrow">
-          <span />
-          {project.client}
-        </div>
-        <h1 id="case-title">{project.title}</h1>
-        <p className="dialog-context">
-          {project.context}
-          <span>·</span>
-          {project.period}
-        </p>
-        <p className="case-intro">{story.intro}</p>
-        <p className="case-role-note">
-          <strong>My role.</strong> {story.role}
-        </p>
-        <nav className="case-jump-links" aria-label="Case study sections">
-          <a href="#case-problem">The problem</a>
-          <a href="#case-action">What I did</a>
-          <a href="#case-result">The result</a>
-          {project.id === "aegon" && (
-            <a href="#linkedin-abm">LinkedIn strategy</a>
-          )}
-          <a href="#case-evidence">
-            Results & evidence <ArrowRight size={15} />
-          </a>
-        </nav>
-        <StatStrip stats={project.stats} />
-        <div className="case-narrative">
-          <section className="case-chapter" aria-labelledby="case-problem">
-            <span className="chapter-number">01 / CONTEXT</span>
+        <a className="text-link case-back" href="/#work">
+          <ArrowRight size={16} className="back-arrow" aria-hidden="true" />{" "}
+          Selected work
+        </a>
+        <header className="case-summary">
+          <p className="case-client">{project.client}</p>
+          <h1 id="case-title">{project.title}</h1>
+          <p className="case-period">
+            {project.context} · {project.period}
+          </p>
+          <p className="case-answer">{brief.result}</p>
+          <StatStrip stats={brief.stats} />
+          <p className="case-role-note">
+            <strong>My role.</strong> {brief.role}
+          </p>
+        </header>
+        <div className="compact-story">
+          <section aria-labelledby="case-problem">
             <h2 id="case-problem">The problem</h2>
-            {story.problem.map((p) => (
-              <p key={p}>{p}</p>
-            ))}
+            <p>{brief.problem}</p>
           </section>
-          <section className="case-chapter" aria-labelledby="case-action">
-            <span className="chapter-number">02 / EXECUTION</span>
+          <section aria-labelledby="case-action">
             <h2 id="case-action">What I did</h2>
-            <ol className="case-actions">
-              {story.actions.map(([title, body], i) => (
-                <li key={title}>
-                  <span>0{i + 1}</span>
-                  <div>
-                    <h3>{title}</h3>
-                    <p>{body}</p>
-                  </div>
-                </li>
+            <ul className="compact-actions">
+              {brief.actions.map((action) => (
+                <li key={action}>{action}</li>
               ))}
-            </ol>
-          </section>
-          <section
-            id="case-evidence"
-            className="case-dashboard"
-            aria-label={`${project.client} results dashboard`}
-          >
-            <Dashboard />
-          </section>
-          <section className="case-chapter" aria-labelledby="case-result">
-            <span className="chapter-number">03 / OUTCOME</span>
-            <h2 id="case-result">The result</h2>
-            {story.result.map((p) => (
-              <p key={p}>{p}</p>
-            ))}
+            </ul>
           </section>
         </div>
-
-        {project.id === "aegon" && <LinkedInStory />}
-        <aside className="case-takeaway">
-          <span>WHAT THIS CHANGED</span>
-          <p>{story.takeaway}</p>
+        <section
+          id="case-result"
+          className="overview-results"
+          aria-labelledby="result-title"
+        >
+          <h2 id="result-title">The result</h2>
+          <CaseOverviewGraphic id={project.id} />
+        </section>
+        <aside className="measurement-caveat">
+          <h2>How to read these results</h2>
+          <p>{brief.caveat}</p>
         </aside>
-        <div className="case-source">
-          <h2>Sources & measurement</h2>
-          <p>{project.note}</p>
-        </div>
+        <details className="case-evidence-details" id="evidence-details">
+          <summary>
+            <span>Evidence & measurement details</span>
+            <span className="disclosure-mark" aria-hidden="true">
+              +
+            </span>
+          </summary>
+          <div className="expanded-evidence">
+            <p className="evidence-intro">
+              Explore the supporting figures, campaign decisions and measurement
+              notes.
+            </p>
+            <section
+              id="case-evidence"
+              className="case-dashboard"
+              aria-label={`${project.client} results dashboard`}
+            >
+              <Dashboard />
+            </section>
+            <div className="evidence-narrative">
+              <h2>Inside the work</h2>
+              {story.actions.map(([title, body]) => (
+                <div key={title}>
+                  <h3>{title}</h3>
+                  <p>{body}</p>
+                </div>
+              ))}
+              {story.result.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+            {project.id === "aegon" && <LinkedInStory />}
+            <div className="case-source">
+              <h2>Sources & measurement</h2>
+              <p>{project.note}</p>
+            </div>
+          </div>
+        </details>
         <div className="case-next">
-          <span>Another account. Another decision.</span>
+          <span>Next case study</span>
           <a
             href={`/case-studies/${next.id}/`}
             data-track="case_open"
@@ -702,11 +718,9 @@ export default function CaseStudyPage({ project }) {
             {next.client} <ArrowRight size={16} aria-hidden="true" />
           </a>
         </div>
-        <div className="case-dialog-bottom">
-          <a className="text-link" href="/#work">
-            Back to selected work <ArrowRight size={16} />
-          </a>
-        </div>
+        <a className="text-link case-return" href="/#work">
+          Back to selected work <ArrowRight size={16} aria-hidden="true" />
+        </a>
       </article>
     </main>
   );
