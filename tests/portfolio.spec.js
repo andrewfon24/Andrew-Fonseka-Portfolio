@@ -44,7 +44,7 @@ test("contact matches the reference and measurement and allocation sections are 
     page.locator(".measurement-section, .allocation-section"),
   ).toHaveCount(0);
   await expect(page.locator('nav a[href="#systems"]')).toHaveCount(0);
-  await expect(page.locator("#systems")).toBeVisible();
+  await expect(page.locator("#systems")).toHaveCount(0);
   const contact = page.locator("#contact");
   await expect(
     contact.getByRole("heading", { name: "Let’s talk paid media" }),
@@ -453,7 +453,7 @@ test("work comes first and analytics hooks are on the conversion links", async (
   const order = await page.evaluate(() =>
     [...document.querySelectorAll("main section[id]")].map((s) => s.id),
   );
-  expect(order.slice(0, 3)).toEqual(["work", "approach", "systems"]);
+  expect(order.slice(0, 3)).toEqual(["work", "approach", "references"]);
   const firstCardTop = await page.evaluate(
     () =>
       document.querySelector(".story-card").getBoundingClientRect().top +
@@ -483,30 +483,7 @@ test("interview stories preserve attribution, confidentiality and human review",
   await expect(page.locator(".decision-story")).toContainText(
     "influenced customers",
   );
-  await expect(page.locator(".client-partnership")).toContainText(
-    "before launch",
-  );
-  await expect(page.locator(".client-partnership")).toContainText(
-    "extended the contract",
-  );
-  const systems = page.locator("#systems");
-  await expect(systems).toContainText("templates and rules");
-  await expect(systems).toContainText("Director approval");
-  await systems
-    .getByRole("button", { name: "Enquiry assistant", exact: true })
-    .click();
-  await expect(systems).toContainText("Fin");
-  await expect(systems).toContainText("during working hours");
-  await expect(systems.locator(".enquiry-workflow")).toBeVisible();
-  const assistantA11y = await new AxeBuilder({ page })
-    .include("#systems")
-    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
-    .analyze();
-  expect(assistantA11y.violations).toEqual([]);
-  await systems
-    .getByRole("button", { name: "Campaign builder", exact: true })
-    .click();
-  await expect(systems.locator(".automation-workflow")).toBeVisible();
+  await expect(page.locator(".client-partnership")).toHaveCount(0);
   await page.goto("/case-studies/aegon/#linkedin-abm");
   const abm = page.locator("#linkedin-abm");
   await expect(abm).toContainText("Thought Leader Ads and carousel creative");
