@@ -489,6 +489,12 @@ test("homepage delivers content and interactions without framework hydration or 
     false,
   );
   await expect(page.locator('link[rel="preload"][as="font"]')).toHaveCount(2);
+  // Keep the largest text paint independent of entrance-animation timing.
+  expect(
+    await page
+      .locator(".intro-copy")
+      .evaluate((e) => getComputedStyle(e).animationName),
+  ).toBe("none");
   await page.getByRole("button", { name: "Next recommendation" }).click();
   await expect(page.locator(".combined-person")).toContainText(
     "Hashan Nalinda Fernando",

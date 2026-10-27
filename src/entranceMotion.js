@@ -3,7 +3,7 @@ export function initEntranceMotion() {
   if (!("IntersectionObserver" in window)) return;
   const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
   const targets = document.querySelectorAll(
-    ".intro-copy, .intro-portrait, .rebuild-stats > div, .result-card, .result-row, .overview-figure, .case-dashboard",
+    ".intro-portrait, .rebuild-stats > div, .result-card, .result-row, .overview-figure, .case-dashboard",
   );
   const seen = new WeakSet();
   const observer = new IntersectionObserver(
