@@ -40,28 +40,47 @@ test("homepage follows the short result-first brief and has one email primary ac
   await expect(page.locator(".rebuild-stats")).toContainText("in Paid Media");
   await expect(
     page.locator(
-      ".filters, #approach, #systems, .experience-list, .decision-story, .client-partnership, .quote-controls, .preview-graphic",
+      ".filters, #systems, .decision-story, .client-partnership, .quote-controls, .preview-graphic",
     ),
   ).toHaveCount(0);
   await expect(page.locator("#references blockquote")).toHaveCount(1);
   await expect(page.locator("#references")).toContainText(
-    "Excerpt from LinkedIn recommendation",
+    "Verbatim LinkedIn recommendation",
   );
-  await expect(page.locator("#about")).toContainText(
-    "Kites Global, Marketing Strategist (2023)",
-  );
+  await expect(page.locator("#about")).toContainText("Marketing Strategist");
   await expect(page.locator("main")).not.toContainText("next agency team");
-  const wordCount = await page
-    .locator("main > section:not(#toolkit), main > .metric-band")
-    .evaluateAll(
-      (es) =>
-        es
-          .map((e) => e.innerText)
-          .join(" ")
-          .trim()
-          .split(/\s+/).length,
-    );
-  expect(wordCount).toBeLessThanOrEqual(470);
+  await expect(page.locator("#references #approach")).toBeVisible();
+  await expect(page.locator(".combined-steps li")).toHaveCount(4);
+  expect(
+    await page
+      .locator("main > section[id]")
+      .evaluateAll((es) => es.map((e) => e.id)),
+  ).toEqual(["work", "references", "about", "toolkit"]);
+  await page.getByRole("button", { name: "Next recommendation" }).click();
+  await expect(page.locator(".combined-person")).toContainText(
+    "Hashan Nalinda Fernando",
+  );
+  await page.getByRole("button", { name: "Previous recommendation" }).click();
+  await expect(page.locator(".combined-person")).toContainText(
+    "Don Chanaka Perera",
+  );
+  await expect(page.locator(".experience-item")).toHaveCount(6);
+  await expect(page.locator(".experience-item[open]")).toHaveCount(3);
+  await expect(page.locator(".experience-list")).toContainText(
+    "Aug 2023 – Oct 2024",
+  );
+  await expect(page.locator(".experience-list")).toContainText(
+    "Sep 2019 – Jun 2022",
+  );
+  const kites = page
+    .locator(".experience-item")
+    .filter({
+      has: page.getByRole("heading", { name: "Kites Global", exact: true }),
+    });
+  await kites.locator("summary").click();
+  await expect(kites.locator(".experience-detail")).toBeVisible();
+  await kites.locator("summary").click();
+  await expect(kites.locator(".experience-detail")).toBeHidden();
   await expect(page.locator(".intro-portrait img")).toBeVisible();
   await expect
     .poll(() =>

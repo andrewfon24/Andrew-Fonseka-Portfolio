@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  ArrowUpRight,
   ArrowDown,
   Download,
   Mail,
@@ -12,6 +11,7 @@ import CaseStudyPage from "./CaseStudyPage";
 import ContactSection from "./ContactSection";
 import BrandIcon from "./BrandIcon";
 import WorkCard from "./WorkCard";
+import { ApproachReferences, PersonBehindWork } from "./ProfileSections";
 
 const resume = "/documents/Andrew_Fonseka_Resume.pdf";
 const email =
@@ -180,77 +180,8 @@ export default function App({ projectId = null }) {
               </div>
             </div>
           </section>
-          <section
-            className="rebuild-reference"
-            id="references"
-            aria-labelledby="reference-title"
-          >
-            <div className="container">
-              <h2 id="reference-title">A colleague’s perspective.</h2>
-              <blockquote>
-                “Any task assigned to him—whether it was campaign execution,
-                analytics reporting, or content creation—was always handled with
-                remarkable attention to detail and delivered at an exceptional
-                standard.”
-              </blockquote>
-              <div className="reference-attribution">
-                <p>
-                  <strong>Don Chanaka Perera</strong>
-                  <span>Managed me directly at Kites Global · 2023</span>
-                </p>
-                <a
-                  className="testimonial-linkedin"
-                  href="https://www.linkedin.com/in/andrewfonseka/details/recommendations/"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Read the LinkedIn recommendation from Don Chanaka Perera"
-                  data-track="linkedin_click"
-                >
-                  <BrandIcon domain="linkedin.com" />
-                </a>
-              </div>
-              <p className="reference-excerpt">
-                Excerpt from LinkedIn recommendation
-              </p>
-            </div>
-          </section>
-          <section
-            className="rebuild-about"
-            id="about"
-            aria-labelledby="about-title"
-          >
-            <div className="container rebuild-about-grid">
-              <h2 id="about-title">
-                From Colombo
-                <br />
-                to Vancouver.
-              </h2>
-              <div>
-                <p>
-                  I started in Colombo’s agency world, running paid media for
-                  banks and retailers. I moved to Vancouver for my MBA, and now
-                  manage paid media across Aegon’s US and Canadian business
-                  units while taking on a few independent clients. I like
-                  finding what’s holding an account back, explaining it plainly
-                  and fixing it.
-                </p>
-                <p className="role-history">
-                  Aegon (2025–now) · Independent (2026–now) · Kites Global,
-                  Marketing Strategist (2023) · Enfection (2022)
-                </p>
-                <a
-                  className="resume-pill"
-                  href={resume}
-                  download
-                  data-track="resume_download"
-                  data-where="about"
-                >
-                  The full story, in my résumé{" "}
-                  <ArrowUpRight size={17} aria-hidden="true" />
-                </a>
-              </div>
-            </div>
-          </section>
+          <ApproachReferences />
+          <PersonBehindWork />
           <section className="expertise-section section" id="toolkit">
             <div className="container">
               <div className="section-heading reveal">

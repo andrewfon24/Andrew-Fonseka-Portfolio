@@ -981,3 +981,277 @@
 .result-card .project-case-link {
   justify-content: flex-start;
 }
+
+/* A shared blue field connects the working approach to colleague references. */
+.approach-references {
+  background: var(--navy);
+  color: #d2deeb;
+  padding-block: 64px;
+}
+.profile-label {
+  font:
+    700 11px/1.5 "Inter",
+    sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.approach-references .profile-label {
+  color: #deb15f;
+  margin-bottom: 18px;
+}
+.combined-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+}
+.approach-references h2 {
+  color: white;
+  font-size: 36px;
+  line-height: 1.16;
+}
+.approach-references h2 span {
+  color: #78b6e8;
+}
+.combined-heading > p {
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 36ch;
+}
+.combined-steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  padding: 0;
+  margin: 36px 0 0;
+}
+.combined-steps li {
+  border-top: 1px solid #42617f;
+  padding-top: 20px;
+}
+.combined-step-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #78b6e8;
+  margin-bottom: 20px;
+}
+.combined-step-top span {
+  color: #b4c8dc;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.combined-steps h3 {
+  color: white;
+  font-size: 17px;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.combined-steps p {
+  font-size: 14px;
+  line-height: 1.75;
+}
+.combined-reference {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 64px;
+  border-top: 1px solid #35516d;
+  margin-top: 44px;
+  padding-top: 40px;
+}
+.combined-reference h2 {
+  font-size: 30px;
+}
+.combined-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+.combined-controls button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #58748f;
+  border-radius: 50%;
+  background: transparent;
+  color: #d2deeb;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.combined-controls button:hover {
+  color: white;
+  border-color: #a3c6e7;
+  background: #1c3b58;
+}
+.combined-controls > span {
+  font-size: 12px;
+  color: #b4c8dc;
+  font-variant-numeric: tabular-nums;
+}
+.combined-quote-mark {
+  display: block;
+  color: #deb15f;
+  font:
+    700 54px/0.8 "Archivo",
+    sans-serif;
+  margin-bottom: 12px;
+}
+.combined-quote blockquote {
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 0;
+  min-height: 135px;
+}
+.combined-person {
+  border-top: 1px solid #35516d;
+  margin-top: 20px;
+  padding-top: 18px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.reference-initials {
+  display: flex;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #42617f;
+  border-radius: 50%;
+  background: #1b354f;
+  font-size: 12px;
+  color: #deb15f;
+}
+.combined-person p {
+  flex: 1;
+}
+.combined-person strong,
+.combined-person p > span {
+  display: block;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.combined-person p > span {
+  font-size: 12px;
+  color: #b4c8dc;
+}
+.combined-person .testimonial-linkedin {
+  background: white;
+  margin-left: 0;
+  flex-shrink: 0;
+}
+.combined-source {
+  font-size: 12px;
+  color: #b4c8dc;
+  margin-top: 14px;
+}
+.restored-about {
+  padding-block: 64px;
+}
+.restored-about .about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.restored-about .about-copy > .profile-label {
+  color: #2467aa;
+  margin: 0 0 22px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.restored-about .about-copy h2 {
+  font-size: 32px;
+}
+.restored-about .about-copy > p:not(.profile-label) {
+  font-size: 15px;
+  line-height: 1.8;
+  margin-top: 22px;
+}
+.restored-about .timeline-label {
+  text-transform: uppercase;
+}
+.restored-about .experience-date > span {
+  font-size: 10px;
+}
+.restored-about .experience-item summary p,
+.restored-about .experience-detail > p {
+  font-size: 13px;
+}
+.restored-about .experience-item h3 {
+  font-size: 17px;
+}
+.restored-about .experience-detail > small {
+  font-size: 12px;
+}
+.restored-about .project-tags > span {
+  font-size: 11px;
+}
+.restored-about .resume-pill {
+  margin-top: 24px;
+}
+@media (max-width: 900px) {
+  .combined-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .combined-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+  .combined-reference {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .restored-about .about-grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+  .restored-about .about-copy {
+    max-width: 70ch;
+  }
+  .combined-quote blockquote {
+    min-height: 0;
+  }
+}
+@media (max-width: 640px) {
+  .approach-references,
+  .restored-about {
+    padding-block: 40px;
+  }
+  .approach-references h2,
+  .restored-about .about-copy h2 {
+    font-size: 29px;
+  }
+  .combined-reference h2 {
+    font-size: 27px;
+  }
+  .combined-steps {
+    gap: 24px 20px;
+    margin-top: 28px;
+  }
+  .combined-step-top {
+    margin-bottom: 14px;
+  }
+  .combined-steps h3 {
+    font-size: 16px;
+  }
+  .combined-steps p {
+    font-size: 13px;
+  }
+  .combined-reference {
+    margin-top: 32px;
+    padding-top: 32px;
+    gap: 28px;
+  }
+  .combined-quote blockquote {
+    font-size: 14px;
+  }
+  .restored-about .experience-item summary {
+    min-height: 70px;
+  }
+}
