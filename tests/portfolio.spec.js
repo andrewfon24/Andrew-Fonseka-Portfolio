@@ -81,7 +81,7 @@ test("homepage follows the short result-first brief and has one email primary ac
   await expect(page.locator(".combined-person")).toContainText(
     "Don Chanaka Perera",
   );
-  await expect(page.locator(".experience-item")).toHaveCount(6);
+  await expect(page.locator(".experience-item")).toHaveCount(5);
   await expect(page.locator(".experience-item[open]")).toHaveCount(0);
   await expect(page.locator(".experience-list")).toContainText(
     "Aug 2023 – Oct 2024",

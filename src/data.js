@@ -270,18 +270,8 @@ export const stackGroups = [
 
 export const experience = [
   {
-    company: "Independent, Self-employed (project-based)",
-    role: "Paid Media Consultant",
-    date: "2026 – Present",
-    type: "Part-time",
-    location: "Greater Vancouver, BC",
-    description:
-      "Paid media projects across education, local services, automotive and hospitality, alongside my full-time role. Some engagements are delivered through a partner agency.",
-    tags: ["Project-based", "4 industries", "Lead generation"],
-  },
-  {
     company: "Aegon",
-    role: "Digital Marketing Specialist",
+    role: "Digital Marketing Strategist",
     date: "2025 – Present",
     type: "In-house",
     location: "Langley, BC",
