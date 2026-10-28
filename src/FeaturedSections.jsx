@@ -38,20 +38,20 @@ export function Systems() {
             <p>
               {builder
                 ? "At Aegon, I turned campaign setup into a Google Sheets and Apps Script workflow. Templates assemble the campaign, rules flag potential compliance issues, and my Director approves the final work."
-                : "At DIMO Academy, I integrated Fin to answer enquiries and help arrange appointments. Calendar bookings and email notifications give admissions a clearer handoff."}
+                : "At DIMO Academy, I helped integrate Fin to answer enquiries and help arrange appointments. Calendar bookings and email notifications give admissions a clearer handoff."}
             </p>
             <div className="system-proof">
-              <strong>{builder ? "−60%" : "4×"}</strong>
+              <strong>{builder ? "−60%" : "+20%"}</strong>
               <span>
                 {builder
                   ? "compliance review time"
-                  : "faster replies during working hours"}
+                  : "CRM-qualified leads at flat spend"}
               </span>
             </div>
             <p className="system-detail">
               {builder
                 ? "Approximately 12 working days saved annually, based on the reported review-time reduction."
-                : "Client-reported comparison of AI and human response times. Fin also handles enquiries after hours."}
+                : "Client-reported acquisition results at unchanged spend. Fin supports the admissions handoff; these results are not attributed to Fin alone."}
             </p>
             <a
               className="text-link"

@@ -420,11 +420,11 @@ function DatsDashboard() {
           </p>
         </div>
         <div>
-          <span>ENQUIRY RESPONSE</span>
-          <strong>4× faster</strong>
+          <span>MONTHLY MEDIA BUDGET</span>
+          <strong>~US$900</strong>
           <p>
-            Fin response versus human replies during working hours. After-hours
-            availability is a separate benefit.
+            Media spend stayed unchanged while CRM-qualified leads increased.
+            The acquisition strategy was judged on CRM-qualified outcomes.
           </p>
         </div>
       </div>
@@ -520,14 +520,23 @@ function AegonDashboard() {
         <div className="case-system-outcome">
           <Check size={22} aria-hidden="true" />
           <div>
-            <strong>{measurement ? "+25%" : "−60%"}</strong>
+            <strong>{measurement ? "6.5 → 8.0" : "−60%"}</strong>
             <span>
               {measurement
-                ? "Meta Event Match Quality · relative improvement"
+                ? "Meta Event Match Quality · before → after, on a 0–10 scale"
                 : "Compliance review time · approximately 12 working days saved annually"}
             </span>
           </div>
         </div>
+        {measurement && (
+          <Bars
+            rows={[
+              { label: "Before", value: "6.5 / 10", width: 65 },
+              { label: "After", value: "8.0 / 10", width: 80 },
+            ]}
+            note="Meta Event Match Quality scores on the same 0–10 scale. Scores are shown directly, not as a percentage increase."
+          />
+        )}
         {!measurement && (
           <Bars
             rows={[
@@ -570,10 +579,8 @@ function LinkedInStory() {
         carousel creative were the main formats.
       </p>
       <p>
-        My Director challenged the initial recommendation. I built a visual
-        presentation and forecast to explain the approach and secure support.
-        That conversation made the reasoning behind the plan as important as the
-        campaign setup.
+        I used forecasting and a visual presentation to explain the audience
+        strategy and recommended campaign mix before launch.
       </p>
       <p>
         I integrated HubSpot with LinkedIn Campaign Manager so I could examine
@@ -605,7 +612,7 @@ export default function CaseStudyPage({ project }) {
   const story = caseStories[project.id];
   const brief = caseBriefs[project.id];
   const Dashboard = dashboards[project.id];
-  const order = ["university", "aegon", "panasia", "petmart", "dats"];
+  const order = ["aegon", "university", "panasia", "petmart", "dats"];
   const next = projects.find(
     (p) => p.id === order[(order.indexOf(project.id) + 1) % order.length],
   );

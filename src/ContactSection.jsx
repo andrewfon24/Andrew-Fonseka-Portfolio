@@ -14,10 +14,10 @@ export default function ContactSection() {
       <div className="contact-reference-inner">
         <h2 id="contact-heading">Let’s talk paid media</h2>
         <p>
-          Looking for a Paid Media Specialist who can get into the account,
-          explain the recommendation and own the follow-through?
+          Looking for someone who can get into the account, explain the
+          recommendation and own the follow-through?
           <br className="contact-line-break" /> I’d love to hear about your
-          agency and its clients.
+          team, agency or in-house.
         </p>
         <div className="contact-reference-actions">
           <a

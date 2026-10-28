@@ -9,8 +9,8 @@ const previews = {
       ["~US$20", "ad spend per enrolment"],
     ],
     method:
-      "Two low-intake colleges got a dedicated campaign: 125 paid enrolments versus 17 from the broad one. I tracked leads through the university’s CRM.",
-    role: "End to end, for a partner agency’s client.",
+      "Two low-intake colleges got a dedicated campaign: 125 paid enrolments versus 17 from the broad one. I helped connect reporting to the university’s CRM.",
+    role: "Advised on strategy and helped launch the campaigns, for a partner agency’s client.",
   },
   aegon: {
     context: "Financial services · Aegon · 2025–now",
@@ -20,7 +20,7 @@ const previews = {
     ],
     method:
       "Same media budget, H1 2026. I connected Google and Meta campaigns to CRM-qualified outcomes and cleaned up double-counted conversions.",
-    role: "Manage 50 business units; report to the CMO every two weeks.",
+    role: "Launch and manage 20+ campaigns for 50 business units, with weekly senior-management and biweekly CMO reporting.",
   },
   panasia: {
     context: "Banking · Pan Asia Bank · 2023",
@@ -40,7 +40,7 @@ const previews = {
   dats: {
     context: "Education",
     summary:
-      "20% more qualified leads at the same budget, after rebuilding acquisition and adding an AI enquiry assistant.",
+      "Advised on acquisition strategy and supported a Google Ads and Meta rebuild, adding Microsoft Advertising at flat spend.",
   },
 };
 
@@ -162,7 +162,8 @@ export default function WorkCard({ project, compact = false }) {
           </>
         ) : (
           <>
-            <h3 className="project-client">{story.context}</h3>
+            <p className="project-client">{story.context}</p>
+            <h3 className="result-story-title">{project.title}</h3>
             <div className="result-numbers">
               {story.numbers.map(([value, label]) => (
                 <div key={label}>

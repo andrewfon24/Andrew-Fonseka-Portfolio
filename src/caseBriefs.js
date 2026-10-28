@@ -7,13 +7,13 @@ export const caseBriefs = {
       ["312", "Fee-paid enrolments"],
       ["~US$20", "Media cost / enrolment"],
     ],
-    role: "Strategy, build, creative testing, optimization and CRM reporting, delivered through partner agency SOL.",
+    role: "Advised on Meta lead-generation strategy and helped launch the campaigns, set budget allocation and build CRM-matched reporting, through a partner agency.",
     problem:
       "Two colleges needed more students. A broad undergraduate campaign brought enquiries, but only 17 enrolments for those priority colleges.",
     actions: [
-      "Gave the two priority colleges a dedicated campaign and budget.",
-      "Tested creative and higher-intent lead forms to improve enquiry quality.",
-      "Matched leads to fee-paid enrolments in the CRM and removed duplicates.",
+      "Advised on a dedicated Meta campaign and budget for the two priority colleges.",
+      "Supported the campaign launch with higher-intent forms and creative testing.",
+      "Helped build CRM-matched reporting to follow leads into fee-paid enrolments.",
     ],
     caveat:
       "The dedicated campaign produced 125 enrolments versus 17 from the broad campaign for the same colleges. Different targeting means this is a comparison, not a controlled test.",
@@ -25,7 +25,7 @@ export const caseBriefs = {
       ["−13%", "Cost per lead"],
       ["+18%", "Completed applications"],
     ],
-    role: "Paid media across 50 US and Canadian business units, with forecasts for Director sign-off and biweekly reporting to the CMO.",
+    role: "I launch and manage 20+ financial-product campaigns for 50 U.S. and Canadian business units and support the team on 100 more. I report weekly to senior management and biweekly to the CMO.",
     problem:
       "Form fills obscured lead quality. Duplicate conversion events made it harder to see which campaigns were delivering useful outcomes.",
     actions: [
@@ -63,11 +63,11 @@ export const caseBriefs = {
       ["+40%", "Paid-attributed sales"],
       ["+30%", "Subscriptions"],
     ],
-    role: "Paid media delivery at Kites Global across Google Shopping, Performance Max and supporting Meta campaigns.",
+    role: "Paid media delivery at Kites Global across Google Shopping, Performance Max and supporting Meta campaigns. Built the Merchant Center product feed.",
     problem:
       "Petmart.lk needed new customers and more subscriptions. Its account structure did not clearly separate acquisition from returning-customer activity.",
     actions: [
-      "Separated new and returning customers in Shopping and Performance Max.",
+      "Built the Merchant Center product feed and separated new and returning customers in Shopping and Performance Max.",
       "Ran complementary Meta campaigns alongside Google activity.",
       "Reviewed first-order return alongside paid-attributed sales and subscriptions.",
     ],
@@ -76,20 +76,20 @@ export const caseBriefs = {
   },
   dats: {
     result:
-      "20% more CRM-qualified leads at unchanged media spend, after rebuilding acquisition and improving the enquiry experience.",
+      "20% more CRM-qualified leads at unchanged media spend, after a Google Ads and Meta rebuild and the addition of Microsoft Advertising.",
     stats: [
       ["+20%", "CRM-qualified leads"],
       ["~US$900", "Monthly media budget"],
     ],
-    role: "Independent delivery across paid media, the landing page and integration of Fin, an AI enquiry assistant.",
+    role: "Advised on acquisition strategy and helped launch the Google Ads and Meta rebuild, add Microsoft Advertising, set budget allocation and report on CRM outcomes.",
     problem:
       "DIMO Academy needed more enrolment-ready prospects on the same budget, plus a useful response when the admissions team was away.",
     actions: [
-      "Rebuilt Google and Meta campaigns and added Microsoft Advertising.",
-      "Simplified the landing page and form to make enquiries easier.",
-      "Integrated Fin for questions, appointment booking and admissions reminders.",
+      "Advised on acquisition strategy and supported the Google Ads and Meta rebuild and addition of Microsoft Advertising.",
+      "Helped build parts of the landing page and simplify the enquiry journey.",
+      "Helped integrate Fin for enquiries and the admissions handoff.",
     ],
     caveat:
-      "Client-reported before-and-after results, not a controlled test. Indexed values show relative change, not lead counts. Fin’s response-time comparison is documented in the evidence below.",
+      "Client-reported before-and-after results, not a controlled test. Indexed values show relative change, not lead counts.",
   },
 };

@@ -116,12 +116,28 @@ export default function CaseOverviewGraphic({ id }) {
           />
         </>
       ) : (
-        <Comparison
-          label="CRM-qualified leads"
-          before={100}
-          after={120}
-          max={120}
-        />
+        <>
+          <Comparison
+            label="CRM-qualified leads"
+            before={100}
+            after={120}
+            max={120}
+          />
+          <div className="dats-channel-share">
+            <h3>A new source of intent</h3>
+            <div
+              className="dats-share-bar"
+              aria-label="Share of 212 leads in the second quarter: Microsoft Advertising 40%, Google Ads and Meta 60%"
+            >
+              <span>40%</span>
+              <span>60%</span>
+            </div>
+            <div className="dats-share-labels">
+              <span>Microsoft Advertising</span>
+              <span>Google Ads &amp; Meta</span>
+            </div>
+          </div>
+        </>
       )}
       <figcaption>
         {id === "aegon"
@@ -129,8 +145,10 @@ export default function CaseOverviewGraphic({ id }) {
           : id === "petmart"
             ? "Client-reported changes · Apr–Jun 2023. "
             : "Unchanged monthly media spend. "}
-        Each measure starts at an index of 100. These are relative changes, not
-        raw counts or currency.
+        Each before-and-after measure starts at an index of 100. These are
+        relative changes, not raw counts or currency.
+        {id === "dats" &&
+          " The channel split describes 212 leads in the engagement’s second quarter. It is a separate measure from the qualified-lead increase."}
       </figcaption>
     </figure>
   );

@@ -14,8 +14,8 @@ import Analytics from "@vercel/analytics/astro";
 import interRegular from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
 import archivoBold from "@fontsource/archivo/files/archivo-latin-800-normal.woff2?url";
 const {
-  title = "Andrew Fonseka | Paid Media Specialist",
-  description = "Vancouver-based Paid Media Specialist with 3 years in paid media. Explore campaign results across education, banking and financial services.",
+  title = "Andrew Fonseka | Paid Media & Digital Marketing",
+  description = "Vancouver-based paid media and digital marketing practitioner with 3 years across agency, in-house and advisory work. Explore CRM-qualified outcomes across financial services, education and retail.",
   noindex = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -24,7 +24,7 @@ const person = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Andrew Fonseka",
-  jobTitle: "Paid Media Specialist",
+  jobTitle: "Digital Marketing Strategist",
   url: Astro.site.href,
   sameAs: ["https://www.linkedin.com/in/andrewfonseka/"],
   email: "rafandrewf@gmail.com",
@@ -67,7 +67,7 @@ const person = {
     <meta property="og:image" content={person.image} />
     <meta
       property="og:image:alt"
-      content="Andrew Fonseka, Paid Media Specialist"
+      content="Andrew Fonseka, paid media and digital marketing"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="generator" content={Astro.generator} />

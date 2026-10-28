@@ -98,9 +98,8 @@ export function ABMStory() {
         </h3>
         <p>
           For a high-net-worth investor program, I owned the strategy and
-          execution. My Director challenged the initial proposal. I used
-          forecasting and a visual presentation to explain the plan and win
-          support.
+          execution. I used forecasting and a visual presentation to explain the
+          plan and win support.
         </p>
         <p>
           Once live, I connected LinkedIn with HubSpot and compared qualified
@@ -183,8 +182,9 @@ export function EnquiryWorkflow() {
         ]}
       />
       <figcaption>
-        The reported 4× improvement compares AI and human response times during
-        working hours. After-hours availability is a separate benefit.
+        I contributed strategic advice, helped build parts of the landing page
+        and helped integrate Fin, connecting prospective students’ enquiries
+        with admissions follow-up.
       </figcaption>
     </figure>
   );

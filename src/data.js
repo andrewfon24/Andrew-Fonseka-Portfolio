@@ -4,7 +4,7 @@ export const projects = [
     category: "Education",
     client: "Private university · Saudi Arabia",
     period: "May–Aug 2026",
-    context: "Contract · via partner agency SOL",
+    context: "Advisory · via a partner agency",
     title: "From interest to intake.",
     summary: "A sharper signal. A stronger student pipeline.",
     metric: "312",
@@ -15,7 +15,7 @@ export const projects = [
     problem:
       "Two colleges had the lowest intakes. Broad targeting was generating leads, but not enough enrolments in the programs that needed them.",
     decision:
-      "Built a dedicated campaign with high-intent lead forms, its own budget and A/B-tested creative. Connected campaign reporting to admissions CRM outcomes.",
+      "Advised on Meta lead-generation strategy and helped launch campaigns with higher-intent forms, dedicated budgets and CRM-matched reporting.",
     learning:
       "The cheapest lead is not always the most valuable one. A higher CPL delivered the enrolments the priority colleges actually needed.",
     note: "Meta Ads Manager, 1 May–31 Aug 2026. Fee-paid enrolments from the admissions CRM. USD converted at SAR 3.75. Institution identifiers removed.",
@@ -85,24 +85,23 @@ export const projects = [
     category: "Education",
     client: "DIMO Academy for Technical Studies",
     period: "Feb 2026–present",
-    context: "Independent · trades education",
+    context: "Advisory · trades education",
     title: "More qualified. Same budget.",
     summary: "Better acquisition, a simpler path to enrolment.",
     metric: "+20%",
     metricLabel: "CRM-qualified leads",
-    secondary: "4×",
-    secondaryLabel: "faster enquiry responses",
+    secondary: "~US$900",
+    secondaryLabel: "monthly media budget",
     channels: ["Google Ads", "Microsoft Ads", "Meta"],
     problem:
       "Generate more enrolment-ready prospects without increasing an approximately US$900 monthly media budget.",
     decision:
-      "Rebuilt Google and Meta lead generation, added Microsoft Advertising, and rebuilt the landing page with a simpler form and an AI assistant for around-the-clock enquiries.",
+      "Advised on acquisition strategy and helped launch the Google Ads and Meta rebuild, add Microsoft Advertising, set budget allocation and report on CRM outcomes.",
     learning:
       "Improve the traffic and the conversion path together before asking for more budget.",
-    note: "Client-reported before-and-after figures, not a controlled test. The 4× response comparison is AI versus human replies during working hours. Microsoft Advertising delivered 40% of 212 leads in the engagement’s second quarter.",
+    note: "Client-reported before-and-after figures, not a controlled test. Microsoft Advertising delivered 40% of 212 leads in the engagement’s second quarter.",
     stats: [
       ["+20%", "CRM-qualified leads"],
-      ["4×", "Faster response"],
       ["40%", "Leads from Microsoft Ads"],
       ["~US$900", "Monthly media budget"],
     ],
@@ -113,12 +112,12 @@ export const projects = [
     client: "Aegon",
     period: "Jan 2025–present",
     context: "In-house · US & Canada",
-    title: "Better signals. Smarter scale.",
+    title: "Bid on pipeline, not form fills.",
     summary:
-      "Measurement and operations across 50 owned and ~100 co-managed ad accounts.",
+      "Launch and manage 20+ financial-product campaigns for 50 business units and support the team on 100 more.",
     metric: "−60%",
     metricLabel: "compliance review time",
-    secondary: "+25%",
+    secondary: "6.5 → 8.0",
     secondaryLabel: "Meta Event Match Quality",
     channels: ["LinkedIn ABM", "Google Ads", "Measurement"],
     problem:
@@ -127,12 +126,12 @@ export const projects = [
       "Connected HubSpot offline conversions, implemented GA4 and server-side GTM, improved event deduplication, and built an Apps Script campaign builder with naming, UTM and compliance controls.",
     learning:
       "Trustworthy conversion signals and repeatable operations make better decisions possible at scale.",
-    note: "Google and Meta acquisition: H1 2026 relative changes at unchanged spend, reported in the supplied résumé and portfolio. Event Match Quality is a relative improvement. Approximately 12 working days saved annually is an estimate. LinkedIn ABM results, targets, budget and performance metrics are confidential and are excluded.",
+    note: "Google and Meta acquisition: H1 2026 relative changes at unchanged spend, reported in the supplied résumé and portfolio. Meta Event Match Quality rose from 6.5 to 8.0 on a 0–10 scale. Approximately 12 working days saved annually is an estimate. LinkedIn ABM results, targets, budget and performance metrics are confidential and are excluded.",
     stats: [
-      ["50 + ~100", "Ad accounts owned + co-managed"],
+      ["50", "Business units managed"],
       ["−60%", "Compliance review time"],
       ["~12 days", "Working time saved / year"],
-      ["+25%", "Meta Event Match Quality"],
+      ["6.5 → 8.0", "Meta Event Match Quality"],
     ],
   },
 ];
@@ -272,12 +271,22 @@ export const experience = [
   {
     company: "Aegon",
     role: "Digital Marketing Strategist",
-    date: "2025 – Present",
+    date: "Jan 2025 – Present",
     type: "In-house",
     location: "Langley, BC",
     description:
-      "Own bidding and campaign structure for 50 US and Canadian business-unit ad accounts and co-manage ~100 more; forecast channel allocations for Director sign-off. Coordinate two external partners: one supports paid media for selected US business units, and the other handles SaaS licences and products. Present biweekly performance reports to the CMO.",
+      "Launch and manage 20+ financial-product campaigns for 50 U.S. and Canadian business units and support the team on 100 more. Co-oversee two external vendors with the Director. Report weekly to senior management and biweekly to the CMO.",
     tags: ["Financial services", "LinkedIn ABM", "Measurement"],
+  },
+  {
+    company: "Independent",
+    role: "Independent Marketing Consultant",
+    date: "Jan 2026 – Present",
+    type: "Part-time",
+    location: "Greater Vancouver, BC",
+    description:
+      "Strategy advice and paid media support for clients outside financial services, including a private university in Saudi Arabia and DIMO Academy.",
+    tags: ["Advisory", "Education", "Meta", "Google Ads"],
   },
   {
     company: "University Canada West",
@@ -291,12 +300,12 @@ export const experience = [
   },
   {
     company: "Kites Global",
-    role: "Marketing Strategist",
+    role: "Digital Marketing Strategist",
     date: "Jan – Aug 2023",
     type: "Agency",
     location: "Colombo, Sri Lanka",
     description:
-      "Led four client accounts end to end and supported five more across banking, consumer goods, retail, beauty and education. Owned strategy, execution, budgets and reporting.",
+      "Led four client accounts from strategy through reporting and supported five more across banking, consumer goods, retail, beauty and education. Owned strategy, execution, budgets and reporting.",
     tags: ["4 accounts led", "5 supported", "B2B & B2C"],
   },
   {

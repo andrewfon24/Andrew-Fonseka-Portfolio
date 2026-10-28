@@ -1,24 +1,24 @@
 export const caseStories = {
   university: {
     intro:
-      "The account was generating enquiries. The admissions challenge was more specific: fill places in the two colleges with the lowest intakes. I built the campaign around that priority and followed the leads through to fee-paid enrolment.",
-    role: "Independent delivery through partner agency SOL. I owned strategy, campaign build, creative testing, optimization and CRM reporting; SOL brought the client.",
+      "The account was generating enquiries. The admissions challenge was more specific: fill places in the two colleges with the lowest intakes. I advised on a strategy built around that priority and helped connect reporting to fee-paid enrolment.",
+    role: "Advised on Meta lead-generation strategy and helped launch the campaigns, set budget allocation and build CRM-matched reporting, through a partner agency.",
     problem: [
       "The broad undergraduate campaign produced only 17 enrolments for the two priority colleges. Its low cost per lead looked encouraging, but that figure did not explain whether we were filling the places the university needed to fill.",
-      "I needed to give those colleges a clearer acquisition plan and make admissions outcomes part of the campaign review.",
+      "The colleges needed a clearer acquisition plan, with admissions outcomes included in the campaign review.",
     ],
     actions: [
       [
         "Give the priority its own campaign",
-        "I separated the two colleges into a dedicated campaign with its own budget. That made the audience, creative and results easier to evaluate against the intake brief.",
+        "The two priority colleges got a dedicated campaign with its own budget. That made the audience, creative and results easier to evaluate against the intake brief.",
       ],
       [
         "Make the enquiry more deliberate",
-        "I used a higher-intent Meta lead form, tightened placements and targeting, and A/B-tested creative. The aim was to attract prospective students who were more likely to complete the admissions journey.",
+        "The campaign used a higher-intent Meta lead form, focused placements and targeting, and creative testing. The aim was to attract prospective students who were more likely to complete the admissions journey.",
       ],
       [
         "Follow the lead into admissions",
-        "I matched enrolments in the university CRM using name, phone and student ID, and deduplicated against existing applicants. Campaign reporting could now connect the enquiry to a fee-paid place.",
+        "I helped build reporting that matched enrolments in the university CRM using name, phone and student ID, with duplicates checked against existing applicants. Campaign reporting could now connect the enquiry to a fee-paid place.",
       ],
     ],
     result: [
@@ -60,7 +60,7 @@ export const caseStories = {
   petmart: {
     intro:
       "For a pet-supplies retailer, the first purchase is one part of the relationship. I restructured acquisition around new and returning customers and read the results alongside subscriptions.",
-    role: "Paid media delivery at Kites Global across Google Shopping, Performance Max and supporting Meta campaigns.",
+    role: "Paid media delivery at Kites Global across Google Shopping, Performance Max and supporting Meta campaigns. I built the Merchant Center product feed.",
     problem: [
       "Petmart.lk needed stronger acquisition and more subscription customers. The campaign structure did not clearly separate new-customer activity from returning-customer activity.",
       "I wanted the account to reflect both needs: bring customers into the business and support the repeat purchases that matter in pet supplies.",
@@ -68,7 +68,7 @@ export const caseStories = {
     actions: [
       [
         "Clarify the role of each campaign",
-        "I restructured Google Shopping and Performance Max to separate new and returning customers, giving acquisition a clearer place in the account.",
+        "I built the Merchant Center product feed and restructured Google Shopping and Performance Max to separate new and returning customers, giving acquisition a clearer place in the account.",
       ],
       [
         "Connect search and social",
@@ -89,7 +89,7 @@ export const caseStories = {
   dats: {
     intro:
       "DIMO Academy needed more qualified prospects within the same media budget. I worked on the campaign mix and the enquiry experience together, so the next step became easier for prospective students and the admissions team.",
-    role: "Independent paid media delivery, landing-page work and integration of a Fin-powered enquiry assistant.",
+    role: "Advised on acquisition strategy and helped launch the Google Ads and Meta rebuild, add Microsoft Advertising, set budget allocation and report on CRM outcomes. I also helped build parts of the landing page and integrate Fin.",
     problem: [
       "With approximately US$900 a month in media spend, increasing the budget was not the starting point. The question was how to get more useful enquiries from the resources already available.",
       "Dynamics 365 qualified-lead data helped me assess acquisition. The next opportunity was the response journey: a prospective student should be able to get help even when the admissions team is away.",
@@ -97,20 +97,19 @@ export const caseStories = {
     actions: [
       [
         "Rework acquisition within the budget",
-        "I rebuilt Google Ads and Meta campaigns and introduced Microsoft Advertising as an additional source of intent.",
+        "I advised on acquisition strategy and supported the Google Ads and Meta rebuild and addition of Microsoft Advertising as a new source of intent.",
       ],
       [
         "Simplify the path to an enquiry",
-        "I rebuilt the landing page in Lovable and simplified the lead form. Campaign changes and conversion experience were part of the same piece of work.",
+        "I gave strategic advice and helped build parts of the Lovable landing page to simplify the enquiry journey. Campaign changes and conversion experience were part of the same piece of work.",
       ],
       [
         "Connect the assistant to admissions",
-        "I integrated Fin to answer questions, including after hours, and support appointment booking into the college calendar. Email notifications and reminders help admissions pick up the conversation.",
+        "I helped integrate Fin to answer questions, including after hours, and support appointment booking into the college calendar. Email notifications and reminders help admissions pick up the conversation.",
       ],
     ],
     result: [
       "The client reported 20% more CRM-qualified leads at unchanged media spend. Microsoft Advertising contributed 40% of 212 leads in my second quarter on the account. The channel share and qualified-lead improvement are separate measures.",
-      "During working hours, AI replies were reported as four times faster than human replies. After-hours availability is an additional benefit. The comparison measures response time, rather than resolution time or enrolment conversion.",
     ],
     takeaway:
       "Improve the account and the handoff together. A useful enquiry needs a useful next step.",
@@ -118,7 +117,7 @@ export const caseStories = {
   aegon: {
     intro:
       "Across a large financial-services account remit, the daily work connects media, measurement, stakeholders and review. I get into the data, build the campaign and explain what should change next.",
-    role: "I own bidding and campaign structure for 50 US and Canadian business-unit ad accounts and co-manage approximately 100 more. I help manage a seven-figure annual media budget, forecast allocations for Director sign-off and report biweekly to the CMO.",
+    role: "I launch and manage 20+ financial-product campaigns for 50 U.S. and Canadian business units and support the team on 100 more. I co-manage a seven-figure annual media budget, forecast allocations for Director sign-off and report weekly to senior management and biweekly to the CMO.",
     problem: [
       "Campaigns were optimizing toward form fills, while the business needed qualified applicants. Overlapping GTM tags also double-counted events and conversions, making it harder to interpret reported performance.",
       "Alongside that measurement work, campaign setup needed a consistent process for structure, naming, UTMs and review. Financial-services advertising also required a clear route from a potential issue to human review and final approval.",
@@ -138,12 +137,12 @@ export const caseStories = {
       ],
       [
         "Keep partners and stakeholders aligned",
-        "I support forecasting, budget pacing and senior-management reporting. Of the two external partners I supervise, one supports paid media for selected US business units; the other handles SaaS licences and products.",
+        "I support forecasting, budget pacing and senior-management reporting. I co-oversee two external vendors with the Director: one supports paid media for selected U.S. business units, the other handles SaaS licences and products.",
       ],
     ],
     result: [
       "For the Google and Meta acquisition work in H1 2026, reported cost per lead fell 13% and completed applications rose 18% at unchanged media spend. These figures describe that acquisition work, separately from the LinkedIn ABM program below.",
-      "The measurement work improved Meta Event Match Quality by 25% relative to the previous level. The team-adopted campaign builder reduced compliance review time by 60%, with approximately 12 working days saved annually.",
+      "The measurement work raised Meta Event Match Quality from 6.5 to 8.0. The team-adopted campaign builder reduced compliance review time by 60%, with approximately 12 working days saved annually.",
     ],
     takeaway:
       "Get the signal right, make the work repeatable and give the people responsible a clear basis for their next decision.",

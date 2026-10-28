@@ -3,7 +3,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 
-const slugs = ["university", "aegon", "panasia", "petmart", "dats"];
+const slugs = ["aegon", "university", "panasia", "petmart", "dats"];
 const email =
   "mailto:rafandrewf@gmail.com?subject=Paid%20media%20specialist%20%E2%80%93%20intro";
 const hash = (value) => createHash("sha256").update(value).digest("hex");
@@ -37,7 +37,7 @@ test("homepage follows the short result-first brief and has one email primary ac
   expect(Math.abs(moreBoxes[0].top - moreBoxes[1].top)).toBeLessThan(2);
   expect(moreBoxes[1].left).toBeGreaterThan(moreBoxes[0].right);
   await expect(page.locator(".card-data")).toHaveCount(3);
-  const firstCard = page.locator(".result-card .project-open").first();
+  const firstCard = page.locator('.result-card a[data-case="university"]');
   await firstCard.focus();
   await expect
     .poll(() =>
@@ -52,7 +52,7 @@ test("homepage follows the short result-first brief and has one email primary ac
     ["7-figure", "50", "3 years"],
   );
   await expect(page.locator(".rebuild-stats")).toContainText(
-    "business units managed at Aegon",
+    "business units run at Aegon",
   );
   await expect(page.locator(".rebuild-stats")).toContainText("in Paid Media");
   await expect(
@@ -81,7 +81,12 @@ test("homepage follows the short result-first brief and has one email primary ac
   await expect(page.locator(".combined-person")).toContainText(
     "Don Chanaka Perera",
   );
-  await expect(page.locator(".experience-item")).toHaveCount(5);
+  await expect(page.locator(".experience-item")).toHaveCount(6);
+  await expect(page.locator(".experience-list")).toContainText(
+    "Independent Marketing Consultant",
+  );
+  const portrait = await page.locator(".intro-portrait").boundingBox();
+  expect(Math.abs(portrait.width - portrait.height)).toBeLessThan(1);
   await expect(page.locator(".experience-item[open]")).toHaveCount(0);
   await expect(page.locator(".experience-list")).toContainText(
     "Aug 2023 – Oct 2024",
@@ -247,7 +252,7 @@ test("case links support refresh, back and the intended reading order", async ({
   await expect(page.locator("h1")).toHaveText("From interest to intake.");
   await expect(page.locator(".case-next a")).toHaveAttribute(
     "href",
-    "/case-studies/aegon/",
+    "/case-studies/panasia/",
   );
   await page.goBack();
   await expect(page.locator(".result-card")).toHaveCount(3);
@@ -309,6 +314,8 @@ test("expanded evidence retains the dashboards and their attribution safeguards"
   await expect(page.locator(".allocation-insight")).toContainText("US$10,000");
   await page.goto("/case-studies/aegon/");
   await page.locator("summary").click();
+  await expect(page.locator(".case-system-outcome")).toContainText("6.5 → 8.0");
+  await expect(page.locator("main")).not.toContainText("+25%");
   await page
     .getByRole("button", { name: "Campaign operations", exact: true })
     .click();
@@ -330,7 +337,11 @@ test("expanded evidence retains the dashboards and their attribution safeguards"
   await page.goto("/case-studies/dats/");
   await page.locator("summary").click();
   await expect(page.locator(".enquiry-workflow")).toContainText(
-    "during working hours",
+    "helped integrate Fin",
+  );
+  await expect(page.locator("main")).not.toContainText("4×");
+  await expect(page.locator(".case-role-note")).toContainText(
+    "Advised on acquisition strategy",
   );
 });
 
@@ -423,7 +434,9 @@ test("chart animations run once while containers stay still and respect reduced 
         .locator("strong")
         .evaluate((e) => getComputedStyle(e).animationName),
     ).toBe("none");
-    const card = page.locator(".result-card").first();
+    const card = page
+      .locator(".result-card")
+      .filter({ has: page.locator('a[data-case="university"]') });
     await card.scrollIntoViewIfNeeded();
     await expect(card).toHaveClass(/motion-arrived/);
     const bar = card.locator(".card-data-track i").first();

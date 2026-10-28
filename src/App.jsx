@@ -117,16 +117,21 @@ export default function App({ projectId = null }) {
           >
             <div className="intro-copy">
               <p className="intro-label">
-                Paid media specialist · Vancouver, BC
+                <span>
+                  Paid media · Digital marketing
+                  <span className="intro-location">
+                    <span className="intro-location-dot"> · </span>Vancouver, BC
+                  </span>
+                </span>
               </p>
               <h1 id="hero-title">
                 I turn ad spend into{" "}
                 <span>enrolments, loans and applications.</span>
               </h1>
               <p className="intro-description">
-                Paid media specialist with agency, in-house and contract
-                experience. I tie campaigns to real business outcomes and
-                explain the results in plain English.
+                Three years across agency, in-house and advisory work. I connect
+                campaigns to CRM-qualified outcomes, build reliable measurement
+                and explain what the numbers mean for the business.
               </p>
               <div className="intro-actions">
                 <a
@@ -163,7 +168,7 @@ export default function App({ projectId = null }) {
               </div>
               <div>
                 <MetricValue value={50} />
-                <span>business units managed at Aegon</span>
+                <span>business units run at Aegon</span>
               </div>
               <div>
                 <MetricValue value={3} suffix=" years" />
@@ -177,9 +182,14 @@ export default function App({ projectId = null }) {
             aria-labelledby="work-title"
           >
             <div className="container">
-              <h2 id="work-title">The results, in context.</h2>
+              <div className="results-heading">
+                <h2 id="work-title">The results, in context.</h2>
+                <p>
+                  Different briefs. One focus: what the business needed next.
+                </p>
+              </div>
               <div className="rebuild-featured">
-                {["university", "aegon", "panasia"].map((id) => (
+                {["aegon", "university", "panasia"].map((id) => (
                   <WorkCard
                     key={id}
                     project={projects.find((p) => p.id === id)}
