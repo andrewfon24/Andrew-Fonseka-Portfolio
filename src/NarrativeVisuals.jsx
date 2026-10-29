@@ -127,32 +127,24 @@ export function CampaignWorkflow() {
       <ProcessDiagram
         label="Campaign builder and human approval"
         steps={[
-          [
-            ListFilter,
-            "Campaign inputs",
-            "The team entered campaign details in Google Sheets.",
-          ],
+          [ListFilter, "Campaign inputs", "Google Sheets: campaign details."],
           [
             FileCheck2,
             "Templates & rules",
-            "Apps Script assembled campaign structure, descriptions, copy and tracking conventions.",
+            "Apps Script: structure, copy, naming and UTMs.",
           ],
           [
             ShieldCheck,
             "Review the flags",
-            "Checks against configured U.S. and Canadian rules flagged potential issues for a person to review.",
+            "Potential compliance issues flagged for human review.",
           ],
-          [
-            Users,
-            "Director approval",
-            "The Director gave final approval before launch.",
-          ],
+          [Users, "Director approval", "Final approval before launch."],
         ]}
       />
       <figcaption>
-        I developed the Apps Script with Claude’s assistance and refined it for
-        the team. The builder used templates and rules; people reviewed flagged
-        issues and approved campaigns.
+        I developed the Apps Script with Claude’s assistance. Templates and
+        rules prepared the campaign; people reviewed flags and the Director
+        approved launch.
       </figcaption>
     </figure>
   );

@@ -9,7 +9,7 @@ const previews = {
       ["~US$20", "ad spend per enrolment"],
     ],
     method:
-      "Two low-intake colleges got a dedicated campaign: 125 paid enrolments versus 17 from the broad one. I helped connect reporting to the university’s CRM.",
+      "Focused the strategy on two low-intake colleges and helped connect reporting to admissions outcomes.",
     role: "Advised on strategy and helped launch the campaigns, for a partner agency’s client.",
   },
   aegon: {
@@ -19,7 +19,7 @@ const previews = {
       ["+18%", "completed applications"],
     ],
     method:
-      "Same media budget, H1 2026. I connected Google and Meta campaigns to CRM-qualified outcomes and cleaned up double-counted conversions.",
+      "Connected Google and Meta optimization to HubSpot outcomes and removed duplicate conversions.",
     role: "Launched and managed 20+ campaigns for 50 business units, with weekly senior-management and biweekly CMO reporting.",
   },
   panasia: {
@@ -29,7 +29,7 @@ const previews = {
       ["~US$97", "ad spend per funded loan"],
     ],
     method:
-      "I allocated US$25K across Meta and Google using lead quality, judged results on funded loans and presented the strategy to the client.",
+      "Lead quality guided the budget split; funded loans guided the review.",
     role: "Led the account and client calls at Kites Global.",
   },
   petmart: {
@@ -48,22 +48,26 @@ function CardDataVisual({ id }) {
   if (id === "university")
     return (
       <figure className="card-data card-funnel">
+        <p className="card-data-title">
+          Fee-paid places · Two priority colleges
+        </p>
         <div className="card-data-rows">
           {[
-            ["Leads", 821],
-            ["Qualified", 430],
-            ["Enrolled", 312],
+            ["Dedicated", 125],
+            ["Broad", 17],
           ].map(([label, value]) => (
             <div className="card-funnel-row" key={label}>
               <span>{label}</span>
               <span className="card-data-track" aria-hidden="true">
-                <i style={{ width: `${(value / 821) * 100}%` }} />
+                <i style={{ width: `${(value / 125) * 100}%` }} />
               </span>
               <strong>{value}</strong>
             </div>
           ))}
         </div>
-        <figcaption>From Meta lead to fee-paid enrolment.</figcaption>
+        <figcaption>
+          Same colleges, different targeting. Not a controlled test.
+        </figcaption>
       </figure>
     );
   if (id === "aegon")
@@ -90,7 +94,7 @@ function CardDataVisual({ id }) {
             </div>
           </div>
         ))}
-        <figcaption>Before → after · Each baseline = 100.</figcaption>
+        <figcaption>H1 2026 · Before = 100 · Spend unchanged.</figcaption>
       </figure>
     );
   return (

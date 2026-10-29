@@ -15,6 +15,7 @@ import { caseStories, universityCampaigns } from "./caseStories";
 import { projects } from "./data";
 import { caseBriefs } from "./caseBriefs";
 import CaseOverviewGraphic from "./CaseOverviewGraphic";
+import { AegonSignalJourney } from "./CaseDecisionVisual";
 import {
   ABMJourney,
   CampaignWorkflow,
@@ -651,18 +652,30 @@ export default function CaseStudyPage({ project }) {
             <strong>My role.</strong> {brief.role}
           </p>
         </header>
-        <div className="compact-story">
+        <div
+          className={`compact-story ${project.id === "aegon" ? "visual-story" : ""}`}
+        >
           <section aria-labelledby="case-problem">
             <h2 id="case-problem">The problem</h2>
             <p>{brief.problem}</p>
           </section>
           <section aria-labelledby="case-action">
             <h2 id="case-action">What I did</h2>
-            <ul className="compact-actions">
-              {brief.actions.map((action) => (
-                <li key={action}>{action}</li>
-              ))}
-            </ul>
+            {project.id === "aegon" ? (
+              <>
+                <AegonSignalJourney />
+                <p className="signal-action-note">
+                  I removed duplicate events, then refined targeting, forms and
+                  budget allocation using CRM evidence.
+                </p>
+              </>
+            ) : (
+              <ul className="compact-actions">
+                {brief.actions.map((action) => (
+                  <li key={action}>{action}</li>
+                ))}
+              </ul>
+            )}
           </section>
         </div>
         <section
@@ -698,12 +711,18 @@ export default function CaseStudyPage({ project }) {
             </section>
             <div className="evidence-narrative">
               <h2>Inside the work</h2>
-              {story.actions.map(([title, body]) => (
-                <div key={title}>
-                  <h3>{title}</h3>
-                  <p>{body}</p>
-                </div>
-              ))}
+              {story.actions
+                .filter(
+                  ([title]) =>
+                    project.id !== "aegon" ||
+                    title !== "Build a repeatable setup workflow",
+                )
+                .map(([title, body]) => (
+                  <div key={title}>
+                    <h3>{title}</h3>
+                    <p>{body}</p>
+                  </div>
+                ))}
               {story.result.map((p) => (
                 <p key={p}>{p}</p>
               ))}

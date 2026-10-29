@@ -26,35 +26,58 @@ function Comparison({ label, before, after, max }) {
 export default function CaseOverviewGraphic({ id }) {
   if (id === "university")
     return (
-      <figure className="overview-figure">
-        <h3>From enquiry to enrolment</h3>
-        <ol className="admissions-funnel">
+      <figure className="overview-figure priority-comparison">
+        <h3>The places that needed filling</h3>
+        <p className="visual-subtitle">
+          Fee-paid enrolments in the same two priority colleges
+        </p>
+        <div className="priority-bars">
           {[
-            ["Meta leads", 821],
-            ["CRM-qualified leads", 430],
-            ["Fee-paid enrolments", 312],
+            ["Dedicated campaign", 125],
+            ["Broad campaign", 17],
           ].map(([label, value]) => (
-            <li key={label}>
+            <div className="priority-bar" key={label}>
               <div>
                 <span>{label}</span>
                 <strong>{value}</strong>
               </div>
-              <div className="funnel-track" aria-hidden="true">
-                <i style={{ width: `${(value / 821) * 100}%` }} />
+              <div className="priority-track" aria-hidden="true">
+                <i style={{ width: `${(value / 125) * 100}%` }} />
               </div>
-            </li>
+            </div>
           ))}
-        </ol>
+        </div>
+        <div className="intake-total">
+          <h3>Across all three campaigns</h3>
+          <ol>
+            {[
+              ["Meta leads", "821"],
+              ["CRM-qualified", "430"],
+              ["Fee-paid enrolments", "312"],
+            ].map(([label, value]) => (
+              <li key={label}>
+                <strong>{value}</strong>
+                <span>{label}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
         <figcaption>
-          May–Aug 2026 · All three campaigns. Widths show the share of the
-          original 821 leads at each stage.
+          May–Aug 2026. The 125 and 17 compare the same colleges; the 312 total
+          includes enrolments across all three campaigns.
         </figcaption>
       </figure>
     );
   if (id === "panasia")
     return (
-      <figure className="overview-figure">
-        <h3>US$25,000, allocated around lead quality</h3>
+      <figure className="overview-figure bank-outcome-flow">
+        <div className="bank-budget-heading">
+          <h3>One budget. A clear business outcome.</h3>
+          <p>
+            <strong>US$25,000</strong>
+            <span>Total media spend</span>
+          </p>
+        </div>
         <div
           className="budget-share"
           aria-label="Media budget allocation: Meta 60 percent, Google Ads 40 percent"
@@ -72,9 +95,23 @@ export default function CaseOverviewGraphic({ id }) {
             Google Ads<strong>US$10,000</strong>
           </p>
         </div>
+        <div className="bank-outcome-line">
+          <span>Combined campaign outcome</span>
+          <div>
+            <p>
+              <strong>259</strong>
+              <span>Funded gold loans</span>
+            </p>
+            <span className="outcome-divider" aria-hidden="true" />{" "}
+            <p>
+              <strong>~US$97</strong>
+              <span>Media cost per funded loan</span>
+            </p>
+          </div>
+        </div>
         <figcaption>
-          259 funded loans from US$25,000 in media spend = US$96.53 per funded
-          loan, rounded to US$97.
+          US$25,000 ÷ 259 = US$96.53 per funded loan. Channel bars show spend
+          allocation, not funded loans by channel.
         </figcaption>
       </figure>
     );

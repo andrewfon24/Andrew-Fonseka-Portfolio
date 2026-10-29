@@ -16,7 +16,7 @@ export const caseBriefs = {
       "Helped build CRM-matched reporting to follow leads into fee-paid enrolments.",
     ],
     caveat:
-      "The dedicated campaign produced 125 enrolments versus 17 from the broad campaign for the same colleges. Different targeting means this is a comparison, not a controlled test.",
+      "The two campaigns used different targeting. The enrolment comparison shows how each served the priority colleges; it is not a controlled test of incremental lift.",
   },
   aegon: {
     result:
