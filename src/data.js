@@ -110,18 +110,18 @@ export const projects = [
     id: "aegon",
     category: "Financial services",
     client: "Aegon",
-    period: "Jan 2025–present",
+    period: "Jan 2025 – Oct 2026",
     context: "In-house · US & Canada",
     title: "Bid on pipeline, not form fills.",
     summary:
-      "Launch and manage 20+ financial-product campaigns for 50 business units and support the team on 100 more.",
+      "Launched and managed 20+ financial-product campaigns for 50 business units and supported the team on 100 more.",
     metric: "−60%",
     metricLabel: "compliance review time",
     secondary: "6.5 → 8.0",
     secondaryLabel: "Meta Event Match Quality",
     channels: ["LinkedIn ABM", "Google Ads", "Measurement"],
     problem:
-      "Support a seven-figure annual paid media program across US and Canadian business units with reliable measurement and consistent campaign operations.",
+      "The seven-figure annual paid media program across U.S. and Canadian business units needed reliable measurement and consistent campaign operations.",
     decision:
       "Connected HubSpot offline conversions, implemented GA4 and server-side GTM, improved event deduplication, and built an Apps Script campaign builder with naming, UTM and compliance controls.",
     learning:
@@ -271,11 +271,11 @@ export const experience = [
   {
     company: "Aegon",
     role: "Digital Marketing Strategist",
-    date: "Jan 2025 – Present",
+    date: "Jan 2025 – Oct 2026",
     type: "In-house",
     location: "Langley, BC",
     description:
-      "Launch and manage 20+ financial-product campaigns for 50 U.S. and Canadian business units and support the team on 100 more. Co-oversee two external vendors with the Director. Report weekly to senior management and biweekly to the CMO.",
+      "Launched and managed 20+ financial-product campaigns for 50 U.S. and Canadian business units and supported the team on 100 more. Co-oversaw two external vendors with the Director. Reported weekly to senior management and biweekly to the CMO.",
     tags: ["Financial services", "LinkedIn ABM", "Measurement"],
   },
   {
@@ -285,7 +285,7 @@ export const experience = [
     type: "Part-time",
     location: "Greater Vancouver, BC",
     description:
-      "Strategy advice and paid media support for clients outside financial services, including a private university in Saudi Arabia and DIMO Academy.",
+      "Part-time advisory practice, started alongside my full-time role at Aegon: strategy advice and paid media support for a private university in Saudi Arabia and DIMO Academy.",
     tags: ["Advisory", "Education", "Meta", "Google Ads"],
   },
   {

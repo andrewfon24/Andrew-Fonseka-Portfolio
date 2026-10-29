@@ -164,9 +164,9 @@ export function PersonBehindWork() {
           </p>
           <p>
             That curiosity brought me to Vancouver for my MBA at University
-            Canada West. Today, I work in-house at Aegon across US and Canadian
-            business units, while also advising clients outside financial
-            services as an independent marketing consultant. I enjoy getting
+            Canada West. Most recently I worked in-house at Aegon (2025–2026),
+            running paid media for U.S. and Canadian business units. I also
+            advise a small number of clients independently. I enjoy getting
             involved in the whole process, from the first campaign idea to the
             systems and reporting behind it.
           </p>

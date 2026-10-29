@@ -116,8 +116,8 @@ export const caseStories = {
   },
   aegon: {
     intro:
-      "Across a large financial-services account remit, the daily work connects media, measurement, stakeholders and review. I get into the data, build the campaign and explain what should change next.",
-    role: "I launch and manage 20+ financial-product campaigns for 50 U.S. and Canadian business units and support the team on 100 more. I co-manage a seven-figure annual media budget, forecast allocations for Director sign-off and report weekly to senior management and biweekly to the CMO.",
+      "Across a large financial-services account remit, my daily work connected media, measurement, stakeholders and review. I analysed the data, built campaigns and explained what should change next.",
+    role: "I launched and managed 20+ financial-product campaigns for 50 U.S. and Canadian business units and supported the team on 100 more. I co-managed a seven-figure annual media budget, forecast allocations for Director sign-off and reported weekly to senior management and biweekly to the CMO.",
     problem: [
       "Campaigns were optimizing toward form fills, while the business needed qualified applicants. Overlapping GTM tags also double-counted events and conversions, making it harder to interpret reported performance.",
       "Alongside that measurement work, campaign setup needed a consistent process for structure, naming, UTMs and review. Financial-services advertising also required a clear route from a potential issue to human review and final approval.",
@@ -133,11 +133,11 @@ export const caseStories = {
       ],
       [
         "Build a repeatable setup workflow",
-        "I developed a Google Sheets and Apps Script campaign builder with Claude’s assistance, then refined its templates and rules. It assembles campaign structure and copy, applies naming and UTM conventions, and flags potential compliance issues for people to review. My Director gives final approval before launch.",
+        "I developed a Google Sheets and Apps Script campaign builder with Claude’s assistance, then refined its templates and rules. It assembled campaign structure and copy, applied naming and UTM conventions, and flagged potential compliance issues for people to review. My Director gave final approval before launch.",
       ],
       [
         "Keep partners and stakeholders aligned",
-        "I support forecasting, budget pacing and senior-management reporting. I co-oversee two external vendors with the Director: one supports paid media for selected U.S. business units, the other handles SaaS licences and products.",
+        "I supported forecasting, budget pacing and senior-management reporting. I co-oversaw two external vendors with the Director: one supported paid media for selected U.S. business units, the other handled SaaS licences and products.",
       ],
     ],
     result: [

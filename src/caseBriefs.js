@@ -25,7 +25,7 @@ export const caseBriefs = {
       ["−13%", "Cost per lead"],
       ["+18%", "Completed applications"],
     ],
-    role: "I launch and manage 20+ financial-product campaigns for 50 U.S. and Canadian business units and support the team on 100 more. I report weekly to senior management and biweekly to the CMO.",
+    role: "I launched and managed 20+ financial-product campaigns for 50 U.S. and Canadian business units and supported the team on 100 more. I reported weekly to senior management and biweekly to the CMO.",
     problem:
       "Form fills obscured lead quality. Duplicate conversion events made it harder to see which campaigns were delivering useful outcomes.",
     actions: [

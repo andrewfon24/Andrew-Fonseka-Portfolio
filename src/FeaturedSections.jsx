@@ -37,7 +37,7 @@ export function Systems() {
             </h3>
             <p>
               {builder
-                ? "At Aegon, I turned campaign setup into a Google Sheets and Apps Script workflow. Templates assemble the campaign, rules flag potential compliance issues, and my Director approves the final work."
+                ? "At Aegon, I turned campaign setup into a Google Sheets and Apps Script workflow. Templates assembled the campaign, rules flagged potential compliance issues, and my Director approved the final work."
                 : "At DIMO Academy, I helped integrate Fin to answer enquiries and help arrange appointments. Calendar bookings and email notifications give admissions a clearer handoff."}
             </p>
             <div className="system-proof">

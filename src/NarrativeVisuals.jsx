@@ -130,29 +130,29 @@ export function CampaignWorkflow() {
           [
             ListFilter,
             "Campaign inputs",
-            "The team enters campaign details in Google Sheets.",
+            "The team entered campaign details in Google Sheets.",
           ],
           [
             FileCheck2,
             "Templates & rules",
-            "Apps Script assembles campaign structure, descriptions, copy and tracking conventions.",
+            "Apps Script assembled campaign structure, descriptions, copy and tracking conventions.",
           ],
           [
             ShieldCheck,
             "Review the flags",
-            "Checks against configured US and Canadian rules flag potential issues for a person to review.",
+            "Checks against configured U.S. and Canadian rules flagged potential issues for a person to review.",
           ],
           [
             Users,
             "Director approval",
-            "The Director gives final approval before launch.",
+            "The Director gave final approval before launch.",
           ],
         ]}
       />
       <figcaption>
         I developed the Apps Script with Claude’s assistance and refined it for
-        the team. The running builder uses templates and rules; people review
-        flagged issues and approve campaigns.
+        the team. The builder used templates and rules; people reviewed flagged
+        issues and approved campaigns.
       </figcaption>
     </figure>
   );

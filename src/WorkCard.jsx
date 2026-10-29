@@ -13,14 +13,14 @@ const previews = {
     role: "Advised on strategy and helped launch the campaigns, for a partner agency’s client.",
   },
   aegon: {
-    context: "Financial services · Aegon · 2025–now",
+    context: "Financial services · Aegon · 2025–2026",
     numbers: [
       ["−13%", "cost per lead"],
       ["+18%", "completed applications"],
     ],
     method:
       "Same media budget, H1 2026. I connected Google and Meta campaigns to CRM-qualified outcomes and cleaned up double-counted conversions.",
-    role: "Launch and manage 20+ campaigns for 50 business units, with weekly senior-management and biweekly CMO reporting.",
+    role: "Launched and managed 20+ campaigns for 50 business units, with weekly senior-management and biweekly CMO reporting.",
   },
   panasia: {
     context: "Banking · Pan Asia Bank · 2023",
