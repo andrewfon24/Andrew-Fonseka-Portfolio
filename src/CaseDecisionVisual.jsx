@@ -1,44 +1,49 @@
 import React from "react";
 import {
-  MousePointer2,
-  FileText,
-  UserCheck,
-  CalendarCheck,
-  ClipboardCheck,
+  Target,
+  ScanLine,
+  Users,
+  ChartNoAxesCombined,
+  Workflow,
   ArrowRight,
-  CornerDownLeft,
 } from "lucide-react";
 
-export function AegonSignalJourney() {
-  const stages = [
-    [MousePointer2, "Ad click", "The starting point"],
-    [FileText, "Form fill", "Before: bidding signal"],
-    [UserCheck, "Qualified lead", "After: CRM signal"],
-    [CalendarCheck, "Booked call", "After: CRM signal"],
-    [ClipboardCheck, "Completed application", "After: CRM signal"],
+export function MeasurementWorkflow() {
+  const steps = [
+    [Target, "Paid media campaigns", "Start with the marketing objective."],
+    [
+      ScanLine,
+      "Conversion tracking & validation",
+      "Check the signals used to assess activity.",
+    ],
+    [Users, "CRM outcomes", "Connect measurement to meaningful actions."],
+    [
+      ChartNoAxesCombined,
+      "Analysis & optimization",
+      "Turn reliable signals into decisions.",
+    ],
+    [
+      Workflow,
+      "Reporting & operational improvements",
+      "Make the next cycle more consistent.",
+    ],
   ];
   return (
-    <figure
-      className="signal-journey"
-      aria-label="Campaign optimization moved from form submissions to HubSpot-qualified outcomes"
-    >
+    <figure className="concept-workflow" aria-labelledby="workflow-title">
+      <h2 id="workflow-title">How the elements fit together</h2>
+      <p className="concept-disclaimer">
+        Illustrative process only; not an actual employer system diagram.
+      </p>
       <ol>
-        {stages.map(([Icon, title, label], index) => (
-          <li
-            key={title}
-            className={index > 1 ? "signal-qualified" : "signal-entry"}
-          >
-            <span className="signal-icon">
-              <Icon size={22} aria-hidden="true" />
-            </span>
-            <div>
-              <strong>{title}</strong>
-              <span>{label}</span>
-            </div>
-            {index < stages.length - 1 && (
+        {steps.map(([Icon, title, detail], index) => (
+          <li key={title}>
+            <Icon size={28} strokeWidth={1.5} aria-hidden="true" />
+            <h3>{title}</h3>
+            <p>{detail}</p>
+            {index < steps.length - 1 && (
               <ArrowRight
-                className="signal-arrow"
-                size={17}
+                className="concept-connector"
+                size={18}
                 aria-hidden="true"
               />
             )}
@@ -46,8 +51,8 @@ export function AegonSignalJourney() {
         ))}
       </ol>
       <figcaption>
-        <CornerDownLeft size={18} aria-hidden="true" /> HubSpot offline
-        conversions fed qualified outcomes back to Google and Meta.
+        Good campaign decisions depend on trustworthy signals and processes that
+        teams can apply consistently.
       </figcaption>
     </figure>
   );

@@ -116,36 +116,15 @@ export const caseStories = {
   },
   aegon: {
     intro:
-      "Across a large financial-services account remit, my daily work connected media, measurement, stakeholders and review. I analysed the data, built campaigns and explained what should change next.",
-    role: "I launched and managed 20+ financial-product campaigns for 50 U.S. and Canadian business units and supported the team on 100 more. I co-managed a seven-figure annual media budget, forecast allocations for Director sign-off and reported weekly to senior management and biweekly to the CMO.",
+      "Paid media strategy, marketing automation, conversion tracking and performance analytics in a regulated financial services environment.",
+    role: "Digital Marketing Strategist, Aegon, 2025–2026.",
     problem: [
-      "Campaigns were optimizing toward form fills, while the business needed qualified applicants. Overlapping GTM tags also double-counted events and conversions, making it harder to interpret reported performance.",
-      "Alongside that measurement work, campaign setup needed a consistent process for structure, naming, UTMs and review. Financial-services advertising also required a clear route from a potential issue to human review and final approval.",
+      "Reliable signals and repeatable processes support informed campaign decisions.",
     ],
-    actions: [
-      [
-        "Connect optimization to the CRM",
-        "I fed HubSpot stages, including qualified leads, booked calls and completed applications, back as offline conversions. I restructured Google Ads, tightened targeting, refined forms and landing pages, and reallocated budget using those outcomes.",
-      ],
-      [
-        "Clean up the measurement",
-        "I rebuilt tracking using GA4, server-side Google Tag Manager, Enhanced Conversions and Meta CAPI. I removed overlapping tags and improved browser-server event deduplication so the team could make decisions from cleaner data.",
-      ],
-      [
-        "Build a repeatable setup workflow",
-        "I developed a Google Sheets and Apps Script campaign builder with Claude’s assistance, then refined its templates and rules. It assembled campaign structure and copy, applied naming and UTM conventions, and flagged potential compliance issues for people to review. My Director gave final approval before launch.",
-      ],
-      [
-        "Keep partners and stakeholders aligned",
-        "I supported forecasting, budget pacing and senior-management reporting. I co-oversaw two external vendors with the Director: one supported paid media for selected U.S. business units, the other handled SaaS licences and products.",
-      ],
-    ],
-    result: [
-      "For the Google and Meta acquisition work in H1 2026, reported cost per lead fell 13% and completed applications rose 18% at unchanged media spend. These figures describe that acquisition work, separately from the LinkedIn ABM program below.",
-      "The measurement work raised Meta Event Match Quality from 6.5 to 8.0. The team-adopted campaign builder reduced compliance review time by 60%, with approximately 12 working days saved annually.",
-    ],
+    actions: [],
+    result: [],
     takeaway:
-      "Get the signal right, make the work repeatable and give the people responsible a clear basis for their next decision.",
+      "Good performance marketing starts with reliable data and repeatable processes.",
   },
 };
 

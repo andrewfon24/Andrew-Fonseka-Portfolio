@@ -20,22 +20,19 @@ export const caseBriefs = {
   },
   aegon: {
     result:
-      "13% lower cost per lead and 18% more completed applications at unchanged Google and Meta media spend in H1 2026.",
-    stats: [
-      ["−13%", "Cost per lead"],
-      ["+18%", "Completed applications"],
-    ],
-    role: "I launched and managed 20+ financial-product campaigns for 50 U.S. and Canadian business units and supported the team on 100 more. I reported weekly to senior management and biweekly to the CMO.",
+      "Connecting campaign execution with useful marketing signals and more repeatable operations.",
+    stats: [],
+    role: "Digital Marketing Strategist, in-house financial services, 2025–2026.",
     problem:
-      "Form fills obscured lead quality. Duplicate conversion events made it harder to see which campaigns were delivering useful outcomes.",
+      "Dependable measurement and consistent processes help teams make informed campaign decisions.",
     actions: [
-      "Connected HubSpot CRM-qualified outcomes to campaign optimization.",
-      "Removed duplicate conversions and rebuilt tracking across Google and Meta.",
-      "Refined targeting, forms and budget allocation using CRM evidence.",
-      "Built a rules-based campaign tool that flags issues for human review and Director approval.",
+      "Connected paid media with CRM outcomes.",
+      "Strengthened conversion tracking.",
+      "Automated campaign operations.",
+      "Made performance reporting more useful.",
     ],
     caveat:
-      "Reported before-and-after acquisition changes, not a controlled lift test. Each chart uses its own baseline. These figures are separate from the confidential LinkedIn ABM program.",
+      "General professional responsibilities and approaches, with an illustrative conceptual workflow. Internal results and proprietary operating details are excluded.",
   },
   panasia: {
     result:

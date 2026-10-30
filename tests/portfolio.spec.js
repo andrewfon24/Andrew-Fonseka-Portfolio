@@ -49,10 +49,10 @@ test("homepage follows the short result-first brief and has one email primary ac
     .toBe("1");
   await expect(page.locator(".project-case-link")).toHaveCount(5);
   await expect(page.locator(".rebuild-stats .metric-count-display")).toHaveText(
-    ["7-figure", "50", "3 years"],
+    ["3 years"],
   );
   await expect(page.locator(".rebuild-stats")).toContainText(
-    "business units run at Aegon",
+    "Measurement and marketing operations",
   );
   await expect(page.locator(".rebuild-stats")).toContainText("in Paid Media");
   await expect(
@@ -261,7 +261,7 @@ test("case links support refresh, back and the intended reading order", async ({
 test("every case puts its answer first and keeps deeper evidence expandable", async ({
   page,
 }) => {
-  for (const slug of slugs) {
+  for (const slug of slugs.filter((s) => s !== "aegon")) {
     await page.goto(`/case-studies/${slug}/`);
     await expect(page.locator(".case-answer")).toBeVisible();
     await expect(page.locator(".case-role-note")).toBeVisible();
@@ -312,28 +312,6 @@ test("expanded evidence retains the dashboards and their attribution safeguards"
   await expect(page.locator(".allocation-insight")).toContainText("US$15,000");
   await page.getByRole("button", { name: "Google Ads", exact: true }).click();
   await expect(page.locator(".allocation-insight")).toContainText("US$10,000");
-  await page.goto("/case-studies/aegon/");
-  await page.locator("summary").click();
-  await expect(page.locator(".case-system-outcome")).toContainText("6.5 → 8.0");
-  await expect(page.locator("main")).not.toContainText("+25%");
-  await page
-    .getByRole("button", { name: "Campaign operations", exact: true })
-    .click();
-  await expect(page.locator(".automation-workflow")).toContainText(
-    "Director approval",
-  );
-  await expect(page.locator(".case-system-outcome")).toContainText("−60%");
-  await page.goto("/case-studies/aegon/#linkedin-abm");
-  await expect(page.locator(".case-evidence-details")).toHaveAttribute("open");
-  const abm = page.locator("#linkedin-abm");
-  await expect(abm).toBeVisible();
-  await expect(abm).toContainText("Thought Leader Ads and carousel creative");
-  await expect(abm).toContainText(
-    "Campaign results, targets, budget and performance metrics remain confidential",
-  );
-  expect(await abm.innerText()).not.toMatch(
-    /[$€£]|\d\s*%|\b(?:million|ROAS|overshot|exceeded)\b/i,
-  );
   await page.goto("/case-studies/dats/");
   await page.locator("summary").click();
   await expect(page.locator(".enquiry-workflow")).toContainText(
@@ -366,7 +344,7 @@ test("all pages fit small screens and pass automated WCAG checks, including expa
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
       .analyze();
     expect(results.violations, path).toEqual([]);
-    if (path !== "/") {
+    if (path !== "/" && path !== "/case-studies/aegon/") {
       expect((await page.locator("main").boundingBox()).height).toBeLessThan(
         3 * 844,
       );
@@ -522,7 +500,7 @@ test("hero metrics count up for 1.5 seconds without moving their containers", as
   await page.setViewportSize({ width: 390, height: 350 });
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/", { waitUntil: "networkidle" });
-  const metric = page.locator('[data-count-to="50"]');
+  const metric = page.locator('[data-count-to="3"]');
   const result = await metric.evaluate(
     (number) =>
       new Promise((resolve) => {
@@ -530,8 +508,8 @@ test("hero metrics count up for 1.5 seconds without moving their containers", as
         const values = [];
         const started = performance.now();
         const observer = new MutationObserver(() => {
-          values.push(Number(display.textContent));
-          if (display.textContent === "50" && !number.dataset.counting) {
+          values.push(parseFloat(display.textContent));
+          if (display.textContent === "3 years" && !number.dataset.counting) {
             observer.disconnect();
             resolve({ values, elapsed: performance.now() - started });
           }
@@ -545,15 +523,15 @@ test("hero metrics count up for 1.5 seconds without moving their containers", as
       }),
   );
   expect(result.values[0]).toBe(0);
-  expect(result.values.some((value) => value > 0 && value < 50)).toBe(true);
-  expect(result.values.at(-1)).toBe(50);
+  expect(result.values.some((value) => value > 0 && value < 3)).toBe(true);
+  expect(result.values.at(-1)).toBe(3);
   expect(result.elapsed).toBeGreaterThanOrEqual(1400);
   expect(result.elapsed).toBeLessThan(3000);
   await expect(metric.locator(".metric-count-display")).toHaveAttribute(
     "aria-hidden",
     "true",
   );
-  await expect(metric.locator(".metric-count-label")).toHaveText("50");
+  await expect(metric.locator(".metric-count-label")).toHaveText("3 years");
   expect(
     await metric.evaluate(
       (e) => getComputedStyle(e.parentElement).animationName,
@@ -561,10 +539,60 @@ test("hero metrics count up for 1.5 seconds without moving their containers", as
   ).toBe("none");
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.reload();
-  await expect(page.locator(".metric-count-display")).toHaveText([
-    "7-figure",
-    "50",
-    "3 years",
-  ]);
+  await expect(page.locator(".metric-count-display")).toHaveText(["3 years"]);
   await expect(page.locator("[data-counting]")).toHaveCount(0);
+});
+
+test("Aegon uses the cleared qualitative narrative with no old evidence panel", async ({
+  page,
+  request,
+  browser,
+}) => {
+  await page.goto("/case-studies/aegon/");
+  await expect(page).toHaveTitle(
+    "Paid Media Automation & CRM Measurement | Andrew Fonseka",
+  );
+  await expect(page.locator("h1")).toHaveText(
+    "Making paid media measurement more reliable through automation.",
+  );
+  await expect(page.locator(".aegon-facts")).toContainText(
+    "Digital Marketing Strategist",
+  );
+  await expect(page.locator(".aegon-approach > ol > li")).toHaveCount(4);
+  await expect(page.locator(".concept-workflow > ol > li")).toHaveCount(5);
+  await expect(page.locator(".concept-disclaimer")).toHaveText(
+    "Illustrative process only; not an actual employer system diagram.",
+  );
+  await expect(page.locator(".aegon-approach")).toContainText(
+    "Google Ads Scripts",
+  );
+  await expect(page.locator(".aegon-approach")).toContainText(
+    "Meta Conversions API",
+  );
+  await expect(page.locator(".confidentiality-note")).toBeVisible();
+  await expect(
+    page.locator(
+      ".case-evidence-details, #linkedin-abm, .case-dashboard, .infographic-stats",
+    ),
+  ).toHaveCount(0);
+  await expect(page.locator(".aegon-connect a").first()).toHaveAttribute(
+    "href",
+    "https://www.linkedin.com/in/andrewfonseka/",
+  );
+  await expect(page.locator(".aegon-connect a").last()).toHaveAttribute(
+    "href",
+    "mailto:rafandrewf@gmail.com",
+  );
+  const response = await request.get("/case-studies/aegon/");
+  const html = await response.text();
+  expect(html).toContain("/images/measurement-automation.png");
+  expect(html).not.toMatch(
+    /Event Match Quality|compliance review time|working days saved|business units managed|high-net-worth|Matched Audiences|Thought Leader Ads|seven-figure/i,
+  );
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const staticPage = await context.newPage();
+  await staticPage.goto("http://127.0.0.1:4173/case-studies/aegon/");
+  await expect(staticPage.locator(".concept-workflow")).toBeVisible();
+  await expect(staticPage.locator(".aegon-approach > ol > li")).toHaveCount(4);
+  await context.close();
 });

@@ -127,17 +127,7 @@ export default function CaseOverviewGraphic({ id }) {
           After
         </span>
       </div>
-      {id === "aegon" ? (
-        <>
-          <Comparison label="Cost per lead" before={100} after={87} max={118} />
-          <Comparison
-            label="Completed applications"
-            before={100}
-            after={118}
-            max={118}
-          />
-        </>
-      ) : id === "petmart" ? (
+      {id === "petmart" ? (
         <>
           <Comparison
             label="Paid-attributed sales"
@@ -177,11 +167,9 @@ export default function CaseOverviewGraphic({ id }) {
         </>
       )}
       <figcaption>
-        {id === "aegon"
-          ? "Google & Meta · H1 2026 · Unchanged spend. "
-          : id === "petmart"
-            ? "Client-reported changes · Apr–Jun 2023. "
-            : "Unchanged monthly media spend. "}
+        {id === "petmart"
+          ? "Client-reported changes · Apr–Jun 2023. "
+          : "Unchanged monthly media spend. "}
         Each before-and-after measure starts at an index of 100. These are
         relative changes, not raw counts or currency.
         {id === "dats" &&

@@ -10,6 +10,7 @@ import "../refinements.css";
 import "../overrides.css";
 import "../narrative.css";
 import "../rebuild.css";
+import "../hallmark.css";
 import Analytics from "@vercel/analytics/astro";
 import interRegular from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
 import archivoBold from "@fontsource/archivo/files/archivo-latin-800-normal.woff2?url";
@@ -17,6 +18,10 @@ const {
   title = "Andrew Fonseka | Paid Media & Digital Marketing",
   description = "Vancouver-based paid media and digital marketing practitioner with 3 years across agency, in-house and advisory work. Explore CRM-qualified outcomes across financial services, education and retail.",
   noindex = false,
+  ogTitle = title,
+  ogDescription = description,
+  ogImage = "/images/andrew-fonseka.jpg",
+  ogImageAlt = "Andrew Fonseka, paid media and digital marketing",
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ga4 = import.meta.env.PUBLIC_GA4_ID;
@@ -60,15 +65,12 @@ const person = {
     <meta name="theme-color" content="#10273f" />
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={person.image} />
-    <meta
-      property="og:image:alt"
-      content="Andrew Fonseka, paid media and digital marketing"
-    />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonical} />

@@ -45,7 +45,6 @@ The original website contained a different freelance client count in its About s
 - Pan Asia Bank: 259 client-reported funded loans and US$500K loan principal on US$25K media spend. About US$97 media cost per funded loan. Principal lent is not bank revenue or profit, and the loan-value-to-spend ratio is not ROAS.
 - Petmart: 4:1 first-order ROAS for Shopping/PMax; client-reported +40% sales and +30% subscriptions over April–June 2023. Not an incrementality claim.
 - DATS: +20% CRM-qualified leads at approximately unchanged spend; before/after index 100 → 120, not raw counts. Four-times faster enquiries is client-reported. Microsoft Ads contributed 40% of 212 leads in Andrew’s second quarter on the account.
-- Aegon: 50+ accounts refers to Andrew’s wider account remit, not the LinkedIn ABM programme alone. Compliance review time fell 60%; ~12 days saved per year is an estimate. Meta Event Match Quality rose 25% relatively, not 25 percentage points. Confidential budgets and performance figures are omitted.
 - No fabricated time-series data, self-rated skill percentages, invented clients, synthetic testimonials, or forecasted ROI are displayed.
 
 Charts are semantic HTML/CSS with the actual values visible. Interactive controls expose pressed state, native dialogs manage focus, reduced-motion preferences are respected, and case studies preserve the source qualifications.
@@ -71,7 +70,6 @@ The three supporting tool groups are now integrated into the main interactive to
 
 Final toolkit grouping: four original categories retained. Paid media includes research and creative (Ahrefs, Semrush, Canva); Measurement includes reporting and collaboration (Microsoft 365, Google Workspace); Automation includes planning and workflow (Notion, ClickUp, Asana). CRM & lifecycle retains Shopify and the existing CRM tools. Supporting tools appear as compact labelled rows inside their relevant panel.
 
-The résumé download was replaced with the user-uploaded “Andrew Fonseka Resume.pdf” (SHA256 7dbf8e1d1874baa5b27d0686a9a61d5d1c18079e840849c76d73141602257172). All résumé links retain the shared URL. Navbar targets are at least 48px high, with Approach, Results, References, About and Contact; Systems remains on the homepage but is removed from navigation. Both the seven-figure budget and 50+ business-unit metrics explicitly name Aegon.
 
 Navbar sizing restored to the earlier compact design while retaining the current links. The hero name and complete role now align inline on desktop, with natural mobile wrapping. The portrait favicon embeds the original unmodified JPEG in an SVG viewport focused on the face; the new favicon URL avoids stale monogram caches.
 
@@ -79,7 +77,6 @@ Navbar clarification: retained the larger 88px desktop bar and 48px link targets
 
 ## Featured story cards and Drive résumé
 
-Selected Work now follows the user’s supplied reference: university, Pan Asia Bank and Aegon in three equal-width cards, followed by Petmart and DATS. Every card has an explicit Read the case study link and arrow. Mini graphics reuse the documented 125 versus 17 priority-college enrolments, US$15K/US$10K media split and reported Aegon relative changes. The new −13% cost per lead and +18% completed-application figures, SOL attribution and account-ownership descriptions come directly from the user-provided reference image. No absolute Aegon acquisition figures or unprovided reporting periods are inferred. The full Aegon narrative includes the new relative outcomes.
 
 Résumé replaced with the PDF downloaded through the authenticated Google Drive connection from file 1x_UrUejTH4t4T_Wdb5qr2ePsnV0hs78i, preserving its original bytes.
 
@@ -89,3 +86,6 @@ Résumé replaced with the PDF downloaded through the authenticated Google Drive
 Navigation retains Results, Approach, References and Contact. Systems content remains on the page. The stack removes Supermetrics, BrightLocal, Airtable, Drip, WordPress and Wix, and adds Dynamics 365 and Jira. The original logo dimensions, chip padding and spacing are restored at the user’s request. Tool additions, removals and corrected logo assets remain.
 
 Brandfetch verified Jira, Dynamics/Microsoft, Klaviyo and Screaming Frog. Its returned display URLs remain verbatim in the asset map; local SVGs avoid dependence on third-party image requests. Dynamics resolves to the Microsoft parent brand in Brandfetch, so the local product-specific mark is used. New local marks: Jira, Bing and Google Search Console from SVG Logos/Iconify 1.2.13; Dynamics 365 from Simple Icons 11.15.0; Klaviyo from DeskproApps/klaviyo `icon.svg`; Screaming Frog from AnthonyGleason/Portfolio-Site `src/assets/skills/screamingFrog.svg` at 5f2948cd5f459e6866c2302c644698b4c2aea461. Trademarks remain their owners’ property.
+
+
+Aegon disclosure revision (2026-10-30): employer name and qualitative replacement copy cleared by the owner. Website performance figures, scope counts, detailed investor programme and evidence panel removed. Existing PDFs retained at the owner’s explicit request pending replacements; this is an outstanding document exception, not confirmation of document clearance.

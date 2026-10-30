@@ -50,7 +50,6 @@ export function ApproachReferences() {
         <div className="combined-approach" id="approach">
           <div className="combined-heading">
             <div>
-              <p className="profile-label">Approach</p>
               <h2 id="approach-title">
                 Signal first.
                 <br />
@@ -78,7 +77,6 @@ export function ApproachReferences() {
         </div>
         <div className="combined-reference" aria-labelledby="reference-title">
           <div>
-            <p className="profile-label">References</p>
             <h2 id="reference-title">
               What colleagues say
               <br />
@@ -149,7 +147,6 @@ export function PersonBehindWork() {
     >
       <div className="container about-grid">
         <div className="about-copy">
-          <p className="profile-label">The person behind the work</p>
           <h2 id="about-title">
             From Colombo to Vancouver.
             <br />

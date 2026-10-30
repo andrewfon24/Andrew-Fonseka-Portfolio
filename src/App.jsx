@@ -116,14 +116,6 @@ export default function App({ projectId = null }) {
             aria-labelledby="hero-title"
           >
             <div className="intro-copy">
-              <p className="intro-label">
-                <span>
-                  Paid media · Digital marketing
-                  <span className="intro-location">
-                    <span className="intro-location-dot"> · </span>Vancouver, BC
-                  </span>
-                </span>
-              </p>
               <h1 id="hero-title">
                 I turn ad spend into{" "}
                 <span>enrolments, loans and applications.</span>
@@ -146,13 +138,16 @@ export default function App({ projectId = null }) {
                   See the results <ArrowDown size={17} aria-hidden="true" />
                 </a>
               </div>
-              <p className="intro-note">MBA · Authorized to work in Canada</p>
+              <p className="intro-identity">
+                Paid media and digital marketing. Vancouver, BC.
+              </p>
+              <p className="intro-note">MBA. Authorized to work in Canada.</p>
             </div>
             <div className="intro-portrait">
               <img
                 src="/images/andrew-fonseka-480.webp"
                 srcSet="/images/andrew-fonseka-240.webp 240w, /images/andrew-fonseka-480.webp 480w"
-                sizes="(max-width: 640px) 64px, (max-width: 960px) 240px, 320px"
+                sizes="(max-width: 640px) 80px, (max-width: 960px) 240px, 360px"
                 alt="Andrew Fonseka"
                 fetchPriority="high"
                 width="1122"
@@ -163,12 +158,12 @@ export default function App({ projectId = null }) {
           <div className="metric-band">
             <div className="container rebuild-stats">
               <div>
-                <MetricValue value={7} suffix="-figure" />
-                <span>annual ad budget co-managed at Aegon</span>
+                <strong>Agency</strong>
+                <span>Strategy and client-facing delivery</span>
               </div>
               <div>
-                <MetricValue value={50} />
-                <span>business units run at Aegon</span>
+                <strong>In-house</strong>
+                <span>Measurement and marketing operations</span>
               </div>
               <div>
                 <MetricValue value={3} suffix=" years" />

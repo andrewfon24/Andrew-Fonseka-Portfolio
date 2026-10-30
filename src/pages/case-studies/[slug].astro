@@ -12,8 +12,26 @@ const { project } = Astro.props;
 ---
 
 <SiteLayout
-  title={`${project.client} case study | Andrew Fonseka`}
-  description={project.summary}
+  title={
+    project.id === "aegon"
+      ? "Paid Media Automation & CRM Measurement | Andrew Fonseka"
+      : `${project.client} case study | Andrew Fonseka`
+  }
+  description={
+    project.id === "aegon"
+      ? "Explore how Andrew Fonseka applied paid media strategy, marketing automation, CRM-integrated measurement, and analytics in a regulated financial services environment."
+      : project.summary
+  }
+  {...(project.id === "aegon"
+    ? {
+        ogTitle: "Paid Media Automation & CRM Measurement | Andrew Fonseka",
+        ogDescription:
+          "A practical look at connecting paid media, conversion measurement, campaign automation, and reporting.",
+        ogImage: "/images/measurement-automation.png",
+        ogImageAlt:
+          "Illustrative workflow connecting paid media, conversion tracking, CRM signals, automation, and reporting.",
+      }
+    : {})}
 >
   <App projectId={project.id} client:load />
 </SiteLayout>

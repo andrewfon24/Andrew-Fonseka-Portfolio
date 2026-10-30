@@ -14,13 +14,10 @@ const previews = {
   },
   aegon: {
     context: "Financial services · Aegon · 2025–2026",
-    numbers: [
-      ["−13%", "cost per lead"],
-      ["+18%", "completed applications"],
-    ],
+    numbers: [],
     method:
-      "Connected Google and Meta optimization to HubSpot outcomes and removed duplicate conversions.",
-    role: "Launched and managed 20+ campaigns for 50 business units, with weekly senior-management and biweekly CMO reporting.",
+      "How I approached conversion tracking, CRM-integrated measurement, campaign automation and reporting in a regulated financial services environment.",
+    role: "Digital Marketing Strategist, working across paid media, measurement and automation.",
   },
   panasia: {
     context: "Banking · Pan Asia Bank · 2023",
@@ -72,29 +69,24 @@ function CardDataVisual({ id }) {
     );
   if (id === "aegon")
     return (
-      <figure className="card-data card-comparison">
-        {[
-          ["Cost per lead", 87],
-          ["Applications", 118],
-        ].map(([label, value]) => (
-          <div className="card-comparison-row" key={label}>
-            <div>
-              <span>{label}</span>
-              <strong>100 → {value}</strong>
-            </div>
-            <div className="card-compare-tracks" aria-hidden="true">
-              <i
-                className="card-before"
-                style={{ width: `${(100 / 118) * 100}%` }}
-              />
-              <i
-                className="card-after"
-                style={{ width: `${(value / 118) * 100}%` }}
-              />
-            </div>
-          </div>
-        ))}
-        <figcaption>H1 2026 · Before = 100 · Spend unchanged.</figcaption>
+      <figure className="card-data card-process">
+        <ol aria-label="Illustrative measurement and automation framework">
+          <li>
+            <span>Connect</span>
+            <strong>Campaigns & CRM signals</strong>
+          </li>
+          <li>
+            <span>Validate</span>
+            <strong>Tracking & quality checks</strong>
+          </li>
+          <li>
+            <span>Improve</span>
+            <strong>Automation & reporting</strong>
+          </li>
+        </ol>
+        <figcaption>
+          Illustrative framework. No employer results or internal architecture.
+        </figcaption>
       </figure>
     );
   return (
@@ -123,7 +115,15 @@ function CardDataVisual({ id }) {
 export default function WorkCard({ project, compact = false }) {
   const story = previews[project.id];
   return (
-    <article className={compact ? "result-row" : "result-card"}>
+    <article
+      className={
+        compact
+          ? "result-row"
+          : project.id === "aegon"
+            ? "result-card result-aegon"
+            : "result-card"
+      }
+    >
       <a
         className="project-open"
         href={`/case-studies/${project.id}/`}
@@ -168,20 +168,22 @@ export default function WorkCard({ project, compact = false }) {
           <>
             <p className="project-client">{story.context}</p>
             <h3 className="result-story-title">{project.title}</h3>
-            <div className="result-numbers">
-              {story.numbers.map(([value, label]) => (
-                <div key={label}>
-                  <strong>{value}</strong>
-                  <span>
-                    {label}
-                    {project.id === "university" &&
-                    label === "ad spend per enrolment"
-                      ? " · Meta Ads"
-                      : ""}
-                  </span>
-                </div>
-              ))}
-            </div>
+            {story.numbers.length > 0 && (
+              <div className="result-numbers">
+                {story.numbers.map(([value, label]) => (
+                  <div key={label}>
+                    <strong>{value}</strong>
+                    <span>
+                      {label}
+                      {project.id === "university" &&
+                      label === "ad spend per enrolment"
+                        ? " · Meta Ads"
+                        : ""}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
             <CardDataVisual id={project.id} />
             <p className="result-method">{story.method}</p>
             <p className="result-role">

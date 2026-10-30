@@ -111,28 +111,24 @@ export const projects = [
     category: "Financial services",
     client: "Aegon",
     period: "Jan 2025 – Oct 2026",
-    context: "In-house · US & Canada",
-    title: "Bid on pipeline, not form fills.",
+    context: "In-house financial services",
+    title: "Paid Media Automation & Measurement",
     summary:
-      "Launched and managed 20+ financial-product campaigns for 50 business units and supported the team on 100 more.",
-    metric: "−60%",
-    metricLabel: "compliance review time",
-    secondary: "6.5 → 8.0",
-    secondaryLabel: "Meta Event Match Quality",
-    channels: ["LinkedIn ABM", "Google Ads", "Measurement"],
-    problem:
-      "The seven-figure annual paid media program across U.S. and Canadian business units needed reliable measurement and consistent campaign operations.",
-    decision:
-      "Connected HubSpot offline conversions, implemented GA4 and server-side GTM, improved event deduplication, and built an Apps Script campaign builder with naming, UTM and compliance controls.",
-    learning:
-      "Trustworthy conversion signals and repeatable operations make better decisions possible at scale.",
-    note: "Google and Meta acquisition: H1 2026 relative changes at unchanged spend, reported in the supplied résumé and portfolio. Meta Event Match Quality rose from 6.5 to 8.0 on a 0–10 scale. Approximately 12 working days saved annually is an estimate. LinkedIn ABM results, targets, budget and performance metrics are confidential and are excluded.",
-    stats: [
-      ["50", "Business units managed"],
-      ["−60%", "Compliance review time"],
-      ["~12 days", "Working time saved / year"],
-      ["6.5 → 8.0", "Meta Event Match Quality"],
+      "How I approached conversion tracking, CRM-integrated measurement, campaign automation and reporting in a regulated financial services environment.",
+    channels: [
+      "Paid media strategy",
+      "Marketing automation",
+      "Conversion tracking",
+      "Performance analytics",
     ],
+    problem:
+      "Marketing teams need dependable conversion measurement and repeatable processes to make informed campaign decisions.",
+    decision:
+      "Connected CRM signals, strengthened conversion tracking, developed campaign automation and made reporting more actionable.",
+    learning:
+      "Good performance marketing starts with reliable data and repeatable processes.",
+    note: "General professional responsibilities and approaches. Internal results and confidential operating details are intentionally excluded. The conceptual workflow is illustrative.",
+    stats: [],
   },
 ];
 
@@ -275,8 +271,8 @@ export const experience = [
     type: "In-house",
     location: "Langley, BC",
     description:
-      "Launched and managed 20+ financial-product campaigns for 50 U.S. and Canadian business units and supported the team on 100 more. Co-oversaw two external vendors with the Director. Reported weekly to senior management and biweekly to the CMO.",
-    tags: ["Financial services", "LinkedIn ABM", "Measurement"],
+      "Worked across paid media strategy, CRM-integrated measurement, conversion tracking, campaign automation and performance reporting in a regulated financial services environment.",
+    tags: ["Financial services", "Automation", "Measurement"],
   },
   {
     company: "Independent",

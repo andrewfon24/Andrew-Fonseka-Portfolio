@@ -15,12 +15,8 @@ import { caseStories, universityCampaigns } from "./caseStories";
 import { projects } from "./data";
 import { caseBriefs } from "./caseBriefs";
 import CaseOverviewGraphic from "./CaseOverviewGraphic";
-import { AegonSignalJourney } from "./CaseDecisionVisual";
-import {
-  ABMJourney,
-  CampaignWorkflow,
-  EnquiryWorkflow,
-} from "./NarrativeVisuals";
+import AegonCaseStudy from "./AegonCaseStudy";
+import { EnquiryWorkflow } from "./NarrativeVisuals";
 
 function StatStrip({ stats }) {
   return (
@@ -439,174 +435,11 @@ function DatsDashboard() {
   );
 }
 
-function AegonDashboard() {
-  const [system, setSystem] = useState("Conversion signals");
-  const measurement = system === "Conversion signals";
-  return (
-    <>
-      <div className="aegon-acquisition">
-        <span className="case-kicker">GOOGLE & META · H1 2026</span>
-        <h4>Acquisition outcomes at unchanged spend.</h4>
-        <div className="case-result-pair">
-          <div>
-            <strong>−13%</strong>
-            <span>cost per lead</span>
-          </div>
-          <div>
-            <strong>+18%</strong>
-            <span>completed applications</span>
-          </div>
-        </div>
-        <Bars
-          rows={[
-            {
-              label: "Cost per lead · before",
-              value: "100",
-              width: 100 / 1.18,
-            },
-            { label: "Cost per lead · after", value: "87", width: 87 / 1.18 },
-            {
-              label: "Completed applications · before",
-              value: "100",
-              width: 100 / 1.18,
-            },
-            {
-              label: "Completed applications · after",
-              value: "118",
-              width: 100,
-            },
-          ]}
-          note="Each measure is indexed to its own baseline of 100. These are relative comparisons, not costs or application counts. They describe Google and Meta acquisition, separately from LinkedIn ABM."
-        />
-      </div>
-      <div className="dashboard-header">
-        <div>
-          <span className="case-kicker">MEASUREMENT & OPERATIONS</span>
-          <h4>Make the signal useful. Make the work repeatable.</h4>
-        </div>
-      </div>
-      <div className="campaign-picker" aria-label="Explore Aegon systems">
-        {["Conversion signals", "Campaign operations"].map((name) => (
-          <button
-            key={name}
-            aria-pressed={system === name}
-            onClick={() => setSystem(name)}
-          >
-            {name}
-          </button>
-        ))}
-      </div>
-      <div className="aegon-system" aria-live="polite">
-        {measurement ? (
-          <Workflow
-            label="Conversion signals"
-            steps={[
-              [
-                "Capture",
-                "GA4, server-side Google Tag Manager, Enhanced Conversions and Meta CAPI.",
-              ],
-              [
-                "Validate",
-                "Remove duplicate events and connect HubSpot offline conversion outcomes.",
-              ],
-              [
-                "Optimize",
-                "Use qualified leads, booked calls and applications to inform bidding.",
-              ],
-            ]}
-          />
-        ) : (
-          <CampaignWorkflow />
-        )}
-        <div className="case-system-outcome">
-          <Check size={22} aria-hidden="true" />
-          <div>
-            <strong>{measurement ? "6.5 → 8.0" : "−60%"}</strong>
-            <span>
-              {measurement
-                ? "Meta Event Match Quality · before → after, on a 0–10 scale"
-                : "Compliance review time · approximately 12 working days saved annually"}
-            </span>
-          </div>
-        </div>
-        {measurement && (
-          <Bars
-            rows={[
-              { label: "Before", value: "6.5 / 10", width: 65 },
-              { label: "After", value: "8.0 / 10", width: 80 },
-            ]}
-            note="Meta Event Match Quality scores on the same 0–10 scale. Scores are shown directly, not as a percentage increase."
-          />
-        )}
-        {!measurement && (
-          <Bars
-            rows={[
-              {
-                label: "Compliance review time · before",
-                value: "100",
-                width: 100,
-              },
-              {
-                label: "Compliance review time · after",
-                value: "40",
-                width: 40,
-              },
-            ]}
-            note="Review time indexed to 100 before the builder. A reported 60% reduction gives an index of 40 afterward. These are not hours or days."
-          />
-        )}
-      </div>
-      <p className="case-evidence-note">
-        Process diagrams illustrate the implemented workflows. Internal
-        dashboards and absolute performance figures are confidential.
-      </p>
-    </>
-  );
-}
-
-function LinkedInStory() {
-  return (
-    <section
-      className="case-briefing"
-      id="linkedin-abm"
-      aria-labelledby="abm-title"
-    >
-      <h2 id="abm-title">Inside the LinkedIn investor program.</h2>
-      <p>
-        I owned the strategy and execution of a high-net-worth investor program
-        across the US and Canada in H1 2026. I organized custom priority
-        audiences in Google Sheets using job titles, seniority, company
-        attributes and account lists. Matched Audiences, Thought Leader Ads and
-        carousel creative were the main formats.
-      </p>
-      <p>
-        I used forecasting and a visual presentation to explain the audience
-        strategy and recommended campaign mix before launch.
-      </p>
-      <p>
-        I integrated HubSpot with LinkedIn Campaign Manager so I could examine
-        qualified enquiries alongside campaign activity. One US region was
-        producing fewer qualified enquiries than other regions. I used that
-        evidence to revise targeting and reallocate budget toward the stronger
-        regions.
-      </p>
-      <p>
-        The customer journey continued through an adviser meeting, document
-        exchange and account funding. HubSpot supported revenue-attribution
-        analysis of LinkedIn’s influence within that journey. Campaign results,
-        targets, budget and performance metrics remain confidential.
-      </p>
-      <ABMJourney />
-    </section>
-  );
-}
-
 const dashboards = {
   university: UniversityDashboard,
   petmart: PetmartDashboard,
   panasia: BankDashboard,
   dats: DatsDashboard,
-  aegon: AegonDashboard,
 };
 
 export default function CaseStudyPage({ project }) {
@@ -627,12 +460,12 @@ export default function CaseStudyPage({ project }) {
         if (parent.tagName === "DETAILS") parent.open = true;
         parent = parent.parentElement;
       }
-      if (id === "linkedin-abm") target.scrollIntoView();
     };
     revealHash();
     window.addEventListener("hashchange", revealHash);
     return () => window.removeEventListener("hashchange", revealHash);
   }, [project.id]);
+  if (project.id === "aegon") return <AegonCaseStudy />;
   return (
     <main id="main" className="case-page case-story-dialog compact-case">
       <article className="dialog-content" aria-labelledby="case-title">
@@ -652,30 +485,18 @@ export default function CaseStudyPage({ project }) {
             <strong>My role.</strong> {brief.role}
           </p>
         </header>
-        <div
-          className={`compact-story ${project.id === "aegon" ? "visual-story" : ""}`}
-        >
+        <div className="compact-story">
           <section aria-labelledby="case-problem">
             <h2 id="case-problem">The problem</h2>
             <p>{brief.problem}</p>
           </section>
           <section aria-labelledby="case-action">
             <h2 id="case-action">What I did</h2>
-            {project.id === "aegon" ? (
-              <>
-                <AegonSignalJourney />
-                <p className="signal-action-note">
-                  I removed duplicate events, then refined targeting, forms and
-                  budget allocation using CRM evidence.
-                </p>
-              </>
-            ) : (
-              <ul className="compact-actions">
-                {brief.actions.map((action) => (
-                  <li key={action}>{action}</li>
-                ))}
-              </ul>
-            )}
+            <ul className="compact-actions">
+              {brief.actions.map((action) => (
+                <li key={action}>{action}</li>
+              ))}
+            </ul>
           </section>
         </div>
         <section
@@ -711,23 +532,16 @@ export default function CaseStudyPage({ project }) {
             </section>
             <div className="evidence-narrative">
               <h2>Inside the work</h2>
-              {story.actions
-                .filter(
-                  ([title]) =>
-                    project.id !== "aegon" ||
-                    title !== "Build a repeatable setup workflow",
-                )
-                .map(([title, body]) => (
-                  <div key={title}>
-                    <h3>{title}</h3>
-                    <p>{body}</p>
-                  </div>
-                ))}
+              {story.actions.map(([title, body]) => (
+                <div key={title}>
+                  <h3>{title}</h3>
+                  <p>{body}</p>
+                </div>
+              ))}
               {story.result.map((p) => (
                 <p key={p}>{p}</p>
               ))}
             </div>
-            {project.id === "aegon" && <LinkedInStory />}
             <div className="case-source">
               <h2>Sources & measurement</h2>
               <p>{project.note}</p>
