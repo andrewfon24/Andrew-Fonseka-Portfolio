@@ -1,7 +1,6 @@
 import React from "react";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { MeasurementWorkflow } from "./CaseDecisionVisual";
-import BrandIcon from "./BrandIcon";
 
 const approaches = [
   {
@@ -182,41 +181,6 @@ export default function AegonCaseStudy() {
             The conceptual workflow is illustrative.
           </p>
         </aside>
-        <section
-          className="aegon-connect"
-          aria-labelledby="aegon-connect-title"
-        >
-          <h2 id="aegon-connect-title">Let’s connect and talk marketing</h2>
-          <p>
-            I’m interested in connecting with marketing professionals,
-            recruiters and teams using technology, data and creative thinking to
-            solve business challenges. If you’re looking for hands-on paid media
-            expertise with marketing automation and strategic problem-solving,
-            I’d welcome the opportunity to learn more about your team.
-          </p>
-          <div className="contact-actions">
-            <a
-              className="button primary"
-              href="https://www.linkedin.com/in/andrewfonseka/"
-              target="_blank"
-              rel="noreferrer"
-              data-track="linkedin_click"
-              data-where="aegon"
-            >
-              <BrandIcon tool="LinkedIn Ads" />
-              Connect on LinkedIn
-            </a>
-            <a
-              className="text-link"
-              href="mailto:rafandrewf@gmail.com"
-              data-track="email_click"
-              data-where="aegon"
-            >
-              Get in touch by email
-              <Mail size={18} aria-hidden="true" />
-            </a>
-          </div>
-        </section>
         <div className="case-next">
           <span>Next case study</span>
           <a

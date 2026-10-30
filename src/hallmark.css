@@ -661,32 +661,6 @@ button:active {
   color: var(--color-muted);
   max-width: 75ch;
 }
-.aegon-connect {
-  padding-block: var(--space-48);
-}
-.aegon-connect p {
-  max-width: 75ch;
-  margin-top: var(--space-20);
-}
-.aegon-connect .contact-actions {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--space-lg);
-  margin-top: var(--space-28);
-}
-.aegon-connect .contact-actions a {
-  min-height: 48px;
-  display: inline-flex;
-  gap: var(--space-sm);
-  align-items: center;
-}
-.aegon-connect .brand-icon {
-  background: var(--color-paper);
-  border-radius: 2px;
-  padding: var(--space-3xs);
-}
-
 @media (max-width: 1100px) {
   .home-rebuild .intro-hero {
     gap: var(--space-xl);

@@ -575,13 +575,10 @@ test("Aegon uses the cleared qualitative narrative with no old evidence panel", 
       ".case-evidence-details, #linkedin-abm, .case-dashboard, .infographic-stats",
     ),
   ).toHaveCount(0);
-  await expect(page.locator(".aegon-connect a").first()).toHaveAttribute(
-    "href",
-    "https://www.linkedin.com/in/andrewfonseka/",
-  );
-  await expect(page.locator(".aegon-connect a").last()).toHaveAttribute(
-    "href",
-    "mailto:rafandrewf@gmail.com",
+  await expect(page.locator(".aegon-connect")).toHaveCount(0);
+  await expect(page.locator("#contact")).toHaveCount(1);
+  await expect(page.locator("#contact a[href^='mailto:']")).toHaveAttribute(
+    "href", "mailto:rafandrewf@gmail.com",
   );
   const response = await request.get("/case-studies/aegon/");
   const html = await response.text();

@@ -11,8 +11,12 @@
 .contact-reference-inner {
   max-width: 1100px;
   margin: auto;
+  text-align: center;
 }
 .contact-reference h2 {
+  max-width: 100%;
+  margin-inline: auto;
+  text-align: center;
   color: #fff;
   font-size: clamp(32px, 3.4vw, 48px);
   line-height: 1.15;
