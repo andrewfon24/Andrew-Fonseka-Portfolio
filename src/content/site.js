@@ -81,7 +81,7 @@ export const cases = [
     client: "Private university",
     clientShort: "Private university, Saudi Arabia",
     sector: "Education",
-    context: "Independent projects, via partner agency",
+    context: "Independent project, via partner agency",
     period: "May to Aug 2026",
     headline: ["Optimize for enrolments,", "not form fills."],
     summary:
@@ -152,7 +152,7 @@ export const cases = [
     client: "DIMO Academy for Technical Studies",
     clientShort: "DIMO Academy",
     sector: "Trades education",
-    context: "Independent projects",
+    context: "Independent project",
     period: "2026",
     headline: ["More qualified leads.", "Same budget."],
     summary:

@@ -107,7 +107,7 @@ test("university case replaces the screenshot with the funnel, per-campaign char
   await expect(explorer.getByRole("button", { name: "Priority colleges" })).toHaveAttribute("aria-pressed", "true");
   await expect(explorer.locator("tbody tr[data-dim]")).toHaveCount(2);
   await expect(page.locator(".callout__big")).toContainText("125");
-  await expect(page.locator(".case-hero .chips")).toContainText("Independent projects, via partner agency");
+  await expect(page.locator(".case-hero .chips")).toContainText("Independent project, via partner agency");
   // The big figure and its sentence never overlap, at any desktop width.
   for (const width of [1024, 1280, 1440, 1920]) {
     await page.setViewportSize({ width, height: 900 });
@@ -126,7 +126,8 @@ test("Aegon shows process and responsibilities without result figures", async ({
   await expect(page.locator(".case-stat")).toHaveCount(0);
   await expect(page.locator("main")).not.toContainText("US$");
   await page.goto("/case-studies/dats/");
-  await expect(page.locator(".case-hero .chips")).toContainText("Independent projects");
+  await expect(page.locator(".case-hero .chips")).toContainText("Independent project");
+  await expect(page.locator(".case-hero .chips")).not.toContainText("Independent projects");
 });
 
 test("journey entries and testimonials respond to input", async ({ page }) => {
