@@ -19,7 +19,7 @@ All colour and type go through `src/styles/tokens.css`. Brand values come from t
 
 ## Rules
 - Headline pattern from the PDF: a plain clause, then the accent clause in sky (dark) or blue (light). Never italic.
-- No eyebrows, no tracked capitals, no middle-dot meta strings. Meta is separate chips or a two-line label.
+- No eyebrows, no tracked capitals, no middle-dot meta strings, except where the owner's reference screenshots ask for them: the stack and credentials kicker and group labels, the journey list head, the contact meta line and the footer tagline. Elsewhere, meta is separate chips or a two-line label.
 - Result figures are gold and tabular. Every figure carries its source or qualification within one glance.
 - Charts are inline SVG or HTML with their values printed; they animate with transform and opacity only.
 - Product demos use the Stageshow kit (`src/kit`). Hallmark gate 47a (drawn app windows) is waived for these demos only: they illustrate a process, carry an "Illustrative" label and show no employer results.

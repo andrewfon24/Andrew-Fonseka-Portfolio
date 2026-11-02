@@ -17,7 +17,14 @@ export const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(
   "Paid media role – intro",
 )}`;
 
-// Hero proof figures, in portfolio-PDF order. `count` drives the counter.
+// The band under the hero, as on the owner's earlier site.
+export const metrics = [
+  { value: "Agency", label: "Strategy and client-facing delivery" },
+  { value: "In-house", label: "Measurement and marketing operations" },
+  { value: "3 years", count: 3, suffix: " years", label: "in Paid Media" },
+];
+
+// Headline results, in portfolio-PDF order. `count` drives the counter.
 export const proof = [
   {
     value: "312",
@@ -349,7 +356,7 @@ export const stackGroups = [
   },
   {
     id: "analytics",
-    name: "Analytics and tracking",
+    name: "Analytics & tracking",
     tools: [
       "Google Analytics 4",
       "Google Search Console",
@@ -364,11 +371,11 @@ export const stackGroups = [
   },
   {
     id: "productivity",
-    name: "Productivity, systems and project management",
+    name: "Productivity, systems & project management",
     tools: ["Microsoft 365", "Google Workspace", "Asana", "ClickUp", "Notion", "Dynamics 365", "Jira"],
   },
-  { id: "email", name: "Email and CRM", tools: ["HubSpot", "Mailchimp", "Klaviyo"] },
-  { id: "cms", name: "CMS, e-commerce and design", tools: ["Shopify", "Canva"] },
+  { id: "email", name: "Email & CRM", tools: ["HubSpot", "Mailchimp", "Klaviyo"] },
+  { id: "cms", name: "CMS, e-commerce & design", tools: ["Shopify", "Canva"] },
 ];
 
 export const certifications = [

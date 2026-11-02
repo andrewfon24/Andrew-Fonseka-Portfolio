@@ -2,7 +2,7 @@
 import Icon from "../Icon.astro";
 import Figure from "../Figure.astro";
 import Bars from "../charts/Bars.astro";
-import { profile, mailto, proof, university } from "../../content/site.js";
+import { profile, mailto, metrics, university } from "../../content/site.js";
 ---
 
 <section class="band band--dark hero" aria-labelledby="hero-title">
@@ -57,32 +57,15 @@ import { profile, mailto, proof, university } from "../../content/site.js";
   </div>
 </section>
 
-<section class="band band--dark proof" aria-label="Selected results">
-  <div class="container">
-    <div class="proof__grid">
-      {
-        proof.map((p, i) => (
-          <a
-            class="proof__item"
-            href={`/case-studies/${p.case}/`}
-            data-track="case_open"
-            data-case={p.case}
-            data-where="proof"
-            data-rise
-            style={`--delay: ${i * 90}ms`}
-          >
-            <Figure dark value={p.value} count={p.count} prefix={p.prefix} suffix={p.suffix} />
-            <span class="proof__label">{p.label}</span>
-            <span class="proof__source">{p.source}</span>
-            <span class="proof__more">
-              Case study <Icon name="arrow-right" size={13} />
-            </span>
-          </a>
-        ))
-      }
-    </div>
-    <p class="fine" style="margin-top: var(--space-5)">
-      Figures are client-reported where stated. Employer results from Aegon are confidential and are not shown.
-    </p>
+<section class="band band--dark metrics" aria-label="At a glance">
+  <div class="container metrics__grid">
+    {
+      metrics.map((m, i) => (
+        <div class="metrics__item" data-rise style={`--delay: ${i * 90}ms`}>
+          <Figure dark value={m.value} count={m.count} suffix={m.suffix} class="metrics__value" />
+          <span class="metrics__label">{m.label}</span>
+        </div>
+      ))
+    }
   </div>
 </section>

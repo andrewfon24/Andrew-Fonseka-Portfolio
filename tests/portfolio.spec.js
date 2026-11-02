@@ -18,8 +18,9 @@ test("homepage leads with the positioning, one email action and the four results
   await expect(primary).toHaveCount(1);
   await expect(primary).toHaveAttribute("href", new RegExp(`^${email}`));
   await expect(page.locator(".hero")).toContainText("Open to paid media roles in Greater Vancouver");
-  for (const figure of ["312", "259", "4:1", "+19%"]) {
-    await expect(page.locator(".proof .visually-hidden", { hasText: figure }).first()).toBeAttached();
+  await expect(page.locator(".metrics__item")).toHaveCount(3);
+  for (const text of ["Agency", "In-house", "3 years", "in Paid Media"]) {
+    await expect(page.locator(".metrics")).toContainText(text);
   }
   for (const slug of slugs) {
     await expect(page.locator(`a[href="/case-studies/${slug}/"]`).first()).toBeAttached();
@@ -31,7 +32,7 @@ test("homepage leads with the positioning, one email action and the four results
 
 test("documents, contact links and analytics hooks are preserved", async ({ page, request }) => {
   await page.goto("/");
-  await expect(page.locator("#contact h2")).toHaveText("Let’s talk paid media.");
+  await expect(page.locator("#contact h2")).toHaveText("Let’s talk paid media");
   await expect(page.locator("#contact a[href^='mailto:']")).toHaveAttribute("href", new RegExp(`^${email}`));
   await expect(page.locator("#contact")).not.toContainText("778");
   for (const name of ["Andrew_Fonseka_Resume.pdf", "Andrew_Fonseka_Portfolio.pdf"]) {
@@ -42,7 +43,16 @@ test("documents, contact links and analytics hooks are preserved", async ({ page
   for (const name of ["email_click", "resume_download", "linkedin_click", "case_open", "portfolio_download"]) {
     await expect(page.locator(`[data-track="${name}"]`)).not.toHaveCount(0);
   }
-  await expect(page.locator(".tool")).toHaveCount(26);
+  await expect(page.locator(".stack__group:not(.stack__group--wide) .tool")).toHaveCount(26);
+  await expect(page.locator(".group-label")).toHaveText([
+    "The journey so far",
+    "Paid media platforms",
+    "Analytics & tracking",
+    "Productivity, systems & project management",
+    "Email & CRM",
+    "CMS, e-commerce & design",
+    "Certifications",
+  ]);
   await expect(page.locator(".cred")).toHaveCount(7);
 });
 
@@ -107,15 +117,15 @@ test("Aegon shows process and responsibilities without result figures", async ({
   await expect(page.locator("main")).not.toContainText("US$");
 });
 
-test("experience timeline, testimonials and toolkit filters respond to input", async ({ page }) => {
+test("journey entries and testimonials respond to input", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator(".role")).toHaveCount(6);
   await expect(page.locator(".role[open]")).toHaveCount(0);
-  await page.locator(".gantt").evaluate((el) => el.scrollIntoView({ block: "center" }));
-  await page.locator(".gantt__bar[data-role-target='role-kites-global']").click();
+  await page.locator("#role-kites-global summary").click();
   await expect(page.locator("#role-kites-global")).toHaveAttribute("open", "");
   await expect(page.locator("#role-kites-global")).toContainText("Godrej India");
-  await expect(page.locator("#role-university-canada-west")).toContainText("Jun 2023 to Oct 2024");
+  await expect(page.locator("#role-university-canada-west")).toContainText("Jun 2023 – Oct 2024");
+  await expect(page.locator("#role-aegon")).toContainText("Intermediate Channel Marketing Specialist (Paid Media)");
 
   const quotes = page.locator("[data-quotes]");
   await expect(quotes.locator(".quote__slide:not([hidden])")).toContainText("Don Chanaka Perera");
@@ -124,9 +134,6 @@ test("experience timeline, testimonials and toolkit filters respond to input", a
   await page.getByRole("button", { name: "Previous recommendation" }).click();
   await expect(quotes.locator(".quote__slide:not([hidden])")).toContainText("Don Chanaka Perera");
 
-  await page.locator('[data-filter="email"]').click();
-  await expect(page.locator('[data-filter="email"]')).toHaveAttribute("aria-pressed", "true");
-  await expect(page.locator(".tool:not([data-dim])")).toHaveCount(3);
 });
 
 test("every page fits small screens and passes automated WCAG 2.1 AA checks", async ({ page }) => {
@@ -162,7 +169,8 @@ test("content and evidence remain readable without JavaScript", async ({ browser
     expect(hidden, path).toBe(0);
   }
   await page.goto("/");
-  await expect(page.locator(".proof")).toContainText("312");
+  await expect(page.locator(".metrics")).toContainText("3 years");
+  await expect(page.locator("#work")).toContainText("312");
   await expect(page.locator(".role")).toHaveCount(6);
   await page.goto("/case-studies/university/");
   await expect(page.locator("main")).toContainText("821");
@@ -174,7 +182,7 @@ test("reduced motion shows final figures and finished charts immediately", async
   const context = await browser.newContext({ reducedMotion: "reduce" });
   const page = await context.newPage();
   await page.goto("/");
-  await expect(page.locator(".proof [data-count]").first()).toHaveText("312");
+  await expect(page.locator(".metrics [data-count]")).toHaveText("3 years");
   const scales = await page.locator(".signal .bar-fill").evaluateAll((els) => els.map((el) => getComputedStyle(el).transform));
   expect(scales.every((t) => t !== "matrix(0, 0, 0, 1, 0, 0)")).toBe(true);
   const risen = await page.evaluate(
@@ -186,9 +194,10 @@ test("reduced motion shows final figures and finished charts immediately", async
 
 test("counters count up once and land on the real figure", async ({ page }) => {
   await page.goto("/");
-  const counter = page.locator(".proof [data-count]").first();
-  await expect(counter).toHaveText("312", { timeout: 4000 });
-  await expect(page.locator(".proof [data-count]").nth(2)).toHaveText("4:1", { timeout: 4000 });
+  await expect(page.locator(".metrics [data-count]")).toHaveText("3 years", { timeout: 4000 });
+  const feature = page.locator(".feature [data-count]").first();
+  await feature.scrollIntoViewIfNeeded();
+  await expect(feature).toHaveText("312", { timeout: 4000 });
 });
 
 test("unknown pages recover to the work and email", async ({ page }) => {
