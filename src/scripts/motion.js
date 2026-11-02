@@ -49,10 +49,9 @@ function initCounters() {
     },
     { threshold: 0.6 },
   );
-  counters.forEach((el) => {
-    render(el, 0);
-    io.observe(el);
-  });
+  // The real figure stays on screen until the count actually starts, so a
+  // late or missing trigger can never leave a counter showing zero.
+  counters.forEach((el) => io.observe(el));
 }
 
 function initNav() {
