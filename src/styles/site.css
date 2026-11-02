@@ -466,7 +466,6 @@ a {
   position: relative;
   justify-self: end;
   width: min(100%, 26rem);
-  padding-bottom: var(--space-8);
 }
 
 .portrait {
@@ -3017,4 +3016,27 @@ a.client-chip:hover {
 
 .role__body .clients > li::before {
   display: none;
+}
+
+/* Stack: two independent columns so short groups don't leave gaps */
+.stack__groups {
+  row-gap: var(--space-7);
+}
+
+.stack__column {
+  display: grid;
+  align-content: start;
+  gap: var(--space-7);
+}
+
+/* Nav spans the full width of the window */
+.nav__inner.container {
+  max-width: none;
+  padding-inline: var(--space-7);
+}
+
+@media (max-width: 40rem) {
+  .nav__inner.container {
+    padding-inline: var(--gutter);
+  }
 }

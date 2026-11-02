@@ -18,17 +18,24 @@ import { stackGroups, certifications, languages } from "../../content/site.js";
 
     <div class="stack__groups">
       {
-        stackGroups.map((g) => (
-          <div class="stack__group" data-rise>
-            <h3 class="group-label">{g.name}</h3>
-            <ul class="tools">
-              {g.tools.map((t) => (
-                <li class="tool">
-                  <BrandIcon tool={t} />
-                  <span>{t}</span>
-                </li>
-              ))}
-            </ul>
+        [
+          stackGroups.filter((g) => ["paid", "productivity", "cms"].includes(g.id)),
+          stackGroups.filter((g) => ["analytics", "email"].includes(g.id)),
+        ].map((column) => (
+          <div class="stack__column">
+            {column.map((g) => (
+              <div class="stack__group" data-rise>
+                <h3 class="group-label">{g.name}</h3>
+                <ul class="tools">
+                  {g.tools.map((t) => (
+                    <li class="tool">
+                      <BrandIcon tool={t} />
+                      <span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         ))
       }

@@ -1,8 +1,7 @@
 ---
 import Icon from "../Icon.astro";
 import Figure from "../Figure.astro";
-import Bars from "../charts/Bars.astro";
-import { profile, mailto, metrics, university } from "../../content/site.js";
+import { profile, mailto, metrics } from "../../content/site.js";
 ---
 
 <section class="band band--dark hero" aria-labelledby="hero-title">
@@ -39,20 +38,6 @@ import { profile, mailto, metrics, university } from "../../content/site.js";
           fetchpriority="high"
         />
       </figure>
-      <a class="signal" href="/case-studies/university/" data-track="case_open" data-case="university" data-where="hero">
-        <span class="signal__title">
-          <span>From Meta lead to fee-paid enrolment</span>
-          <Icon name="arrow-up-right" size={16} />
-        </span>
-        <Bars
-          dark
-          compact
-          rows={university.funnel.map((r, i) => ({ ...r, tone: i === 2 ? "gold" : undefined }))}
-          label="Funnel: 821 Meta leads, 430 CRM-qualified, 312 fee-paid enrolments"
-          stagger={220}
-        />
-        <p class="signal__foot">Private university, Saudi Arabia, 2026</p>
-      </a>
     </div>
   </div>
 </section>

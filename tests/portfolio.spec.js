@@ -27,6 +27,8 @@ test("homepage leads with the positioning, one email action and the four results
   }
   // The Meta Ads Manager screenshot is gone everywhere.
   await expect(page.locator('img[src*="university-ads-results"]')).toHaveCount(0);
+  await expect(page.locator(".hero__visual img")).toHaveAttribute("alt", "Andrew Fonseka");
+  await expect(page.locator(".hero__visual .signal")).toHaveCount(0);
   expect(errors).toEqual([]);
 });
 
@@ -47,10 +49,10 @@ test("documents, contact links and analytics hooks are preserved", async ({ page
   await expect(page.locator(".group-label")).toHaveText([
     "The journey so far",
     "Paid media platforms",
-    "Analytics & tracking",
     "Productivity, systems & project management",
-    "Email & CRM",
     "CMS, e-commerce & design",
+    "Analytics & tracking",
+    "Email & CRM",
     "Certifications",
   ]);
   await expect(page.locator(".cred")).toHaveCount(7);
@@ -183,8 +185,10 @@ test("reduced motion shows final figures and finished charts immediately", async
   const page = await context.newPage();
   await page.goto("/");
   await expect(page.locator(".metrics [data-count]")).toHaveText("3 years");
-  const scales = await page.locator(".signal .bar-fill").evaluateAll((els) => els.map((el) => getComputedStyle(el).transform));
+  await page.goto("/case-studies/university/");
+  const scales = await page.locator(".brief .bar-fill").evaluateAll((els) => els.map((el) => getComputedStyle(el).transform));
   expect(scales.every((t) => t !== "matrix(0, 0, 0, 1, 0, 0)")).toBe(true);
+  await page.goto("/");
   const risen = await page.evaluate(
     () => [...document.querySelectorAll("[data-rise]")].every((el) => getComputedStyle(el).opacity === "1"),
   );
