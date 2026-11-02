@@ -89,3 +89,17 @@ Brandfetch verified Jira, Dynamics/Microsoft, Klaviyo and Screaming Frog. Its re
 
 
 Aegon disclosure revision (2026-10-30): employer name and qualitative replacement copy cleared by the owner. Website performance figures, scope counts, detailed investor programme and evidence panel removed. Existing PDFs retained at the owner’s explicit request pending replacements; this is an outstanding document exception, not confirmation of document clearance.
+
+## November 2026 redesign
+
+Authoritative content is now the 2026 `Andrew_Fonseka_Resume.pdf` and the eight-page `Andrew_Fonseka_Portfolio.pdf`, copied byte for byte into `public/documents/`. Owner interview decisions:
+
+- Positioning: Paid Media & Performance Marketing Specialist. Hero status: open to paid media roles in Greater Vancouver.
+- Email: andrew@andrewfonseka.com everywhere, including structured data. Phone number stays off the website.
+- Corrections from the PDFs: Aegon title Intermediate Channel Marketing Specialist (Paid Media); MBA June 2023 to October 2024; Petmart period March to May 2023; DATS +19% (178 to 212 CRM-qualified leads). The earlier Microsoft Advertising share and response-time claims are removed because the new PDFs do not contain them.
+- Aegon: the owner cleared the content of the new PDF and résumé for the website (both process flows and the résumé responsibilities). No figures.
+- Other clients named in the résumé (Godrej India, a B2B apparel retailer, CDB Bank, Costa Coffee Singapore, Keells) appear as text in the career timeline only, with no logos.
+- Toolkit: kept exactly as the previous site listed it, at the owner's request.
+- The Meta Ads Manager screenshot (`university-ads-results.png`) is deleted. The same figures appear as the funnel (821, 430, 312) and per-campaign charts from the portfolio PDF, with the note: enrolments matched on name, phone and student ID, de-duplicated; qualification data available for all campaigns combined only.
+
+Libraries: Stageshow kit (benjitaylor/skills, MIT) for the three product demos; Liveline 0.0.7 (benjitaylor/liveline) for the illustrative pacing line, which shows no axis values or results.

@@ -1,0 +1,68 @@
+---
+import Icon from "../Icon.astro";
+import GoLiveDemo from "../../islands/GoLiveDemo.tsx";
+import { aegon, caseById } from "../../content/site.js";
+
+const { showLink = true, headingLevel = 2, title } = Astro.props;
+const c = caseById.aegon;
+const H = `h${headingLevel}`;
+---
+
+<section class="band band--dark" id="systems" aria-labelledby="systems-title">
+  <div class="container">
+    <div class="head" data-rise>
+      {
+        !title && (
+          <ul class="chips" aria-label="Context">
+            <li class="chip">{c.client}</li>
+            <li class="chip">{c.context}</li>
+            <li class="chip">{c.sector}</li>
+            <li class="chip">{c.period}</li>
+          </ul>
+        )
+      }
+      <H id="systems-title" style="font-size: var(--text-section)">
+        {title ? title[0] : c.headline[0]}{" "}<span class="accent">{title ? title[1] : c.headline[1]}</span>
+      </H>
+    </div>
+
+    <div class="systems__grid">
+      <div class="demo" data-rise>
+        <div aria-hidden="true" data-ss-fill>
+          <GoLiveDemo client:visible />
+        </div>
+        <p class="visually-hidden">
+          Illustrative campaign builder: QA flags a missing UTM parameter, it is fixed, compliance clears, the campaign launches on Google Ads, Meta and LinkedIn, spend is paced against budget and a biweekly report is scheduled.
+        </p>
+        <div class="demo__label"><span class="fine">{c.note}</span></div>
+      </div>
+      <div data-rise style="--delay: 120ms">
+        <p class="fine" style="margin-bottom: var(--space-3)">How a campaign goes live</p>
+        <ol class="pipeline" data-steps="golive">
+          {
+            aegon.goLive.map((s) => (
+              <li>
+                <span class="pipeline__icon"><Icon name={s.icon} size={18} /></span>
+                <span>
+                  <h3>{s.title}</h3>
+                  <p>{s.body}</p>
+                </span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+
+    {
+      showLink && (
+        <div class="below" data-rise>
+          <p class="fine" style="max-width: 60ch">{c.role}</p>
+          <a class="button button--ghost" href="/case-studies/aegon/" data-track="case_open" data-case="aegon" data-where="systems">
+            Read the case study <Icon name="arrow-right" size={17} class="icon-nudge" />
+          </a>
+        </div>
+      )
+    }
+  </div>
+</section>

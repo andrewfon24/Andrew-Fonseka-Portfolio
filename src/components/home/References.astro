@@ -1,0 +1,54 @@
+---
+import Icon from "../Icon.astro";
+import { testimonials } from "../../content/site.js";
+---
+
+<section class="band band--surface band--tight" id="references" aria-labelledby="references-title">
+  <div class="container quote" data-quotes>
+    <div data-rise>
+      <span class="quote__mark"><Icon name="quote" size={44} stroke={1.5} /></span>
+      <h2 id="references-title" style="font-size: var(--text-title); margin-top: var(--space-4)">
+        What colleagues say about the work
+      </h2>
+      <p class="fine" style="margin-top: var(--space-3)">Verbatim LinkedIn recommendations</p>
+    </div>
+    <div data-rise style="--delay: 120ms">
+      <div class="quote__slides" aria-live="polite">
+        {
+          testimonials.map((t, i) => (
+            <figure class="quote__slide" hidden={i !== 0} style="margin: 0">
+              <blockquote>“{t.quote}”</blockquote>
+              <figcaption class="quote__person">
+                <span class="avatar" aria-hidden="true">{t.initials}</span>
+                <span>
+                  <strong>{t.name}</strong>
+                  <span class="quote__role">{t.role}</span>
+                </span>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+      <div class="quote__controls">
+        <button class="icon-button" type="button" data-quote-prev aria-label="Previous recommendation">
+          <Icon name="chevron-left" size={18} />
+        </button>
+        <button class="icon-button" type="button" data-quote-next aria-label="Next recommendation">
+          <Icon name="chevron-right" size={18} />
+        </button>
+        <span class="fine" data-quote-status>Recommendation 1 of {testimonials.length}</span>
+        <a
+          class="link"
+          style="margin-left: auto"
+          href="https://www.linkedin.com/in/andrewfonseka/details/recommendations/"
+          target="_blank"
+          rel="noreferrer"
+          data-track="linkedin_click"
+          data-where="references"
+        >
+          All recommendations <Icon name="arrow-up-right" size={15} />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,37 @@
+---
+import Icon from "../Icon.astro";
+import ApproachDemo from "../../islands/ApproachDemo.tsx";
+import { approach } from "../../content/site.js";
+---
+
+<section class="band band--paper" id="approach" aria-labelledby="approach-title">
+  <div class="container">
+    <div class="head" data-rise>
+      <h2 id="approach-title">{approach.headline[0]}{" "}<span class="accent">{approach.headline[1]}</span></h2>
+    </div>
+    <div class="approach__grid">
+      <ol class="approach__steps" data-steps="approach" data-rise>
+        {
+          approach.steps.map((s, i) => (
+            <li data-active={i === 0 ? "" : undefined}>
+              <span class="approach__num"><Icon name={s.icon} size={20} /></span>
+              <span>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="demo" data-rise style="--delay: 120ms">
+        <div aria-hidden="true" data-ss-fill>
+          <ApproachDemo client:visible />
+        </div>
+        <p class="visually-hidden">
+          Illustrative account review: signal checks pass, the optimization target switches from form fills to qualified leads, a test scales the winning variant, and spend is paced against plan.
+        </p>
+        <div class="demo__label"><span class="fine">Illustrative account review. The pacing line is drawn live with Liveline and shows no client data.</span></div>
+      </div>
+    </div>
+  </div>
+</section>

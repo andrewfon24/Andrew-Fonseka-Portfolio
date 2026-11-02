@@ -1,0 +1,85 @@
+---
+// One icon library (Lucide), rendered to static SVG at build time.
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUp,
+  ArrowUpRight,
+  BadgeCheck,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Copy,
+  Download,
+  FileText,
+  Gauge,
+  GraduationCap,
+  Hammer,
+  Languages,
+  Linkedin,
+  Mail,
+  MapPin,
+  Presentation,
+  Quote,
+  Radar,
+  RefreshCw,
+  Rocket,
+  ScanSearch,
+  Shield,
+  ShieldCheck,
+  Split,
+  Target,
+  Workflow,
+  Filter as Funnel,
+} from "lucide-react";
+
+const icons = {
+  "arrow-down": ArrowDown,
+  "arrow-left": ArrowLeft,
+  "arrow-right": ArrowRight,
+  "arrow-up": ArrowUp,
+  "arrow-up-right": ArrowUpRight,
+  badge: BadgeCheck,
+  "chevron-down": ChevronDown,
+  "chevron-left": ChevronLeft,
+  "chevron-right": ChevronRight,
+  copy: Copy,
+  download: Download,
+  file: FileText,
+  gauge: Gauge,
+  cap: GraduationCap,
+  hammer: Hammer,
+  languages: Languages,
+  linkedin: Linkedin,
+  mail: Mail,
+  pin: MapPin,
+  presentation: Presentation,
+  quote: Quote,
+  radar: Radar,
+  refresh: RefreshCw,
+  rocket: Rocket,
+  "scan-search": ScanSearch,
+  shield: Shield,
+  "shield-check": ShieldCheck,
+  split: Split,
+  target: Target,
+  workflow: Workflow,
+  funnel: Funnel,
+};
+
+const { name, size = 20, class: className, stroke = 1.75 } = Astro.props;
+const Component = icons[name];
+---
+
+{
+  Component && (
+    <Component
+      size={size}
+      strokeWidth={stroke}
+      aria-hidden="true"
+      focusable="false"
+      className={className}
+    />
+  )
+}

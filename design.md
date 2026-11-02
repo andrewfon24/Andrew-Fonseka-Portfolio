@@ -1,34 +1,32 @@
 # Design: Andrew Fonseka portfolio
 
-## System
-- Purpose: help recruiters and marketing leaders evaluate Andrew’s work and contact him for an interview.
-- Genre: editorial portfolio, retaining Andrew’s navy, blue and pale-blue brand.
-- Homepage: portrait-led introduction, experience strip, a leading technical case, paired outcome cases, combined approach and references, story and timeline, tools, contact.
-- Case studies: clear role and context, then the problem, contribution and evidence. The financial-services case is qualitative, with a labelled conceptual diagram.
+Locked system for every page. Hallmark reads this file first; it overrides theme dealing.
+
+## Purpose
+Help hiring managers and marketing leaders see, in under a minute, that Andrew runs paid media judged on business outcomes, then email him. Positioning: Paid Media & Performance Marketing Specialist.
+
+## Genre and posture
+Premium SaaS product page crossed with a personal brand site. Dark navy for the story-telling bands (hero, Aegon systems, contact); pale blue paper for evidence (case cards, charts). Minimal prose: every section leads with a visual (chart, product demo, timeline), with words as captions.
 
 ## Tokens
-`src/tokens.css` supplies spacing and type scales; brand tokens originate in `src/styles.css`. `src/hallmark.css` applies the current layouts.
-- Display: Archivo, weight 800.
-- Body: Inter, regular and semibold.
-- Navy: hsl(215 65% 13%).
-- Ink: hsl(215 35% 13%).
-- Accessible action blue: #2164a9.
-- Pale surface: hsl(208 68% 95%).
-- Neutral paper and rules keep charts and text readable.
-- Content capped at 1280px including gutters; case-reading content is narrower.
-- Radius: 4px for visual surfaces and portrait; 8px for work cards. Preserve existing tools and contact treatment.
+All colour and type go through `src/styles/tokens.css`. Brand values come from the résumé and portfolio PDFs.
+- Navy ground `#061224`, navy `#0c2037`, raised navy `#12304d`.
+- Blue `#2c7ac9` (light surfaces, actions), sky `#5ba6e3` (accent words on dark).
+- Gold `#c08a2b` on light, `#d9a441` on dark: result figures only.
+- Paper `#eef5fc`, surface `#ffffff`, ink `#121c2a`, body `#3d4c61`, rule `#d6e0ea`.
+- Display: Archivo 800, tight tracking. Body: Inter 400/500/600.
+- Container 1200px, 24px gutters (16px under 640px). Radius 14px cards, 22px feature panels, 999px chips.
 
-## Controls
-- Primary action: navy fill, light text, at least 48px target.
-- Secondary action: blue text and a clear focus ring.
-- Keep case-study CTA arrows, user-requested navigation and all real destinations.
-- Timeline entries begin closed. Evidence panels remain available for cases with public supporting data.
+## Rules
+- Headline pattern from the PDF: a plain clause, then the accent clause in sky (dark) or blue (light). Never italic.
+- No eyebrows, no tracked capitals, no middle-dot meta strings. Meta is separate chips or a two-line label.
+- Result figures are gold and tabular. Every figure carries its source or qualification within one glance.
+- Charts are inline SVG or HTML with their values printed; they animate with transform and opacity only.
+- Product demos use the Stageshow kit (`src/kit`). Hallmark gate 47a (drawn app windows) is waived for these demos only: they illustrate a process, carry an "Illustrative" label and show no employer results.
+- Liveline renders the illustrative pacing line only: no axis values, no result figures.
 
 ## Motion
-No whole-page or section entrance animation. Existing 1.5-second number and chart animations run once. Respect reduced motion and render readable content without JavaScript.
+Rich and purposeful. Sections reveal once on entry (opacity plus 16px rise, 600ms, ease-out); counters run 1.2s; charts draw on entry; cards respond to the pointer with a soft spotlight. Demos play when in view and pause when offscreen. Under `prefers-reduced-motion: reduce` everything renders in its final state and demos show their poster frame. Without JavaScript all content is visible.
 
 ## Content boundaries
-Use cleared factual copy and attributable evidence. Never invent results, testimonials or logos. Conceptual diagrams must identify themselves as illustrative. The Aegon case must not regain removed internal results, scale figures or investor-strategy details.
-
-## Exports
-Shared stylesheet: `src/hallmark.css`; tokens: `src/tokens.css`; baseline: `src/base.css`.
+The résumé and portfolio PDFs are the source of truth. Never invent results, testimonials, logos or client names. Aegon shows process and responsibilities, never figures. The Saudi university stays anonymous. Phone number stays off the site; email is andrew@andrewfonseka.com.

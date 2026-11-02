@@ -18,3 +18,6 @@ work/
 
 # Private design review captures and records
 .hallmark/
+
+# Local Claude preview config
+.claude/

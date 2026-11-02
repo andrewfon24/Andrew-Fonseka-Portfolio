@@ -1,0 +1,11 @@
+---
+import Icon from "./Icon.astro";
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <small>© {year} Andrew Fonseka, Greater Vancouver, BC</small>
+    <a href="#top" class="link">Back to top <Icon name="arrow-up" size={14} /></a>
+  </div>
+</footer>

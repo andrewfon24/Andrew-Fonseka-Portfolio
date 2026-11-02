@@ -1,13 +1,20 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
-import App from "../App.jsx";
+import Hero from "../components/home/Hero.astro";
+import Work from "../components/home/Work.astro";
+import Systems from "../components/home/Systems.astro";
+import Approach from "../components/home/Approach.astro";
+import References from "../components/home/References.astro";
+import Experience from "../components/home/Experience.astro";
+import Toolkit from "../components/home/Toolkit.astro";
 ---
 
-<SiteLayout>
-  <App />
+<SiteLayout home>
+  <Hero />
+  <Work />
+  <Systems />
+  <Approach />
+  <References />
+  <Experience />
+  <Toolkit />
 </SiteLayout>
-
-<script>
-  import { initHomepage } from "../homepage";
-  initHomepage();
-</script>

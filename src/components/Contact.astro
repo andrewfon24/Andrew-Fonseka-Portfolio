@@ -1,0 +1,74 @@
+---
+import Icon from "./Icon.astro";
+import { profile, mailto } from "../content/site.js";
+---
+
+<section class="band band--navy contact" id="contact" aria-labelledby="contact-title">
+  <div class="container contact__grid">
+    <div data-rise>
+      <h2 id="contact-title">Let’s talk <span class="accent">paid media.</span></h2>
+      <p class="contact__lede">
+        Hiring for paid media or performance marketing? Email is the fastest way to reach me.
+      </p>
+      <ul class="contact__facts chips">
+        <li class="chip status"><Icon name="badge" size={14} />{profile.status}</li>
+        <li class="chip">Authorized to work in Canada</li>
+        <li class="chip">References on request</li>
+      </ul>
+    </div>
+    <ul class="contact__links" data-rise style="--delay: 120ms">
+      <li>
+        <a class="contact__link" href={mailto} data-track="email_click" data-where="contact">
+          <span class="contact__icon"><Icon name="mail" /></span>
+          <span><b>{profile.email}</b><small>Email</small></span>
+          <span class="contact__trail"><Icon name="arrow-up-right" size={18} /></span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="contact__link"
+          href={profile.linkedin}
+          target="_blank"
+          rel="noreferrer"
+          data-track="linkedin_click"
+          data-where="contact"
+        >
+          <span class="contact__icon"><Icon name="linkedin" /></span>
+          <span><b>linkedin.com/in/andrewfonseka</b><small>LinkedIn</small></span>
+          <span class="contact__trail"><Icon name="arrow-up-right" size={18} /></span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="contact__link"
+          href={profile.resume}
+          download
+          data-track="resume_download"
+          data-where="contact"
+        >
+          <span class="contact__icon"><Icon name="file" /></span>
+          <span><b>Résumé</b><small>PDF, 1 page</small></span>
+          <span class="contact__trail"><Icon name="download" size={18} /></span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="contact__link"
+          href={profile.portfolio}
+          download
+          data-track="portfolio_download"
+          data-where="contact"
+        >
+          <span class="contact__icon"><Icon name="presentation" /></span>
+          <span><b>Portfolio</b><small>PDF, 8 pages, five case studies</small></span>
+          <span class="contact__trail"><Icon name="download" size={18} /></span>
+        </a>
+      </li>
+      <li>
+        <button class="copy" type="button" data-copy={profile.email}>
+          <Icon name="copy" size={14} /><span data-copy-label>Copy email</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</section>

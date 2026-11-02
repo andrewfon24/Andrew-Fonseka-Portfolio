@@ -1,0 +1,43 @@
+---
+import Icon from "./Icon.astro";
+import { profile } from "../content/site.js";
+
+const { home = false } = Astro.props;
+const links = [
+  ["work", "Work"],
+  ["systems", "Systems"],
+  ["approach", "How I work"],
+  ["experience", "Experience"],
+  ["contact", "Contact"],
+];
+---
+
+<header class="nav" data-nav>
+  <div class="nav__inner container">
+    <a class="brand" href="/">
+      <span class="brand__mark" aria-hidden="true">AF</span>
+      <span>Andrew Fonseka<span class="brand__dot">.</span></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <ul class="nav__links">
+        {
+          links.map(([id, label]) => (
+            <li>
+              <a href={home || id === "contact" ? `#${id}` : `/#${id}`}>{label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <a
+      class="button button--ghost nav__resume"
+      href={profile.resume}
+      download
+      data-track="resume_download"
+      data-where="header"
+    >
+      <Icon name="download" size={16} />
+      Résumé
+    </a>
+  </div>
+</header>

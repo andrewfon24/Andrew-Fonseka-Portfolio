@@ -1,0 +1,121 @@
+---
+import Icon from "../Icon.astro";
+import { experience } from "../../content/site.js";
+
+// Gantt of the résumé dates. Axis: Sep 2019 to Dec 2026.
+const START = 2019 + 8 / 12;
+const END = 2027;
+const span = END - START;
+const pos = (y) => (((y - START) / span) * 100).toFixed(2);
+
+// [start, end] as fractional years, from the résumé.
+const ranges = {
+  Aegon: [2025, 2025 + 10 / 12],
+  "Independent projects": [2026 + 2 / 12, 2026 + 8 / 12],
+  "University Canada West": [2023 + 5 / 12, 2024 + 10 / 12],
+  "Kites Global": [2023, 2023 + 8 / 12],
+  Enfection: [2022 + 6 / 12, 2023],
+  "University of London": [2019 + 8 / 12, 2022 + 6 / 12],
+};
+// Aegon ends Oct 2026.
+ranges.Aegon = [2025, 2026 + 10 / 12];
+
+const slug = (s) => `role-${s.toLowerCase().replace(/[^a-z]+/g, "-")}`;
+const years = [2020, 2021, 2022, 2023, 2024, 2025, 2026];
+const kinds = ["In-house", "Agency", "Independent", "Education"];
+---
+
+<section class="band band--paper" id="experience" aria-labelledby="experience-title">
+  <div class="container">
+    <div class="head" data-rise>
+      <h2 id="experience-title">From Colombo <span class="accent">to Vancouver.</span></h2>
+      <p>Three years across agency, in-house and independent work, plus an MBA.</p>
+    </div>
+
+    <div class="gantt" data-draw data-rise>
+      <div class="gantt__axis" aria-hidden="true">
+        <span></span>
+        <div class="gantt__years">
+          {years.map((y) => <span style={`--x: ${pos(y)}`}>{y}</span>)}
+        </div>
+      </div>
+      <ul class="gantt__rows" aria-label="Career timeline">
+        {
+          experience.map((e, i) => {
+            const [a, b] = ranges[e.org];
+            return (
+              <li class="gantt__row">
+                <span class="gantt__name">
+                  {e.org}
+                  <small>{e.kind}</small>
+                </span>
+                <span class="gantt__lane">
+                  <button
+                    type="button"
+                    class="gantt__bar"
+                    data-kind={e.kind}
+                    data-role-target={slug(e.org)}
+                    style={`--x: ${pos(a)}; --w: ${(((b - a) / span) * 100).toFixed(2)}; --delay: ${i * 90}ms`}
+                    aria-label={`${e.org}, ${e.role}, ${e.date}. Show details.`}
+                  />
+                </span>
+              </li>
+            );
+          })
+        }
+      </ul>
+      <div class="gantt__legend" aria-hidden="true">
+        {kinds.map((k) => <span><i data-kind={k} />{k}</span>)}
+      </div>
+    </div>
+
+    <div class="roles">
+      {
+        experience.map((e) => (
+          <details class="role" id={slug(e.org)}>
+            <summary>
+              <h3>
+                {e.role}
+                <span>
+                  {e.org}
+                  {e.place && `, ${e.place}`}
+                </span>
+              </h3>
+              <span class="role__date">{e.date}</span>
+              <span class="role__chevron"><Icon name="chevron-down" size={18} /></span>
+            </summary>
+            <div class="role__body">
+              {e.points.length > 0 && (
+                <ul>
+                  {e.points.map((p) => (
+                    <li>{p}</li>
+                  ))}
+                </ul>
+              )}
+              {e.clients.length > 0 && (
+                <ul class="clients" aria-label="Clients">
+                  {e.clients.map((c) =>
+                    c.href ? (
+                      <li>
+                        <a class="client-chip" href={c.href} data-track="case_open" data-where="experience">
+                          {c.name}
+                          <small>{c.detail}</small>
+                        </a>
+                      </li>
+                    ) : (
+                      <li class="client-chip">
+                        {c.name}
+                        <small>{c.detail}</small>
+                      </li>
+                    ),
+                  )}
+                </ul>
+              )}
+              {e.footnote && <p class="fine">{e.footnote}</p>}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

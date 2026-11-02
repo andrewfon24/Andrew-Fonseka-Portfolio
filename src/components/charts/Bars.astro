@@ -1,0 +1,29 @@
+---
+// Horizontal bars with the value printed beside each. Bars scale with transform only.
+const {
+  rows,
+  max = Math.max(...rows.map((r) => r.value)),
+  dark = false,
+  compact = false,
+  label,
+  stagger = 140,
+} = Astro.props;
+const cls = ["bars", dark && "bars--dark", compact && "bars--compact"].filter(Boolean).join(" ");
+---
+
+<div class={cls} role="img" aria-label={label} data-draw>
+  {
+    rows.map((r, i) => (
+      <div class="bar-row" aria-hidden="true" data-row={r.id}>
+        <span>{r.label}</span>
+        <span class="bar-track">
+          <span
+            class:list={["bar-fill", r.tone && `bar-fill--${r.tone}`]}
+            style={`--v: ${(r.value / max).toFixed(4)}; --delay: ${i * stagger}ms`}
+          />
+        </span>
+        <span class="bar-row__value">{r.display ?? r.value}</span>
+      </div>
+    ))
+  }
+</div>

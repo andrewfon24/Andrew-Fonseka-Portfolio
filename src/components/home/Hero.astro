@@ -1,0 +1,88 @@
+---
+import Icon from "../Icon.astro";
+import Figure from "../Figure.astro";
+import Bars from "../charts/Bars.astro";
+import { profile, mailto, proof, university } from "../../content/site.js";
+---
+
+<section class="band band--dark hero" aria-labelledby="hero-title">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <h1 id="hero-title">Paid media judged on <span class="accent">customers, not clicks.</span></h1>
+      <p class="hero__lede">
+        I connect media, measurement and the customer journey across in-house, agency and independent work.
+      </p>
+      <div class="actions">
+        <a class="button button--primary" href={mailto} data-track="email_click" data-where="hero">
+          <Icon name="mail" size={18} />Email me
+        </a>
+        <a class="button button--ghost" href={profile.resume} download data-track="resume_download" data-where="hero">
+          <Icon name="download" size={18} />Download résumé
+        </a>
+      </div>
+      <ul class="hero__facts" aria-label="At a glance">
+        <li class="chip status"><Icon name="badge" size={14} />{profile.status}</li>
+        <li class="chip"><Icon name="cap" size={14} />MBA</li>
+        <li class="chip">Authorized to work in Canada</li>
+      </ul>
+    </div>
+
+    <div class="hero__visual">
+      <figure class="portrait">
+        <img
+          src="/images/andrew-fonseka-480.webp"
+          srcset="/images/andrew-fonseka-240.webp 240w, /images/andrew-fonseka-480.webp 480w, /images/andrew-fonseka.jpg 1122w"
+          sizes="(max-width: 640px) 72vw, 26rem"
+          alt="Andrew Fonseka"
+          width="1122"
+          height="1402"
+          fetchpriority="high"
+        />
+      </figure>
+      <a class="signal" href="/case-studies/university/" data-track="case_open" data-case="university" data-where="hero">
+        <span class="signal__title">
+          <span>From Meta lead to fee-paid enrolment</span>
+          <Icon name="arrow-up-right" size={16} />
+        </span>
+        <Bars
+          dark
+          compact
+          rows={university.funnel.map((r, i) => ({ ...r, tone: i === 2 ? "gold" : undefined }))}
+          label="Funnel: 821 Meta leads, 430 CRM-qualified, 312 fee-paid enrolments"
+          stagger={220}
+        />
+        <p class="signal__foot">Private university, Saudi Arabia, 2026</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="band band--dark proof" aria-label="Selected results">
+  <div class="container">
+    <div class="proof__grid">
+      {
+        proof.map((p, i) => (
+          <a
+            class="proof__item"
+            href={`/case-studies/${p.case}/`}
+            data-track="case_open"
+            data-case={p.case}
+            data-where="proof"
+            data-rise
+            style={`--delay: ${i * 90}ms`}
+          >
+            <Figure dark value={p.value} count={p.count} prefix={p.prefix} suffix={p.suffix} />
+            <span class="proof__label">{p.label}</span>
+            <span class="proof__source">{p.source}</span>
+            <span class="proof__more">
+              Case study <Icon name="arrow-right" size={13} />
+            </span>
+          </a>
+        ))
+      }
+    </div>
+    <p class="fine" style="margin-top: var(--space-5)">
+      Figures are client-reported where stated. Employer results from Aegon are confidential and are not shown.
+    </p>
+  </div>
+</section>

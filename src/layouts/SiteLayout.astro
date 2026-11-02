@@ -2,38 +2,41 @@
 import "@fontsource/inter/latin-400.css";
 import "@fontsource/inter/latin-500.css";
 import "@fontsource/inter/latin-600.css";
+import "@fontsource/inter/latin-700.css";
 import "@fontsource/archivo/latin-600.css";
-import "@fontsource/archivo/latin-700.css";
 import "@fontsource/archivo/latin-800.css";
-import "../styles.css";
-import "../refinements.css";
-import "../overrides.css";
-import "../narrative.css";
-import "../rebuild.css";
-import "../hallmark.css";
+import "../styles/site.css";
 import Analytics from "@vercel/analytics/astro";
 import interRegular from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
 import archivoBold from "@fontsource/archivo/files/archivo-latin-800-normal.woff2?url";
+import Nav from "../components/Nav.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import { profile } from "../content/site.js";
+
 const {
-  title = "Andrew Fonseka | Paid Media & Digital Marketing",
-  description = "Vancouver-based paid media and digital marketing practitioner with 3 years across agency, in-house and advisory work. Explore CRM-qualified outcomes across financial services, education and retail.",
+  title = "Andrew Fonseka | Paid Media & Performance Marketing Specialist",
+  description = "Paid media specialist in Greater Vancouver. Google Ads, Meta, LinkedIn and Microsoft Advertising judged on CRM outcomes: 312 fee-paid enrolments, 259 funded loans, 4:1 first-order ROAS.",
   noindex = false,
+  home = false,
+  contact = true,
   ogTitle = title,
   ogDescription = description,
   ogImage = "/images/andrew-fonseka.jpg",
-  ogImageAlt = "Andrew Fonseka, paid media and digital marketing",
+  ogImageAlt = "Andrew Fonseka, paid media and performance marketing specialist",
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ga4 = import.meta.env.PUBLIC_GA4_ID;
 const person = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Andrew Fonseka",
-  jobTitle: "Digital Marketing Strategist",
+  name: profile.name,
+  jobTitle: profile.title,
   url: Astro.site.href,
-  sameAs: ["https://www.linkedin.com/in/andrewfonseka/"],
-  email: "rafandrewf@gmail.com",
+  sameAs: [profile.linkedin],
+  email: profile.email,
   image: new URL("/images/andrew-fonseka.jpg", Astro.site).href,
+  alumniOf: ["University Canada West", "University of London"],
   address: {
     "@type": "PostalAddress",
     addressLocality: "Greater Vancouver",
@@ -44,25 +47,14 @@ const person = {
 ---
 
 <!doctype html>
-<html lang="en-CA">
+<html lang="en-CA" id="top">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="preload"
-      href={archivoBold}
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href={interRegular}
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <meta name="theme-color" content="#10273f" />
+    <script is:inline>document.documentElement.classList.add("js");</script>
+    <link rel="preload" href={archivoBold} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interRegular} as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content="#061224" />
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
     <meta property="og:title" content={ogTitle} />
@@ -76,35 +68,40 @@ const person = {
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon-portrait.svg" />
     <script type="application/ld+json" set:html={JSON.stringify(person)} />
-    {ga4 && (
-      <>
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${ga4}`}
-        />
-        <script is:inline define:vars={{ ga4 }}>
-          window.dataLayer = window.dataLayer || [];
-          window.gtag = function () {
-            dataLayer.push(arguments);
-          };
-          gtag("js", new Date());
-          gtag("config", ga4);
-        </script>
-      </>
-    )}
+    {
+      ga4 && (
+        <>
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4}`} />
+          <script is:inline define:vars={{ ga4 }}>
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () {
+              dataLayer.push(arguments);
+            };
+            gtag("js", new Date());
+            gtag("config", ga4);
+          </script>
+        </>
+      )
+    }
     <title>{title}</title>
   </head>
   <body>
-    <slot />
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Nav home={home} />
+    <main id="main">
+      <slot />
+    </main>
+    {contact && <Contact />}
+    <Footer />
     <Analytics />
     <script>
+      import { initMotion } from "../scripts/motion.js";
       import { track } from "@vercel/analytics";
+      initMotion();
       // One delegated listener for every [data-track] link: résumé and
       // portfolio downloads, email and LinkedIn clicks, case opens.
       document.addEventListener("click", (event) => {
-        const el = (event.target as Element)?.closest?.(
-          "[data-track]",
-        ) as HTMLElement | null;
+        const el = (event.target as Element)?.closest?.("[data-track]") as HTMLElement | null;
         if (!el) return;
         const name = el.dataset.track as string;
         const data: Record<string, string> = { page: location.pathname };

@@ -1,0 +1,59 @@
+---
+import Icon from "../Icon.astro";
+import BrandIcon from "../../BrandIcon.jsx";
+import { stackGroups, certifications, languages } from "../../content/site.js";
+---
+
+<section class="band band--surface" id="toolkit" aria-labelledby="toolkit-title">
+  <div class="container">
+    <div class="head" data-rise>
+      <h2 id="toolkit-title">The platforms I use. <span class="accent">The thinking comes first.</span></h2>
+    </div>
+
+    <div class="filters" data-filters role="group" aria-label="Filter tools by category">
+      <button type="button" class="filter" data-filter="all" aria-pressed="true">All tools</button>
+      {
+        stackGroups.map((g) => (
+          <button type="button" class="filter" data-filter={g.id} aria-pressed="false">
+            {g.name}
+          </button>
+        ))
+      }
+    </div>
+
+    <ul class="tools" data-rise>
+      {
+        stackGroups.flatMap((g) =>
+          g.tools.map((t) => (
+            <li class="tool" data-group={g.id}>
+              <BrandIcon tool={t} />
+              <span>{t}</span>
+            </li>
+          )),
+        )
+      }
+    </ul>
+
+    <div class="creds" data-rise>
+      <h3 class="creds__title">Certifications</h3>
+      {
+        certifications.map((c) => (
+          <div class="cred">
+            <BrandIcon domain={c.domain} />
+            <span>
+              <b>{c.title}</b>
+              <small>{c.year ? `${c.issuer}, ${c.year}` : c.issuer}</small>
+            </span>
+          </div>
+        ))
+      }
+      <div class="cred">
+        <span class="brand-icon"><Icon name="languages" size={20} /></span>
+        <span>
+          <b>Languages</b>
+          <small>{languages.join(" and ")}</small>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>

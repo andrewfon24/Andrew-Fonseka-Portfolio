@@ -1,0 +1,23 @@
+---
+// Vertical bars from a zero baseline, values printed on top.
+const { bars, max = Math.max(...bars.map((b) => b.value)), label, height } = Astro.props;
+---
+
+<figure class="columns-chart" style="margin: 0" data-draw>
+  <div class="columns" role="img" aria-label={label} style={height ? `height: ${height}` : undefined}>
+    {
+      bars.map((b, i) => (
+        <div class="column" aria-hidden="true">
+          <span class="column__value">{b.display ?? b.value}</span>
+          <span
+            class:list={["column__bar", b.tone && `column__bar--${b.tone}`]}
+            style={`--h: ${((b.value / max) * 74).toFixed(2)}; --delay: ${i * 120}ms`}
+          />
+        </div>
+      ))
+    }
+  </div>
+  <div class="columns__labels" aria-hidden="true">
+    {bars.map((b) => <span>{b.label}</span>)}
+  </div>
+</figure>

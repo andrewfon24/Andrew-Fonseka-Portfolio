@@ -15,9 +15,7 @@ npm run build
 npm run preview
 ```
 
-Astro generates complete HTML for the homepage, five case studies and a custom 404 page in `dist/`. The homepage is static HTML with a small script for navigation, testimonial controls and metric counters and chart animations; it does not download React. Case-study pages hydrate their interactive dashboards with React. The main content, contact details and case-study narratives are present in the HTML before JavaScript runs.
-
-CSS is pruned at build time and inlined to avoid a render-blocking stylesheet request. Dynamic dashboard classes and pseudo-only hover/focus rules are explicitly preserved. Critical Archivo and Inter font files are preloaded. When adding homepage interactions, implement them in `src/homepage.js` or a focused Astro island rather than hydrating the full page.
+Astro generates complete HTML for the homepage, five case studies and a custom 404 page in `dist/`. Static sections are Astro components with no client JavaScript; a small script (`src/scripts/motion.js`) adds scroll reveals, counters, chart drawing and the testimonial, toolkit and timeline controls. React loads only for the interactive islands: three Stageshow product demos, the Liveline pacing line and the university campaign explorer, each hydrated when it scrolls into view. Every figure, chart value and case narrative is in the HTML before JavaScript runs.
 
 ## Validate
 
@@ -26,7 +24,7 @@ npx playwright install chromium
 npm test
 ```
 
-Eleven Playwright checks cover documents, direct page navigation, browser back and refresh, responsive layouts, the timeline, interactive dashboards, shared contact sections, automated WCAG 2.1 AA checks, server-rendered HTML, 404 recovery, reduced-motion preferences and the homepage loading budget. Chromium is read from `CHROMIUM_PATH` or `/usr/bin/chromium`. Automated accessibility checks supplement visual and keyboard review.
+Twelve Playwright checks cover the positioning and primary action, documents and analytics hooks, navigation, case routes with refresh and back, the university evidence that replaced the Meta Ads screenshot, the figure-free Aegon case, the timeline, testimonials and toolkit filters, automated WCAG 2.1 AA checks at desktop and phone widths, no-JavaScript reading, reduced motion, counters and 404 recovery. Chromium is read from `CHROMIUM_PATH` or `/usr/bin/chromium`; on macOS, `CHROMIUM_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"` uses an installed Chrome.
 
 ## Publish
 
@@ -36,20 +34,15 @@ The build uses `https://andrewfonseka.com` for canonical links, per-page social 
 
 ## Sources and structure
 
-- `src/pages/`: native Astro routes and sitemap generation.
-- `src/layouts/SiteLayout.astro`: metadata, structured data, fonts and global styles.
-- `src/App.jsx`: homepage, shared navigation and page shell.
-- `src/CaseStudyPage.jsx`: case narratives, dashboards and evidence.
-- `src/ContactSection.jsx`: the same contact section on every page.
-- `src/data.js` and `src/caseStories.js`: career history, credentials, campaign figures, narratives and measurement qualifications.
-- `src/homepage.js`: progressive enhancement for homepage interactions.
-- `src/entranceMotion.js`: shared, reduced-motion-aware metric counters and chart animations.
-- `src/testimonials.js`: verbatim recommendations shared by static and hydrated views.
-- `docs/design-and-sources.md`: content and asset provenance.
-- `docs/impeccable-review.md`: Impeccable review scope and decisions.
+- `design.md`: the locked design system (tokens, rules, motion, content boundaries).
+- `src/content/site.js`: every fact on the site, from the 2026 résumé and portfolio PDFs.
+- `src/pages/`: the homepage, the case-study route, 404 and sitemap.
+- `src/layouts/SiteLayout.astro`: metadata, structured data, fonts, nav, contact and footer.
+- `src/components/`: static sections (`home/`), charts (`charts/`), icons and figures.
+- `src/islands/`: React islands. `GoLiveDemo`, `FunnelCrmDemo` and `ApproachDemo` are built with the Stageshow kit; `PacingLine` uses Liveline; `CampaignExplorer` drives the university per-campaign charts.
+- `src/kit/`: the Stageshow kit (MIT, benjitaylor/skills), copied unmodified.
+- `src/styles/tokens.css` and `site.css`: the only place colours, type, spacing and motion are declared.
+- `src/scripts/motion.js`: progressive enhancement for every page.
+- `docs/design-and-sources.md`: content and asset provenance; `docs/impeccable-review.md`: the Hallmark and Impeccable review.
 
-Selected work leads with the qualitative Aegon automation and measurement case, followed by paired university and Pan Asia Bank outcome cards and smaller Petmart and DATS cards. Every card links to its full case study. All five studies have dedicated pages. The compact career timeline keeps employers, institutions, dates and roles visible, with supporting details available on expansion.
-
-Brand identities were researched through Brandfetch. Locally hosted product marks and fallbacks preserve recognizability; other marks use the exact Brandfetch display URLs. The Data Analysis credential has a neutral icon because its issuer was not supplied. Marks do not imply endorsement.
-
-Andrew confirmed his bachelor’s dates as September 2019–June 2022 and his MBA dates as August 2023–October 2024. Testimonials and supplied PDF downloads remain faithful to their original wording. The university stays anonymous, and Aegon website content describes cleared qualitative responsibilities; supplied PDF replacements remain outstanding at the owner’s request.
+The demos are illustrations of real processes, labelled as such, drawn as the app's own panel without OS window chrome. They show no employer results, client data or student data. The university case presents the Meta Ads Manager figures as charts (funnel, rate, cost per enrolment, volume against conversion and a table) instead of the original screenshot.
