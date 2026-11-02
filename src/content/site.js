@@ -81,7 +81,7 @@ export const cases = [
     client: "Private university",
     clientShort: "Private university, Saudi Arabia",
     sector: "Education",
-    context: "Advisory via partner agency",
+    context: "Independent projects, via partner agency",
     period: "May to Aug 2026",
     headline: ["Optimize for enrolments,", "not form fills."],
     summary:
@@ -152,7 +152,7 @@ export const cases = [
     client: "DIMO Academy for Technical Studies",
     clientShort: "DIMO Academy",
     sector: "Trades education",
-    context: "Independent",
+    context: "Independent projects",
     period: "2026",
     headline: ["More qualified leads.", "Same budget."],
     summary:
@@ -281,7 +281,7 @@ export const experience = [
     role: "Freelance Marketing Consultant",
     kind: "Independent",
     place: "Greater Vancouver, BC",
-    date: "2026",
+    date: "Jan 2026 to Sep 2026",
     start: 2026,
     points: [
       "Saudi private university (via partner agency, May to Aug 2026): advised on Meta lead-generation strategy through to fee-paid enrolments.",

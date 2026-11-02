@@ -107,6 +107,14 @@ test("university case replaces the screenshot with the funnel, per-campaign char
   await expect(explorer.getByRole("button", { name: "Priority colleges" })).toHaveAttribute("aria-pressed", "true");
   await expect(explorer.locator("tbody tr[data-dim]")).toHaveCount(2);
   await expect(page.locator(".callout__big")).toContainText("125");
+  await expect(page.locator(".case-hero .chips")).toContainText("Independent projects, via partner agency");
+  // The big figure and its sentence never overlap, at any desktop width.
+  for (const width of [1024, 1280, 1440, 1920]) {
+    await page.setViewportSize({ width, height: 900 });
+    const [big, text] = await page.locator(".panel.callout > *").evaluateAll((els) => els.map((el) => el.getBoundingClientRect().toJSON()));
+    const separate = big.right <= text.left || big.bottom <= text.top;
+    expect(separate, `callout overlaps at ${width}px`).toBe(true);
+  }
 });
 
 test("Aegon shows process and responsibilities without result figures", async ({ page }) => {
@@ -117,6 +125,8 @@ test("Aegon shows process and responsibilities without result figures", async ({
   await expect(page.locator(".systems-list li")).toHaveCount(5);
   await expect(page.locator(".case-stat")).toHaveCount(0);
   await expect(page.locator("main")).not.toContainText("US$");
+  await page.goto("/case-studies/dats/");
+  await expect(page.locator(".case-hero .chips")).toContainText("Independent projects");
 });
 
 test("journey entries and testimonials respond to input", async ({ page }) => {
@@ -128,6 +138,7 @@ test("journey entries and testimonials respond to input", async ({ page }) => {
   await expect(page.locator("#role-kites-global")).toContainText("Godrej India");
   await expect(page.locator("#role-university-canada-west")).toContainText("Jun 2023 – Oct 2024");
   await expect(page.locator("#role-aegon")).toContainText("Intermediate Channel Marketing Specialist (Paid Media)");
+  await expect(page.locator("#role-independent-projects")).toContainText("Jan 2026 – Sep 2026");
 
   const quotes = page.locator("[data-quotes]");
   await expect(quotes.locator(".quote__slide:not([hidden])")).toContainText("Don Chanaka Perera");

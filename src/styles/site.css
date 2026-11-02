@@ -2237,10 +2237,20 @@ a.client-chip:hover {
 }
 
 .callout {
-  display: grid;
-  grid-template-columns: minmax(0, 0.45fr) minmax(0, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-6);
+  gap: var(--space-4) var(--space-6);
+}
+
+/* The figure keeps its own width; the text takes the rest, or wraps below */
+.callout > * {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+
+.callout > .callout__big {
+  flex: 0 0 auto;
 }
 
 .callout__big {
@@ -3038,5 +3048,24 @@ a.client-chip:hover {
 @media (max-width: 40rem) {
   .nav__inner.container {
     padding-inline: var(--gutter);
+  }
+}
+
+/* University: the 125 vs 17 callout beside the trade-off */
+.callout-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.callout-row > .panel {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 60rem) {
+  .callout-row {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
