@@ -146,6 +146,10 @@ test("journey entries and testimonials respond to input", async ({ page }) => {
   await page.locator("#role-kites-global summary").click();
   await expect(page.locator("#role-kites-global")).toHaveAttribute("open", "");
   await expect(page.locator("#role-kites-global")).toContainText("Godrej India");
+  // Plain and linked client chips share the same inner padding.
+  const pads = await page.locator("#role-kites-global .client-chip").evaluateAll((els) => els.map((el) => getComputedStyle(el).paddingLeft));
+  expect(new Set(pads).size).toBe(1);
+  expect(parseFloat(pads[0])).toBeGreaterThan(8);
   await expect(page.locator("#role-university-canada-west")).toContainText("Jun 2023 – Oct 2024");
   await expect(page.locator("#role-aegon")).toContainText("Intermediate Channel Marketing Specialist (Paid Media)");
   await expect(page.locator("#role-independent-projects")).toContainText("Jan 2026 – Sep 2026");

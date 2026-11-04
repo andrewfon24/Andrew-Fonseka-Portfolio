@@ -3351,3 +3351,8 @@ a.client-chip:hover {
 .card__foot .link {
   white-space: nowrap;
 }
+
+/* Client chips that aren't links keep the same padding as linked ones */
+.role__body .clients > li.client-chip {
+  padding: var(--space-2) var(--space-4);
+}
