@@ -7,16 +7,17 @@ import { profile, mailto, metrics } from "../../content/site.js";
 <section class="band band--dark hero" aria-labelledby="hero-title">
   <div class="container hero__grid">
     <div class="hero__copy">
+      <p class="hero__role">{profile.title}</p>
       <h1 id="hero-title">Paid media judged on <span class="accent">customers, not clicks.</span></h1>
       <p class="hero__lede">
-        I connect media, measurement and the customer journey across in-house, agency and independent work.
+        I manage paid search and paid social campaigns, connect reporting to CRM outcomes, and improve campaign delivery across agency, in-house and independent work.
       </p>
       <div class="actions">
         <a class="button button--primary" href={mailto} data-track="email_click" data-where="hero">
           <Icon name="mail" size={18} />Email me
         </a>
-        <a class="button button--ghost" href={profile.resume} download data-track="resume_download" data-where="hero">
-          <Icon name="download" size={18} />Download résumé
+        <a class="button button--ghost" href="#work" data-track="case_list" data-where="hero">
+          View case studies <Icon name="arrow-down" size={18} />
         </a>
       </div>
       <ul class="hero__facts" aria-label="At a glance">

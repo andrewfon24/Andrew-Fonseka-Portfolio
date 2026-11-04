@@ -4,16 +4,17 @@ import ApproachDemo from "../../islands/ApproachDemo.tsx";
 import { approach } from "../../content/site.js";
 ---
 
-<section class="band band--paper" id="approach" aria-labelledby="approach-title">
+<section class="band band--paper band--tight" id="approach" aria-labelledby="approach-title">
   <div class="container">
     <div class="head" data-rise>
       <h2 id="approach-title">{approach.headline[0]}{" "}<span class="accent">{approach.headline[1]}</span></h2>
+      <p>{approach.intro}</p>
     </div>
     <div class="approach__grid">
-      <ol class="approach__steps" data-steps="approach" data-rise>
+      <ol class="approach__steps" data-rise>
         {
-          approach.steps.map((s, i) => (
-            <li data-active={i === 0 ? "" : undefined}>
+          approach.steps.map((s) => (
+            <li>
               <span class="approach__num"><Icon name={s.icon} size={20} /></span>
               <span>
                 <h3>{s.title}</h3>
@@ -28,9 +29,9 @@ import { approach } from "../../content/site.js";
           <ApproachDemo client:visible />
         </div>
         <p class="visually-hidden">
-          Illustrative account review: signal checks pass, the optimization target switches from form fills to qualified leads, a test scales the winning variant, and spend is paced against plan.
+          Illustrative example with no client data: an account review where signal checks pass, the optimization target switches from form fills to qualified leads, a test scales the winning variant, and spend is paced against plan.
         </p>
-        <div class="demo__label"><span class="fine">Illustrative account review. The pacing line is drawn live with Liveline and shows no client data.</span></div>
+        <div class="demo__label"><span class="fine">Illustrative example; no client data.</span></div>
       </div>
     </div>
   </div>

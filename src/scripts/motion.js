@@ -20,6 +20,26 @@ function initReveal() {
     { rootMargin: "0px 0px -4% 0px", threshold: 0 },
   );
   targets.forEach((el) => io.observe(el));
+
+  // Fallback: if the observer is late (background tabs, slow devices), reveal
+  // anything already on screen when the page scrolls or loads, so copy is
+  // never left hidden.
+  let queued = false;
+  const sweep = () => {
+    queued = false;
+    for (const el of targets) {
+      if (el.classList.contains("is-in")) continue;
+      const r = el.getBoundingClientRect();
+      if (r.top < innerHeight && r.bottom > 0) el.classList.add("is-in");
+    }
+  };
+  const queue = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(sweep);
+  };
+  window.addEventListener("scroll", queue, { passive: true });
+  window.addEventListener("load", () => setTimeout(sweep, 600));
 }
 
 function initCounters() {

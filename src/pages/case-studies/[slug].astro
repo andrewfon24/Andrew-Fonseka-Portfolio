@@ -8,7 +8,7 @@ import Split from "../../components/charts/Split.astro";
 import Systems from "../../components/home/Systems.astro";
 import FunnelCrmDemo from "../../islands/FunnelCrmDemo.tsx";
 import CampaignExplorer from "../../islands/CampaignExplorer.tsx";
-import { cases, university, aegon } from "../../content/site.js";
+import { cases, university, aegon, builder } from "../../content/site.js";
 
 export function getStaticPaths() {
   return cases.map((c, i) => ({
@@ -62,6 +62,23 @@ const ogExtras = isAegon
     isAegon ? (
       <>
         <Systems showLink={false} headingLevel={2} title={["How a campaign", "goes live."]} />
+        <section class="band band--surface" aria-labelledby="builder-title">
+          <div class="container">
+            <div class="head" data-rise>
+              <h2 id="builder-title">{builder.title[0]}{" "}<span class="accent">{builder.title[1]}</span></h2>
+              <p>{builder.intro}</p>
+            </div>
+            <ol class="build-steps">
+              {builder.steps.map((b, i) => (
+                <li data-rise style={`--delay: ${i * 80}ms`}>
+                  <span class="build-steps__num">0{i + 1}</span>
+                  <h3>{b.label}</h3>
+                  <p>{b.body}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
         <section class="band band--paper" aria-labelledby="aegon-detail">
           <div class="container">
             <div class="head" data-rise>
@@ -80,7 +97,7 @@ const ogExtras = isAegon
               ))}
             </ul>
             <div class="journey" data-rise>
-              <h3 class="journey__title" id="journey-title">Investor journey: the LinkedIn account-based program</h3>
+              <h3 class="journey__title" id="journey-title">Investor journey: the LinkedIn high-net-worth investor program (audience-based lead generation)</h3>
               <ol class="journey__steps" aria-labelledby="journey-title">
                 {aegon.journey.map((j) => (
                   <li>
@@ -106,10 +123,28 @@ const ogExtras = isAegon
               <h2>{c.decisionLabel ?? "Decision"}</h2>
               <p>{c.decision}</p>
             </div>
-            <div>
-              <h2>My role</h2>
-              <p>{c.role}</p>
-            </div>
+            {c.ownership ? (
+              <div class="who">
+                <h2>Who did what</h2>
+                <p class="who__label">Me</p>
+                <ul>
+                  {c.ownership.me.map((m) => (
+                    <li>{m}</li>
+                  ))}
+                </ul>
+                <p class="who__label">{c.ownership.othersLabel}</p>
+                <ul class="who__others">
+                  {c.ownership.others.map((m) => (
+                    <li>{m}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <div>
+                <h2>My role</h2>
+                <p>{c.role}</p>
+              </div>
+            )}
           </aside>
 
           <div class="brief__evidence">
@@ -153,9 +188,9 @@ const ogExtras = isAegon
 
             {c.id === "petmart" && (
               <>
-                <div class="panel charts-pair" data-rise>
+                <div class="panel" data-rise>
                   <div>
-                    <div class="chart-title"><strong>Indexed change</strong><span>Before = 100</span></div>
+                    <div class="chart-title"><strong>Indexed change, quarter on quarter</strong><span>Previous quarter = 100, client-reported</span></div>
                     <Columns
                       label="Indexed change: sales 100 before, 140 after; subscriptions 100 before, 130 after"
                       bars={[
@@ -166,20 +201,18 @@ const ogExtras = isAegon
                       ]}
                     />
                   </div>
-                  <div>
-                    <div class="chart-title"><strong>Spend and revenue</strong><span>US$, client-reported</span></div>
-                    <Columns
-                      label="US$5K ad spend against US$50K quarterly revenue"
-                      bars={[
-                        { label: "Ad spend", value: 5, display: "US$5K", tone: "navy" },
-                        { label: "Quarterly revenue", value: 50, display: "US$50K", tone: "gold" },
-                      ]}
-                    />
-                  </div>
+                </div>
+                <div class="panel panel--note" data-rise>
+                  <h3>Separate business context</h3>
+                  <p>{c.businessContext}</p>
+                </div>
+                <div class="panel panel--note" data-rise>
+                  <h3>Separate project</h3>
+                  <p>{c.sideProject}</p>
                 </div>
                 <figure class="creative" data-rise style="max-width: 22rem">
                   <img src="/images/petmart-valentines.jpg" alt="Petmart and Sugar Beach Valentine’s Day activation creative" loading="lazy" width="864" height="1080" />
-                  <figcaption>Valentine’s Day activation creative, Petmart and Sugar Beach</figcaption>
+                  <figcaption>Valentine’s Day activation creative (February 2023), Petmart and Sugar Beach. A separate project.</figcaption>
                 </figure>
               </>
             )}
@@ -188,18 +221,18 @@ const ogExtras = isAegon
               <>
                 <div class="panel" data-rise>
                   <h3>CRM-qualified leads per quarter</h3>
-                  <p class="panel__sub">Raw counts, client-reported</p>
+                  <p class="panel__sub">Raw counts, same qualification rule, client-reported</p>
                   <div class="callout">
                     <Columns
-                      label="178 CRM-qualified leads in the prior quarter, 212 in March to May 2026"
+                      label="178 CRM-qualified leads in December 2025 to February 2026, 212 in March to May 2026"
                       bars={[
-                        { label: "Prior quarter", value: 178, tone: "soft" },
+                        { label: "Dec 2025 to Feb 2026", value: 178, tone: "soft" },
                         { label: "Mar to May 2026", value: 212, tone: "gold" },
                       ]}
                     />
                     <div>
                       <Figure value="+19%" count={19} prefix="+" suffix="%" />
-                      <p class="stat__label">178 to 212 at the same budget</p>
+                      <p class="stat__label">178 to 212, total media unchanged</p>
                     </div>
                   </div>
                 </div>
@@ -211,7 +244,20 @@ const ogExtras = isAegon
                     </li>
                   ))}
                 </ol>
+                <p class="fine" data-rise>{c.actionsNote} Their individual contributions were not separated.</p>
               </>
+            )}
+
+            {c.limits && (
+              <div class="panel panel--limits" data-rise>
+                <h3>Measurement and limits</h3>
+                {c.whyCpl && <p class="limits__why">{c.whyCpl}</p>}
+                <ul class="limits">
+                  {c.limits.map((l) => (
+                    <li>{l}</li>
+                  ))}
+                </ul>
+              </div>
             )}
           </div>
         </div>

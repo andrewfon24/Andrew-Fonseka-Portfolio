@@ -103,3 +103,16 @@ Authoritative content is now the 2026 `Andrew_Fonseka_Resume.pdf` and the eight-
 - The Meta Ads Manager screenshot (`university-ads-results.png`) is deleted. The same figures appear as the funnel (821, 430, 312) and per-campaign charts from the portfolio PDF, with the note: enrolments matched on name, phone and student ID, de-duplicated; qualification data available for all campaigns combined only.
 
 Libraries: Stageshow kit (benjitaylor/skills, MIT) for the three product demos; Liveline 0.0.7 (benjitaylor/liveline) for the illustrative pacing line, which shows no axis values or results.
+
+## 4 November 2026: hiring-evidence pass
+
+Applied from the owner's "Website improvement plan for performance marketing hiring", with every factual change confirmed by the owner in interview:
+
+- Removed the Keells "Demand Gen +27%" claim (Demand Gen did not exist in 2022; the original report is still to be checked).
+- Petmart: 4:1 first-order ROAS shown alone; the US$5K spend and US$50K revenue are a separate, labelled business context not used in the ROAS; the Valentine's activation is a separate February 2023 project, not credited to the March to May results.
+- Aegon: the LinkedIn program is described as audience-based lead generation, not ABM; the budget-pacing claim is narrowed; the Apps Script campaign builder is told end to end (problem, design, ownership, validation) with legal and compliance approval kept separate; one collaboration example added.
+- University: ownership split (owner: strategy recommendation and campaign setup; partner agency and university: optimisation, CRM matching and reporting), audience and scope limits, no enrolment target.
+- Pan Asia Bank: January to June 2023; 60/40 planned from the bank's lead-quality feedback; funded loans as reported by the bank.
+- DIMO: dated baseline (Dec 2025 to Feb 2026), same qualification rule, total media including Microsoft Advertising about US$900 a month, described as one combined change.
+- Homepage: role line and supporting sentence, Email plus View case studies, nav of Work, Experience and Contact, Aegon as a fifth "confidential operating-process" card, a shorter Aegon section, How I work as the university decision sequence, two recommendation excerpts linked to LinkedIn.
+- Unchanged at the owner's request: tools and certifications. The résumé and portfolio PDFs still contain the old claims until the owner supplies corrected versions.

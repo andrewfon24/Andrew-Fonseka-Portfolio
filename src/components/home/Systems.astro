@@ -8,7 +8,7 @@ const c = caseById.aegon;
 const H = `h${headingLevel}`;
 ---
 
-<section class="band band--dark" id="systems" aria-labelledby="systems-title">
+<section class="band band--dark band--tight" id="systems" aria-labelledby="systems-title">
   <div class="container">
     <div class="head" data-rise>
       {
@@ -56,8 +56,21 @@ const H = `h${headingLevel}`;
 
     {
       showLink && (
-        <div class="below" data-rise>
-          <p class="fine" style="max-width: 60ch">{c.role}</p>
+        <div class="below below--facts" data-rise>
+          <dl class="facts">
+            <div>
+              <dt>The problem</dt>
+              <dd>{c.problemShort}</dd>
+            </div>
+            <div>
+              <dt>What I built</dt>
+              <dd>{c.builtShort}</dd>
+            </div>
+            <div>
+              <dt>Who I worked with</dt>
+              <dd>{c.withShort}</dd>
+            </div>
+          </dl>
           <a class="button button--ghost" href="/case-studies/aegon/" data-track="case_open" data-case="aegon" data-where="systems">
             Read the case study <Icon name="arrow-right" size={17} class="icon-nudge" />
           </a>

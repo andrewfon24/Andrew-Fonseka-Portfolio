@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { testimonials } from "../src/testimonials.js";
 
 const slugs = ["aegon", "university", "panasia", "petmart", "dats"];
 const email = "mailto:andrew@andrewfonseka.com";
@@ -60,13 +61,16 @@ test("documents, contact links and analytics hooks are preserved", async ({ page
 
 test("navigation links to every section and collapses to brand plus résumé on phones", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".nav__links a")).toHaveText(["Work", "Systems", "How I work", "Experience", "Contact"]);
+  await expect(page.locator(".nav__links a")).toHaveText(["Work", "Experience", "Contact"]);
   for (const id of ["work", "systems", "approach", "experience", "contact"]) {
     await expect(page.locator(`#${id}`)).toHaveCount(1);
   }
-  await page.locator('.nav__links a[href="#approach"]').click();
-  await expect(page).toHaveURL(/#approach$/);
-  await expect(page.locator("#approach-title")).toBeInViewport();
+  await page.locator('.nav__links a[href="#experience"]').click();
+  await expect(page).toHaveURL(/#experience$/);
+  await expect(page.locator("#experience-title")).toBeInViewport();
+  // The sticky nav must not cover the anchored heading.
+  const navBottom = (await page.locator(".nav").boundingBox()).y + (await page.locator(".nav").boundingBox()).height;
+  expect((await page.locator("#experience-title").boundingBox()).y).toBeGreaterThanOrEqual(navBottom);
 
   await page.setViewportSize({ width: 375, height: 812 });
   await expect(page.locator(".nav__links")).toBeHidden();
@@ -123,6 +127,10 @@ test("Aegon shows process and responsibilities without result figures", async ({
   await expect(page.locator(".pipeline li")).toHaveCount(6);
   await expect(page.locator(".journey__steps li")).toHaveCount(6);
   await expect(page.locator(".systems-list li")).toHaveCount(5);
+  await expect(page.locator(".build-steps li")).toHaveCount(4);
+  await expect(page.locator("main")).toContainText("Legal and compliance kept final approval");
+  await expect(page.locator("main")).not.toContainText("account-based");
+  await expect(page.locator("main")).not.toContainText("eliminated");
   await expect(page.locator(".case-stat")).toHaveCount(0);
   await expect(page.locator("main")).not.toContainText("US$");
   await page.goto("/case-studies/dats/");
@@ -141,12 +149,13 @@ test("journey entries and testimonials respond to input", async ({ page }) => {
   await expect(page.locator("#role-aegon")).toContainText("Intermediate Channel Marketing Specialist (Paid Media)");
   await expect(page.locator("#role-independent-projects")).toContainText("Jan 2026 – Sep 2026");
 
-  const quotes = page.locator("[data-quotes]");
-  await expect(quotes.locator(".quote__slide:not([hidden])")).toContainText("Don Chanaka Perera");
-  await page.getByRole("button", { name: "Next recommendation" }).click();
-  await expect(quotes.locator(".quote__slide:not([hidden])")).toContainText("Hashan Nalinda Fernando");
-  await page.getByRole("button", { name: "Previous recommendation" }).click();
-  await expect(quotes.locator(".quote__slide:not([hidden])")).toContainText("Don Chanaka Perera");
+  // Two excerpts, both visible, each a verbatim part of the full recommendation.
+  await expect(page.locator(".ref")).toHaveCount(2);
+  await expect(page.locator(".ref__label")).toHaveText(["Excerpt", "Excerpt"]);
+  for (const t of testimonials) {
+    expect(t.quote.includes(t.excerpt)).toBe(true);
+    await expect(page.locator(".ref", { hasText: t.name })).toContainText(t.excerpt);
+  }
 
 });
 
@@ -221,4 +230,35 @@ test("unknown pages recover to the work and email", async ({ page }) => {
   expect(response.status()).toBe(404);
   await expect(page.locator('main a[href="/#work"]')).toBeVisible();
   await expect(page.locator(`main a[href^="${email}"]`)).toBeVisible();
+});
+
+test("hiring-evidence pass: role, ownership and corrected claims", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator(".hero__role")).toHaveText("Paid Media & Performance Marketing Specialist");
+  await expect(page.locator(".hero .actions a")).toHaveText(["Email me", "View case studies"]);
+  await expect(page.locator(".card__role")).toHaveCount(5);
+  await expect(page.locator(".card--process")).toContainText("Confidential operating-process case");
+  await expect(page.locator("#work")).toContainText("Four quantified case studies, plus one confidential operating-process case");
+  await expect(page.locator("#approach .approach__steps li")).toHaveCount(5);
+  await expect(page.locator("main")).not.toContainText("Liveline");
+  await expect(page.locator("main")).not.toContainText("Demand Gen");
+  await expect(page.locator("#experience")).toContainText("one QA pass instead of rework");
+
+  await page.goto("/case-studies/petmart/");
+  await expect(page.locator("main")).toContainText("not used to calculate the 4:1 first-order ROAS");
+  await expect(page.locator(".columns[aria-label*='US$50K']")).toHaveCount(0);
+  await expect(page.locator("main")).not.toContainText("boosted by");
+
+  await page.goto("/case-studies/university/");
+  await expect(page.locator(".who")).toContainText("Set up the campaigns, lead forms and targeting in Meta Ads Manager");
+  await expect(page.locator(".panel--limits")).toContainText("Its 167 covers every programme");
+
+  for (const slug of ["university", "panasia", "petmart", "dats"]) {
+    await page.goto(`/case-studies/${slug}/`);
+    await expect(page.locator(".panel--limits li")).not.toHaveCount(0);
+  }
+  await page.goto("/case-studies/panasia/");
+  await expect(page.locator(".case-hero .chips")).toContainText("Jan to Jun 2023");
+  await page.goto("/case-studies/dats/");
+  await expect(page.locator("main")).toContainText("including Microsoft Advertising");
 });
