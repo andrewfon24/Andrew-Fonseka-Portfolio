@@ -61,7 +61,8 @@ test("documents, contact links and analytics hooks are preserved", async ({ page
 
 test("navigation links to every section and collapses to brand plus résumé on phones", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".nav__links a")).toHaveText(["Work", "Experience", "Contact"]);
+  await expect(page.locator(".nav__links a")).toHaveText(["Results", "How I work", "Experience", "Contact"]);
+  await expect(page.locator('.nav__links a[href="#approach"]')).toHaveText("How I work");
   for (const id of ["work", "systems", "approach", "experience", "contact"]) {
     await expect(page.locator(`#${id}`)).toHaveCount(1);
   }
@@ -236,9 +237,9 @@ test("hiring-evidence pass: role, ownership and corrected claims", async ({ page
   await page.goto("/");
   await expect(page.locator(".hero__role")).toHaveText("Paid Media & Performance Marketing Specialist");
   await expect(page.locator(".hero .actions a")).toHaveText(["Email me", "View case studies"]);
-  await expect(page.locator(".card__role")).toHaveCount(5);
-  await expect(page.locator(".card--process")).toContainText("Confidential operating-process case");
-  await expect(page.locator("#work")).toContainText("Four quantified case studies, plus one confidential operating-process case");
+  await expect(page.locator(".card__role")).toHaveCount(4);
+  await expect(page.locator(".card--process")).toHaveCount(0);
+  await expect(page.locator('#systems a[href="/case-studies/aegon/"]')).toHaveCount(1);
   await expect(page.locator("#approach .approach__steps li")).toHaveCount(5);
   await expect(page.locator("main")).not.toContainText("Liveline");
   await expect(page.locator("main")).not.toContainText("Demand Gen");
