@@ -285,3 +285,12 @@ test("interview facts: hands-on roles, agency scope and Aegon scale are stated",
   await expect(page.locator("body")).not.toContainText("restructur");
   await expect(page.locator("body")).not.toContainText("overspen");
 });
+
+test("storytelling pass: reader-first hook, proof in the first screen, a story line on every card", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator(".hero__lede")).toContainText("Want to know which ads became customers?");
+  await expect(page.locator(".hero__lede")).toContainText("312 fee-paid enrolments, 259 funded loans and a 4:1 first-order ROAS");
+  await expect(page.locator("#work .card__story")).toHaveCount(4);
+  await expect(page.locator("#work .head")).toContainText("filling the wrong colleges");
+  await expect(page.locator("#systems .head")).toContainText("I can show you the system I built");
+});

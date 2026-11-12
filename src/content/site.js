@@ -77,6 +77,7 @@ export const cases = [
     scale: "Seven-figure annual budget",
     role: "Managed Google Ads, Meta and LinkedIn campaigns for U.S. and Canadian financial products on a seven-figure annual budget, and helped develop and launch a LinkedIn lead-generation program for high-net-worth investors with the team.",
     roleShort: "Managed Google Ads, Meta and LinkedIn; built the team's campaign builder.",
+    lede: "Then I went in-house, and the stakes got bigger. I can’t show you Aegon’s results. I can show you the system I built to launch every campaign there.",
     note: "Illustrative process. No employer results or figures are shown.",
     caseType: "Confidential operating-process case",
     problemShort: "Hand-built launches meant inconsistent names and UTMs, and slow manual compliance checks.",
@@ -100,6 +101,8 @@ export const cases = [
     decision:
       "A dedicated Meta campaign and budget for the two priority colleges, separate from the broad undergraduate campaign. Every campaign judged on fee-paid enrolments in the university’s CRM, not form fills.",
     role: "Recommended the strategy, including the separate priority-colleges campaign and budget, and built the campaigns in Meta Ads Manager: the audience structure, the placements and a higher-intent lead form. I also had input on the creative.",
+    // One-line story for the homepage card: the problem, then the move.
+    hook: "Two colleges needed students. The cheap leads were filling other programmes, so I funded those two colleges directly.",
     roleShort: "I set the strategy and built the campaigns: audience structure, placements and a higher-intent lead form. The partner agency ran day-to-day optimisation.",
     ownership: {
       me: [
@@ -145,6 +148,7 @@ export const cases = [
     decision:
       "The bank’s sales team rated Meta leads as higher quality at a lower cost per lead, so the plan allocated 60% to Meta and 40% to Google Ads from the start, measured on funded loans in the bank’s own system.",
     role: "Account lead: strategy, the week-to-week changes in Meta Ads and Google Ads, and the monthly client calls. I also pitched the Meta video, in which a mother takes a gold loan to pay for her daughter’s wedding. The bank approved it.",
+    hook: "A fixed US$25K had to produce funded loans, not enquiries. The bank’s sales team rated Meta leads higher, so Meta got 60% from day one.",
     roleShort: "Account lead. I set the strategy, made the week-to-week changes in Meta and Google Ads, pitched the Meta video and joined the client calls.",
     limits: [
       "Campaign period: January to June 2023. The 60/40 split was the starting plan, not a later reallocation.",
@@ -176,6 +180,7 @@ export const cases = [
       "Split Google Shopping and Performance Max by new vs returning customers, and read first-order return alongside paid-attributed sales and subscriptions.",
     decisionLabel: "Actions",
     role: "Paid media strategy and delivery for Google Shopping and Performance Max. I made the week-to-week changes in the account myself.",
+    hook: "Petmart needed to see which spend was winning new customers. I split Shopping and Performance Max by new and returning buyers.",
     roleShort: "Strategy and hands-on delivery. I made the week-to-week changes in the account myself.",
     sideProject:
       "Separately, in February 2023, I helped launch a Valentine’s Day activation with Sugar Beach (HI Magazine coverage). It sits outside the March to May reporting period and is not counted in these results.",
@@ -210,6 +215,7 @@ export const cases = [
     decision:
       "Judge campaigns on CRM-qualified leads, rebuild Google Ads and Meta around them, and add Microsoft Advertising as a new intent source.",
     role: "Advised on acquisition strategy, supported the Google Ads and Meta rebuild and made the in-platform changes week to week. Deployed the AI chat assistant and added Microsoft Advertising.",
+    hook: "The college needed more enrolment-ready prospects without spending more. We rebuilt the campaigns around CRM-qualified leads.",
     roleShort: "Acquisition strategy and the week-to-week changes in the accounts. I added Microsoft Ads and the AI assistant.",
     limits: [
       "Compares March to May 2026 (212) with December 2025 to February 2026 (178), using the same CRM qualification rule.",

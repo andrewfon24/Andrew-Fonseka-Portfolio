@@ -3363,3 +3363,11 @@ a.client-chip:hover {
 .ref blockquote { font-size: var(--text-md); line-height: 1.45; }
 .ref .quote__person { align-items: flex-start; }
 .ref .quote__role { display: block; }
+
+/* Storytelling pass: one line of problem-then-move above each card's role. */
+.card__story {
+  max-width: 52ch;
+  color: var(--color-ink);
+  font-size: var(--text-base);
+  line-height: 1.5;
+}

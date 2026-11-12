@@ -25,6 +25,7 @@ const H = `h${headingLevel}`;
       <H id="systems-title" style="font-size: var(--text-section)">
         {title ? title[0] : c.headline[0]}{" "}<span class="accent">{title ? title[1] : c.headline[1]}</span>
       </H>
+      {!title && <p>{c.lede}</p>}
     </div>
 
     <div class="systems__grid">
