@@ -1,7 +1,9 @@
 ---
 import BrandIcon from "../../BrandIcon.jsx";
 import Icon from "../Icon.astro";
-import { stackGroups, certifications, languages } from "../../content/site.js";
+import { stackGroups, certifications, languages, coreTools } from "../../content/site.js";
+
+const core = `${coreTools.slice(0, -1).join(", ")} and ${coreTools.at(-1)}`;
 ---
 
 <section class="band band--surface band--tight stack" id="toolkit" aria-labelledby="toolkit-title">
@@ -13,6 +15,7 @@ import { stackGroups, certifications, languages } from "../../content/site.js";
       </div>
       <p class="stack__intro">
         Paid search, paid social, measurement and the tools that help me keep the account and the team connected.
+        Test me on any of these five: {core}.
       </p>
     </div>
 

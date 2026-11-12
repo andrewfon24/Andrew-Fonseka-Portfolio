@@ -135,7 +135,7 @@ test("university case replaces the screenshot with the funnel, per-campaign char
 
 test("Aegon shows process and responsibilities without result figures", async ({ page }) => {
   await page.goto("/case-studies/aegon/");
-  await expect(page.locator("main")).toContainText("Illustrative process. No employer results, budgets or figures are shown.");
+  await expect(page.locator("main")).toContainText("Illustrative process. No employer results or figures are shown.");
   await expect(page.locator(".pipeline li")).toHaveCount(6);
   await expect(page.locator(".journey__steps li")).toHaveCount(6);
   await expect(page.locator(".systems-list li")).toHaveCount(5);
@@ -268,7 +268,7 @@ test("hiring-evidence pass: role, ownership and corrected claims", async ({ page
   await expect(page.locator("main")).not.toContainText("boosted by");
 
   await page.goto("/case-studies/university/");
-  await expect(page.locator(".who")).toContainText("Set up the campaigns, lead forms and targeting in Meta Ads Manager");
+  await expect(page.locator(".who")).toContainText("audience structure, placements and a higher-intent lead form");
   await expect(page.locator(".panel--limits")).toContainText("Its 167 covers every programme");
 
   for (const slug of ["university", "panasia", "petmart", "dats"]) {
@@ -331,4 +331,37 @@ test("story pass: four short result cards, two to a row, and a tighter Aegon and
   expect(boxes[0].left).toBeLessThan(boxes[1].left);
   expect(boxes[0].rows).toBe(boxes[1].rows);
   expect(boxes[2].rows).toBe(boxes[3].rows);
+});
+
+test("objection pass: hands-on work, agency scope and Aegon scale are stated", async ({ page }) => {
+  await page.goto("/");
+  // Hands-on: every card says who made the changes in the account.
+  await expect(page.locator("#work .head")).toContainText("On three of them I made the week-to-week changes in the ad accounts myself");
+  const roles = page.locator("#work .card__role");
+  await expect(roles.nth(0)).toContainText("audience structure, the placements and a higher-intent lead form");
+  await expect(roles.nth(1)).toContainText("made the week-to-week changes in Meta and Google Ads");
+  await expect(roles.nth(2)).toContainText("I made the week-to-week changes in the account myself");
+  await expect(roles.nth(3)).toContainText("week-to-week changes in the accounts");
+  // Aegon: the budget band and nothing more specific.
+  await expect(page.locator("#systems .chips")).toContainText("Seven-figure annual budget");
+  await expect(page.locator("#systems")).not.toContainText("$");
+  await expect(page.locator("#approach")).toContainText("pre-launch checklist");
+  // Agency scope is visible without opening anything.
+  await expect(page.locator("#experience .story")).toContainText("I led four client accounts");
+  await expect(page.locator("#experience .story")).toContainText("hybrid or on-site");
+  await page.locator("#role-kites-global summary").click();
+  await expect(page.locator("#role-kites-global")).toContainText("The client reported US$300K in revenue for the quarter the ads ran");
+  await expect(page.locator("#role-kites-global")).toContainText("The bank approved it");
+  await page.locator("#role-enfection summary").click();
+  await expect(page.locator("#role-enfection")).toContainText("stayed with the agency");
+  await expect(page.locator("#toolkit")).toContainText("Google Ads, Meta Ads, LinkedIn Ads, TikTok Ads and Google Analytics 4");
+  await expect(page.locator("#contact")).toContainText("hybrid or on-site roles");
+  // No mistake story and no permit date on the site.
+  await expect(page.locator("main")).not.toContainText("overspen");
+  await expect(page.locator("body")).not.toContainText("2027");
+
+  await page.goto("/case-studies/aegon/");
+  await expect(page.locator("main")).toContainText("on a seven-figure annual budget");
+  await page.goto("/case-studies/panasia/");
+  await expect(page.locator("main")).toContainText("The bank approved it");
 });

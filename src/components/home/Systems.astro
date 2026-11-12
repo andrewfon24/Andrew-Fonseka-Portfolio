@@ -18,6 +18,7 @@ const H = `h${headingLevel}`;
             <li class="chip">{c.context}</li>
             <li class="chip">{c.sector}</li>
             <li class="chip">{c.period}</li>
+            {c.scale && <li class="chip">{c.scale}</li>}
           </ul>
         )
       }

@@ -36,3 +36,12 @@ Validation: production build, fourteen Playwright checks, axe WCAG 2.1 AA at 144
 The homepage was cut from about 10.4 to 8.9 desktop screens (21.2 to 17.4 on a phone): result cards carry the headline and the result only, Aegon drops the step list that repeated the demo, the stack keeps every tool but sets them compactly, and the hero strip shows three outcomes linked to their cases.
 
 Approach was then merged into the Aegon section (one dark band, four steps in a row), taking the homepage to about 8.3 desktop screens and 16.5 on a phone. `ApproachDemo.tsx` and `PacingLine.tsx` are kept in `src/islands` but are no longer imported.
+
+## Objection pass (November 2026)
+A hiring-manager read of the site raised six objections; the owner answered each and the true answers were worked in without adding a section.
+- Hands-on depth: every result card's role line now says who made the changes in the account, and the Results intro states it once (three accounts hands-on week to week; strategy and build on the university).
+- Agency scope: the Experience story names the four accounts led at Kites Global and the client calls; the Kites Global and Enfection entries carry the approved Pan Asia Bank video pitch, the Godrej India quarter and a retained pharmaceutical client.
+- Budget size and the Aegon gap: one context pill, "Seven-figure annual budget", plus the same wording in the role text. No other Aegon figure.
+- Practical fit: five platforms the owner will be tested on, and hybrid or on-site, stated in the toolkit intro, the story and the contact band.
+- Kept off the site on purpose: the budget-entry mistake (interview story; only the pre-launch checklist is mentioned) and the work-permit end date.
+- Still open: a recommendation from an Aegon colleague has been requested and is not yet on the site.
