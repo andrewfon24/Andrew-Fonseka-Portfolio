@@ -1,13 +1,13 @@
 ---
-// One result, told the same way every time: the problem, the decision and
-// what the client's system recorded, then the evidence. The card's rows sit
-// on the section's grid (subgrid), so two cards side by side line up row for
-// row: context, headline, story, evidence, role, link.
+// One result, told the same way every time: what was decided (the headline),
+// what the client's system recorded, then the evidence. The full problem and
+// decision live on the case-study page. The card's rows sit on the section's
+// grid (subgrid), so two cards side by side line up row for row: context,
+// headline, result, evidence, footer.
 import Icon from "../Icon.astro";
 import Figure from "../Figure.astro";
 
-const { id, chips, headline, problem, decision, decisionLabel = "The decision", result, role, stats, note, delay = 0 } =
-  Astro.props;
+const { id, chips, headline, result, role, stats, note, delay = 0 } = Astro.props;
 const href = `/case-studies/${id}/`;
 ---
 
@@ -16,20 +16,7 @@ const href = `/case-studies/${id}/`;
     {chips.map((chip) => <li class="chip">{chip}</li>)}
   </ul>
   <h3 id={`${id}-title`}>{headline[0]}{" "}<span class="accent">{headline[1]}</span></h3>
-  <ol class="beats">
-    <li>
-      <h4>The problem</h4>
-      <p>{problem}</p>
-    </li>
-    <li>
-      <h4>{decisionLabel}</h4>
-      <p>{decision}</p>
-    </li>
-    <li class="beats__result">
-      <h4>The result</h4>
-      <p>{result}</p>
-    </li>
-  </ol>
+  <p class="chapter__result">{result}</p>
   <div class="chapter__evidence">
     <dl class="chapter__stats">
       {
@@ -48,8 +35,10 @@ const href = `/case-studies/${id}/`;
     </div>
     <p class="fine">{note}</p>
   </div>
-  <p class="card__role"><b>My role.</b> {role}</p>
-  <a class="button button--solid chapter__link" href={href} data-track="case_open" data-case={id} data-where="work">
-    Read the case study <Icon name="arrow-right" size={17} class="icon-nudge" />
-  </a>
+  <div class="chapter__foot">
+    <p class="card__role"><b>My role.</b> {role}</p>
+    <a class="link" href={href} data-track="case_open" data-case={id} data-where="work">
+      Read the case study <Icon name="arrow-right" size={16} />
+    </a>
+  </div>
 </article>

@@ -9,7 +9,7 @@ const email = "mailto:andrew@andrewfonseka.com";
 const hash = (value) => createHash("sha256").update(value).digest("hex");
 const pages = ["/", ...slugs.map((s) => `/case-studies/${s}/`)];
 
-test("homepage leads with the positioning, one email action, the portrait and three facts", async ({ page }) => {
+test("homepage leads with the positioning, one email action, the portrait and three outcomes", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
@@ -21,16 +21,11 @@ test("homepage leads with the positioning, one email action, the portrait and th
   await expect(page.locator(".hero")).toContainText("Available now in Greater Vancouver. Authorized to work in Canada.");
   await expect(page.locator(".hero__visual img")).toHaveAttribute("alt", "Andrew Fonseka");
   await expect(page.locator(".metrics__item")).toHaveCount(3);
-  for (const text of [
-    "3 years",
-    "in paid media",
-    "9 accounts",
-    "4 led end to end, 5 supported",
-    "5 platforms",
-    "Google, Meta, Microsoft, LinkedIn and TikTok ads",
-  ]) {
+  for (const text of ["312", "fee-paid enrolments", "259", "funded gold loans", "4:1", "first-order ROAS"]) {
     await expect(page.locator(".metrics")).toContainText(text);
   }
+  await expect(page.locator(".metrics a")).toHaveCount(3);
+  await expect(page.locator(".metrics a").first()).toHaveAttribute("href", "/case-studies/university/");
   await expect(page.locator(".hero .signal")).toHaveCount(0);
   await expect(page.locator(".accounts")).toHaveCount(0);
   for (const slug of slugs) {
@@ -213,7 +208,7 @@ test("content and evidence remain readable without JavaScript", async ({ browser
     expect(hidden, path).toBe(0);
   }
   await page.goto("/");
-  await expect(page.locator(".metrics")).toContainText("3 years");
+  await expect(page.locator(".metrics")).toContainText("312");
   await expect(page.locator("#work")).toContainText("312");
   await expect(page.locator("#work")).toContainText("125");
   await expect(page.locator("#work")).toContainText("259");
@@ -228,7 +223,7 @@ test("reduced motion shows final figures and finished charts immediately", async
   const context = await browser.newContext({ reducedMotion: "reduce" });
   const page = await context.newPage();
   await page.goto("/");
-  await expect(page.locator(".metrics [data-count]")).toHaveText(["3 years", "9 accounts", "5 platforms"]);
+  await expect(page.locator(".metrics [data-count]")).toHaveText(["312", "259", "4:1"]);
   await page.goto("/case-studies/university/");
   const scales = await page.locator(".brief .bar-fill").evaluateAll((els) => els.map((el) => getComputedStyle(el).transform));
   expect(scales.every((t) => t !== "matrix(0, 0, 0, 1, 0, 0)")).toBe(true);
@@ -242,7 +237,7 @@ test("reduced motion shows final figures and finished charts immediately", async
 
 test("counters count up once and land on the real figure", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".metrics [data-count]").first()).toHaveText("3 years", { timeout: 4000 });
+  await expect(page.locator(".metrics [data-count]").first()).toHaveText("312", { timeout: 4000 });
   const compare = page.locator(".compare__row--win [data-count]");
   await compare.scrollIntoViewIfNeeded();
   await expect(compare).toHaveText("125", { timeout: 4000 });
@@ -286,7 +281,7 @@ test("hiring-evidence pass: role, ownership and corrected claims", async ({ page
   await expect(page.locator("main")).toContainText("including Microsoft Advertising");
 });
 
-test("story pass: four results told as problem, decision and result, two to a row", async ({ page }) => {
+test("story pass: four short result cards, two to a row, and a tighter Aegon and stack", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("#work h2")).toHaveText("Every result here ends at a customer.");
   const chapters = page.locator("#work .chapter");
@@ -297,10 +292,12 @@ test("story pass: four results told as problem, decision and result, two to a ro
     "First orders. Lasting customers.",
     "More qualified leads. Same budget.",
   ]);
-  for (let i = 0; i < 4; i++) {
-    await expect(chapters.nth(i).locator(".beats li")).toHaveCount(3);
-    await expect(chapters.nth(i).locator(".beats__result h4")).toHaveText("The result");
-  }
+  // Cards carry the headline and the result; problem and decision live on the case page.
+  await expect(chapters.locator(".chapter__result")).toHaveCount(4);
+  await expect(page.locator("#work .beats")).toHaveCount(0);
+  // Aegon keeps the demo and three facts; the step list stays on its case page.
+  await expect(page.locator("#systems .pipeline")).toHaveCount(0);
+  await expect(page.locator("#systems .facts dt")).toHaveText(["The problem", "What I built", "Who I worked with"]);
   for (const fact of ["125 fee-paid enrolments", "259 funded gold loans", "4:1 first-order ROAS", "up from 178"]) {
     await expect(page.locator("#work")).toContainText(fact);
   }

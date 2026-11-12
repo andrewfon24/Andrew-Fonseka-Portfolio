@@ -30,3 +30,7 @@ Direction A ("Signal") was chosen by the owner from three side-by-side direction
 - Not used: the Brand Identity skill (the brand was kept), Dimensional Drawing (no spec sheet was needed for the page) and the Awwwards MCP (an MCP server cannot be added mid-session). No third-party skill scripts were executed.
 
 Validation: production build, fourteen Playwright checks, axe WCAG 2.1 AA at 1440 and 375 px on every page, and desktop and phone review in the browser.
+
+## Tightening pass
+
+The homepage was cut from about 10.4 to 8.9 desktop screens (21.2 to 17.4 on a phone): result cards carry the headline and the result only, Aegon drops the step list that repeated the demo, the stack keeps every tool but sets them compactly, and the hero strip shows three outcomes linked to their cases.

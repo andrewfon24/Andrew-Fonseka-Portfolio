@@ -43,17 +43,20 @@ import { profile, mailto, metrics } from "../../content/site.js";
   </div>
 
   <div class="container">
-    <dl class="metrics" aria-label="At a glance">
+    <ul class="metrics" aria-label="Results">
       {
         metrics.map((m) => (
-          <div class="metrics__item">
-            <dt class="metrics__label">{m.label}</dt>
-            <dd>
+          <li class="metrics__item">
+            <a href={`/case-studies/${m.case}/`} data-track="case_open" data-case={m.case} data-where="hero">
               <Figure dark value={m.value} count={m.count} suffix={m.suffix} class="metrics__value" />
-            </dd>
-          </div>
+              <span class="metrics__label">{m.label}</span>
+              <span class="metrics__source">
+                {m.source} <Icon name="arrow-right" size={14} />
+              </span>
+            </a>
+          </li>
         ))
       }
-    </dl>
+    </ul>
   </div>
 </section>

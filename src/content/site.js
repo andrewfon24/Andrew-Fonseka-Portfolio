@@ -18,12 +18,11 @@ export const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(
   "Paid media role – intro",
 )}`;
 
-// The strip under the hero: who Andrew is, in three facts from the résumé.
-// Outcomes live in the results cards below, so they are not repeated here.
+// The strip under the hero: three outcomes, each linked to its case study.
 export const metrics = [
-  { value: "3 years", count: 3, suffix: " years", label: "in paid media" },
-  { value: "9 accounts", count: 9, suffix: " accounts", label: "Agency clients: 4 led end to end, 5 supported" },
-  { value: "5 platforms", count: 5, suffix: " platforms", label: "Google, Meta, Microsoft, LinkedIn and TikTok ads" },
+  { value: "312", count: 312, label: "fee-paid enrolments", source: "Private university, Saudi Arabia", case: "university" },
+  { value: "259", count: 259, label: "funded gold loans", source: "Pan Asia Bank", case: "panasia" },
+  { value: "4:1", count: 4, suffix: ":1", label: "first-order ROAS", source: "Petmart.lk, Shopping and Performance Max", case: "petmart" },
 ];
 
 export const cases = [

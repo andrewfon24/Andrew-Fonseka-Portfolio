@@ -12,12 +12,12 @@ const dats = caseById.dats;
 const max = Math.max(...decision.rows.map((r) => r.value));
 ---
 
-<section class="band band--paper" id="work" aria-labelledby="work-title">
+<section class="band band--paper band--tight" id="work" aria-labelledby="work-title">
   <div class="container">
     <div class="head" data-rise>
       <h2 id="work-title">Every result here <span class="accent">ends at a customer.</span></h2>
       <p>
-        Four accounts, told the same way: the problem, the decision, and what the client’s own system recorded.
+        Four accounts, each judged on what the client’s own system recorded. Open any one for the full story.
       </p>
     </div>
 
@@ -26,8 +26,6 @@ const max = Math.max(...decision.rows.map((r) => r.value));
         id="university"
         chips={[uni.clientShort, uni.context, uni.period]}
         headline={decision.headline}
-        problem={uni.problem}
-        decision={uni.decision}
         result={uni.result}
         role={decision.role}
         stats={uni.stats}
@@ -60,8 +58,6 @@ const max = Math.max(...decision.rows.map((r) => r.value));
         delay={100}
         chips={[pan.client, pan.context, pan.period]}
         headline={pan.headline}
-        problem={pan.problem}
-        decision={pan.decision}
         result={pan.result}
         role={pan.roleShort}
         stats={pan.stats.slice(0, 2)}
@@ -75,9 +71,6 @@ const max = Math.max(...decision.rows.map((r) => r.value));
         id="petmart"
         chips={[pet.client, pet.context, pet.period]}
         headline={pet.headline}
-        problem={pet.problem}
-        decision={pet.decision}
-        decisionLabel="The actions"
         result={pet.result}
         role={pet.roleShort}
         stats={pet.stats}
@@ -85,7 +78,7 @@ const max = Math.max(...decision.rows.map((r) => r.value));
       >
         <div class="chart-title"><strong>Indexed change on the previous quarter</strong><span>Before = 100, client-reported</span></div>
         <Columns
-          height="7.5rem"
+          height="6.5rem"
           label="Indexed change: sales 100 before, 140 after; subscriptions 100 before, 130 after"
           bars={[
             { label: "Sales before", value: 100, tone: "soft" },
@@ -101,8 +94,6 @@ const max = Math.max(...decision.rows.map((r) => r.value));
         delay={100}
         chips={[dats.clientShort, dats.context, dats.period]}
         headline={dats.headline}
-        problem={dats.problem}
-        decision={dats.decision}
         result={dats.result}
         role={dats.roleShort}
         stats={dats.stats}
@@ -110,7 +101,7 @@ const max = Math.max(...decision.rows.map((r) => r.value));
       >
         <div class="chart-title"><strong>CRM-qualified leads per quarter</strong><span>Same qualification rule, client-reported</span></div>
         <Columns
-          height="7.5rem"
+          height="6.5rem"
           label="CRM-qualified leads: 178 in December 2025 to February 2026, 212 in March to May 2026"
           bars={[
             { label: "Dec 2025 to Feb 2026", value: 178, tone: "soft" },

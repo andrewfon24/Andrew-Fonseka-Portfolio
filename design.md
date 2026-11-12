@@ -7,9 +7,9 @@ Help hiring managers and marketing leaders see, in under a minute, that Andrew r
 
 ## Story (November 2026 pass)
 Written first for agency hiring managers in Greater Vancouver; the one action is email. One thread runs top to bottom: campaigns are judged on customers in the CRM, not clicks in the ad platform.
-1. Hero: the belief, the email action, "available now" and the portrait. Beneath it, three facts about the person (3 years in paid media, 9 agency accounts, 5 ad platforms); outcomes are left to the results cards so nothing repeats.
-2. Results: four accounts as cards, two to a row, each told the same way: context, headline, the problem, the decision and the result (joined by one line that ends on gold), then the evidence (figures, chart, caveat), role and link. Card rows use subgrid so a pair lines up row for row.
-3. Aegon: the system, because the results are confidential. It follows the four results so all the work sits together.
+1. Hero: the belief, the email action, "available now" and the portrait. Beneath it, three outcomes (312 fee-paid enrolments, 259 funded loans, 4:1 first-order ROAS), each linked to its case study, so the first screen carries proof.
+2. Results: four accounts as cards, two to a row: context, headline, the one-line result, the evidence (figures, chart, caveat), then role and link. The problem and decision live on the case-study pages. Card rows use subgrid so a pair lines up row for row.
+3. Aegon: the demo with three facts beside it (the problem, what I built, who I worked with). The step list stays on the Aegon case page. It follows the four results so all the work sits together.
 4. Approach: Audit, Define, Test, Report, in step with the demo.
 5. Colleagues, journey, stack, contact (email first).
 
