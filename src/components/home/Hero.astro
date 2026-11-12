@@ -7,24 +7,24 @@ import { profile, mailto, metrics } from "../../content/site.js";
 <section class="band band--dark hero" aria-labelledby="hero-title">
   <div class="container hero__grid">
     <div class="hero__copy">
-      <p class="hero__role">{profile.title}</p>
-      <h1 id="hero-title">Paid media judged on <span class="accent">customers, not clicks.</span></h1>
+      <h1 id="hero-title">Paid media judged on <span class="accent">customers,</span> not clicks.</h1>
       <p class="hero__lede">
-        I manage paid search and paid social campaigns, connect reporting to CRM outcomes, and improve campaign delivery across agency, in-house and independent work.
+        I’m Andrew, a paid media specialist. I plan and run paid search and paid social, then{" "}
+        <strong>follow every lead into the CRM</strong>{" "}to see which ones became enrolments, funded loans and first
+        orders.
       </p>
       <div class="actions">
         <a class="button button--primary" href={mailto} data-track="email_click" data-where="hero">
           <Icon name="mail" size={18} />Email me
         </a>
         <a class="button button--ghost" href="#work" data-track="case_list" data-where="hero">
-          View case studies <Icon name="arrow-down" size={18} />
+          See the results <Icon name="arrow-down" size={18} />
         </a>
       </div>
-      <ul class="hero__facts" aria-label="At a glance">
-        <li class="chip status"><Icon name="badge" size={14} />{profile.status}</li>
-        <li class="chip"><Icon name="cap" size={14} />MBA</li>
-        <li class="chip">Authorized to work in Canada</li>
-      </ul>
+      <p class="hero__status">
+        <span class="hero__dot" aria-hidden="true"></span>
+        {profile.status}. {profile.eligibility}.
+      </p>
     </div>
 
     <div class="hero__visual">
@@ -41,17 +41,22 @@ import { profile, mailto, metrics } from "../../content/site.js";
       </figure>
     </div>
   </div>
-</section>
 
-<section class="band band--dark metrics" aria-label="At a glance">
-  <div class="container metrics__grid">
-    {
-      metrics.map((m, i) => (
-        <div class="metrics__item" data-rise style={`--delay: ${i * 90}ms`}>
-          <Figure dark value={m.value} count={m.count} suffix={m.suffix} class="metrics__value" />
-          <span class="metrics__label">{m.label}</span>
-        </div>
-      ))
-    }
+  <div class="container">
+    <ul class="metrics" aria-label="Results">
+      {
+        metrics.map((m) => (
+          <li class="metrics__item">
+            <a href={`/case-studies/${m.case}/`} data-track="case_open" data-case={m.case} data-where="hero">
+              <Figure dark value={m.value} count={m.count} suffix={m.suffix} class="metrics__value" />
+              <span class="metrics__label">{m.label}</span>
+              <span class="metrics__source">
+                {m.source} <Icon name="arrow-right" size={14} />
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>

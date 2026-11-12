@@ -15,7 +15,7 @@ npm run build
 npm run preview
 ```
 
-Astro generates complete HTML for the homepage, five case studies and a custom 404 page in `dist/`. Static sections are Astro components with no client JavaScript; a small script (`src/scripts/motion.js`) adds scroll reveals, counters, chart drawing and the testimonial, toolkit and timeline controls. React loads only for the interactive islands: three Stageshow product demos, the Liveline pacing line and the university campaign explorer, each hydrated when it scrolls into view. Every figure, chart value and case narrative is in the HTML before JavaScript runs.
+Astro generates complete HTML for the homepage, five case studies and a custom 404 page in `dist/`. Static sections are Astro components with no client JavaScript; a small script (`src/scripts/motion.js`) adds scroll reveals, counters, chart drawing and the testimonial, toolkit and timeline controls. React loads only for the interactive islands: two Stageshow product demos (the Aegon campaign builder on the homepage and its case page, the CRM funnel on the university case), the Liveline pacing line and the university campaign explorer, each hydrated when it scrolls into view. Every figure, chart value and case narrative is in the HTML before JavaScript runs.
 
 ## Validate
 
@@ -24,7 +24,7 @@ npx playwright install chromium
 npm test
 ```
 
-Twelve Playwright checks cover the positioning and primary action, documents and analytics hooks, navigation, case routes with refresh and back, the university evidence that replaced the Meta Ads screenshot, the figure-free Aegon case, the timeline, testimonials and toolkit filters, automated WCAG 2.1 AA checks at desktop and phone widths, no-JavaScript reading, reduced motion, counters and 404 recovery. Chromium is read from `CHROMIUM_PATH` or `/usr/bin/chromium`; on macOS, `CHROMIUM_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"` uses an installed Chrome.
+Fifteen Playwright checks cover the positioning and primary action, the hero portrait and three linked outcomes, the four results chapters and their alignment, documents and analytics hooks, navigation, case routes with refresh and back, the university evidence that replaced the Meta Ads screenshot, the figure-free Aegon case, the timeline, testimonials and toolkit filters, automated WCAG 2.1 AA checks at desktop and phone widths, no-JavaScript reading, reduced motion, counters and 404 recovery. Chromium is read from `CHROMIUM_PATH` or `/usr/bin/chromium`; on macOS, `CHROMIUM_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"` uses an installed Chrome.
 
 ## Publish
 

@@ -9,7 +9,7 @@ const email = "mailto:andrew@andrewfonseka.com";
 const hash = (value) => createHash("sha256").update(value).digest("hex");
 const pages = ["/", ...slugs.map((s) => `/case-studies/${s}/`)];
 
-test("homepage leads with the positioning, one email action and the four results", async ({ page }) => {
+test("homepage leads with the positioning, one email action, the portrait and three outcomes", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
@@ -18,18 +18,21 @@ test("homepage leads with the positioning, one email action and the four results
   const primary = page.locator(".hero .button--primary");
   await expect(primary).toHaveCount(1);
   await expect(primary).toHaveAttribute("href", new RegExp(`^${email}`));
-  await expect(page.locator(".hero")).toContainText("Open to paid media roles in Greater Vancouver");
+  await expect(page.locator(".hero")).toContainText("Available now in Greater Vancouver. Authorized to work in Canada.");
+  await expect(page.locator(".hero__visual img")).toHaveAttribute("alt", "Andrew Fonseka");
   await expect(page.locator(".metrics__item")).toHaveCount(3);
-  for (const text of ["Agency", "In-house", "3 years", "in Paid Media"]) {
+  for (const text of ["312", "fee-paid enrolments", "259", "funded gold loans", "4:1", "first-order ROAS"]) {
     await expect(page.locator(".metrics")).toContainText(text);
   }
+  await expect(page.locator(".metrics a")).toHaveCount(3);
+  await expect(page.locator(".metrics a").first()).toHaveAttribute("href", "/case-studies/university/");
+  await expect(page.locator(".hero .signal")).toHaveCount(0);
+  await expect(page.locator(".accounts")).toHaveCount(0);
   for (const slug of slugs) {
     await expect(page.locator(`a[href="/case-studies/${slug}/"]`).first()).toBeAttached();
   }
   // The Meta Ads Manager screenshot is gone everywhere.
   await expect(page.locator('img[src*="university-ads-results"]')).toHaveCount(0);
-  await expect(page.locator(".hero__visual img")).toHaveAttribute("alt", "Andrew Fonseka");
-  await expect(page.locator(".hero__visual .signal")).toHaveCount(0);
   expect(errors).toEqual([]);
 });
 
@@ -37,6 +40,9 @@ test("documents, contact links and analytics hooks are preserved", async ({ page
   await page.goto("/");
   await expect(page.locator("#contact h2")).toHaveText("Let’s talk paid media");
   await expect(page.locator("#contact a[href^='mailto:']")).toHaveAttribute("href", new RegExp(`^${email}`));
+  // Email is the first and most prominent contact action.
+  await expect(page.locator("#contact .contact__actions a").first()).toHaveAttribute("href", new RegExp(`^${email}`));
+  await expect(page.locator("#contact")).toContainText("available now in Greater Vancouver");
   await expect(page.locator("#contact")).not.toContainText("778");
   for (const name of ["Andrew_Fonseka_Resume.pdf", "Andrew_Fonseka_Portfolio.pdf"]) {
     const response = await request.get(`/documents/${name}`);
@@ -59,11 +65,12 @@ test("documents, contact links and analytics hooks are preserved", async ({ page
   await expect(page.locator(".cred")).toHaveCount(7);
 });
 
-test("navigation links to every section and collapses to brand plus résumé on phones", async ({ page }) => {
+test("navigation links to every section and collapses to brand, résumé and email on phones", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".nav__links a")).toHaveText(["Results", "How I work", "Experience", "Contact"]);
-  await expect(page.locator('.nav__links a[href="#approach"]')).toHaveText("How I work");
-  for (const id of ["work", "systems", "approach", "experience", "contact"]) {
+  await expect(page.locator(".nav__links a")).toHaveText(["Results", "Approach", "Experience", "Contact"]);
+  await expect(page.locator(".nav__email")).toHaveAttribute("href", new RegExp(`^${email}`));
+  await expect(page.locator('.nav__links a[href="#approach"]')).toHaveText("Approach");
+  for (const id of ["work", "approach", "systems", "experience", "contact"]) {
     await expect(page.locator(`#${id}`)).toHaveCount(1);
   }
   await page.locator('.nav__links a[href="#experience"]').click();
@@ -77,11 +84,15 @@ test("navigation links to every section and collapses to brand plus résumé on 
   await expect(page.locator(".nav__links")).toBeHidden();
   await expect(page.locator(".brand")).toBeVisible();
   await expect(page.locator(".nav__resume")).toBeVisible();
+  await expect(page.locator(".nav__email")).toBeVisible();
+  // Nothing in the nav is clipped at phone width.
+  const right = await page.locator(".nav__email").evaluate((el) => el.getBoundingClientRect().right);
+  expect(right).toBeLessThanOrEqual(375);
 });
 
 test("case pages load directly, survive refresh and back, and link onward", async ({ page }) => {
   await page.goto("/");
-  await page.locator('.feature a[href="/case-studies/university/"]').click();
+  await page.locator('#work a[href="/case-studies/university/"]').click();
   await expect(page).toHaveURL(/\/case-studies\/university\/$/);
   await expect(page.locator("h1")).toHaveText("Optimize for enrolments, not form fills.");
   await page.reload();
@@ -124,7 +135,7 @@ test("university case replaces the screenshot with the funnel, per-campaign char
 
 test("Aegon shows process and responsibilities without result figures", async ({ page }) => {
   await page.goto("/case-studies/aegon/");
-  await expect(page.locator("main")).toContainText("Illustrative process. No employer results, budgets or figures are shown.");
+  await expect(page.locator("main")).toContainText("Illustrative process. No employer results or figures are shown.");
   await expect(page.locator(".pipeline li")).toHaveCount(6);
   await expect(page.locator(".journey__steps li")).toHaveCount(6);
   await expect(page.locator(".systems-list li")).toHaveCount(5);
@@ -154,9 +165,11 @@ test("journey entries and testimonials respond to input", async ({ page }) => {
   await expect(page.locator("#role-aegon")).toContainText("Intermediate Channel Marketing Specialist (Paid Media)");
   await expect(page.locator("#role-independent-projects")).toContainText("Jan 2026 – Sep 2026");
 
-  // Two excerpts, both visible, each a verbatim part of the full recommendation.
-  await expect(page.locator(".ref")).toHaveCount(2);
-  await expect(page.locator(".ref__label")).toHaveText(["Excerpt", "Excerpt"]);
+  // Three excerpts, all visible, each a verbatim part of the full recommendation.
+  await expect(page.locator(".ref")).toHaveCount(3);
+  await expect(page.locator(".ref__label")).toHaveText(["Excerpt", "Excerpt", "Excerpt"]);
+  await expect(page.locator(".ref").first()).toContainText("Nabi Zadeh");
+  await expect(page.locator("#references h2")).toHaveText("What people say about the work");
   for (const t of testimonials) {
     expect(t.quote.includes(t.excerpt)).toBe(true);
     await expect(page.locator(".ref", { hasText: t.name })).toContainText(t.excerpt);
@@ -197,8 +210,10 @@ test("content and evidence remain readable without JavaScript", async ({ browser
     expect(hidden, path).toBe(0);
   }
   await page.goto("/");
-  await expect(page.locator(".metrics")).toContainText("3 years");
+  await expect(page.locator(".metrics")).toContainText("312");
   await expect(page.locator("#work")).toContainText("312");
+  await expect(page.locator("#work")).toContainText("125");
+  await expect(page.locator("#work")).toContainText("259");
   await expect(page.locator(".role")).toHaveCount(6);
   await page.goto("/case-studies/university/");
   await expect(page.locator("main")).toContainText("821");
@@ -210,7 +225,7 @@ test("reduced motion shows final figures and finished charts immediately", async
   const context = await browser.newContext({ reducedMotion: "reduce" });
   const page = await context.newPage();
   await page.goto("/");
-  await expect(page.locator(".metrics [data-count]")).toHaveText("3 years");
+  await expect(page.locator(".metrics [data-count]")).toHaveText(["312", "259", "4:1"]);
   await page.goto("/case-studies/university/");
   const scales = await page.locator(".brief .bar-fill").evaluateAll((els) => els.map((el) => getComputedStyle(el).transform));
   expect(scales.every((t) => t !== "matrix(0, 0, 0, 1, 0, 0)")).toBe(true);
@@ -224,10 +239,10 @@ test("reduced motion shows final figures and finished charts immediately", async
 
 test("counters count up once and land on the real figure", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".metrics [data-count]")).toHaveText("3 years", { timeout: 4000 });
-  const feature = page.locator(".feature [data-count]").first();
-  await feature.scrollIntoViewIfNeeded();
-  await expect(feature).toHaveText("312", { timeout: 4000 });
+  await expect(page.locator(".metrics [data-count]").first()).toHaveText("312", { timeout: 4000 });
+  const compare = page.locator(".compare__row--win [data-count]");
+  await compare.scrollIntoViewIfNeeded();
+  await expect(compare).toHaveText("125", { timeout: 4000 });
 });
 
 test("unknown pages recover to the work and email", async ({ page }) => {
@@ -239,12 +254,12 @@ test("unknown pages recover to the work and email", async ({ page }) => {
 
 test("hiring-evidence pass: role, ownership and corrected claims", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".hero__role")).toHaveText("Paid Media & Performance Marketing Specialist");
-  await expect(page.locator(".hero .actions a")).toHaveText(["Email me", "View case studies"]);
+  await expect(page.locator(".hero .actions a")).toHaveText(["Email me", "See the results"]);
   await expect(page.locator(".card__role")).toHaveCount(4);
+  await expect(page.locator(".card__role").first()).toContainText("The partner agency ran day-to-day optimisation");
   await expect(page.locator(".card--process")).toHaveCount(0);
   await expect(page.locator('#systems a[href="/case-studies/aegon/"]')).toHaveCount(1);
-  await expect(page.locator("#approach .approach__steps li")).toHaveCount(5);
+  await expect(page.locator("#approach .approach__steps li h3")).toHaveText(["Audit", "Define", "Test", "Report"]);
   await expect(page.locator("main")).not.toContainText("Liveline");
   await expect(page.locator("main")).not.toContainText("Demand Gen");
   await expect(page.locator("#experience")).toContainText("one QA pass instead of rework");
@@ -255,7 +270,7 @@ test("hiring-evidence pass: role, ownership and corrected claims", async ({ page
   await expect(page.locator("main")).not.toContainText("boosted by");
 
   await page.goto("/case-studies/university/");
-  await expect(page.locator(".who")).toContainText("Set up the campaigns, lead forms and targeting in Meta Ads Manager");
+  await expect(page.locator(".who")).toContainText("audience structure, placements and a higher-intent lead form");
   await expect(page.locator(".panel--limits")).toContainText("Its 167 covers every programme");
 
   for (const slug of ["university", "panasia", "petmart", "dats"]) {
@@ -266,4 +281,91 @@ test("hiring-evidence pass: role, ownership and corrected claims", async ({ page
   await expect(page.locator(".case-hero .chips")).toContainText("Jan to Jun 2023");
   await page.goto("/case-studies/dats/");
   await expect(page.locator("main")).toContainText("including Microsoft Advertising");
+});
+
+test("story pass: four short result cards, two to a row, and a tighter Aegon and stack", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("#work h2")).toHaveText("Every result here ends at a customer.");
+  const chapters = page.locator("#work .chapter");
+  await expect(chapters).toHaveCount(4);
+  await expect(chapters.locator("h3")).toHaveText([
+    "The cheaper leads were filling the wrong colleges.",
+    "Lead quality made the allocation decision.",
+    "First orders. Lasting customers.",
+    "More qualified leads. Same budget.",
+  ]);
+  // Cards carry the headline and the result; problem and decision live on the case page.
+  await expect(chapters.locator(".chapter__result")).toHaveCount(4);
+  await expect(page.locator("#work .beats")).toHaveCount(0);
+  // Aegon keeps the demo and three facts; the step list stays on its case page.
+  await expect(page.locator("#systems .pipeline")).toHaveCount(0);
+  await expect(page.locator("#systems .facts dt")).toHaveText(["The problem", "What I built", "Who I worked with"]);
+  // Approach closes the Aegon section: same dark band, four steps, no second demo.
+  await expect(page.locator("#approach.band--dark")).toHaveCount(1);
+  await expect(page.locator("#approach .ss-stage")).toHaveCount(0);
+  await expect(page.locator("main .ss-stage")).toHaveCount(1);
+  const gap = await page.evaluate(() => {
+    const a = document.querySelector("#systems").getBoundingClientRect();
+    const b = document.querySelector("#approach").getBoundingClientRect();
+    return Math.round(b.top - a.bottom);
+  });
+  expect(gap).toBe(0);
+  for (const fact of ["125 fee-paid enrolments", "259 funded gold loans", "4:1 first-order ROAS", "up from 178"]) {
+    await expect(page.locator("#work")).toContainText(fact);
+  }
+  await expect(page.locator("#work .compare__row")).toHaveCount(2);
+  await expect(page.locator("#work")).toContainText("not a controlled test");
+  await expect(page.locator("#systems .head")).toContainText("The results are confidential");
+  await expect(page.locator("#questions")).toHaveCount(0);
+
+  // Two to a row, and each pair lines up row for row.
+  const boxes = await chapters.evaluateAll((els) =>
+    els.map((el) => {
+      const top = el.getBoundingClientRect().top;
+      return {
+        left: Math.round(el.getBoundingClientRect().left),
+        rows: [...el.children].map((child) => Math.round(child.getBoundingClientRect().top - top)).join(","),
+      };
+    }),
+  );
+  expect(boxes[0].left).toBe(boxes[2].left);
+  expect(boxes[1].left).toBe(boxes[3].left);
+  expect(boxes[0].left).toBeLessThan(boxes[1].left);
+  expect(boxes[0].rows).toBe(boxes[1].rows);
+  expect(boxes[2].rows).toBe(boxes[3].rows);
+});
+
+test("objection pass: hands-on work, agency scope and Aegon scale are stated", async ({ page }) => {
+  await page.goto("/");
+  // Hands-on: every card says who made the changes in the account.
+  await expect(page.locator("#work .head")).toContainText("On three of them I made the week-to-week changes in the ad accounts myself");
+  const roles = page.locator("#work .card__role");
+  await expect(roles.nth(0)).toContainText("audience structure, the placements and a higher-intent lead form");
+  await expect(roles.nth(1)).toContainText("made the week-to-week changes in Meta and Google Ads");
+  await expect(roles.nth(2)).toContainText("I made the week-to-week changes in the account myself");
+  await expect(roles.nth(3)).toContainText("week-to-week changes in the accounts");
+  // Aegon: the budget band and nothing more specific.
+  await expect(page.locator("#systems .chips")).toContainText("Seven-figure annual budget");
+  await expect(page.locator("#systems")).not.toContainText("$");
+  await expect(page.locator("#approach")).toContainText("pre-launch checklist");
+  // Agency scope is visible without opening anything.
+  await expect(page.locator("#experience .story")).toContainText("I led four client accounts");
+  await expect(page.locator("#experience .story")).toContainText("hybrid or on-site");
+  await expect(page.locator("#experience .story")).toContainText("the breadth of agency work again, across more industries");
+  await expect(page.locator("body")).not.toContainText("restructur");
+  await page.locator("#role-kites-global summary").click();
+  await expect(page.locator("#role-kites-global")).toContainText("The client reported US$300K in revenue for the quarter the ads ran");
+  await expect(page.locator("#role-kites-global")).toContainText("The bank approved it");
+  await page.locator("#role-enfection summary").click();
+  await expect(page.locator("#role-enfection")).toContainText("stayed with the agency");
+  await expect(page.locator("#toolkit")).toContainText("Google Ads, Meta Ads, LinkedIn Ads, TikTok Ads and Google Analytics 4");
+  await expect(page.locator("#contact")).toContainText("hybrid or on-site roles");
+  // No mistake story and no permit date on the site.
+  await expect(page.locator("main")).not.toContainText("overspen");
+  await expect(page.locator("body")).not.toContainText("2027");
+
+  await page.goto("/case-studies/aegon/");
+  await expect(page.locator("main")).toContainText("on a seven-figure annual budget");
+  await page.goto("/case-studies/panasia/");
+  await expect(page.locator("main")).toContainText("The bank approved it");
 });

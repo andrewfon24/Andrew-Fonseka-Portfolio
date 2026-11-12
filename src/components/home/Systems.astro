@@ -18,12 +18,14 @@ const H = `h${headingLevel}`;
             <li class="chip">{c.context}</li>
             <li class="chip">{c.sector}</li>
             <li class="chip">{c.period}</li>
+            {c.scale && <li class="chip">{c.scale}</li>}
           </ul>
         )
       }
       <H id="systems-title" style="font-size: var(--text-section)">
         {title ? title[0] : c.headline[0]}{" "}<span class="accent">{title ? title[1] : c.headline[1]}</span>
       </H>
+      {!title && <p>{c.lede}</p>}
     </div>
 
     <div class="systems__grid">
@@ -36,46 +38,44 @@ const H = `h${headingLevel}`;
         </p>
         <div class="demo__label"><span class="fine">{c.note}</span></div>
       </div>
-      <div data-rise style="--delay: 120ms">
-        <p class="fine" style="margin-bottom: var(--space-3)">How a campaign goes live</p>
-        <ol class="pipeline" data-steps="golive">
-          {
-            aegon.goLive.map((s) => (
-              <li>
-                <span class="pipeline__icon"><Icon name={s.icon} size={18} /></span>
-                <span>
-                  <h3>{s.title}</h3>
-                  <p>{s.body}</p>
-                </span>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
+      {
+        showLink ? (
+          <div class="systems__facts" data-rise style="--delay: 120ms">
+            <dl class="facts">
+              <div>
+                <dt>The problem</dt>
+                <dd>{c.problemShort}</dd>
+              </div>
+              <div>
+                <dt>What I built</dt>
+                <dd>{c.builtShort}</dd>
+              </div>
+              <div>
+                <dt>Who I worked with</dt>
+                <dd>{c.withShort}</dd>
+              </div>
+            </dl>
+            <a class="button button--ghost" href="/case-studies/aegon/" data-track="case_open" data-case="aegon" data-where="systems">
+              Read the case study <Icon name="arrow-right" size={17} class="icon-nudge" />
+            </a>
+          </div>
+        ) : (
+          <div data-rise style="--delay: 120ms">
+            <p class="fine" style="margin-bottom: var(--space-3)">How a campaign goes live</p>
+            <ol class="pipeline" data-steps="golive">
+              {aegon.goLive.map((s) => (
+                <li>
+                  <span class="pipeline__icon"><Icon name={s.icon} size={18} /></span>
+                  <span>
+                    <h3>{s.title}</h3>
+                    <p>{s.body}</p>
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )
+      }
     </div>
-
-    {
-      showLink && (
-        <div class="below below--facts" data-rise>
-          <dl class="facts">
-            <div>
-              <dt>The problem</dt>
-              <dd>{c.problemShort}</dd>
-            </div>
-            <div>
-              <dt>What I built</dt>
-              <dd>{c.builtShort}</dd>
-            </div>
-            <div>
-              <dt>Who I worked with</dt>
-              <dd>{c.withShort}</dd>
-            </div>
-          </dl>
-          <a class="button button--ghost" href="/case-studies/aegon/" data-track="case_open" data-case="aegon" data-where="systems">
-            Read the case study <Icon name="arrow-right" size={17} class="icon-nudge" />
-          </a>
-        </div>
-      )
-    }
   </div>
 </section>
