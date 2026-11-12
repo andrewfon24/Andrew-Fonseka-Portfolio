@@ -7,7 +7,7 @@ Help hiring managers and marketing leaders see, in under a minute, that Andrew r
 
 ## Story (November 2026 pass)
 Written first for agency hiring managers in Greater Vancouver; the one action is email. One thread runs top to bottom: campaigns are judged on customers in the CRM, not clicks in the ad platform.
-1. Hero: the belief, the email action, "available now", and the real 821 to 430 to 312 funnel as the visual. The portrait sits in the nav and the journey section.
+1. Hero: the belief, the email action, "available now" and the portrait. Beneath it, three facts about the person (3 years in paid media, 9 agency accounts, 5 ad platforms); outcomes are left to the results cards so nothing repeats.
 2. Results: four accounts as cards, two to a row, each told the same way: context, headline, the problem, the decision and the result (joined by one line that ends on gold), then the evidence (figures, chart, caveat), role and link. Card rows use subgrid so a pair lines up row for row.
 3. Aegon: the system, because the results are confidential. It follows the four results so all the work sits together.
 4. Approach: Audit, Define, Test, Report, in step with the demo.
@@ -34,7 +34,7 @@ All colour and type go through `src/styles/tokens.css`. Brand values come from t
 - Liveline renders the illustrative pacing line only: no axis values, no result figures.
 
 ## Motion
-Rich and purposeful. The hero enters once on load and its funnel bars grow to their values (the one authored moment). Sections reveal once on entry (opacity plus 16px rise, 600ms, ease-out); counters run 1.2s; charts draw on entry; cards respond to the pointer with a soft spotlight. Demos play when in view and pause when offscreen. Under `prefers-reduced-motion: reduce` everything renders in its final state and demos show their poster frame. Without JavaScript all content is visible.
+Rich and purposeful. The hero enters once on load. Sections reveal once on entry (opacity plus 16px rise, 600ms, ease-out); counters run 1.2s; charts draw on entry; cards respond to the pointer with a soft spotlight. Demos play when in view and pause when offscreen. Under `prefers-reduced-motion: reduce` everything renders in its final state and demos show their poster frame. Without JavaScript all content is visible.
 
 ## Content boundaries
 The résumé and portfolio PDFs are the source of truth. Never invent results, testimonials, logos or client names. Aegon shows process and responsibilities, never figures. The Saudi university stays anonymous. Phone number stays off the site; email is andrew@andrewfonseka.com.

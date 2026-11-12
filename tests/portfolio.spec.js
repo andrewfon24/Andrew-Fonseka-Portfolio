@@ -9,7 +9,7 @@ const email = "mailto:andrew@andrewfonseka.com";
 const hash = (value) => createHash("sha256").update(value).digest("hex");
 const pages = ["/", ...slugs.map((s) => `/case-studies/${s}/`)];
 
-test("homepage leads with the positioning, one email action, the funnel and the accounts", async ({ page }) => {
+test("homepage leads with the positioning, one email action, the portrait and three facts", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
@@ -19,28 +19,25 @@ test("homepage leads with the positioning, one email action, the funnel and the 
   await expect(primary).toHaveCount(1);
   await expect(primary).toHaveAttribute("href", new RegExp(`^${email}`));
   await expect(page.locator(".hero")).toContainText("Available now in Greater Vancouver. Authorized to work in Canada.");
-  // The hero's visual is the real funnel, linked to its case study.
-  const signal = page.locator(".hero a.signal");
-  await expect(signal).toHaveAttribute("href", "/case-studies/university/");
-  for (const text of ["Meta leads", "821", "CRM-qualified", "430", "Fee-paid enrolments", "312"]) {
-    await expect(signal).toContainText(text);
+  await expect(page.locator(".hero__visual img")).toHaveAttribute("alt", "Andrew Fonseka");
+  await expect(page.locator(".metrics__item")).toHaveCount(3);
+  for (const text of [
+    "3 years",
+    "in paid media",
+    "9 accounts",
+    "4 led end to end, 5 supported",
+    "5 platforms",
+    "Google, Meta, Microsoft, LinkedIn and TikTok ads",
+  ]) {
+    await expect(page.locator(".metrics")).toContainText(text);
   }
-  await expect(page.locator(".accounts li")).toHaveText([
-    "Pan Asia Bank",
-    "Petmart.lk",
-    "Godrej India",
-    "Costa Coffee Singapore",
-    "CDB Bank",
-    "Keells",
-    "DIMO Academy",
-    "Aegon",
-  ]);
+  await expect(page.locator(".hero .signal")).toHaveCount(0);
+  await expect(page.locator(".accounts")).toHaveCount(0);
   for (const slug of slugs) {
     await expect(page.locator(`a[href="/case-studies/${slug}/"]`).first()).toBeAttached();
   }
   // The Meta Ads Manager screenshot is gone everywhere.
   await expect(page.locator('img[src*="university-ads-results"]')).toHaveCount(0);
-  await expect(page.locator("#experience .story__face")).toHaveAttribute("alt", "Andrew Fonseka");
   expect(errors).toEqual([]);
 });
 
@@ -93,6 +90,9 @@ test("navigation links to every section and collapses to brand, résumé and ema
   await expect(page.locator(".brand")).toBeVisible();
   await expect(page.locator(".nav__resume")).toBeVisible();
   await expect(page.locator(".nav__email")).toBeVisible();
+  // Nothing in the nav is clipped at phone width.
+  const right = await page.locator(".nav__email").evaluate((el) => el.getBoundingClientRect().right);
+  expect(right).toBeLessThanOrEqual(375);
 });
 
 test("case pages load directly, survive refresh and back, and link onward", async ({ page }) => {
@@ -213,7 +213,8 @@ test("content and evidence remain readable without JavaScript", async ({ browser
     expect(hidden, path).toBe(0);
   }
   await page.goto("/");
-  await expect(page.locator(".hero .signal")).toContainText("312");
+  await expect(page.locator(".metrics")).toContainText("3 years");
+  await expect(page.locator("#work")).toContainText("312");
   await expect(page.locator("#work")).toContainText("125");
   await expect(page.locator("#work")).toContainText("259");
   await expect(page.locator(".role")).toHaveCount(6);
@@ -227,9 +228,7 @@ test("reduced motion shows final figures and finished charts immediately", async
   const context = await browser.newContext({ reducedMotion: "reduce" });
   const page = await context.newPage();
   await page.goto("/");
-  await expect(page.locator(".signal__row--win [data-count]")).toHaveText("312");
-  const bars = await page.locator(".signal__bar").evaluateAll((els) => els.map((el) => getComputedStyle(el).animationName));
-  expect(bars.every((name) => name === "none")).toBe(true);
+  await expect(page.locator(".metrics [data-count]")).toHaveText(["3 years", "9 accounts", "5 platforms"]);
   await page.goto("/case-studies/university/");
   const scales = await page.locator(".brief .bar-fill").evaluateAll((els) => els.map((el) => getComputedStyle(el).transform));
   expect(scales.every((t) => t !== "matrix(0, 0, 0, 1, 0, 0)")).toBe(true);
@@ -243,7 +242,7 @@ test("reduced motion shows final figures and finished charts immediately", async
 
 test("counters count up once and land on the real figure", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".signal__row--win [data-count]")).toHaveText("312", { timeout: 4000 });
+  await expect(page.locator(".metrics [data-count]").first()).toHaveText("3 years", { timeout: 4000 });
   const compare = page.locator(".compare__row--win [data-count]");
   await compare.scrollIntoViewIfNeeded();
   await expect(compare).toHaveText("125", { timeout: 4000 });

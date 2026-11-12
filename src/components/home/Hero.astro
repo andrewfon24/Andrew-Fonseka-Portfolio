@@ -1,11 +1,7 @@
 ---
 import Icon from "../Icon.astro";
 import Figure from "../Figure.astro";
-import { profile, mailto, accounts, university, caseById } from "../../content/site.js";
-
-const uni = caseById.university;
-const [leads, qualified, enrolled] = university.funnel;
-const share = (n) => (n / leads.value).toFixed(3);
+import { profile, mailto, metrics } from "../../content/site.js";
 ---
 
 <section class="band band--dark hero" aria-labelledby="hero-title">
@@ -31,49 +27,33 @@ const share = (n) => (n / leads.value).toFixed(3);
       </p>
     </div>
 
-    <a
-      class="signal"
-      href="/case-studies/university/"
-      data-track="case_open"
-      data-case="university"
-      data-where="hero"
-    >
-      <span class="signal__head">
-        <span>{uni.clientShort}</span>
-        <span>{uni.period}</span>
-      </span>
-      <span class="signal__row" style="--v: 1">
-        <span class="signal__top">
-          <span>{leads.label}</span>
-          <Figure dark value={String(leads.value)} count={leads.value} />
-        </span>
-        <span class="signal__track"><span class="signal__bar"></span></span>
-      </span>
-      <span class="signal__row" style={`--v: ${share(qualified.value)}; --delay: 160ms`}>
-        <span class="signal__top">
-          <span>{qualified.label}</span>
-          <Figure dark value={String(qualified.value)} count={qualified.value} />
-        </span>
-        <span class="signal__track"><span class="signal__bar signal__bar--mid"></span></span>
-      </span>
-      <span class="signal__row signal__row--win" style={`--v: ${share(enrolled.value)}; --delay: 320ms`}>
-        <span class="signal__top">
-          <span>{enrolled.label}</span>
-          <Figure dark value={String(enrolled.value)} count={enrolled.value} />
-        </span>
-        <span class="signal__track"><span class="signal__bar signal__bar--win"></span></span>
-      </span>
-      <span class="signal__foot">
-        <span>The number I report on is the last one, matched in the admissions CRM on name, phone and student ID.</span>
-        <span class="signal__more">Read the case <Icon name="arrow-right" size={15} /></span>
-      </span>
-    </a>
+    <div class="hero__visual">
+      <figure class="portrait">
+        <img
+          src="/images/andrew-fonseka-480.webp"
+          srcset="/images/andrew-fonseka-240.webp 240w, /images/andrew-fonseka-480.webp 480w, /images/andrew-fonseka.jpg 1122w"
+          sizes="(max-width: 640px) 72vw, 26rem"
+          alt="Andrew Fonseka"
+          width="1122"
+          height="1402"
+          fetchpriority="high"
+        />
+      </figure>
+    </div>
   </div>
 
-  <div class="container accounts">
-    <p>Accounts I’ve led or supported, agency and in-house</p>
-    <ul>
-      {accounts.map((name) => <li>{name}</li>)}
-    </ul>
+  <div class="container">
+    <dl class="metrics" aria-label="At a glance">
+      {
+        metrics.map((m) => (
+          <div class="metrics__item">
+            <dt class="metrics__label">{m.label}</dt>
+            <dd>
+              <Figure dark value={m.value} count={m.count} suffix={m.suffix} class="metrics__value" />
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
   </div>
 </section>

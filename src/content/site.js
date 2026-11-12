@@ -18,16 +18,12 @@ export const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(
   "Paid media role – intro",
 )}`;
 
-// Accounts named in the résumé, shown under the hero. No logos: names only.
-export const accounts = [
-  "Pan Asia Bank",
-  "Petmart.lk",
-  "Godrej India",
-  "Costa Coffee Singapore",
-  "CDB Bank",
-  "Keells",
-  "DIMO Academy",
-  "Aegon",
+// The strip under the hero: who Andrew is, in three facts from the résumé.
+// Outcomes live in the results cards below, so they are not repeated here.
+export const metrics = [
+  { value: "3 years", count: 3, suffix: " years", label: "in paid media" },
+  { value: "9 accounts", count: 9, suffix: " accounts", label: "Agency clients: 4 led end to end, 5 supported" },
+  { value: "5 platforms", count: 5, suffix: " platforms", label: "Google, Meta, Microsoft, LinkedIn and TikTok ads" },
 ];
 
 export const cases = [
