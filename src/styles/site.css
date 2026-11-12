@@ -3191,7 +3191,7 @@ a.client-chip:hover {
 
 .refs {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-5);
 }
 
@@ -3356,3 +3356,10 @@ a.client-chip:hover {
 .role__body .clients > li.client-chip {
   padding: var(--space-2) var(--space-4);
 }
+
+/* Three recommendations in a row: a slightly smaller quote keeps the row
+   compact, and the avatar never gives up its width to a long role line. */
+.ref .avatar { flex: none; }
+.ref blockquote { font-size: var(--text-md); line-height: 1.45; }
+.ref .quote__person { align-items: flex-start; }
+.ref .quote__role { display: block; }

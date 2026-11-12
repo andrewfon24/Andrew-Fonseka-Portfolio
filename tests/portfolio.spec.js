@@ -124,7 +124,7 @@ test("university case replaces the screenshot with the funnel, per-campaign char
 
 test("Aegon shows process and responsibilities without result figures", async ({ page }) => {
   await page.goto("/case-studies/aegon/");
-  await expect(page.locator("main")).toContainText("Illustrative process. No employer results, budgets or figures are shown.");
+  await expect(page.locator("main")).toContainText("Illustrative process. No employer results or figures are shown.");
   await expect(page.locator(".pipeline li")).toHaveCount(6);
   await expect(page.locator(".journey__steps li")).toHaveCount(6);
   await expect(page.locator(".systems-list li")).toHaveCount(5);
@@ -155,8 +155,8 @@ test("journey entries and testimonials respond to input", async ({ page }) => {
   await expect(page.locator("#role-independent-projects")).toContainText("Jan 2026 – Sep 2026");
 
   // Two excerpts, both visible, each a verbatim part of the full recommendation.
-  await expect(page.locator(".ref")).toHaveCount(2);
-  await expect(page.locator(".ref__label")).toHaveText(["Excerpt", "Excerpt"]);
+  await expect(page.locator(".ref")).toHaveCount(3);
+  await expect(page.locator(".ref__label")).toHaveText(["Excerpt", "Excerpt", "Excerpt"]);
   for (const t of testimonials) {
     expect(t.quote.includes(t.excerpt)).toBe(true);
     await expect(page.locator(".ref", { hasText: t.name })).toContainText(t.excerpt);
@@ -255,7 +255,7 @@ test("hiring-evidence pass: role, ownership and corrected claims", async ({ page
   await expect(page.locator("main")).not.toContainText("boosted by");
 
   await page.goto("/case-studies/university/");
-  await expect(page.locator(".who")).toContainText("Set up the campaigns, lead forms and targeting in Meta Ads Manager");
+  await expect(page.locator(".who")).toContainText("audience structure, placements and a higher-intent lead form");
   await expect(page.locator(".panel--limits")).toContainText("Its 167 covers every programme");
 
   for (const slug of ["university", "panasia", "petmart", "dats"]) {
@@ -266,4 +266,22 @@ test("hiring-evidence pass: role, ownership and corrected claims", async ({ page
   await expect(page.locator(".case-hero .chips")).toContainText("Jan to Jun 2023");
   await page.goto("/case-studies/dats/");
   await expect(page.locator("main")).toContainText("including Microsoft Advertising");
+});
+
+test("interview facts: hands-on roles, agency scope and Aegon scale are stated", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("#work .card__role").first()).toContainText("The partner agency ran day-to-day optimisation");
+  await expect(page.locator("#work")).toContainText("made the week-to-week changes in Meta and Google Ads");
+  await expect(page.locator("#systems .chips")).toContainText("Seven-figure annual budget");
+  await expect(page.locator("#systems")).not.toContainText("$");
+  await expect(page.locator("#experience .story")).toContainText("I led four client accounts");
+  await expect(page.locator("#experience .story")).toContainText("the breadth of agency work again, across more industries");
+  await page.locator("#role-kites-global summary").click();
+  await expect(page.locator("#role-kites-global")).toContainText("The client reported US$300K in revenue for the quarter the ads ran");
+  await page.locator("#role-enfection summary").click();
+  await expect(page.locator("#role-enfection")).toContainText("stayed with the agency");
+  await expect(page.locator("#toolkit")).toContainText("Google Ads, Meta Ads, LinkedIn Ads, TikTok Ads and Google Analytics 4");
+  await expect(page.locator(".ref").first()).toContainText("Nabi Zadeh");
+  await expect(page.locator("body")).not.toContainText("restructur");
+  await expect(page.locator("body")).not.toContainText("overspen");
 });
