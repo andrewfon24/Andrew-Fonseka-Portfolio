@@ -9,6 +9,16 @@ const dash = (d) => d.replace(" to ", " – ");
 <section class="band band--paper" id="experience" aria-labelledby="experience-title">
   <div class="container journey-grid">
     <div class="story" data-rise>
+      <img
+        class="story__face"
+        src="/images/andrew-fonseka-480.webp"
+        srcset="/images/andrew-fonseka-240.webp 240w, /images/andrew-fonseka-480.webp 480w"
+        sizes="7.5rem"
+        alt="Andrew Fonseka"
+        width="480"
+        height="600"
+        loading="lazy"
+      />
       <h2 id="experience-title">From Colombo to Vancouver.<br />Still asking better questions.</h2>
       <p>
         I’m Andrew. I started in Colombo’s agency teams after a degree in Management and Digital Innovation, working
@@ -16,11 +26,11 @@ const dash = (d) => d.replace(" to ", " – ");
       </p>
       <p>
         An MBA brought me to Vancouver. Most recently I ran paid media in-house at Aegon for U.S. and Canadian
-        financial products, and I advise a small number of clients independently.
+        financial products, alongside independent client projects. I’m now looking for my next paid media role here.
       </p>
       <p class="story__place">
         <Icon name="pin" size={18} />
-        <span>{profile.location}<small>Authorized to work in Canada</small></span>
+        <span>{profile.location}<small>{profile.eligibility}</small></span>
       </p>
       <a class="button button--outline story__cta" href={profile.resume} download data-track="resume_download" data-where="experience">
         The full story, in my résumé <Icon name="arrow-up-right" size={16} />

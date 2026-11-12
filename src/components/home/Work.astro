@@ -3,60 +3,22 @@ import Icon from "../Icon.astro";
 import Figure from "../Figure.astro";
 import Split from "../charts/Split.astro";
 import Columns from "../charts/Columns.astro";
-import FunnelCrmDemo from "../../islands/FunnelCrmDemo.tsx";
 import { caseById } from "../../content/site.js";
 
-const uni = caseById.university;
 const pan = caseById.panasia;
 const pet = caseById.petmart;
 const dats = caseById.dats;
 ---
 
-<section class="band band--paper" id="work" aria-labelledby="work-title">
+<section class="band band--paper band--follow" id="work" aria-labelledby="work-title">
   <div class="container">
     <div class="head" data-rise>
-      <h2 id="work-title">Judged in the CRM, <span class="accent">not the ad platform.</span></h2>
+      <h2 id="work-title">Same test, <span class="accent">three more accounts.</span></h2>
       <p>
-        Four quantified case studies, plus a confidential Aegon operating-process case below. Each result ends at a
-        customer: an enrolment, a funded loan, a first order.
+        A bank, a pet retailer and a trades college. Different platforms and budgets, each judged on what the client’s
+        own system recorded.
       </p>
     </div>
-
-    <article class="feature" data-rise aria-labelledby="feature-title">
-      <div class="feature__copy">
-        <ul class="card__meta chips" aria-label="Context">
-          <li class="chip">{uni.sector}</li>
-          <li class="chip">{uni.context}</li>
-          <li class="chip">{uni.period}</li>
-        </ul>
-        <h3 id="feature-title">{uni.headline[0]}{" "}<span class="accent">{uni.headline[1]}</span></h3>
-        <p class="card__role"><b>My role.</b> {uni.roleShort}</p>
-        <div class="stat-pair">
-          {
-            uni.stats.map((s) => (
-              <div class="stat">
-                <Figure value={s.value} count={s.count} prefix={s.prefix} suffix={s.suffix} />
-                <span class="stat__label">{s.label}</span>
-              </div>
-            ))
-          }
-        </div>
-        <div>
-          <a class="button button--solid" href="/case-studies/university/" data-track="case_open" data-case="university" data-where="work">
-            Read the case study <Icon name="arrow-right" size={17} class="icon-nudge" />
-          </a>
-        </div>
-      </div>
-      <div class="feature__demo demo">
-        <div aria-hidden="true" data-ss-fill>
-          <FunnelCrmDemo client:visible />
-        </div>
-        <p class="visually-hidden">
-          Illustrative CRM view: filtering 821 Meta leads to 430 CRM-qualified leads and 312 fee-paid enrolments, matched on name, phone and student ID.
-        </p>
-        <div class="demo__label"><span class="fine">Illustrative CRM view of the real funnel. No student data.</span></div>
-      </div>
-    </article>
 
     <div class="bento">
       <article class="card card--link" data-rise aria-labelledby="pan-title">

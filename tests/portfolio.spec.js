@@ -9,7 +9,7 @@ const email = "mailto:andrew@andrewfonseka.com";
 const hash = (value) => createHash("sha256").update(value).digest("hex");
 const pages = ["/", ...slugs.map((s) => `/case-studies/${s}/`)];
 
-test("homepage leads with the positioning, one email action and the four results", async ({ page }) => {
+test("homepage leads with the positioning, one email action, the funnel and the accounts", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
@@ -18,18 +18,29 @@ test("homepage leads with the positioning, one email action and the four results
   const primary = page.locator(".hero .button--primary");
   await expect(primary).toHaveCount(1);
   await expect(primary).toHaveAttribute("href", new RegExp(`^${email}`));
-  await expect(page.locator(".hero")).toContainText("Open to paid media roles in Greater Vancouver");
-  await expect(page.locator(".metrics__item")).toHaveCount(3);
-  for (const text of ["Agency", "In-house", "3 years", "in Paid Media"]) {
-    await expect(page.locator(".metrics")).toContainText(text);
+  await expect(page.locator(".hero")).toContainText("Available now in Greater Vancouver. Authorized to work in Canada.");
+  // The hero's visual is the real funnel, linked to its case study.
+  const signal = page.locator(".hero a.signal");
+  await expect(signal).toHaveAttribute("href", "/case-studies/university/");
+  for (const text of ["Meta leads", "821", "CRM-qualified", "430", "Fee-paid enrolments", "312"]) {
+    await expect(signal).toContainText(text);
   }
+  await expect(page.locator(".accounts li")).toHaveText([
+    "Pan Asia Bank",
+    "Petmart.lk",
+    "Godrej India",
+    "Costa Coffee Singapore",
+    "CDB Bank",
+    "Keells",
+    "DIMO Academy",
+    "Aegon",
+  ]);
   for (const slug of slugs) {
     await expect(page.locator(`a[href="/case-studies/${slug}/"]`).first()).toBeAttached();
   }
   // The Meta Ads Manager screenshot is gone everywhere.
   await expect(page.locator('img[src*="university-ads-results"]')).toHaveCount(0);
-  await expect(page.locator(".hero__visual img")).toHaveAttribute("alt", "Andrew Fonseka");
-  await expect(page.locator(".hero__visual .signal")).toHaveCount(0);
+  await expect(page.locator("#experience .story__face")).toHaveAttribute("alt", "Andrew Fonseka");
   expect(errors).toEqual([]);
 });
 
@@ -37,6 +48,9 @@ test("documents, contact links and analytics hooks are preserved", async ({ page
   await page.goto("/");
   await expect(page.locator("#contact h2")).toHaveText("Let’s talk paid media");
   await expect(page.locator("#contact a[href^='mailto:']")).toHaveAttribute("href", new RegExp(`^${email}`));
+  // Email is the first and most prominent contact action.
+  await expect(page.locator("#contact .contact__actions a").first()).toHaveAttribute("href", new RegExp(`^${email}`));
+  await expect(page.locator("#contact")).toContainText("available now in Greater Vancouver");
   await expect(page.locator("#contact")).not.toContainText("778");
   for (const name of ["Andrew_Fonseka_Resume.pdf", "Andrew_Fonseka_Portfolio.pdf"]) {
     const response = await request.get(`/documents/${name}`);
@@ -59,11 +73,12 @@ test("documents, contact links and analytics hooks are preserved", async ({ page
   await expect(page.locator(".cred")).toHaveCount(7);
 });
 
-test("navigation links to every section and collapses to brand plus résumé on phones", async ({ page }) => {
+test("navigation links to every section and collapses to brand, résumé and email on phones", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".nav__links a")).toHaveText(["Results", "How I work", "Experience", "Contact"]);
+  await expect(page.locator(".nav__links a")).toHaveText(["Results", "How I work", "Questions", "Experience"]);
+  await expect(page.locator(".nav__email")).toHaveAttribute("href", new RegExp(`^${email}`));
   await expect(page.locator('.nav__links a[href="#approach"]')).toHaveText("How I work");
-  for (const id of ["work", "systems", "approach", "experience", "contact"]) {
+  for (const id of ["decision", "work", "approach", "systems", "questions", "experience", "contact"]) {
     await expect(page.locator(`#${id}`)).toHaveCount(1);
   }
   await page.locator('.nav__links a[href="#experience"]').click();
@@ -77,11 +92,12 @@ test("navigation links to every section and collapses to brand plus résumé on 
   await expect(page.locator(".nav__links")).toBeHidden();
   await expect(page.locator(".brand")).toBeVisible();
   await expect(page.locator(".nav__resume")).toBeVisible();
+  await expect(page.locator(".nav__email")).toBeVisible();
 });
 
 test("case pages load directly, survive refresh and back, and link onward", async ({ page }) => {
   await page.goto("/");
-  await page.locator('.feature a[href="/case-studies/university/"]').click();
+  await page.locator('#decision a[href="/case-studies/university/"]').click();
   await expect(page).toHaveURL(/\/case-studies\/university\/$/);
   await expect(page.locator("h1")).toHaveText("Optimize for enrolments, not form fills.");
   await page.reload();
@@ -197,8 +213,10 @@ test("content and evidence remain readable without JavaScript", async ({ browser
     expect(hidden, path).toBe(0);
   }
   await page.goto("/");
-  await expect(page.locator(".metrics")).toContainText("3 years");
-  await expect(page.locator("#work")).toContainText("312");
+  await expect(page.locator(".hero .signal")).toContainText("312");
+  await expect(page.locator("#decision")).toContainText("125");
+  await expect(page.locator("#work")).toContainText("259");
+  await expect(page.locator("#questions dt")).toHaveCount(4);
   await expect(page.locator(".role")).toHaveCount(6);
   await page.goto("/case-studies/university/");
   await expect(page.locator("main")).toContainText("821");
@@ -210,7 +228,9 @@ test("reduced motion shows final figures and finished charts immediately", async
   const context = await browser.newContext({ reducedMotion: "reduce" });
   const page = await context.newPage();
   await page.goto("/");
-  await expect(page.locator(".metrics [data-count]")).toHaveText("3 years");
+  await expect(page.locator(".signal__row--win [data-count]")).toHaveText("312");
+  const bars = await page.locator(".signal__bar").evaluateAll((els) => els.map((el) => getComputedStyle(el).animationName));
+  expect(bars.every((name) => name === "none")).toBe(true);
   await page.goto("/case-studies/university/");
   const scales = await page.locator(".brief .bar-fill").evaluateAll((els) => els.map((el) => getComputedStyle(el).transform));
   expect(scales.every((t) => t !== "matrix(0, 0, 0, 1, 0, 0)")).toBe(true);
@@ -224,10 +244,10 @@ test("reduced motion shows final figures and finished charts immediately", async
 
 test("counters count up once and land on the real figure", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".metrics [data-count]")).toHaveText("3 years", { timeout: 4000 });
-  const feature = page.locator(".feature [data-count]").first();
-  await feature.scrollIntoViewIfNeeded();
-  await expect(feature).toHaveText("312", { timeout: 4000 });
+  await expect(page.locator(".signal__row--win [data-count]")).toHaveText("312", { timeout: 4000 });
+  const compare = page.locator(".compare__row--win [data-count]");
+  await compare.scrollIntoViewIfNeeded();
+  await expect(compare).toHaveText("125", { timeout: 4000 });
 });
 
 test("unknown pages recover to the work and email", async ({ page }) => {
@@ -239,12 +259,12 @@ test("unknown pages recover to the work and email", async ({ page }) => {
 
 test("hiring-evidence pass: role, ownership and corrected claims", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".hero__role")).toHaveText("Paid Media & Performance Marketing Specialist");
-  await expect(page.locator(".hero .actions a")).toHaveText(["Email me", "View case studies"]);
-  await expect(page.locator(".card__role")).toHaveCount(4);
+  await expect(page.locator(".hero .actions a")).toHaveText(["Email me", "See the decisions"]);
+  await expect(page.locator(".card__role")).toHaveCount(3);
+  await expect(page.locator(".decision__role")).toContainText("The partner agency ran day-to-day optimisation");
   await expect(page.locator(".card--process")).toHaveCount(0);
   await expect(page.locator('#systems a[href="/case-studies/aegon/"]')).toHaveCount(1);
-  await expect(page.locator("#approach .approach__steps li")).toHaveCount(5);
+  await expect(page.locator("#approach .approach__steps li h3")).toHaveText(["Audit", "Define", "Test", "Report"]);
   await expect(page.locator("main")).not.toContainText("Liveline");
   await expect(page.locator("main")).not.toContainText("Demand Gen");
   await expect(page.locator("#experience")).toContainText("one QA pass instead of rework");
@@ -266,4 +286,28 @@ test("hiring-evidence pass: role, ownership and corrected claims", async ({ page
   await expect(page.locator(".case-hero .chips")).toContainText("Jan to Jun 2023");
   await page.goto("/case-studies/dats/");
   await expect(page.locator("main")).toContainText("including Microsoft Advertising");
+});
+
+test("story pass: the opening decision and the questions use only sourced figures", async ({ page }) => {
+  await page.goto("/");
+  const decision = page.locator("#decision");
+  await expect(decision.locator("h2")).toHaveText("The cheaper leads were filling the wrong colleges.");
+  await expect(decision.locator(".compare__row")).toHaveCount(2);
+  await expect(decision.locator(".compare")).toContainText("603 leads");
+  await expect(decision.locator(".compare")).toContainText("161 leads");
+  await expect(decision.locator(".compare")).toContainText("not a controlled test");
+  await expect(page.locator("#work h2")).toHaveText("Same test, three more accounts.");
+  await expect(page.locator("#systems .head")).toContainText("The results are confidential");
+
+  const questions = page.locator("#questions");
+  await expect(questions.locator("dt")).toHaveText([
+    "Your agency years were in Sri Lanka. Does that carry over?",
+    "Three years in. Can you own an account?",
+    "Why are there no numbers from Aegon?",
+    "These budgets are small. Can you handle more?",
+  ]);
+  for (const fact of ["4 client accounts end to end", "259 funded gold loans", "US$25K", "about US$900 a month"]) {
+    await expect(questions).toContainText(fact);
+  }
+  await expect(questions.locator('a[href="/case-studies/aegon/"]')).toHaveCount(1);
 });

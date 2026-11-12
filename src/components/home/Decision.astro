@@ -1,0 +1,64 @@
+---
+import Icon from "../Icon.astro";
+import Figure from "../Figure.astro";
+import { decision, caseById } from "../../content/site.js";
+
+const uni = caseById.university;
+const max = Math.max(...decision.rows.map((r) => r.value));
+---
+
+<section class="band band--paper decision" id="decision" aria-labelledby="decision-title">
+  <div class="container decision__grid">
+    <div class="decision__copy" data-rise>
+      <h2 id="decision-title">
+        {decision.headline[0]}{" "}<span class="accent">{decision.headline[1]}</span>
+      </h2>
+      {decision.body.map((p) => <p>{p}</p>)}
+      <p class="decision__role"><b>My role.</b> {decision.role}</p>
+      <a
+        class="button button--solid"
+        href="/case-studies/university/"
+        data-track="case_open"
+        data-case="university"
+        data-where="decision"
+      >
+        Read the full case study <Icon name="arrow-right" size={17} class="icon-nudge" />
+      </a>
+    </div>
+
+    <figure class="compare" data-rise data-draw style="--delay: 120ms">
+      <figcaption>{decision.chartTitle}</figcaption>
+      <div class="compare__rows">
+        {
+          decision.rows.map((r, i) => (
+            <div class:list={["compare__row", r.win && "compare__row--win"]}>
+              <span class="compare__name">
+                {r.name}
+                <small>{r.leads}</small>
+              </span>
+              <span class="compare__track">
+                <span
+                  class:list={["bar-fill", r.win && "bar-fill--gold"]}
+                  style={`--v: ${(r.value / max).toFixed(3)}; --delay: ${200 + i * 180}ms`}
+                />
+              </span>
+              <Figure value={String(r.value)} count={r.value} class="compare__value" />
+            </div>
+          ))
+        }
+      </div>
+      <p class="fine">{decision.note}</p>
+      <dl class="compare__totals">
+        {
+          uni.stats.map((s) => (
+            <div>
+              <dt>{s.label}</dt>
+              <dd>{s.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class="fine">Totals are for all three campaigns. {uni.note}</p>
+    </figure>
+  </div>
+</section>
