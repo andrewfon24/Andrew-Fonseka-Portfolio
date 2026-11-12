@@ -165,9 +165,11 @@ test("journey entries and testimonials respond to input", async ({ page }) => {
   await expect(page.locator("#role-aegon")).toContainText("Intermediate Channel Marketing Specialist (Paid Media)");
   await expect(page.locator("#role-independent-projects")).toContainText("Jan 2026 – Sep 2026");
 
-  // Two excerpts, both visible, each a verbatim part of the full recommendation.
-  await expect(page.locator(".ref")).toHaveCount(2);
-  await expect(page.locator(".ref__label")).toHaveText(["Excerpt", "Excerpt"]);
+  // Three excerpts, all visible, each a verbatim part of the full recommendation.
+  await expect(page.locator(".ref")).toHaveCount(3);
+  await expect(page.locator(".ref__label")).toHaveText(["Excerpt", "Excerpt", "Excerpt"]);
+  await expect(page.locator(".ref").first()).toContainText("Nabi Zadeh");
+  await expect(page.locator("#references h2")).toHaveText("What people say about the work");
   for (const t of testimonials) {
     expect(t.quote.includes(t.excerpt)).toBe(true);
     await expect(page.locator(".ref", { hasText: t.name })).toContainText(t.excerpt);

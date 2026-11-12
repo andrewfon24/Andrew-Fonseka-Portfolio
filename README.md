@@ -24,7 +24,7 @@ npx playwright install chromium
 npm test
 ```
 
-Fourteen Playwright checks cover the positioning and primary action, the hero portrait and three linked outcomes, the four results chapters and their alignment, documents and analytics hooks, navigation, case routes with refresh and back, the university evidence that replaced the Meta Ads screenshot, the figure-free Aegon case, the timeline, testimonials and toolkit filters, automated WCAG 2.1 AA checks at desktop and phone widths, no-JavaScript reading, reduced motion, counters and 404 recovery. Chromium is read from `CHROMIUM_PATH` or `/usr/bin/chromium`; on macOS, `CHROMIUM_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"` uses an installed Chrome.
+Fifteen Playwright checks cover the positioning and primary action, the hero portrait and three linked outcomes, the four results chapters and their alignment, documents and analytics hooks, navigation, case routes with refresh and back, the university evidence that replaced the Meta Ads screenshot, the figure-free Aegon case, the timeline, testimonials and toolkit filters, automated WCAG 2.1 AA checks at desktop and phone widths, no-JavaScript reading, reduced motion, counters and 404 recovery. Chromium is read from `CHROMIUM_PATH` or `/usr/bin/chromium`; on macOS, `CHROMIUM_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"` uses an installed Chrome.
 
 ## Publish
 
