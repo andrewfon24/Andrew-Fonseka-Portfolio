@@ -287,7 +287,7 @@ test("hiring-evidence pass: role, ownership and corrected claims", async ({ page
   await expect(page.locator("main")).toContainText("including Microsoft Advertising");
 });
 
-test("story pass: four results told as problem, decision and result on one grid", async ({ page }) => {
+test("story pass: four results told as problem, decision and result, two to a row", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("#work h2")).toHaveText("Every result here ends at a customer.");
   const chapters = page.locator("#work .chapter");
@@ -310,9 +310,19 @@ test("story pass: four results told as problem, decision and result on one grid"
   await expect(page.locator("#systems .head")).toContainText("The results are confidential");
   await expect(page.locator("#questions")).toHaveCount(0);
 
-  // Story and evidence columns share their edges in every chapter.
-  const edges = await chapters.evaluateAll((els) =>
-    els.map((el) => [...el.children].map((child) => Math.round(child.getBoundingClientRect().left))),
+  // Two to a row, and each pair lines up row for row.
+  const boxes = await chapters.evaluateAll((els) =>
+    els.map((el) => {
+      const top = el.getBoundingClientRect().top;
+      return {
+        left: Math.round(el.getBoundingClientRect().left),
+        rows: [...el.children].map((child) => Math.round(child.getBoundingClientRect().top - top)).join(","),
+      };
+    }),
   );
-  expect(new Set(edges.map((e) => e.join(","))).size).toBe(1);
+  expect(boxes[0].left).toBe(boxes[2].left);
+  expect(boxes[1].left).toBe(boxes[3].left);
+  expect(boxes[0].left).toBeLessThan(boxes[1].left);
+  expect(boxes[0].rows).toBe(boxes[1].rows);
+  expect(boxes[2].rows).toBe(boxes[3].rows);
 });

@@ -8,7 +8,7 @@ Help hiring managers and marketing leaders see, in under a minute, that Andrew r
 ## Story (November 2026 pass)
 Written first for agency hiring managers in Greater Vancouver; the one action is email. One thread runs top to bottom: campaigns are judged on customers in the CRM, not clicks in the ad platform.
 1. Hero: the belief, the email action, "available now", and the real 821 to 430 to 312 funnel as the visual. The portrait sits in the nav and the journey section.
-2. Results: four accounts on one grid, each told the same way. Story on the left (the problem, the decision, the result, joined by one line that ends on gold), evidence on the right (figures, chart, caveat). The evidence card stays in view while its story is read.
+2. Results: four accounts as cards, two to a row, each told the same way: context, headline, the problem, the decision and the result (joined by one line that ends on gold), then the evidence (figures, chart, caveat), role and link. Card rows use subgrid so a pair lines up row for row.
 3. Approach: Audit, Define, Test, Report, in step with the demo.
 4. Aegon: the system, because the results are confidential.
 5. Colleagues, journey, stack, contact (email first).

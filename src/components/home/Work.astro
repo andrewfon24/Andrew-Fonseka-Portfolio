@@ -57,6 +57,7 @@ const max = Math.max(...decision.rows.map((r) => r.value));
 
       <Chapter
         id="panasia"
+        delay={100}
         chips={[pan.client, pan.context, pan.period]}
         headline={pan.headline}
         problem={pan.problem}
@@ -84,7 +85,7 @@ const max = Math.max(...decision.rows.map((r) => r.value));
       >
         <div class="chart-title"><strong>Indexed change on the previous quarter</strong><span>Before = 100, client-reported</span></div>
         <Columns
-          height="9rem"
+          height="7.5rem"
           label="Indexed change: sales 100 before, 140 after; subscriptions 100 before, 130 after"
           bars={[
             { label: "Sales before", value: 100, tone: "soft" },
@@ -97,6 +98,7 @@ const max = Math.max(...decision.rows.map((r) => r.value));
 
       <Chapter
         id="dats"
+        delay={100}
         chips={[dats.clientShort, dats.context, dats.period]}
         headline={dats.headline}
         problem={dats.problem}
@@ -108,7 +110,7 @@ const max = Math.max(...decision.rows.map((r) => r.value));
       >
         <div class="chart-title"><strong>CRM-qualified leads per quarter</strong><span>Same qualification rule, client-reported</span></div>
         <Columns
-          height="9rem"
+          height="7.5rem"
           label="CRM-qualified leads: 178 in December 2025 to February 2026, 212 in March to May 2026"
           bars={[
             { label: "Dec 2025 to Feb 2026", value: 178, tone: "soft" },

@@ -1,40 +1,36 @@
 ---
 // One result, told the same way every time: the problem, the decision and
-// what the client's system recorded, with the evidence beside it.
+// what the client's system recorded, then the evidence. The card's rows sit
+// on the section's grid (subgrid), so two cards side by side line up row for
+// row: context, headline, story, evidence, role, link.
 import Icon from "../Icon.astro";
 import Figure from "../Figure.astro";
 
-const { id, chips, headline, problem, decision, decisionLabel = "The decision", result, role, stats, note } = Astro.props;
+const { id, chips, headline, problem, decision, decisionLabel = "The decision", result, role, stats, note, delay = 0 } =
+  Astro.props;
 const href = `/case-studies/${id}/`;
 ---
 
-<article class="chapter" aria-labelledby={`${id}-title`}>
-  <div class="chapter__story" data-rise>
-    <ul class="chips" aria-label="Context">
-      {chips.map((chip) => <li class="chip">{chip}</li>)}
-    </ul>
-    <h3 id={`${id}-title`}>{headline[0]}{" "}<span class="accent">{headline[1]}</span></h3>
-    <ol class="beats">
-      <li>
-        <h4>The problem</h4>
-        <p>{problem}</p>
-      </li>
-      <li>
-        <h4>{decisionLabel}</h4>
-        <p>{decision}</p>
-      </li>
-      <li class="beats__result">
-        <h4>The result</h4>
-        <p>{result}</p>
-      </li>
-    </ol>
-    <p class="card__role"><b>My role.</b> {role}</p>
-    <a class="button button--solid" href={href} data-track="case_open" data-case={id} data-where="work">
-      Read the case study <Icon name="arrow-right" size={17} class="icon-nudge" />
-    </a>
-  </div>
-
-  <div class="chapter__evidence" data-rise style="--delay: 120ms">
+<article class="chapter" aria-labelledby={`${id}-title`} data-rise style={`--delay: ${delay}ms`}>
+  <ul class="chips" aria-label="Context">
+    {chips.map((chip) => <li class="chip">{chip}</li>)}
+  </ul>
+  <h3 id={`${id}-title`}>{headline[0]}{" "}<span class="accent">{headline[1]}</span></h3>
+  <ol class="beats">
+    <li>
+      <h4>The problem</h4>
+      <p>{problem}</p>
+    </li>
+    <li>
+      <h4>{decisionLabel}</h4>
+      <p>{decision}</p>
+    </li>
+    <li class="beats__result">
+      <h4>The result</h4>
+      <p>{result}</p>
+    </li>
+  </ol>
+  <div class="chapter__evidence">
     <dl class="chapter__stats">
       {
         stats.map((s) => (
@@ -52,4 +48,8 @@ const href = `/case-studies/${id}/`;
     </div>
     <p class="fine">{note}</p>
   </div>
+  <p class="card__role"><b>My role.</b> {role}</p>
+  <a class="button button--solid chapter__link" href={href} data-track="case_open" data-case={id} data-where="work">
+    Read the case study <Icon name="arrow-right" size={17} class="icon-nudge" />
+  </a>
 </article>

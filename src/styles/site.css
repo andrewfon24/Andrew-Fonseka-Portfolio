@@ -3346,35 +3346,45 @@ a.client-chip:hover {
   color: var(--color-gold);
 }
 
-/* Results: four chapters on one grid. Story left, evidence right, every
-   edge shared, so the eye reads down either column without re-finding it. */
+/* Results: four chapters, two to a row. Each card's six rows (context,
+   headline, story, evidence, role, link) sit on the section's grid, so a
+   pair lines up row for row and the page stays short. */
 .chapters {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
 }
 
 .chapter {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: start;
-  gap: var(--space-8);
-  padding-block: var(--space-8);
-  border-top: 1px solid var(--color-rule);
-}
-
-.chapter:first-child {
-  padding-top: 0;
-  border-top: 0;
-}
-
-.chapter__story {
-  display: grid;
+  grid-row: span 6;
+  grid-template-rows: subgrid;
+  row-gap: var(--space-5);
   justify-items: start;
-  gap: var(--space-5);
+  padding: var(--space-6);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
 }
 
-.chapter__story h3 {
-  max-width: 16ch;
-  font-size: clamp(1.875rem, 1.4rem + 1.6vw, 2.75rem);
+.chapter,
+.js .chapter[data-rise] {
+  transition:
+    opacity var(--dur-slow) var(--ease-out) var(--delay, 0ms),
+    transform var(--dur-slow) var(--ease-out) var(--delay, 0ms),
+    box-shadow var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .chapter:hover {
+    border-color: var(--color-blue-soft);
+    box-shadow: var(--shadow-card);
+  }
+}
+
+.chapter h3 {
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
   text-wrap: balance;
 }
 
@@ -3382,9 +3392,8 @@ a.client-chip:hover {
 .beats {
   position: relative;
   display: grid;
-  gap: var(--space-5);
-  max-width: 52ch;
-  margin-block: var(--space-2);
+  align-content: start;
+  gap: var(--space-4);
 }
 
 .beats::before {
@@ -3407,13 +3416,13 @@ a.client-chip:hover {
 .beats li::before {
   content: "";
   position: absolute;
-  top: 0.4375rem;
+  top: 0.375rem;
   left: 0;
   width: 0.6875rem;
   height: 0.6875rem;
   border: 2px solid var(--color-blue-bright);
   border-radius: var(--radius-pill);
-  background: var(--color-paper);
+  background: var(--color-surface);
 }
 
 .beats .beats__result::before {
@@ -3424,10 +3433,15 @@ a.client-chip:hover {
 .beats h4 {
   color: var(--color-muted);
   font-family: var(--font-body);
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   font-weight: 600;
   letter-spacing: 0;
   line-height: 1.6;
+}
+
+.beats p {
+  font-size: var(--text-sm);
+  line-height: 1.55;
 }
 
 .beats .beats__result h4 {
@@ -3436,27 +3450,25 @@ a.client-chip:hover {
 
 .beats .beats__result p {
   color: var(--color-ink);
-  font-size: var(--text-md);
+  font-size: var(--text-base);
   font-weight: 500;
   line-height: 1.5;
 }
 
 .chapter__evidence {
-  position: sticky;
-  top: calc(var(--nav-height) + var(--space-5));
   display: grid;
-  gap: var(--space-6);
-  padding: var(--space-6);
-  border: 1px solid var(--color-rule);
+  grid-template-rows: auto 1fr auto;
+  justify-self: stretch;
+  gap: var(--space-5);
+  padding: var(--space-5);
   border-radius: var(--radius-md);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
+  background: var(--color-paper);
 }
 
 .chapter__stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-5);
+  gap: var(--space-4);
   margin: 0;
 }
 
@@ -3464,12 +3476,11 @@ a.client-chip:hover {
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-end;
-  gap: var(--space-2);
+  gap: var(--space-1);
 }
 
 .chapter__stats dt {
-  max-width: 18ch;
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   line-height: 1.4;
 }
 
@@ -3478,16 +3489,37 @@ a.client-chip:hover {
 }
 
 .chapter__stats .figure {
-  font-size: clamp(1.75rem, 1.3rem + 1.3vw, 2.5rem);
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2.125rem);
 }
 
 .chapter__chart {
   display: grid;
-  gap: var(--space-4);
-  min-height: 13rem;
   align-content: end;
-  padding-top: var(--space-6);
+  gap: var(--space-3);
+  padding-top: var(--space-5);
   border-top: 1px solid var(--color-rule);
+}
+
+.chapter .card__role {
+  align-self: start;
+}
+
+.chapter__link {
+  align-self: end;
+}
+
+.chapter .compare__row {
+  grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr) 3.5rem;
+  gap: var(--space-3);
+  padding-block: var(--space-3);
+}
+
+.chapter .compare__track {
+  height: 1.75rem;
+}
+
+.chapter .compare__value {
+  font-size: var(--text-lg);
 }
 
 .chapters__note {
@@ -3495,24 +3527,23 @@ a.client-chip:hover {
 }
 
 @media (max-width: 60rem) {
-  .chapter {
+  .chapters {
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-6);
-    padding-block: var(--space-7);
   }
 
-  .chapter__evidence {
-    position: static;
-  }
-
-  .chapter__chart {
-    min-height: 0;
+  .chapter {
+    grid-row: auto;
+    grid-template-rows: none;
   }
 }
 
 @media (max-width: 40rem) {
-  .chapter__evidence {
+  .chapter {
     padding: var(--space-5);
+  }
+
+  .chapter__evidence {
+    padding: var(--space-4);
   }
 
   .chapter__stats {
@@ -3523,8 +3554,8 @@ a.client-chip:hover {
     font-size: 1.375rem;
   }
 
-  .chapter__stats dt {
-    font-size: var(--text-xs);
+  .chapter .compare__row {
+    grid-template-columns: minmax(0, 1fr) 3.5rem;
   }
 }
 
