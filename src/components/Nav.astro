@@ -1,11 +1,11 @@
 ---
 import Icon from "./Icon.astro";
-import { profile, mailto } from "../content/site.js";
+import { profile } from "../content/site.js";
 
 const { home = false } = Astro.props;
 const links = [
   ["work", "Results"],
-  ["approach", "Approach"],
+  ["approach", "How I work"],
   ["experience", "Experience"],
   ["contact", "Contact"],
 ];
@@ -28,21 +28,15 @@ const links = [
         }
       </ul>
     </nav>
-    <div class="nav__actions">
-      <a
-        class="button button--ghost nav__resume"
-        href={profile.resume}
-        download
-        aria-label="Download résumé"
-        data-track="resume_download"
-        data-where="header"
-      >
-        <Icon name="download" size={16} />
-        <span>Résumé</span>
-      </a>
-      <a class="button button--primary nav__email" href={mailto} data-track="email_click" data-where="header">
-        Email me
-      </a>
-    </div>
+    <a
+      class="button button--ghost nav__resume"
+      href={profile.resume}
+      download
+      data-track="resume_download"
+      data-where="header"
+    >
+      <Icon name="download" size={16} />
+      Résumé
+    </a>
   </div>
 </header>

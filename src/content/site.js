@@ -1,7 +1,6 @@
 // Single source of truth for the site. Every figure and claim comes from the
-// supplied résumé and portfolio PDFs (2026), or from the owner's own answers
-// in the November 2026 objection interview (marked "owner, Nov 2026" below).
-// Do not add numbers that are not in those sources.
+// supplied résumé and portfolio PDFs (2026). Do not add numbers that are not
+// in those documents.
 
 export const profile = {
   name: "Andrew Fonseka",
@@ -11,19 +10,54 @@ export const profile = {
   location: "Greater Vancouver, BC",
   resume: "/documents/Andrew_Fonseka_Resume.pdf",
   portfolio: "/documents/Andrew_Fonseka_Portfolio.pdf",
-  status: "Available now in Greater Vancouver",
-  eligibility: "Authorized to work in Canada",
+  status: "Open to paid media roles in Greater Vancouver",
 };
 
 export const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(
   "Paid media role – intro",
 )}`;
 
-// The strip under the hero: three outcomes, each linked to its case study.
+// The band under the hero, as on the owner's earlier site.
 export const metrics = [
-  { value: "312", count: 312, label: "fee-paid enrolments", source: "Private university, Saudi Arabia", case: "university" },
-  { value: "259", count: 259, label: "funded gold loans", source: "Pan Asia Bank", case: "panasia" },
-  { value: "4:1", count: 4, suffix: ":1", label: "first-order ROAS", source: "Petmart.lk, Shopping and Performance Max", case: "petmart" },
+  { value: "Agency", label: "Strategy and client-facing delivery" },
+  { value: "In-house", label: "Measurement and marketing operations" },
+  { value: "3 years", count: 3, suffix: " years", label: "in Paid Media" },
+];
+
+// Headline results, in portfolio-PDF order. `count` drives the counter.
+export const proof = [
+  {
+    value: "312",
+    count: 312,
+    label: "fee-paid enrolments",
+    source: "Private university, Saudi Arabia, May to Aug 2026",
+    case: "university",
+  },
+  {
+    value: "259",
+    count: 259,
+    label: "funded gold loans",
+    source: "Pan Asia Bank, US$25K media budget",
+    case: "panasia",
+  },
+  {
+    value: "4:1",
+    prefix: "",
+    count: 4,
+    suffix: ":1",
+    label: "first-order ROAS",
+    source: "Petmart.lk, Google Shopping and PMax",
+    case: "petmart",
+  },
+  {
+    value: "+19%",
+    count: 19,
+    prefix: "+",
+    suffix: "%",
+    label: "CRM-qualified leads at flat spend",
+    source: "DIMO Academy for Technical Studies, 2026",
+    case: "dats",
+  },
 ];
 
 export const cases = [
@@ -37,13 +71,9 @@ export const cases = [
     headline: ["Trust the data.", "Then automate the routine."],
     summary:
       "Paid media for annuity, life insurance, pension and wealth products in the U.S. and Canada, with the tracking, CRM signal and automation behind it.",
-    // Owner, Nov 2026: the budget band may be stated as "seven-figure annual"
-    // and nothing more specific. No other Aegon figure is shown.
-    scale: "Seven-figure annual budget",
-    role: "Managed Google Ads, Meta and LinkedIn campaigns for U.S. and Canadian financial products on a seven-figure annual budget, and helped develop and launch a LinkedIn lead-generation program for high-net-worth investors with the team.",
+    role: "Managed Google Ads, Meta and LinkedIn campaigns for U.S. and Canadian financial products, and helped develop and launch a LinkedIn lead-generation program for high-net-worth investors with the team.",
     roleShort: "Managed Google Ads, Meta and LinkedIn; built the team's campaign builder.",
-    lede: "Then I went in-house. At Aegon I ran Google Ads, Meta and LinkedIn for U.S. and Canadian financial products. The results are confidential, so here is the system I built instead.",
-    note: "Illustrative process. No employer results or figures are shown.",
+    note: "Illustrative process. No employer results, budgets or figures are shown.",
     caseType: "Confidential operating-process case",
     problemShort: "Hand-built launches meant inconsistent names and UTMs, and slow manual compliance checks.",
     builtShort: "A Sheet and Apps Script campaign builder that generates names and UTMs and runs compliance QA before launch.",
@@ -65,14 +95,12 @@ export const cases = [
       "Two colleges needed more students. A broad undergraduate campaign produced enquiries, but only 17 enrolments for those colleges.",
     decision:
       "A dedicated Meta campaign and budget for the two priority colleges, separate from the broad undergraduate campaign. Every campaign judged on fee-paid enrolments in the university’s CRM, not form fills.",
-    result: "125 fee-paid enrolments at the two priority colleges, against 17 from the broad campaign. Across all three campaigns: 312 enrolments at about US$20 of media each.",
-    role: "Recommended the strategy, including the separate priority-colleges campaign and budget, and built the campaigns in Meta Ads Manager: the audience structure, the placements and a higher-intent lead form. I also had input on the creative.",
+    role: "Recommended the strategy, including the separate priority-colleges campaign and budget, and set up the campaigns in Meta Ads Manager.",
     roleShort: "Strategy recommendation and campaign setup.",
     ownership: {
       me: [
         "Recommended a separate campaign and budget for the two priority colleges.",
-        "Built the campaigns in Meta Ads Manager: audience structure, placements and a higher-intent lead form.",
-        "Gave input on the creative.",
+        "Set up the campaigns, lead forms and targeting in Meta Ads Manager.",
       ],
       others: [
         "Day-to-day optimisation during May to August.",
@@ -111,9 +139,8 @@ export const cases = [
       "Pan Asia Bank wanted gold-loan customers from paid media. A fixed US$25K budget had to produce funded loans, not just enquiries.",
     decision:
       "The bank’s sales team rated Meta leads as higher quality at a lower cost per lead, so the plan allocated 60% to Meta and 40% to Google Ads from the start, measured on funded loans in the bank’s own system.",
-    result: "259 funded gold loans, as reported by the bank, at about US$97 of media per loan.",
-    role: "Account lead: strategy, the week-to-week changes in Meta Ads and Google Ads, and the monthly client calls. I also pitched the Meta video, in which a mother takes a gold loan to pay for her daughter’s wedding. The bank approved it.",
-    roleShort: "Account lead. I set the strategy, made the week-to-week changes in Meta and Google Ads, pitched the Meta video and joined the client calls.",
+    role: "Account lead: strategy, the Meta video pitch and client calls.",
+    roleShort: "Account lead: strategy, the Meta video pitch and client calls.",
     limits: [
       "Campaign period: January to June 2023. The 60/40 split was the starting plan, not a later reallocation.",
       "Funded loans are as reported by the bank, which owns the matching to campaign leads.",
@@ -143,9 +170,8 @@ export const cases = [
     decision:
       "Split Google Shopping and Performance Max by new vs returning customers, and read first-order return alongside paid-attributed sales and subscriptions.",
     decisionLabel: "Actions",
-    result: "A 4:1 first-order ROAS on Shopping and Performance Max. The client also reported paid-attributed sales up 40% and subscriptions up 30% on the previous quarter.",
-    role: "Paid media strategy and delivery for Google Shopping and Performance Max. I made the week-to-week changes in the account myself.",
-    roleShort: "Strategy and hands-on delivery. I made the week-to-week changes in the account myself.",
+    role: "Paid media strategy and delivery for Google Shopping and Performance Max.",
+    roleShort: "Paid media strategy and delivery.",
     sideProject:
       "Separately, in February 2023, I helped launch a Valentine’s Day activation with Sugar Beach (HI Magazine coverage). It sits outside the March to May reporting period and is not counted in these results.",
     businessContext:
@@ -178,9 +204,8 @@ export const cases = [
       "The college needed more enrolment-ready prospects at the same budget.",
     decision:
       "Judge campaigns on CRM-qualified leads, rebuild Google Ads and Meta around them, and add Microsoft Advertising as a new intent source.",
-    result: "212 CRM-qualified leads, up from 178 the quarter before: 19% more at the same budget of about US$900 a month.",
-    role: "Advised on acquisition strategy, supported the Google Ads and Meta rebuild and made the in-platform changes week to week. Deployed the AI chat assistant and added Microsoft Advertising.",
-    roleShort: "Acquisition strategy and the week-to-week changes in the accounts. I added Microsoft Ads and the AI assistant.",
+    role: "Advised on acquisition strategy and supported the Google Ads and Meta rebuild. Deployed the AI chat assistant and added Microsoft Advertising.",
+    roleShort: "Acquisition strategy, rebuild support, Microsoft Ads and the AI assistant.",
     limits: [
       "Compares March to May 2026 (212) with December 2025 to February 2026 (178), using the same CRM qualification rule.",
       "Total media stayed at about US$900 a month, including Microsoft Advertising.",
@@ -285,29 +310,15 @@ export const builder = {
   ],
 };
 
-// The opening story: one real decision from the university case. Every
-// figure is from the campaign table below (`university`).
-export const decision = {
-  headline: ["The cheaper leads were filling", "the wrong colleges."],
-  role: "I set the strategy and built the campaigns in Meta Ads Manager: the audience structure, the placements and a higher-intent lead form. The partner agency ran day-to-day optimisation.",
-  chartTitle: "Fee-paid enrolments at the two priority colleges",
-  rows: [
-    { name: "Broad undergraduate", leads: "603 leads", value: 17 },
-    { name: "Priority colleges", leads: "161 leads", value: 125, win: true },
-  ],
-  note: "Both ran 1 May to 31 August 2026. They targeted different programmes, so this compares audiences and is not a controlled test.",
-};
-
-// How I work: the four moves the demo beside it walks through. Method only,
-// no figures.
 export const approach = {
   headline: ["Signal first.", "Budget follows evidence."],
-  intro: "The same four moves on every account, whatever the platform or the budget. Nothing goes live until it has passed my pre-launch checklist.",
+  intro: "One real decision, step by step, from the university case.",
   steps: [
-    { title: "Audit", body: "Check the signal can be trusted before touching bids: conversion tracking, CRM fields, creative and search terms.", icon: "scan-search" },
-    { title: "Define", body: "Agree with the client which outcome counts, then point campaigns at qualified leads instead of form fills.", icon: "target" },
-    { title: "Test", body: "Judge every test on that outcome. Pause what loses and move budget to what wins.", icon: "split" },
-    { title: "Report", body: "Report cost per customer, pipeline quality and the next move, in terms the client can act on.", icon: "presentation" },
+    { title: "Signal observed", body: "Broad leads were cheap, but only 17 enrolments came from the two colleges that needed students.", icon: "radar" },
+    { title: "Alternatives considered", body: "Keep scaling the broad campaign for cheaper leads, or fund the priority colleges directly.", icon: "split" },
+    { title: "Decision", body: "A dedicated campaign and budget for the two colleges, accepting a higher cost per lead.", icon: "target" },
+    { title: "Evidence reviewed", body: "Fee-paid enrolments in the admissions CRM: 125 from the dedicated campaign against 17 from broad.", icon: "scan-search" },
+    { title: "Next action", body: "Judge every campaign on fee-paid enrolments, not form fills.", icon: "presentation" },
   ],
 };
 
@@ -321,7 +332,7 @@ export const experience = [
     date: "Jan 2025 to Oct 2026",
     start: 2025,
     points: [
-      "Launched and managed Google Ads, Meta and LinkedIn campaigns for annuity, life insurance, pension and wealth products in the U.S. and Canada, on a seven-figure annual budget.",
+      "Launched and managed Google Ads, Meta and LinkedIn campaigns for annuity, life insurance, pension and wealth products in the U.S. and Canada.",
       "Helped develop and launch a LinkedIn lead-generation program for high-net-worth investors, with the team.",
       "Aligned web, product and compliance reviewers on a pre-launch checklist I owned, so launches went through one QA pass instead of rework.",
       "Connected HubSpot offline conversions to Smart Bidding and Meta: lower cost per lead and more completed applications at flat spend.",
@@ -341,8 +352,6 @@ export const experience = [
     points: [
       "Saudi private university (via partner agency, May to Aug 2026): recommended the Meta lead-generation strategy and set up the campaigns.",
       "DIMO Academy for Technical Studies: Google Ads and Meta rebuild, AI chat assistant and Microsoft Advertising; CRM-qualified leads +19% at flat spend.",
-      "Also for DIMO Academy: ran the creative and ad copy for a campaign built around a cross-country engineering showcase, with mobile pop-ups around Sri Lanka and a vehicle engine on display.",
-      "A third independent client, in the automobile sector.",
     ],
     clients: [
       { name: "Private university, Saudi Arabia", detail: "Meta lead generation to enrolment", href: "/case-studies/university/" },
@@ -368,9 +377,6 @@ export const experience = [
     start: 2023,
     points: [
       "Managed 4 client accounts end to end and supported 5 more across banking, retail, e-commerce and education.",
-      "Made the week-to-week changes in the ad accounts myself, joined the monthly client calls and at times presented the weekly updates.",
-      "Pitched Pan Asia Bank a Meta video in which a mother takes a gold loan to pay for her daughter’s wedding. The bank approved it.",
-      "Godrej India: a 30-creator influencer program and TikTok Ads. The client reported US$300K in revenue for the quarter the ads ran.",
     ],
     clients: [
       { name: "Pan Asia Bank", detail: "Account lead, Meta and Google Ads", href: "/case-studies/panasia/" },
@@ -387,8 +393,7 @@ export const experience = [
     date: "Jul 2022 to Dec 2022",
     start: 2022,
     points: [
-      "Supported Google Shopping, Performance Max and Meta campaigns across 3 markets, making the in-platform changes week to week.",
-      "Kept a pharmaceutical client whose first brief would have broken Meta’s rules for advertising medical products. With a language barrier in the way, I built a visual presentation of a compliant strategy. The client approved it and stayed with the agency.",
+      "Supported Google Shopping, Performance Max and Meta campaigns across 3 markets.",
     ],
     clients: [
       { name: "CDB Bank", detail: "Shopping, PMax and Meta" },
@@ -438,9 +443,6 @@ export const stackGroups = [
   { id: "email", name: "Email & CRM", tools: ["HubSpot", "Mailchimp", "Klaviyo"] },
   { id: "cms", name: "CMS, e-commerce & design", tools: ["Shopify", "Canva"] },
 ];
-
-// Owner, Nov 2026: the five platforms he is comfortable being tested on.
-export const coreTools = ["Google Ads", "Meta Ads", "LinkedIn Ads", "TikTok Ads", "Google Analytics 4"];
 
 export const certifications = [
   { title: "Google Ads Search", issuer: "Google", year: "2026", domain: "google.com" },

@@ -5,14 +5,6 @@ Locked system for every page. Hallmark reads this file first; it overrides theme
 ## Purpose
 Help hiring managers and marketing leaders see, in under a minute, that Andrew runs paid media judged on business outcomes, then email him. Positioning: Paid Media & Performance Marketing Specialist.
 
-## Story (November 2026 pass)
-Written first for agency hiring managers in Greater Vancouver; the one action is email. One thread runs top to bottom: campaigns are judged on customers in the CRM, not clicks in the ad platform.
-1. Hero: the belief, the email action, "available now" and the portrait. Beneath it, three outcomes (312 fee-paid enrolments, 259 funded loans, 4:1 first-order ROAS), each linked to its case study, so the first screen carries proof.
-2. Results: four accounts as cards, two to a row: context, headline, the one-line result, the evidence (figures, chart, caveat), then role and link. The problem and decision live on the case-study pages. Card rows use subgrid so a pair lines up row for row.
-3. Aegon: the demo with three facts beside it (the problem, what I built, who I worked with). The step list stays on the Aegon case page. It follows the four results so all the work sits together.
-4. Approach: closes the Aegon section in the same dark band, under a hairline: Audit, Define, Test, Report in one row. The approach demo is no longer on the homepage.
-5. Colleagues, journey, stack, contact (email first).
-
 ## Genre and posture
 Premium SaaS product page crossed with a personal brand site. Dark navy for the story-telling bands (hero, Aegon systems, contact); pale blue paper for evidence (case cards, charts). Minimal prose: every section leads with a visual (chart, product demo, timeline), with words as captions.
 
@@ -34,7 +26,7 @@ All colour and type go through `src/styles/tokens.css`. Brand values come from t
 - Liveline renders the illustrative pacing line only: no axis values, no result figures.
 
 ## Motion
-Rich and purposeful. The hero enters once on load. Sections reveal once on entry (opacity plus 16px rise, 600ms, ease-out); counters run 1.2s; charts draw on entry; cards respond to the pointer with a soft spotlight. Demos play when in view and pause when offscreen. Under `prefers-reduced-motion: reduce` everything renders in its final state and demos show their poster frame. Without JavaScript all content is visible.
+Rich and purposeful. Sections reveal once on entry (opacity plus 16px rise, 600ms, ease-out); counters run 1.2s; charts draw on entry; cards respond to the pointer with a soft spotlight. Demos play when in view and pause when offscreen. Under `prefers-reduced-motion: reduce` everything renders in its final state and demos show their poster frame. Without JavaScript all content is visible.
 
 ## Content boundaries
-The résumé and portfolio PDFs are the source of truth, together with the owner's answers in the November 2026 objection interview (marked in `src/content/site.js`). Never invent results, testimonials, logos or client names. Aegon shows process and responsibilities, never figures; the one permitted statement of scale is the wording "seven-figure annual budget", with no currency or amount. The early budget-entry mistake stays off the site (only the pre-launch checklist is mentioned), as does the work-permit end date. The Saudi university stays anonymous. Phone number stays off the site; email is andrew@andrewfonseka.com.
+The résumé and portfolio PDFs are the source of truth. Never invent results, testimonials, logos or client names. Aegon shows process and responsibilities, never figures. The Saudi university stays anonymous. Phone number stays off the site; email is andrew@andrewfonseka.com.
