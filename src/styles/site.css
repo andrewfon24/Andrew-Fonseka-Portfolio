@@ -3699,3 +3699,9 @@ a.client-chip:hover {
     grid-template-columns: 2.75rem minmax(0, 1fr);
   }
 }
+
+/* Context pills keep their own height when a neighbouring card's pills wrap */
+.chapter .chips {
+  align-items: flex-start;
+  align-content: flex-start;
+}
