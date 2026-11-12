@@ -351,6 +351,8 @@ test("objection pass: hands-on work, agency scope and Aegon scale are stated", a
   // Agency scope is visible without opening anything.
   await expect(page.locator("#experience .story")).toContainText("I led four client accounts");
   await expect(page.locator("#experience .story")).toContainText("hybrid or on-site");
+  await expect(page.locator("#experience .story")).toContainText("the breadth of agency work again, across more industries");
+  await expect(page.locator("body")).not.toContainText("restructur");
   await page.locator("#role-kites-global summary").click();
   await expect(page.locator("#role-kites-global")).toContainText("The client reported US$300K in revenue for the quarter the ads ran");
   await expect(page.locator("#role-kites-global")).toContainText("The bank approved it");

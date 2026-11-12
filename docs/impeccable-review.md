@@ -45,4 +45,5 @@ A hiring-manager read of the site raised six objections; the owner answered each
 - Practical fit: five platforms the owner will be tested on, and hybrid or on-site, stated in the toolkit intro, the story and the contact band.
 - Kept off the site on purpose: the budget-entry mistake (interview story; only the pre-launch checklist is mentioned) and the work-permit end date.
 - Testimonials: a third excerpt, from the owner's lecturer at University Canada West (LinkedIn, 4 November 2026), now leads the row; it is the first from Canada and the first to mention paid search and GA4. The section heading no longer says "colleagues".
+- Why agency after in-house: one line in the Experience story (Aegon was one sector; the owner wants breadth across industries again). The reason the Aegon role ended, a restructuring, stays off the site as an interview answer.
 - Still open: a recommendation from an Aegon colleague has been requested and is not yet on the site.
