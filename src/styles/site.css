@@ -3621,3 +3621,81 @@ a.client-chip:hover {
 .journey-list .role::before {
   top: calc(var(--space-4) + 0.3rem);
 }
+
+/* Approach closes the Aegon section: one dark band, a hairline between them,
+   four steps in a row */
+#systems {
+  padding-bottom: var(--space-8);
+}
+
+.approach {
+  padding-block: 0 var(--space-9);
+}
+
+.approach__inner {
+  display: grid;
+  gap: var(--space-7);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-navy-line);
+}
+
+.approach__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: end;
+  gap: var(--space-7);
+}
+
+.approach__head h2 {
+  font-size: clamp(1.875rem, 1.4rem + 1.5vw, 2.625rem);
+  text-wrap: balance;
+}
+
+.approach__head p {
+  max-width: 44ch;
+  font-size: var(--text-md);
+}
+
+.approach .approach__steps {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+.approach .approach__steps li {
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  padding: 0;
+  border: 0;
+}
+
+.approach .approach__num {
+  background: var(--color-navy-raised);
+  color: var(--color-sky);
+}
+
+.approach .approach__steps h3 {
+  margin-bottom: var(--space-1);
+  color: var(--color-on-dark);
+}
+
+@media (max-width: 60rem) {
+  .approach__head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .approach .approach__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 40rem) {
+  .approach .approach__steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+
+  .approach .approach__steps li {
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+  }
+}

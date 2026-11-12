@@ -10,7 +10,7 @@ Written first for agency hiring managers in Greater Vancouver; the one action is
 1. Hero: the belief, the email action, "available now" and the portrait. Beneath it, three outcomes (312 fee-paid enrolments, 259 funded loans, 4:1 first-order ROAS), each linked to its case study, so the first screen carries proof.
 2. Results: four accounts as cards, two to a row: context, headline, the one-line result, the evidence (figures, chart, caveat), then role and link. The problem and decision live on the case-study pages. Card rows use subgrid so a pair lines up row for row.
 3. Aegon: the demo with three facts beside it (the problem, what I built, who I worked with). The step list stays on the Aegon case page. It follows the four results so all the work sits together.
-4. Approach: Audit, Define, Test, Report, in step with the demo.
+4. Approach: closes the Aegon section in the same dark band, under a hairline: Audit, Define, Test, Report in one row. The approach demo is no longer on the homepage.
 5. Colleagues, journey, stack, contact (email first).
 
 ## Genre and posture

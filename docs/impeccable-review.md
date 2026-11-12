@@ -34,3 +34,5 @@ Validation: production build, fourteen Playwright checks, axe WCAG 2.1 AA at 144
 ## Tightening pass
 
 The homepage was cut from about 10.4 to 8.9 desktop screens (21.2 to 17.4 on a phone): result cards carry the headline and the result only, Aegon drops the step list that repeated the demo, the stack keeps every tool but sets them compactly, and the hero strip shows three outcomes linked to their cases.
+
+Approach was then merged into the Aegon section (one dark band, four steps in a row), taking the homepage to about 8.3 desktop screens and 16.5 on a phone. `ApproachDemo.tsx` and `PacingLine.tsx` are kept in `src/islands` but are no longer imported.

@@ -298,6 +298,16 @@ test("story pass: four short result cards, two to a row, and a tighter Aegon and
   // Aegon keeps the demo and three facts; the step list stays on its case page.
   await expect(page.locator("#systems .pipeline")).toHaveCount(0);
   await expect(page.locator("#systems .facts dt")).toHaveText(["The problem", "What I built", "Who I worked with"]);
+  // Approach closes the Aegon section: same dark band, four steps, no second demo.
+  await expect(page.locator("#approach.band--dark")).toHaveCount(1);
+  await expect(page.locator("#approach .ss-stage")).toHaveCount(0);
+  await expect(page.locator("main .ss-stage")).toHaveCount(1);
+  const gap = await page.evaluate(() => {
+    const a = document.querySelector("#systems").getBoundingClientRect();
+    const b = document.querySelector("#approach").getBoundingClientRect();
+    return Math.round(b.top - a.bottom);
+  });
+  expect(gap).toBe(0);
   for (const fact of ["125 fee-paid enrolments", "259 funded gold loans", "4:1 first-order ROAS", "up from 178"]) {
     await expect(page.locator("#work")).toContainText(fact);
   }
