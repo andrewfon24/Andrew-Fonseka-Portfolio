@@ -66,6 +66,7 @@ export const cases = [
       "Two colleges needed more students. A broad undergraduate campaign produced enquiries, but only 17 enrolments for those colleges.",
     decision:
       "A dedicated Meta campaign and budget for the two priority colleges, separate from the broad undergraduate campaign. Every campaign judged on fee-paid enrolments in the university’s CRM, not form fills.",
+    result: "125 fee-paid enrolments at the two priority colleges, against 17 from the broad campaign. Across all three campaigns: 312 enrolments at about US$20 of media each.",
     role: "Recommended the strategy, including the separate priority-colleges campaign and budget, and set up the campaigns in Meta Ads Manager.",
     roleShort: "Strategy recommendation and campaign setup.",
     ownership: {
@@ -110,6 +111,7 @@ export const cases = [
       "Pan Asia Bank wanted gold-loan customers from paid media. A fixed US$25K budget had to produce funded loans, not just enquiries.",
     decision:
       "The bank’s sales team rated Meta leads as higher quality at a lower cost per lead, so the plan allocated 60% to Meta and 40% to Google Ads from the start, measured on funded loans in the bank’s own system.",
+    result: "259 funded gold loans, as reported by the bank, at about US$97 of media per loan.",
     role: "Account lead: strategy, the Meta video pitch and client calls.",
     roleShort: "Account lead: strategy, the Meta video pitch and client calls.",
     limits: [
@@ -141,6 +143,7 @@ export const cases = [
     decision:
       "Split Google Shopping and Performance Max by new vs returning customers, and read first-order return alongside paid-attributed sales and subscriptions.",
     decisionLabel: "Actions",
+    result: "A 4:1 first-order ROAS on Shopping and Performance Max. The client also reported paid-attributed sales up 40% and subscriptions up 30% on the previous quarter.",
     role: "Paid media strategy and delivery for Google Shopping and Performance Max.",
     roleShort: "Paid media strategy and delivery.",
     sideProject:
@@ -175,6 +178,7 @@ export const cases = [
       "The college needed more enrolment-ready prospects at the same budget.",
     decision:
       "Judge campaigns on CRM-qualified leads, rebuild Google Ads and Meta around them, and add Microsoft Advertising as a new intent source.",
+    result: "212 CRM-qualified leads, up from 178 the quarter before: 19% more at the same budget of about US$900 a month.",
     role: "Advised on acquisition strategy and supported the Google Ads and Meta rebuild. Deployed the AI chat assistant and added Microsoft Advertising.",
     roleShort: "Acquisition strategy, rebuild support, Microsoft Ads and the AI assistant.",
     limits: [
@@ -285,10 +289,6 @@ export const builder = {
 // figure is from the campaign table below (`university`).
 export const decision = {
   headline: ["The cheaper leads were filling", "the wrong colleges."],
-  body: [
-    "Two colleges at a private university needed students. The broad undergraduate campaign brought in enquiries for less, but only 17 of its enrolments landed in those two colleges.",
-    "I recommended a separate campaign and budget for them, accepting a higher cost per lead. It delivered 125.",
-  ],
   role: "Strategy recommendation and campaign setup in Meta Ads Manager. The partner agency ran day-to-day optimisation.",
   chartTitle: "Fee-paid enrolments at the two priority colleges",
   rows: [
@@ -310,28 +310,6 @@ export const approach = {
     { title: "Report", body: "Report cost per customer, pipeline quality and the next move, in terms the client can act on.", icon: "presentation" },
   ],
 };
-
-// The doubts a hiring manager is likely to have, answered with facts from the
-// résumé and the cases. No new figures.
-export const questions = [
-  {
-    q: "Your agency years were in Sri Lanka. Does that carry over?",
-    a: "The platforms are the same ones: Google Ads, Meta, Shopping and Performance Max. At Kites Global I managed 4 client accounts end to end and supported 5 more across banking, retail, e-commerce and education. Since 2025 I have run campaigns for U.S. and Canadian audiences at Aegon, including Quebec and U.S. state advertising rules.",
-  },
-  {
-    q: "Three years in. Can you own an account?",
-    a: "I already have. At Pan Asia Bank I was the account lead: I set the strategy, pitched the Meta video approach and ran the client calls, on a US$25K budget that produced 259 funded gold loans. At Aegon I owned the pre-launch checklist that web, product and compliance reviewers worked from.",
-  },
-  {
-    q: "Why are there no numbers from Aegon?",
-    a: "Aegon asked me to keep performance figures confidential, so I have. What I can show is the work itself: HubSpot offline conversions feeding Smart Bidding and Meta, tracking rebuilt on GA4, GTM, Enhanced Conversions and the Meta Conversions API, and a campaign builder the whole team adopted.",
-    link: { href: "/case-studies/aegon/", label: "See the Aegon process" },
-  },
-  {
-    q: "These budgets are small. Can you handle more?",
-    a: "The public cases run from about US$900 a month to US$25K in total, and Aegon’s budgets are confidential. What carries over is the method: every dollar is judged on the customer it produced, and that does not change with the size of the budget.",
-  },
-];
 
 // Career history, from the résumé.
 export const experience = [

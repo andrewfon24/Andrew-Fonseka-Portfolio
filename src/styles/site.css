@@ -679,90 +679,6 @@ a {
   font-size: clamp(2rem, 1.6rem + 1.4vw, 3rem);
 }
 
-/* Work section */
-.feature {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  align-items: center;
-  gap: var(--space-8);
-  padding: var(--space-7);
-  border: 1px solid var(--color-rule);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-}
-
-.feature__copy {
-  display: grid;
-  gap: var(--space-5);
-}
-
-.feature__copy h3 {
-  font-size: clamp(1.875rem, 1.4rem + 1.6vw, 2.75rem);
-}
-
-.feature .stat-pair {
-  gap: var(--space-5);
-}
-
-.feature .stat .figure {
-  font-size: clamp(1.75rem, 1.4rem + 1.1vw, 2.5rem);
-}
-
-.feature__demo {
-  min-width: 0;
-}
-
-.bento {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: var(--space-5);
-  margin-top: var(--space-5);
-}
-
-.bento > :nth-child(1) {
-  grid-column: span 7;
-}
-
-.bento > :nth-child(2) {
-  grid-column: span 5;
-}
-
-.bento > :nth-child(3) {
-  grid-column: span 12;
-}
-
-.card--wide {
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  align-items: center;
-  column-gap: var(--space-8);
-}
-
-.card--wide .card__body {
-  display: grid;
-  gap: var(--space-5);
-}
-
-@media (max-width: 60rem) {
-  .feature {
-    grid-template-columns: minmax(0, 1fr);
-    padding: var(--space-5);
-  }
-
-  .bento > :nth-child(n) {
-    grid-column: span 12;
-  }
-
-  .card--wide {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-@media (max-width: 40rem) {
-  .card {
-    padding: var(--space-5);
-  }
-}
-
 /* Split allocation bar */
 .split {
   display: grid;
@@ -2871,10 +2787,6 @@ a.client-chip:hover {
   color: var(--color-ink);
 }
 
-.bento > :nth-child(3) {
-  grid-column: span 12;
-}
-
 .card__type {
   display: inline-flex;
   align-items: center;
@@ -3139,15 +3051,11 @@ a.client-chip:hover {
   padding: var(--space-2) var(--space-4);
 }
 
-/* Story pass (November 2026): hero funnel panel, accounts line, the opening
-   decision, questions, nav email action. Direction A, chosen by the owner. */
+/* Story pass (November 2026): hero funnel panel, accounts line, the results
+   chapters, nav email action. Direction A, chosen by the owner. */
 ::selection {
   background: var(--color-sky);
   color: var(--color-ground);
-}
-
-.band--follow {
-  padding-top: 0;
 }
 
 .hero {
@@ -3382,53 +3290,14 @@ a.client-chip:hover {
   letter-spacing: -0.01em;
 }
 
-/* The opening decision */
-.decision__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: start;
-  gap: var(--space-8);
-}
-
-.decision__copy {
-  display: grid;
-  justify-items: start;
-  gap: var(--space-5);
-}
-
-.decision__copy h2 {
-  font-size: clamp(2.25rem, 1.5rem + 2.3vw, 3.25rem);
-  text-wrap: balance;
-}
-
-.decision__copy p {
-  max-width: 46ch;
-  font-size: var(--text-md);
-}
-
-.decision__copy .decision__role {
-  padding-top: var(--space-5);
-  border-top: 1px solid var(--color-rule);
-  font-size: var(--text-sm);
-}
-
-.decision__role b {
-  color: var(--color-ink);
-}
-
+/* The priority-colleges comparison, inside the first chapter's evidence */
 .compare {
   display: grid;
-  gap: var(--space-5);
   margin: 0;
-  padding: var(--space-6);
-  border: 1px solid var(--color-rule);
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
 }
 
-.compare figcaption {
-  color: var(--color-ink);
-  font-weight: 600;
+.compare .compare__row:first-of-type {
+  border-top: 0;
 }
 
 .compare__row {
@@ -3477,93 +3346,186 @@ a.client-chip:hover {
   color: var(--color-gold);
 }
 
-.compare__totals {
+/* Results: four chapters on one grid. Story left, evidence right, every
+   edge shared, so the eye reads down either column without re-finding it. */
+.chapters {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-4);
-  margin: 0;
-  padding-top: var(--space-5);
-  border-top: 1px solid var(--color-rule);
 }
 
-.compare__totals div {
-  display: flex;
-  flex-direction: column-reverse;
-  gap: var(--space-1);
-}
-
-.compare__totals dt {
-  font-size: var(--text-xs);
-}
-
-.compare__totals dd {
-  margin: 0;
-  color: var(--color-ink);
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
-}
-
-/* Questions */
-.questions__grid {
+.chapter {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: start;
   gap: var(--space-8);
-}
-
-.questions__head {
-  position: sticky;
-  top: calc(var(--nav-height) + var(--space-6));
-  display: grid;
-  justify-items: start;
-  gap: var(--space-4);
-}
-
-.questions__head h2 {
-  font-size: var(--text-section);
-  text-wrap: balance;
-}
-
-.questions__head p {
-  max-width: 34ch;
-  font-size: var(--text-md);
-}
-
-.questions {
-  margin: 0;
-}
-
-.question {
-  display: grid;
-  gap: var(--space-3);
-  padding-block: var(--space-6);
+  padding-block: var(--space-8);
   border-top: 1px solid var(--color-rule);
 }
 
-.question:first-child {
+.chapter:first-child {
   padding-top: 0;
   border-top: 0;
 }
 
-.question dt {
-  color: var(--color-ink);
-  font-family: var(--font-display);
-  font-size: var(--text-title);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: var(--leading-snug);
+.chapter__story {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-5);
+}
+
+.chapter__story h3 {
+  max-width: 16ch;
+  font-size: clamp(1.875rem, 1.4rem + 1.6vw, 2.75rem);
   text-wrap: balance;
 }
 
-.question dd {
+/* Problem, decision, result: one line threads the three beats and ends on gold */
+.beats {
+  position: relative;
   display: grid;
-  justify-items: start;
-  gap: var(--space-3);
-  max-width: 60ch;
+  gap: var(--space-5);
+  max-width: 52ch;
+  margin-block: var(--space-2);
+}
+
+.beats::before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 0.3125rem;
+  width: 1px;
+  background: var(--color-rule);
+}
+
+.beats li {
+  position: relative;
+  display: grid;
+  gap: var(--space-1);
+  padding-left: var(--space-6);
+}
+
+.beats li::before {
+  content: "";
+  position: absolute;
+  top: 0.4375rem;
+  left: 0;
+  width: 0.6875rem;
+  height: 0.6875rem;
+  border: 2px solid var(--color-blue-bright);
+  border-radius: var(--radius-pill);
+  background: var(--color-paper);
+}
+
+.beats .beats__result::before {
+  border-color: var(--color-gold-mark);
+  background: var(--color-gold-mark);
+}
+
+.beats h4 {
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+
+.beats .beats__result h4 {
+  color: var(--color-gold);
+}
+
+.beats .beats__result p {
+  color: var(--color-ink);
+  font-size: var(--text-md);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.chapter__evidence {
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-5));
+  display: grid;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.chapter__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
   margin: 0;
+}
+
+.chapter__stats div {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.chapter__stats dt {
+  max-width: 18ch;
+  font-size: var(--text-sm);
+  line-height: 1.4;
+}
+
+.chapter__stats dd {
+  margin: 0;
+}
+
+.chapter__stats .figure {
+  font-size: clamp(1.75rem, 1.3rem + 1.3vw, 2.5rem);
+}
+
+.chapter__chart {
+  display: grid;
+  gap: var(--space-4);
+  min-height: 13rem;
+  align-content: end;
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-rule);
+}
+
+.chapters__note {
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 60rem) {
+  .chapter {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
+    padding-block: var(--space-7);
+  }
+
+  .chapter__evidence {
+    position: static;
+  }
+
+  .chapter__chart {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 40rem) {
+  .chapter__evidence {
+    padding: var(--space-5);
+  }
+
+  .chapter__stats {
+    gap: var(--space-3);
+  }
+
+  .chapter__stats .figure {
+    font-size: 1.375rem;
+  }
+
+  .chapter__stats dt {
+    font-size: var(--text-xs);
+  }
 }
 
 /* Systems lede under the Aegon heading */
@@ -3605,19 +3567,13 @@ a.client-chip:hover {
 }
 
 @media (max-width: 60rem) {
-  .hero__grid,
-  .decision__grid,
-  .questions__grid {
+  .hero__grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
   .hero__grid {
     gap: var(--space-7);
     padding-bottom: var(--space-8);
-  }
-
-  .questions__head {
-    position: static;
   }
 
   .accounts {
@@ -3635,8 +3591,7 @@ a.client-chip:hover {
     flex: 1 1 auto;
   }
 
-  .signal,
-  .compare {
+  .signal {
     padding: var(--space-5);
   }
 

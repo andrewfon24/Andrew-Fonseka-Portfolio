@@ -4,10 +4,10 @@ import { profile, mailto } from "../content/site.js";
 
 const { home = false } = Astro.props;
 const links = [
-  ["decision", "Results"],
-  ["approach", "How I work"],
-  ["questions", "Questions"],
+  ["work", "Results"],
+  ["approach", "Approach"],
   ["experience", "Experience"],
+  ["contact", "Contact"],
 ];
 ---
 
@@ -22,7 +22,7 @@ const links = [
         {
           links.map(([id, label]) => (
             <li>
-              <a href={home ? `#${id}` : `/#${id}`}>{label}</a>
+              <a href={home || id === "contact" ? `#${id}` : `/#${id}`}>{label}</a>
             </li>
           ))
         }

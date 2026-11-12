@@ -75,10 +75,10 @@ test("documents, contact links and analytics hooks are preserved", async ({ page
 
 test("navigation links to every section and collapses to brand, résumé and email on phones", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".nav__links a")).toHaveText(["Results", "How I work", "Questions", "Experience"]);
+  await expect(page.locator(".nav__links a")).toHaveText(["Results", "Approach", "Experience", "Contact"]);
   await expect(page.locator(".nav__email")).toHaveAttribute("href", new RegExp(`^${email}`));
-  await expect(page.locator('.nav__links a[href="#approach"]')).toHaveText("How I work");
-  for (const id of ["decision", "work", "approach", "systems", "questions", "experience", "contact"]) {
+  await expect(page.locator('.nav__links a[href="#approach"]')).toHaveText("Approach");
+  for (const id of ["work", "approach", "systems", "experience", "contact"]) {
     await expect(page.locator(`#${id}`)).toHaveCount(1);
   }
   await page.locator('.nav__links a[href="#experience"]').click();
@@ -97,7 +97,7 @@ test("navigation links to every section and collapses to brand, résumé and ema
 
 test("case pages load directly, survive refresh and back, and link onward", async ({ page }) => {
   await page.goto("/");
-  await page.locator('#decision a[href="/case-studies/university/"]').click();
+  await page.locator('#work a[href="/case-studies/university/"]').click();
   await expect(page).toHaveURL(/\/case-studies\/university\/$/);
   await expect(page.locator("h1")).toHaveText("Optimize for enrolments, not form fills.");
   await page.reload();
@@ -214,9 +214,8 @@ test("content and evidence remain readable without JavaScript", async ({ browser
   }
   await page.goto("/");
   await expect(page.locator(".hero .signal")).toContainText("312");
-  await expect(page.locator("#decision")).toContainText("125");
+  await expect(page.locator("#work")).toContainText("125");
   await expect(page.locator("#work")).toContainText("259");
-  await expect(page.locator("#questions dt")).toHaveCount(4);
   await expect(page.locator(".role")).toHaveCount(6);
   await page.goto("/case-studies/university/");
   await expect(page.locator("main")).toContainText("821");
@@ -259,9 +258,9 @@ test("unknown pages recover to the work and email", async ({ page }) => {
 
 test("hiring-evidence pass: role, ownership and corrected claims", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".hero .actions a")).toHaveText(["Email me", "See the decisions"]);
-  await expect(page.locator(".card__role")).toHaveCount(3);
-  await expect(page.locator(".decision__role")).toContainText("The partner agency ran day-to-day optimisation");
+  await expect(page.locator(".hero .actions a")).toHaveText(["Email me", "See the results"]);
+  await expect(page.locator(".card__role")).toHaveCount(4);
+  await expect(page.locator(".card__role").first()).toContainText("The partner agency ran day-to-day optimisation");
   await expect(page.locator(".card--process")).toHaveCount(0);
   await expect(page.locator('#systems a[href="/case-studies/aegon/"]')).toHaveCount(1);
   await expect(page.locator("#approach .approach__steps li h3")).toHaveText(["Audit", "Define", "Test", "Report"]);
@@ -288,26 +287,32 @@ test("hiring-evidence pass: role, ownership and corrected claims", async ({ page
   await expect(page.locator("main")).toContainText("including Microsoft Advertising");
 });
 
-test("story pass: the opening decision and the questions use only sourced figures", async ({ page }) => {
+test("story pass: four results told as problem, decision and result on one grid", async ({ page }) => {
   await page.goto("/");
-  const decision = page.locator("#decision");
-  await expect(decision.locator("h2")).toHaveText("The cheaper leads were filling the wrong colleges.");
-  await expect(decision.locator(".compare__row")).toHaveCount(2);
-  await expect(decision.locator(".compare")).toContainText("603 leads");
-  await expect(decision.locator(".compare")).toContainText("161 leads");
-  await expect(decision.locator(".compare")).toContainText("not a controlled test");
-  await expect(page.locator("#work h2")).toHaveText("Same test, three more accounts.");
-  await expect(page.locator("#systems .head")).toContainText("The results are confidential");
-
-  const questions = page.locator("#questions");
-  await expect(questions.locator("dt")).toHaveText([
-    "Your agency years were in Sri Lanka. Does that carry over?",
-    "Three years in. Can you own an account?",
-    "Why are there no numbers from Aegon?",
-    "These budgets are small. Can you handle more?",
+  await expect(page.locator("#work h2")).toHaveText("Every result here ends at a customer.");
+  const chapters = page.locator("#work .chapter");
+  await expect(chapters).toHaveCount(4);
+  await expect(chapters.locator("h3")).toHaveText([
+    "The cheaper leads were filling the wrong colleges.",
+    "Lead quality made the allocation decision.",
+    "First orders. Lasting customers.",
+    "More qualified leads. Same budget.",
   ]);
-  for (const fact of ["4 client accounts end to end", "259 funded gold loans", "US$25K", "about US$900 a month"]) {
-    await expect(questions).toContainText(fact);
+  for (let i = 0; i < 4; i++) {
+    await expect(chapters.nth(i).locator(".beats li")).toHaveCount(3);
+    await expect(chapters.nth(i).locator(".beats__result h4")).toHaveText("The result");
   }
-  await expect(questions.locator('a[href="/case-studies/aegon/"]')).toHaveCount(1);
+  for (const fact of ["125 fee-paid enrolments", "259 funded gold loans", "4:1 first-order ROAS", "up from 178"]) {
+    await expect(page.locator("#work")).toContainText(fact);
+  }
+  await expect(page.locator("#work .compare__row")).toHaveCount(2);
+  await expect(page.locator("#work")).toContainText("not a controlled test");
+  await expect(page.locator("#systems .head")).toContainText("The results are confidential");
+  await expect(page.locator("#questions")).toHaveCount(0);
+
+  // Story and evidence columns share their edges in every chapter.
+  const edges = await chapters.evaluateAll((els) =>
+    els.map((el) => [...el.children].map((child) => Math.round(child.getBoundingClientRect().left))),
+  );
+  expect(new Set(edges.map((e) => e.join(","))).size).toBe(1);
 });

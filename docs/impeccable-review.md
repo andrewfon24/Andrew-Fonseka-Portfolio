@@ -25,7 +25,7 @@ Direction A ("Signal") was chosen by the owner from three side-by-side direction
 
 - Removed the hero eyebrow and the three-figure band under the hero (Impeccable: kicker ban, hero-metric template). The hero's visual is now the real funnel; the band became a plain line of account names from the résumé.
 - One authored motion moment: the hero enters once on load and the funnel bars grow to their values. Curves and durations come from the existing tokens (Emil Kowalski's rules: ease-out entrances, transform and opacity only, hover gated behind `(hover: hover)`, reduced motion shipped with the animation).
-- New sections: the opening decision (17 against 125) and "Questions you're about to ask". Both use only figures already in `src/content/site.js`.
+- Results are four chapters on one grid instead of a feature card and a bento of unequal cards: story left (problem, decision, result), evidence right, every edge shared. Only figures already in `src/content/site.js` are used. A "Questions you're about to ask" section was drafted and removed at the owner's request.
 - Text selection is themed from the palette.
 - Not used: the Brand Identity skill (the brand was kept), Dimensional Drawing (no spec sheet was needed for the page) and the Awwwards MCP (an MCP server cannot be added mid-session). No third-party skill scripts were executed.
 

@@ -8,12 +8,10 @@ Help hiring managers and marketing leaders see, in under a minute, that Andrew r
 ## Story (November 2026 pass)
 Written first for agency hiring managers in Greater Vancouver; the one action is email. One thread runs top to bottom: campaigns are judged on customers in the CRM, not clicks in the ad platform.
 1. Hero: the belief, the email action, "available now", and the real 821 to 430 to 312 funnel as the visual. The portrait sits in the nav and the journey section.
-2. The decision: the university story (17 against 125 at the priority colleges).
-3. Three more accounts: Pan Asia Bank, Petmart.lk, DIMO Academy.
-4. How I work: Audit, Define, Test, Report, in step with the demo.
-5. Aegon: the system, because the results are confidential.
-6. Questions you're about to ask: agency years outside Canada, three years' experience, no Aegon numbers, small budgets. Answered only with facts already in `site.js`.
-7. Colleagues, journey, stack, contact (email first).
+2. Results: four accounts on one grid, each told the same way. Story on the left (the problem, the decision, the result, joined by one line that ends on gold), evidence on the right (figures, chart, caveat). The evidence card stays in view while its story is read.
+3. Approach: Audit, Define, Test, Report, in step with the demo.
+4. Aegon: the system, because the results are confidential.
+5. Colleagues, journey, stack, contact (email first).
 
 ## Genre and posture
 Premium SaaS product page crossed with a personal brand site. Dark navy for the story-telling bands (hero, Aegon systems, contact); pale blue paper for evidence (case cards, charts). Minimal prose: every section leads with a visual (chart, product demo, timeline), with words as captions.

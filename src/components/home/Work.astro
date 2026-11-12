@@ -1,122 +1,124 @@
 ---
-import Icon from "../Icon.astro";
 import Figure from "../Figure.astro";
 import Split from "../charts/Split.astro";
 import Columns from "../charts/Columns.astro";
-import { caseById } from "../../content/site.js";
+import Chapter from "./Chapter.astro";
+import { caseById, decision } from "../../content/site.js";
 
+const uni = caseById.university;
 const pan = caseById.panasia;
 const pet = caseById.petmart;
 const dats = caseById.dats;
+const max = Math.max(...decision.rows.map((r) => r.value));
 ---
 
-<section class="band band--paper band--follow" id="work" aria-labelledby="work-title">
+<section class="band band--paper" id="work" aria-labelledby="work-title">
   <div class="container">
     <div class="head" data-rise>
-      <h2 id="work-title">Same test, <span class="accent">three more accounts.</span></h2>
+      <h2 id="work-title">Every result here <span class="accent">ends at a customer.</span></h2>
       <p>
-        A bank, a pet retailer and a trades college. Different platforms and budgets, each judged on what the client’s
-        own system recorded.
+        Four accounts, told the same way: the problem, the decision, and what the client’s own system recorded.
       </p>
     </div>
 
-    <div class="bento">
-      <article class="card card--link" data-rise aria-labelledby="pan-title">
-        <a class="card__cover" href="/case-studies/panasia/" data-track="case_open" data-case="panasia" data-where="work" aria-labelledby="pan-title"></a>
-        <ul class="card__meta chips" aria-label="Context">
-          <li class="chip">{pan.client}</li>
-          <li class="chip">{pan.context}</li>
-          <li class="chip">{pan.period}</li>
-        </ul>
-        <h3 id="pan-title">{pan.headline[0]}{" "}<span class="accent">{pan.headline[1]}</span></h3>
-        <p class="card__role"><b>My role.</b> {pan.roleShort}</p>
-        <div class="stat-pair">
+    <div class="chapters">
+      <Chapter
+        id="university"
+        chips={[uni.clientShort, uni.context, uni.period]}
+        headline={decision.headline}
+        problem={uni.problem}
+        decision={uni.decision}
+        result={uni.result}
+        role={decision.role}
+        stats={uni.stats}
+        note={decision.note}
+      >
+        <figure class="compare" data-draw>
+          <figcaption class="chart-title"><strong>{decision.chartTitle}</strong></figcaption>
           {
-            pan.stats.slice(0, 2).map((s) => (
-              <div class="stat">
-                <Figure value={s.value} count={s.count} prefix={s.prefix} suffix={s.suffix} />
-                <span class="stat__label">{s.label}</span>
+            decision.rows.map((r, i) => (
+              <div class:list={["compare__row", r.win && "compare__row--win"]}>
+                <span class="compare__name">
+                  {r.name}
+                  <small>{r.leads}</small>
+                </span>
+                <span class="compare__track">
+                  <span
+                    class:list={["bar-fill", r.win && "bar-fill--gold"]}
+                    style={`--v: ${(r.value / max).toFixed(3)}; --delay: ${200 + i * 180}ms`}
+                  />
+                </span>
+                <Figure value={String(r.value)} count={r.value} class="compare__value" />
               </div>
             ))
           }
-        </div>
+        </figure>
+      </Chapter>
+
+      <Chapter
+        id="panasia"
+        chips={[pan.client, pan.context, pan.period]}
+        headline={pan.headline}
+        problem={pan.problem}
+        decision={pan.decision}
+        result={pan.result}
+        role={pan.roleShort}
+        stats={pan.stats.slice(0, 2)}
+        note="Funded loans are client-reported. Channel-level loan counts are not available."
+      >
+        <div class="chart-title"><strong>How the US$25K was allocated</strong><span>Set by lead quality, from the start</span></div>
         <Split />
-        <div class="card__foot">
-          <span class="fine">Client-reported funded loans</span>
-          <span class="link">Read the case study <Icon name="arrow-right" size={16} /></span>
-        </div>
-      </article>
+      </Chapter>
 
-      <article class="card card--link" data-rise style="--delay: 100ms" aria-labelledby="pet-title">
-        <a class="card__cover" href="/case-studies/petmart/" data-track="case_open" data-case="petmart" data-where="work" aria-labelledby="pet-title"></a>
-        <ul class="card__meta chips" aria-label="Context">
-          <li class="chip">{pet.client}</li>
-          <li class="chip">{pet.period}</li>
-        </ul>
-        <h3 id="pet-title">{pet.headline[0]}{" "}<span class="accent">{pet.headline[1]}</span></h3>
-        <p class="card__role"><b>My role.</b> {pet.roleShort}</p>
-        <div class="stat">
-          <Figure value="4:1" count={4} suffix=":1" />
-          <span class="stat__label">first-order ROAS, Shopping and PMax</span>
-        </div>
-        <div>
-          <div class="chart-title"><strong>Indexed change</strong><span>Before = 100, client-reported</span></div>
-          <Columns
-            height="8.5rem"
-            label="Indexed change: sales 100 before, 140 after; subscriptions 100 before, 130 after"
-            bars={[
-              { label: "Sales before", value: 100, tone: "soft" },
-              { label: "Sales after", value: 140 },
-              { label: "Subs. before", value: 100, tone: "soft" },
-              { label: "Subs. after", value: 130 },
-            ]}
-          />
-        </div>
-        <div class="card__foot">
-          <span class="link">Read the case study <Icon name="arrow-right" size={16} /></span>
-        </div>
-      </article>
+      <Chapter
+        id="petmart"
+        chips={[pet.client, pet.context, pet.period]}
+        headline={pet.headline}
+        problem={pet.problem}
+        decision={pet.decision}
+        decisionLabel="The actions"
+        result={pet.result}
+        role={pet.roleShort}
+        stats={pet.stats}
+        note="Client-reported. First-order ROAS excludes customer lifetime value and is not an incrementality test."
+      >
+        <div class="chart-title"><strong>Indexed change on the previous quarter</strong><span>Before = 100, client-reported</span></div>
+        <Columns
+          height="9rem"
+          label="Indexed change: sales 100 before, 140 after; subscriptions 100 before, 130 after"
+          bars={[
+            { label: "Sales before", value: 100, tone: "soft" },
+            { label: "Sales after", value: 140 },
+            { label: "Subs. before", value: 100, tone: "soft" },
+            { label: "Subs. after", value: 130 },
+          ]}
+        />
+      </Chapter>
 
-      <article class="card card--link card--wide" data-rise aria-labelledby="dats-title">
-        <a class="card__cover" href="/case-studies/dats/" data-track="case_open" data-case="dats" data-where="work" aria-labelledby="dats-title"></a>
-        <div class="card__body">
-          <ul class="card__meta chips" aria-label="Context">
-            <li class="chip">{dats.clientShort}</li>
-            <li class="chip">{dats.context}</li>
-            <li class="chip">{dats.period}</li>
-          </ul>
-          <h3 id="dats-title">{dats.headline[0]}{" "}<span class="accent">{dats.headline[1]}</span></h3>
-          <p class="card__role"><b>My role.</b> {dats.roleShort}</p>
-          <div class="stat-pair">
-            {
-              dats.stats.map((s) => (
-                <div class="stat">
-                  <Figure value={s.value} count={s.count} prefix={s.prefix} suffix={s.suffix} />
-                  <span class="stat__label">{s.label}</span>
-                </div>
-              ))
-            }
-          </div>
-          <div class="card__foot">
-            <span class="fine">Combined change, not a controlled test</span>
-            <span class="link">Read the case study <Icon name="arrow-right" size={16} /></span>
-          </div>
-        </div>
-        <div>
-          <div class="chart-title"><strong>CRM-qualified leads per quarter</strong><span>Same qualification rule, client-reported</span></div>
-          <Columns
-            height="9rem"
-            label="CRM-qualified leads: 178 in December 2025 to February 2026, 212 in March to May 2026"
-            bars={[
-              { label: "Dec 2025 to Feb 2026", value: 178, tone: "soft" },
-              { label: "Mar to May 2026", value: 212, tone: "gold" },
-            ]}
-          />
-        </div>
-      </article>
-
+      <Chapter
+        id="dats"
+        chips={[dats.clientShort, dats.context, dats.period]}
+        headline={dats.headline}
+        problem={dats.problem}
+        decision={dats.decision}
+        result={dats.result}
+        role={dats.roleShort}
+        stats={dats.stats}
+        note="Combined change across consecutive quarters, not a controlled test."
+      >
+        <div class="chart-title"><strong>CRM-qualified leads per quarter</strong><span>Same qualification rule, client-reported</span></div>
+        <Columns
+          height="9rem"
+          label="CRM-qualified leads: 178 in December 2025 to February 2026, 212 in March to May 2026"
+          bars={[
+            { label: "Dec 2025 to Feb 2026", value: 178, tone: "soft" },
+            { label: "Mar to May 2026", value: 212, tone: "gold" },
+          ]}
+        />
+      </Chapter>
     </div>
-    <p class="fine" style="margin-top: var(--space-6)">
+
+    <p class="fine chapters__note">
       Figures are client-reported where stated. Employer results from Aegon are confidential and are not shown.
     </p>
   </div>
