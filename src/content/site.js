@@ -75,9 +75,10 @@ export const cases = [
     summary:
       "Paid media for annuity, life insurance, pension and wealth products in the U.S. and Canada, with the tracking, CRM signal and automation behind it.",
     // Owner, Nov 2026: the budget may be stated as "seven-figure annual" and
-    // nothing more specific. No other Aegon figure is shown.
+    // nothing more specific; he owned most of it and managed it with the team.
+    // No other Aegon figure is shown.
     scale: "Seven-figure annual budget",
-    role: "Managed Google Ads, Meta and LinkedIn campaigns for U.S. and Canadian financial products on a seven-figure annual budget, and helped develop and launch a LinkedIn lead-generation program for high-net-worth investors with the team.",
+    role: "Managed Google Ads, Meta and LinkedIn campaigns for U.S. and Canadian financial products on a seven-figure annual budget, most of which I owned and managed with the team. I also helped develop and launch a LinkedIn lead-generation program for high-net-worth investors with the team.",
     roleShort: "Managed Google Ads, Meta and LinkedIn; built the team's campaign builder.",
     lede: "Then I went in-house, and the stakes got bigger. I can’t show you Aegon’s results. I can show you the system I built to launch every campaign there.",
     note: "Illustrative process. No employer results or figures are shown.",
@@ -346,7 +347,7 @@ export const experience = [
     date: "Jan 2025 to Oct 2026",
     start: 2025,
     points: [
-      "Launched and managed Google Ads, Meta and LinkedIn campaigns for annuity, life insurance, pension and wealth products in the U.S. and Canada, on a seven-figure annual budget.",
+      "Launched and managed Google Ads, Meta and LinkedIn campaigns for annuity, life insurance, pension and wealth products in the U.S. and Canada. I owned most of the seven-figure annual budget and managed it with the team.",
       "Helped develop and launch a LinkedIn lead-generation program for high-net-worth investors, with the team.",
       "Aligned web, product and compliance reviewers on a pre-launch checklist I owned, so launches went through one QA pass instead of rework.",
       "Connected HubSpot offline conversions to Smart Bidding and Meta: lower cost per lead and more completed applications at flat spend.",
@@ -369,6 +370,8 @@ export const experience = [
       "Also for DIMO Academy: ran the creative and ad copy for a campaign built around a cross-country engineering showcase, with mobile pop-ups around Sri Lanka and a vehicle engine on display.",
       "A third independent client, in the automobile sector.",
     ],
+    // Owner, Nov 2026: this overlapped the Aegon role and was permitted.
+    footnote: "Done outside my hours at Aegon, with the employer’s permission.",
     clients: [
       { name: "Private university, Saudi Arabia", detail: "Meta lead generation to enrolment", href: "/case-studies/university/" },
       { name: "DIMO Academy", detail: "Google Ads, Meta and Microsoft Ads", href: "/case-studies/dats/" },

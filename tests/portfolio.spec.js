@@ -275,7 +275,11 @@ test("interview facts: hands-on roles, agency scope and Aegon scale are stated",
   await expect(page.locator("#systems .chips")).toContainText("Seven-figure annual budget");
   await expect(page.locator("#systems")).not.toContainText("$");
   await expect(page.locator("#experience .story")).toContainText("I led four client accounts");
-  await expect(page.locator("#experience .story")).toContainText("the breadth of agency work again, across more industries");
+  await expect(page.locator("#experience .story")).toContainText("Agency work across several industries is my first choice, and I’m open to in-house teams too");
+  await expect(page.locator("#experience .story")).toContainText("I owned most of a seven-figure annual budget");
+  await expect(page.locator("#experience .story")).toContainText("with Aegon’s permission");
+  await page.locator("#role-independent-projects summary").click();
+  await expect(page.locator("#role-independent-projects")).toContainText("Done outside my hours at Aegon, with the employer’s permission.");
   await page.locator("#role-kites-global summary").click();
   await expect(page.locator("#role-kites-global")).toContainText("The bank approved it");
   await expect(page.locator("#role-kites-global")).toContainText("Godrej India");
