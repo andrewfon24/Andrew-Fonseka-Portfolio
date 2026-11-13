@@ -20,7 +20,7 @@ test("homepage leads with the positioning, one email action and the four results
   await expect(primary).toHaveAttribute("href", new RegExp(`^${email}`));
   await expect(page.locator(".hero")).toContainText("Open to paid media roles in Greater Vancouver");
   await expect(page.locator(".metrics__item")).toHaveCount(3);
-  for (const text of ["Agency", "In-house", "3 years", "in Paid Media"]) {
+  for (const text of ["~US$20", "media cost per fee-paid enrolment", "~US$97", "Pan Asia Bank", "+19%", "DIMO Academy"]) {
     await expect(page.locator(".metrics")).toContainText(text);
   }
   for (const slug of slugs) {
@@ -197,7 +197,7 @@ test("content and evidence remain readable without JavaScript", async ({ browser
     expect(hidden, path).toBe(0);
   }
   await page.goto("/");
-  await expect(page.locator(".metrics")).toContainText("3 years");
+  await expect(page.locator(".metrics")).toContainText("~US$97");
   await expect(page.locator("#work")).toContainText("312");
   await expect(page.locator(".role")).toHaveCount(6);
   await page.goto("/case-studies/university/");
@@ -210,7 +210,7 @@ test("reduced motion shows final figures and finished charts immediately", async
   const context = await browser.newContext({ reducedMotion: "reduce" });
   const page = await context.newPage();
   await page.goto("/");
-  await expect(page.locator(".metrics [data-count]")).toHaveText("3 years");
+  await expect(page.locator(".metrics [data-count]")).toHaveText(["~US$20", "~US$97", "+19%"]);
   await page.goto("/case-studies/university/");
   const scales = await page.locator(".brief .bar-fill").evaluateAll((els) => els.map((el) => getComputedStyle(el).transform));
   expect(scales.every((t) => t !== "matrix(0, 0, 0, 1, 0, 0)")).toBe(true);
@@ -224,7 +224,7 @@ test("reduced motion shows final figures and finished charts immediately", async
 
 test("counters count up once and land on the real figure", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".metrics [data-count]")).toHaveText("3 years", { timeout: 4000 });
+  await expect(page.locator(".metrics [data-count]")).toHaveText(["~US$20", "~US$97", "+19%"], { timeout: 4000 });
   const feature = page.locator(".feature [data-count]").first();
   await feature.scrollIntoViewIfNeeded();
   await expect(feature).toHaveText("312", { timeout: 4000 });
@@ -244,7 +244,7 @@ test("hiring-evidence pass: role, ownership and corrected claims", async ({ page
   await expect(page.locator(".card__role")).toHaveCount(4);
   await expect(page.locator(".card--process")).toHaveCount(0);
   await expect(page.locator('#systems a[href="/case-studies/aegon/"]')).toHaveCount(1);
-  await expect(page.locator("#approach .approach__steps li")).toHaveCount(5);
+  await expect(page.locator("#approach .approach__steps li h3")).toHaveText(["Audit", "Define", "Test", "Report"]);
   await expect(page.locator("main")).not.toContainText("Liveline");
   await expect(page.locator("main")).not.toContainText("Demand Gen");
   await expect(page.locator("#experience")).toContainText("one QA pass instead of rework");
@@ -277,7 +277,8 @@ test("interview facts: hands-on roles, agency scope and Aegon scale are stated",
   await expect(page.locator("#experience .story")).toContainText("I led four client accounts");
   await expect(page.locator("#experience .story")).toContainText("the breadth of agency work again, across more industries");
   await page.locator("#role-kites-global summary").click();
-  await expect(page.locator("#role-kites-global")).toContainText("The client reported US$300K in revenue for the quarter the ads ran");
+  await expect(page.locator("#role-kites-global")).toContainText("The bank approved it");
+  await expect(page.locator("#role-kites-global")).toContainText("Godrej India");
   await page.locator("#role-enfection summary").click();
   await expect(page.locator("#role-enfection")).toContainText("stayed with the agency");
   await expect(page.locator("#toolkit")).toContainText("Google Ads, Meta Ads, LinkedIn Ads, TikTok Ads and Google Analytics 4");
@@ -293,4 +294,19 @@ test("storytelling pass: reader-first hook, proof in the first screen, a story l
   await expect(page.locator("#work .card__story")).toHaveCount(4);
   await expect(page.locator("#work .head")).toContainText("filling the wrong colleges");
   await expect(page.locator("#systems .head")).toContainText("I can show you the system I built");
+});
+
+test("credibility pass: claims match the case studies", async ({ page }) => {
+  await page.goto("/");
+  // The hero no longer says he follows leads into the CRM himself; clients own that matching.
+  await expect(page.locator(".hero__lede")).toContainText("judge every campaign on what the client’s own system records");
+  await expect(page.locator("main")).not.toContainText("follow every lead into the CRM");
+  await expect(page.locator("main")).not.toContainText("I followed the lead");
+  // No unsupported revenue claim, no "3 years" filler, no "test me" line.
+  await expect(page.locator("body")).not.toContainText("US$300K");
+  await expect(page.locator(".metrics")).not.toContainText("3 years");
+  await expect(page.locator("#toolkit")).not.toContainText("Test me");
+  // The university decision is told in the results, not again in "How I work".
+  await expect(page.locator("#approach")).not.toContainText("17 enrolments");
+  await expect(page.locator("#approach")).toContainText("pre-launch checklist");
 });

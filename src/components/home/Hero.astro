@@ -10,9 +10,9 @@ import { profile, mailto, metrics } from "../../content/site.js";
       <p class="hero__role">{profile.title}</p>
       <h1 id="hero-title">Paid media judged on <span class="accent">customers, not clicks.</span></h1>
       <p class="hero__lede">
-        Want to know which ads became customers? I run paid search and paid social, then{" "}
-        <strong>follow every lead into the CRM</strong>. So far that has meant 312 fee-paid enrolments, 259 funded
-        loans and a 4:1 first-order ROAS.
+        Want to know which ads became customers? I plan and run paid search and paid social, and{" "}
+        <strong>judge every campaign on what the client’s own system records</strong>. On the accounts below, that
+        was 312 fee-paid enrolments, 259 funded loans and a 4:1 first-order ROAS.
       </p>
       <div class="actions">
         <a class="button button--primary" href={mailto} data-track="email_click" data-where="hero">
@@ -45,13 +45,14 @@ import { profile, mailto, metrics } from "../../content/site.js";
   </div>
 </section>
 
-<section class="band band--dark metrics" aria-label="At a glance">
+<section class="band band--dark metrics" aria-label="What the results cost">
   <div class="container metrics__grid">
     {
       metrics.map((m, i) => (
         <div class="metrics__item" data-rise style={`--delay: ${i * 90}ms`}>
-          <Figure dark value={m.value} count={m.count} suffix={m.suffix} class="metrics__value" />
+          <Figure dark value={m.value} count={m.count} prefix={m.prefix} suffix={m.suffix} class="metrics__value" />
           <span class="metrics__label">{m.label}</span>
+          <span class="metrics__source">{m.source}</span>
         </div>
       ))
     }

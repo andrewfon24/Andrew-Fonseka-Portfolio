@@ -1,7 +1,7 @@
 // Single source of truth for the site. Every figure and claim comes from the
 // supplied résumé and portfolio PDFs (2026), or from the owner's own answers
 // in the November 2026 interview (hands-on roles, agency scope, the Aegon
-// budget band, Godrej revenue). Do not add numbers that are not in those sources.
+// budget band). Do not add numbers that are not in those sources.
 
 export const profile = {
   name: "Andrew Fonseka",
@@ -18,11 +18,13 @@ export const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(
   "Paid media role – intro",
 )}`;
 
-// The band under the hero, as on the owner's earlier site.
+// The band under the hero: what the results cost, each with its account. The
+// hero gives the volumes; this gives the efficiency. All three figures are in
+// the case studies below.
 export const metrics = [
-  { value: "Agency", label: "Strategy and client-facing delivery" },
-  { value: "In-house", label: "Measurement and marketing operations" },
-  { value: "3 years", count: 3, suffix: " years", label: "in Paid Media" },
+  { value: "~US$20", count: 20, prefix: "~US$", label: "media cost per fee-paid enrolment", source: "Private university, Saudi Arabia" },
+  { value: "~US$97", count: 97, prefix: "~US$", label: "media cost per funded loan", source: "Pan Asia Bank" },
+  { value: "+19%", count: 19, prefix: "+", suffix: "%", label: "CRM-qualified leads at the same budget", source: "DIMO Academy" },
 ];
 
 // Headline results, in portfolio-PDF order. `count` drives the counter.
@@ -323,13 +325,14 @@ export const builder = {
 
 export const approach = {
   headline: ["Signal first.", "Budget follows evidence."],
-  intro: "One real decision, step by step, from the university case.",
+  // Method only, no figures: the same four moves the demo beside it walks
+  // through. The university decision is told once, in the results above.
+  intro: "The same four moves on every account, whatever the platform or the budget. Nothing goes live until it has passed my pre-launch checklist.",
   steps: [
-    { title: "Signal observed", body: "Broad leads were cheap, but only 17 enrolments came from the two colleges that needed students.", icon: "radar" },
-    { title: "Alternatives considered", body: "Keep scaling the broad campaign for cheaper leads, or fund the priority colleges directly.", icon: "split" },
-    { title: "Decision", body: "A dedicated campaign and budget for the two colleges, accepting a higher cost per lead.", icon: "target" },
-    { title: "Evidence reviewed", body: "Fee-paid enrolments in the admissions CRM: 125 from the dedicated campaign against 17 from broad.", icon: "scan-search" },
-    { title: "Next action", body: "Judge every campaign on fee-paid enrolments, not form fills.", icon: "presentation" },
+    { title: "Audit", body: "Check the signal can be trusted before touching bids: conversion tracking, CRM fields, creative and search terms.", icon: "scan-search" },
+    { title: "Define", body: "Agree with the client which outcome counts, then point campaigns at qualified leads instead of form fills.", icon: "target" },
+    { title: "Test", body: "Judge every test on that outcome. Pause what loses and move budget to what wins.", icon: "split" },
+    { title: "Report", body: "Report cost per customer, pipeline quality and the next move, in terms the client can act on.", icon: "presentation" },
   ],
 };
 
@@ -392,7 +395,6 @@ export const experience = [
       "Managed 4 client accounts end to end and supported 5 more across banking, retail, e-commerce and education.",
       "Made the week-to-week changes in the ad accounts myself, joined the monthly client calls and at times presented the weekly updates.",
       "Pitched Pan Asia Bank a Meta video in which a mother takes a gold loan to pay for her daughter’s wedding. The bank approved it.",
-      "Godrej India: a 30-creator influencer program and TikTok Ads. The client reported US$300K in revenue for the quarter the ads ran.",
     ],
     clients: [
       { name: "Pan Asia Bank", detail: "Account lead, Meta and Google Ads", href: "/case-studies/panasia/" },
