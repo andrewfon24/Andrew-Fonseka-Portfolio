@@ -22,6 +22,9 @@ export const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(
 export const metrics = [
   { value: "Agency", label: "Strategy and client-facing delivery" },
   { value: "In-house", label: "Measurement and marketing operations" },
+  // Owner, Nov 2026: the Aegon budget may be stated as "seven-figure annual"
+  // and nothing more specific.
+  { value: "Seven-figure", label: "annual budget managed at Aegon" },
   { value: "3 years", count: 3, suffix: " years", label: "in Paid Media" },
 ];
 

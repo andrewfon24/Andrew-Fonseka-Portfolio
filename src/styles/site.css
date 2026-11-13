@@ -2590,7 +2590,7 @@ a.client-chip:hover {
 
 .metrics__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   border-top: 1px solid var(--color-navy-line);
 }
 
@@ -2598,7 +2598,7 @@ a.client-chip:hover {
   display: grid;
   align-content: start;
   gap: var(--space-3);
-  padding: var(--space-6) var(--space-6) var(--space-5);
+  padding: var(--space-6) var(--space-5) var(--space-5);
 }
 
 .metrics__item:first-child {
@@ -2610,12 +2610,33 @@ a.client-chip:hover {
 }
 
 .metrics__value {
-  font-size: clamp(2.25rem, 1.8rem + 1.6vw, 3.25rem);
+  font-size: clamp(2rem, 1.1rem + 1.6vw, 2.5rem);
+  white-space: nowrap;
 }
 
 .metrics__label {
   max-width: 24ch;
   color: var(--color-on-dark-muted);
+}
+
+/* Four items: two by two on tablets and small laptops, one column on phones. */
+@media (max-width: 72rem) {
+  .metrics__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .metrics__item:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .metrics__item:nth-child(n + 3) {
+    border-top: 1px solid var(--color-navy-line);
+  }
+
+  .metrics__value {
+    font-size: clamp(2.25rem, 1.8rem + 1.6vw, 3.25rem);
+  }
 }
 
 @media (max-width: 40rem) {

@@ -19,7 +19,11 @@ test("homepage leads with the positioning, one email action and the four results
   await expect(primary).toHaveCount(1);
   await expect(primary).toHaveAttribute("href", new RegExp(`^${email}`));
   await expect(page.locator(".hero")).toContainText("Open to paid media roles in Greater Vancouver");
-  await expect(page.locator(".metrics__item")).toHaveCount(3);
+  await expect(page.locator(".metrics__item")).toHaveCount(4);
+  // Aegon scale in the strip: the budget band only, never a currency or amount.
+  await expect(page.locator(".metrics")).toContainText("Seven-figure");
+  await expect(page.locator(".metrics")).toContainText("annual budget managed at Aegon");
+  await expect(page.locator(".metrics")).not.toContainText("$");
   for (const text of ["Agency", "In-house", "3 years", "in Paid Media"]) {
     await expect(page.locator(".metrics")).toContainText(text);
   }
