@@ -25,6 +25,9 @@ export const metrics = [
   { value: "~US$20", count: 20, prefix: "~US$", label: "media cost per fee-paid enrolment", source: "Private university, Saudi Arabia" },
   { value: "~US$97", count: 97, prefix: "~US$", label: "media cost per funded loan", source: "Pan Asia Bank" },
   { value: "+19%", count: 19, prefix: "+", suffix: "%", label: "CRM-qualified leads at the same budget", source: "DIMO Academy" },
+  // Owner, Nov 2026: the Aegon budget may be stated as "seven-figure annual"
+  // and nothing more specific.
+  { value: "Seven-figure", label: "annual budget managed", source: "Aegon" },
 ];
 
 // Headline results, in portfolio-PDF order. `count` drives the counter.

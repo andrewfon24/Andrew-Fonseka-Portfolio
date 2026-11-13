@@ -19,8 +19,12 @@ test("homepage leads with the positioning, one email action and the four results
   await expect(primary).toHaveCount(1);
   await expect(primary).toHaveAttribute("href", new RegExp(`^${email}`));
   await expect(page.locator(".hero")).toContainText("Open to paid media roles in Greater Vancouver");
-  await expect(page.locator(".metrics__item")).toHaveCount(3);
-  for (const text of ["~US$20", "media cost per fee-paid enrolment", "~US$97", "Pan Asia Bank", "+19%", "DIMO Academy"]) {
+  await expect(page.locator(".metrics__item")).toHaveCount(4);
+  // Aegon scale in the strip: the budget band only, never a currency or amount.
+  await expect(page.locator(".metrics__item").nth(3)).toContainText("Seven-figure");
+  await expect(page.locator(".metrics__item").nth(3)).toContainText("annual budget managed");
+  await expect(page.locator(".metrics__item").nth(3)).not.toContainText("$");
+  for (const text of ["~US$20", "media cost per fee-paid enrolment", "~US$97", "Pan Asia Bank", "+19%", "DIMO Academy", "Aegon"]) {
     await expect(page.locator(".metrics")).toContainText(text);
   }
   for (const slug of slugs) {
