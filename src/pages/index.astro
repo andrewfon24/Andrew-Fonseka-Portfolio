@@ -1,20 +1,70 @@
 ---
-import SiteLayout from "../layouts/SiteLayout.astro";
-import Hero from "../components/home/Hero.astro";
-import Work from "../components/home/Work.astro";
-import Systems from "../components/home/Systems.astro";
-import Approach from "../components/home/Approach.astro";
-import References from "../components/home/References.astro";
-import Experience from "../components/home/Experience.astro";
-import Toolkit from "../components/home/Toolkit.astro";
+import PreviewLayout from '../layouts/EditorialLayout.astro';
+import ActionIcon from '../components/editorial/ActionIcon.astro';
+import Evidence from '../components/editorial/Evidence.astro';
+import Capabilities from '../components/editorial/Capabilities.astro';
+import TechStack from '../components/editorial/TechStack.astro';
+import CareerTimeline from '../components/editorial/CareerTimeline.astro';
+import { profile, mailto, capabilities, supportingWork, testimonials } from '../content/editorial.js';
+const direction = 'editorial';
+const editorial = direction === 'editorial';
+const caseUrl = (id) => `/case-studies/${id}/`;
 ---
-
-<SiteLayout home>
-  <Hero />
-  <Work />
-  <Systems />
-  <Approach />
-  <References />
-  <Experience />
-  <Toolkit />
-</SiteLayout>
+<PreviewLayout direction={direction} home>
+  <section class="hero wrap">
+    <div class="hero-copy">
+      {!editorial && <img class="small-portrait" src="/images/andrew-fonseka-240.webp" width="88" height="88" alt="Andrew Fonseka" fetchpriority="high" />}
+      <h1>{editorial ? <>Paid media.<br />A founder’s care<br /><span>for the numbers.</span></> : <>I run paid media with a founder’s care for the numbers.</>}</h1>
+      <p class="intro">I’m Andrew, a paid media specialist. I combine hands-on campaigns with measurement that connects spend to business outcomes.</p>
+      <p class="hero-detail">I’ve worked in-house at Aegon and across agency and independent projects in financial services, education and e-commerce.</p>
+      <div class="hero-actions"><a class="button" href={mailto}>Email Me <ActionIcon name="arrow" /></a><a class="text-link" href={profile.resume} target="_blank" rel="noopener"><ActionIcon name="file" />View résumé</a></div>
+      <p class="availability">Open to roles in Greater Vancouver & remote within Canada</p>
+    </div>
+    {editorial && <figure class="portrait-block"><img src="/images/andrew-fonseka-480.webp" srcset="/images/andrew-fonseka-480.webp 480w, /images/andrew-fonseka.jpg 1122w" sizes="(max-width: 700px) 76vw, 320px" width="480" height="600" alt="Andrew Fonseka, Paid Media Specialist" fetchpriority="high" /><figcaption><strong>Andrew Fonseka</strong><span>Based in Greater Vancouver, BC</span></figcaption></figure>}
+  </section>
+  <div class="proof-strip wrap" aria-label="Selected campaign outcomes">
+    <a href={caseUrl('university')}><strong>312</strong><span>fee-paid enrolments<small>Private university · CRM-matched</small></span></a>
+    <a href={caseUrl('panasia')}><strong>259</strong><span>funded loans<small>Pan Asia Bank · client-reported</small></span></a>
+    <a href={caseUrl('petmart')}><strong>4:1</strong><span>first-order ROAS<small>Petmart.lk · client-reported</small></span></a>
+  </div>
+  {!editorial && <Capabilities />}
+  <section id="work" class="selected section wrap">
+    <div class="section-heading work-heading"><h2>A closer look<br class="editorial-only" /> at the work.</h2><p>One decision, the outcome, and what I owned.</p></div>
+    <article class="featured">
+      <div class="featured-copy">
+        <div class="case-meta"><span>Private university, Saudi Arabia</span><span>May–Aug 2026</span></div>
+        <h3>The right students.<br /><span>A clearer budget decision.</span></h3>
+        <p>Two colleges needed more students. I recommended a dedicated Meta campaign and budget, with success measured in fee-paid enrolments.</p>
+        <div class="feature-result"><strong>125</strong><span>enrolments for the priority colleges<small>Within 312 enrolments across all campaigns</small></span></div>
+        <p class="ownership"><strong>My part:</strong> strategy, campaign setup, audiences and a higher-intent lead form. The partner agency handled day-to-day optimisation; the university matched enrolments in its CRM.</p>
+        <a class:list={[editorial ? "case-button" : "text-link"]} href={caseUrl('university')} aria-label={editorial ? "Read the case study: Private university" : undefined}>{editorial ? "Read the case study" : "Read the university case"} <ActionIcon name="arrow" /></a>
+      </div>
+      <Evidence />
+    </article>
+    <div class="supporting-work">
+      <h3>More selected work</h3>
+      {editorial ? <div class="case-grid">{supportingWork.map(c=><article class="case-card"><div class="case-card-top"><h4>{c.name}</h4><span class="tag">{c.context}</span></div><h5>{c.title}</h5><p>{c.body}</p><div class="card-result"><strong>{c.outcome}</strong><span>{c.qualifier}</span></div><a class="case-button" href={caseUrl(c.id)} aria-label={`Read the case study: ${c.name}`}>Read the case study <ActionIcon name="arrow" /></a></article>)}</div> : supportingWork.map(c=><a class="work-row" href={caseUrl(c.id)}><div class="work-client"><strong>{c.name}</strong><span>{c.context}</span></div><div class="work-summary"><h4>{c.title}</h4><p>{c.body}</p></div><div class="work-outcome"><strong>{c.outcome}</strong><span>{c.qualifier}</span></div><span class="row-arrow" aria-hidden="true">↗</span></a>)}
+    </div>
+  </section>
+  {editorial && <><Capabilities /><TechStack /></>}
+  <section id="about" class="about section wrap">
+    {editorial ? <div class="about-introduction">
+      <p class="about-eyebrow">Your next paid media specialist</p>
+      <div class="section-heading"><h2>Hands on in the account.<br /><span>All in on the outcome.</span></h2></div>
+      <div class="about-body">
+        <p class="about-lead">Give me a business goal. I’ll get into the numbers, find what needs testing, and own the next move.</p>
+        <p>I enjoy the work that connects a good idea to a real result: building campaigns, improving the signal, and turning what we learn into a better decision.</p>
+        <p class="founder-perspective"><strong>I think like a founder.</strong> What does it cost to win a customer? What are they worth? Where should the next dollar go?</p>
+        <p>I bring experience from in-house paid media at Aegon, agency accounts at Kites Global, and independent education projects—plus an MBA from University Canada West.</p>
+        <a class="text-link" href={profile.resume} target="_blank" rel="noopener"><ActionIcon name="file" />View my experience</a>
+      </div>
+    </div> : <>
+    <div class:list={[editorial ? "about-introduction" : "about-original"]}><div class="section-heading"><h2>Hands on in the account.<br /><span>Commercial in the thinking.</span></h2></div>
+    <div class="about-body"><p class="about-lead">I think like a founder: what does it cost to win a customer, what are they worth, and where should the next dollar go?</p><p>That means looking beyond platform averages. I consider acquisition cost, lead quality and the economics of the offer, then make the campaign decisions and explain the tradeoffs.</p><p>My experience spans in-house paid media at Aegon, agency accounts at Kites Global, and independent education projects. I also hold an MBA from University Canada West.</p><a class="text-link" href={profile.resume} target="_blank" rel="noopener">View my experience <span aria-hidden="true">↗</span></a></div>
+    </div>
+    </>}
+    {editorial && <CareerTimeline />}
+  </section>
+  {!editorial && <section class="reference wrap" aria-label="Recommendation"><blockquote><p>“{testimonials[1].excerpt}”</p><footer><strong>{testimonials[1].name}</strong><span>Managed Andrew directly at Kites Global</span><a href={`${profile.linkedin}details/recommendations/`} target="_blank" rel="noopener">LinkedIn recommendation ↗</a></footer></blockquote></section>}
+  {editorial && <section class="recommendations section wrap" aria-labelledby="recommendations-title"><div class="section-heading"><h2 id="recommendations-title">From the people<br /><span>I’ve worked with.</span></h2><a class="text-link" href={`${profile.linkedin}details/recommendations/`} target="_blank" rel="noopener">View recommendations on LinkedIn ↗</a></div><div class="recommendation-grid">{testimonials.map(t=><figure class="recommendation-card"><blockquote><p>“{t.excerpt}”</p></blockquote><figcaption><strong>{t.name}</strong><span>{t.role}</span></figcaption><details><summary>Read the full recommendation</summary><p>“{t.quote}”</p></details></figure>)}</div></section>}
+</PreviewLayout>

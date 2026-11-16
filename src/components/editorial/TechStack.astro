@@ -1,0 +1,30 @@
+---
+import { stackGroups, certifications, languages, coreTools } from '../../content/site.js';
+const marks = {
+ 'Google Ads':'google-ads','Meta Ads':'meta-icon','Microsoft Advertising':'bing','LinkedIn Ads':'linkedin-icon','TikTok Ads':'tiktok-icon',
+ 'Google Analytics 4':'google-analytics','Google Search Console':'google-search-console','Google Tag Manager':'google-tag-manager','Microsoft Clarity':'microsoft-icon','Looker Studio':'looker-icon','Ahrefs':'ahrefs','SEMrush':'semrush','Zapier':'zapier-icon','Screaming Frog':'screaming-frog',
+ 'Microsoft 365':'microsoft-365','Google Workspace':'google-icon','Asana':'asana-icon','ClickUp':'clickup','Notion':'notion-icon','Dynamics 365':'dynamics-365','Jira':'jira','HubSpot':'hubspot-symbol','Mailchimp':'mailchimp-freddie','Klaviyo':'klaviyo','Shopify':'shopify-symbol','Canva':'canva'
+};
+const credentialMarks = { "google.com":"google-icon", "meta.com":"meta-icon", "coursera.org":"coursera-symbol", "hubspot.com":"hubspot-symbol" };
+// Preview taxonomy: preserve source data while grouping tools by their primary use.
+const groups = stackGroups.map(g => ({...g, tools: g.tools.filter(t => !['Dynamics 365', 'Zapier', 'Ahrefs', 'SEMrush', 'Screaming Frog'].includes(t))}));
+groups.find(g => g.id === 'email').tools.unshift('Dynamics 365');
+groups.find(g => g.id === 'productivity').tools.push('Zapier');
+groups.find(g => g.id === 'productivity').name = 'Productivity, project management & automation';
+groups.push({id:'seo', name:'SEO & search research', tools:['Ahrefs', 'SEMrush', 'Screaming Frog']});
+const columns = [groups.filter(g => ["paid", "productivity", "cms"].includes(g.id)), groups.filter(g => ["analytics", "email", "seo"].includes(g.id))];
+const core = `${coreTools.slice(0, -1).join(", ")} and ${coreTools.at(-1)}`;
+---
+<section class="tech-stack section wrap" id="toolkit" aria-labelledby="stack-title">
+  <div class="stack-heading">
+    <div class="section-heading"><p class="stack-kicker">Stack &amp; credentials</p><h2 id="stack-title">The platforms I use.<br /><span>The thinking comes first.</span></h2></div>
+    <p class="stack-intro">Paid search, paid social, measurement and the tools that help me keep the account and the team connected. I work hands-on in {core}.</p>
+  </div>
+  <div class="stack-groups">
+    {columns.map(column => <div class="stack-column">{column.map(group => <div class="stack-group"><h3>{group.name}</h3><ul>{group.tools.map(tool => <li><img src={`/images/brands/${marks[tool]}.svg`} width="22" height="22" alt="" /><span>{tool}</span></li>)}</ul></div>)}</div>)}
+    <div class="stack-group stack-credentials"><h3>Certifications</h3><ul>
+      {certifications.map(c => <li><img src={`/images/brands/${credentialMarks[c.domain]}.svg`} width="22" height="22" alt="" /><span>{c.title}<small>{c.issuer}{c.year && `, ${c.year}`}</small></span></li>)}
+      <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m5 8 6 6m-7 0 6-6 2-4M2 4h12M7 2v2m7 18 5-11 5 11M16 18h6" transform="translate(-1 0)" /></svg><span>Languages<small>{languages.join(' and ')}</small></span></li>
+    </ul></div>
+  </div>
+</section>

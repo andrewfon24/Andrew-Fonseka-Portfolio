@@ -1,320 +1,90 @@
-import { test, expect } from "@playwright/test";
-import AxeBuilder from "@axe-core/playwright";
-import { readFileSync } from "node:fs";
-import { createHash } from "node:crypto";
-import { testimonials } from "../src/testimonials.js";
+import {test,expect} from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+import {readFileSync,mkdirSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+const slugs=['aegon','university','panasia','petmart','dats'];
+const hash=x=>createHash('sha256').update(x).digest('hex');
+mkdirSync('test-results/review',{recursive:true});
 
-const slugs = ["aegon", "university", "panasia", "petmart", "dats"];
-const email = "mailto:andrew@andrewfonseka.com";
-const hash = (value) => createHash("sha256").update(value).digest("hex");
-const pages = ["/", ...slugs.map((s) => `/case-studies/${s}/`)];
-
-test("homepage leads with the positioning, one email action and the four results", async ({ page }) => {
-  const errors = [];
-  page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/");
-  await expect(page.locator("h1")).toHaveText("Paid media judged on customers, not clicks.");
-  await expect(page).toHaveTitle(/Paid Media & Performance Marketing Specialist/);
-  const primary = page.locator(".hero .button--primary");
-  await expect(primary).toHaveCount(1);
-  await expect(primary).toHaveAttribute("href", new RegExp(`^${email}`));
-  await expect(page.locator(".hero")).toContainText("Open to paid media roles in Greater Vancouver");
-  await expect(page.locator(".metrics__item")).toHaveCount(4);
-  // Aegon scale in the strip: the budget band only, never a currency or amount.
-  await expect(page.locator(".metrics__item").nth(3)).toContainText("Seven-figure");
-  await expect(page.locator(".metrics__item").nth(3)).toContainText("annual budget managed");
-  await expect(page.locator(".metrics__item").nth(3)).not.toContainText("$");
-  for (const text of ["~US$20", "media cost per fee-paid enrolment", "~US$97", "Pan Asia Bank", "+19%", "DIMO Academy", "Aegon"]) {
-    await expect(page.locator(".metrics")).toContainText(text);
-  }
-  for (const slug of slugs) {
-    await expect(page.locator(`a[href="/case-studies/${slug}/"]`).first()).toBeAttached();
-  }
-  // The Meta Ads Manager screenshot is gone everywhere.
-  await expect(page.locator('img[src*="university-ads-results"]')).toHaveCount(0);
-  await expect(page.locator(".hero__visual img")).toHaveAttribute("alt", "Andrew Fonseka");
-  await expect(page.locator(".hero__visual .signal")).toHaveCount(0);
-  expect(errors).toEqual([]);
+test('homepage positioning, header, actions and production metadata',async({page})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');
+ await expect(page.locator('h1')).toContainText('A founder’s care');
+ await expect(page.locator('.hero-actions .button')).toHaveText('Email Me');
+ await expect(page.locator('.hero-actions .button')).toHaveAttribute('href',/^mailto:andrew@andrewfonseka.com/);
+ await expect(page.locator('.monogram')).toHaveText('AF');
+ await expect(page.locator('.nav-email')).toHaveText('Email me');
+ await expect(page.locator('.case-button')).toHaveCount(5);
+ await expect(page.locator('.recommendation-card')).toHaveCount(3);
+ await expect(page.locator('.preview-bar')).toHaveCount(0);
+ await expect(page.locator('meta[name=robots]')).toHaveCount(0);
+ await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href','https://andrewfonseka.com/');
+ await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content',/^https:\/\/andrewfonseka.com\//);
+ expect(JSON.parse(await page.locator('script[type="application/ld+json"]').textContent())['@type']).toBe('Person');
+ expect(errors).toEqual([]);
 });
 
-test("documents, contact links and analytics hooks are preserved", async ({ page, request }) => {
-  await page.goto("/");
-  await expect(page.locator("#contact h2")).toHaveText("Let’s talk paid media");
-  await expect(page.locator("#contact a[href^='mailto:']")).toHaveAttribute("href", new RegExp(`^${email}`));
-  await expect(page.locator("#contact")).not.toContainText("778");
-  for (const name of ["Andrew_Fonseka_Resume.pdf", "Andrew_Fonseka_Portfolio.pdf"]) {
-    const response = await request.get(`/documents/${name}`);
-    expect(response.status()).toBe(200);
-    expect(hash(await response.body())).toBe(hash(readFileSync(`public/documents/${name}`)));
-  }
-  for (const name of ["email_click", "resume_download", "linkedin_click", "case_open", "portfolio_download"]) {
-    await expect(page.locator(`[data-track="${name}"]`)).not.toHaveCount(0);
-  }
-  await expect(page.locator(".stack__group:not(.stack__group--wide) .tool")).toHaveCount(26);
-  await expect(page.locator(".group-label")).toHaveText([
-    "The journey so far",
-    "Paid media platforms",
-    "Productivity, systems & project management",
-    "CMS, e-commerce & design",
-    "Analytics & tracking",
-    "Email & CRM",
-    "Certifications",
-  ]);
-  await expect(page.locator(".cred")).toHaveCount(7);
+for(const width of [1440,1024,768,390,320])test(`responsive navigation, no overflow and accessibility at ${width}px`,async({page})=>{
+ await page.setViewportSize({width,height:1000});await page.goto('/');await page.evaluate(()=>document.fonts.ready);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width+1);
+ const header=await page.locator('.site-header').boundingBox();const identity=await page.locator('.identity').boundingBox();const nav=await page.locator('.site-header nav').boundingBox();const email=await page.locator('.nav-email').boundingBox();
+ if(width>1000){expect(Math.abs(nav.x+nav.width/2-width/2)).toBeLessThan(1);expect(identity.x+identity.width).toBeLessThan(nav.x);expect(email.x).toBeGreaterThan(nav.x+nav.width);}
+ else expect(identity.x+identity.width).toBeLessThan(email.x);
+ await page.emulateMedia({reducedMotion:'reduce'});await page.evaluate(()=>scrollTo(0,600));
+ expect((await page.locator('.site-header').boundingBox()).y).toBe(0);expect((await page.locator('.site-header').boundingBox()).height).toBe(header.height);
+ for(const [name,id] of [['Results','work'],['Approach','capabilities'],['About','about'],['Contact','contact']]){
+  await page.locator('.site-header nav').getByRole('link',{name,exact:true}).click();
+  expect(new URL(page.url()).hash).toBe('#'+id);
+  expect((await page.locator('#'+id).boundingBox()).y).toBeGreaterThanOrEqual(header.height);
+ }
+ const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();expect(axe.violations).toEqual([]);
+ expect(await page.evaluate(()=>[...document.images].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src))).toEqual([]);
+ if([1440,390].includes(width)){
+  await page.goto('/');await page.screenshot({path:`test-results/review/home-${width}.png`});await page.screenshot({path:`test-results/review/home-full-${width}.png`,fullPage:true});
+  for(const id of ['about','toolkit','contact'])await page.locator('#'+id).screenshot({path:`test-results/review/${id}-${width}.png`});
+ }
 });
 
-test("navigation links to every section and collapses to brand plus résumé on phones", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.locator(".nav__links a")).toHaveText(["Results", "How I work", "Experience", "Contact"]);
-  await expect(page.locator('.nav__links a[href="#approach"]')).toHaveText("How I work");
-  for (const id of ["work", "systems", "approach", "experience", "contact"]) {
-    await expect(page.locator(`#${id}`)).toHaveCount(1);
-  }
-  await page.locator('.nav__links a[href="#experience"]').click();
-  await expect(page).toHaveURL(/#experience$/);
-  await expect(page.locator("#experience-title")).toBeInViewport();
-  // The sticky nav must not cover the anchored heading.
-  const navBottom = (await page.locator(".nav").boundingBox()).y + (await page.locator(".nav").boundingBox()).height;
-  expect((await page.locator("#experience-title").boundingBox()).y).toBeGreaterThanOrEqual(navBottom);
-
-  await page.setViewportSize({ width: 375, height: 812 });
-  await expect(page.locator(".nav__links")).toBeHidden();
-  await expect(page.locator(".brand")).toBeVisible();
-  await expect(page.locator(".nav__resume")).toBeVisible();
+test('keyboard disclosures, evidence controls and tool groups',async({page})=>{
+ await page.goto('/');await page.keyboard.press('Tab');await expect(page.locator('.skip')).toBeFocused();
+ const entries=page.locator('.timeline-entry');await expect(entries).toHaveCount(6);await expect(page.locator('.timeline-entry[open]')).toHaveCount(0);
+ for(const entry of await entries.all()){await entry.locator('summary').focus();await page.keyboard.press('Enter');await expect(entry.locator('.timeline-content')).toBeVisible();await page.keyboard.press('Enter');await expect(entry.locator('.timeline-content')).not.toBeVisible();}
+ await page.locator('.recommendation-card details').first().locator('summary').click();await expect(page.locator('.recommendation-card details').first().locator('p')).toBeVisible();
+ await page.locator('.decision > summary').click();
+ for(const name of ['Priority colleges','Broad undergraduate','All campaigns']){const button=page.getByRole('button',{name,exact:true});await button.click();await expect(button).toHaveAttribute('aria-pressed','true');}
+ await expect(page.locator('.stack-group').filter({has:page.getByRole('heading',{name:'Email & CRM',exact:true})})).toContainText('Dynamics 365');
+ const tools=await page.locator('.stack-column li span').allTextContents();expect(new Set(tools).size).toBe(tools.length);expect(tools).toHaveLength(26);
 });
 
-test("case pages load directly, survive refresh and back, and link onward", async ({ page }) => {
-  await page.goto("/");
-  await page.locator('.feature a[href="/case-studies/university/"]').click();
-  await expect(page).toHaveURL(/\/case-studies\/university\/$/);
-  await expect(page.locator("h1")).toHaveText("Optimize for enrolments, not form fills.");
-  await page.reload();
-  await expect(page.locator("h1")).toHaveText("Optimize for enrolments, not form fills.");
-  await page.goBack();
-  await expect(page).toHaveURL(/\/$/);
-  for (const slug of slugs) {
-    const response = await page.goto(`/case-studies/${slug}/`);
-    expect(response.status()).toBe(200);
-    await expect(page.locator("h1")).toHaveCount(1);
-    await expect(page.locator(".next-case")).toHaveCount(1);
-  }
+for(const slug of slugs)test(`case ${slug}: direct route, return pill spacing, mobile and accessibility`,async({page})=>{
+ await page.goto(`/case-studies/${slug}/`);await page.reload();await expect(page.locator('h1')).toBeVisible();
+ await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href',`https://andrewfonseka.com/case-studies/${slug}/`);
+ for(const width of [1440,390,320]){
+  await page.setViewportSize({width,height:1000});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width+1);
+  const pill=await page.locator('.case-next a').boundingBox();const contact=await page.locator('.contact-band').boundingBox();expect(contact.y-pill.y-pill.height).toBeGreaterThanOrEqual(47);
+ }
+ if(slug==='university'){
+  await page.locator('.source-image > summary').click();const img=page.locator('.source-image img');await img.evaluate(i=>i.decode());
+  const size=await img.evaluate(i=>({w:i.width,h:i.height,nw:i.naturalWidth,nh:i.naturalHeight}));expect(Math.abs(size.w/size.h-size.nw/size.nh)).toBeLessThan(.05);
+ }
+ if(slug==='aegon')await expect(page.locator('.case-page')).not.toContainText('$50');
+ const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();expect(axe.violations).toEqual([]);
+ if(slug==='aegon'){await page.setViewportSize({width:1440,height:1000});await page.locator('.case-next').screenshot({path:'test-results/review/case-return.png'});}
+ await page.locator('.case-next a').click();await expect(page).toHaveURL('/#work');
 });
 
-test("university case replaces the screenshot with the funnel, per-campaign charts and the match note", async ({ page }) => {
-  await page.goto("/case-studies/university/");
-  const funnel = page.locator(".brief .bars").first();
-  await expect(funnel).toHaveAttribute("aria-label", /821.*430.*312/);
-  await expect(page.locator("main")).toContainText("Enrolments matched on name, phone and student ID, and de-duplicated. Qualification data is available for all campaigns combined only.");
-  await expect(page.locator('img[src*="university-ads-results"]')).toHaveCount(0);
-
-  const explorer = page.locator(".explorer");
-  await explorer.scrollIntoViewIfNeeded();
-  await expect(explorer.locator("tbody tr")).toHaveCount(3);
-  await expect(explorer.locator("tfoot")).toContainText("821");
-  await expect(explorer.locator("tfoot")).toContainText("US$20.02");
-  await explorer.getByRole("button", { name: "Priority colleges" }).click();
-  await expect(explorer.getByRole("button", { name: "Priority colleges" })).toHaveAttribute("aria-pressed", "true");
-  await expect(explorer.locator("tbody tr[data-dim]")).toHaveCount(2);
-  await expect(page.locator(".callout__big")).toContainText("125");
-  await expect(page.locator(".case-hero .chips")).toContainText("Independent project, via partner agency");
-  // The big figure and its sentence never overlap, at any desktop width.
-  for (const width of [1024, 1280, 1440, 1920]) {
-    await page.setViewportSize({ width, height: 900 });
-    const [big, text] = await page.locator(".panel.callout > *").evaluateAll((els) => els.map((el) => el.getBoundingClientRect().toJSON()));
-    const separate = big.right <= text.left || big.bottom <= text.top;
-    expect(separate, `callout overlaps at ${width}px`).toBe(true);
-  }
+test('all local links, downloads, search files, images and 404 recovery',async({page,request})=>{
+ const paths=new Set();
+ for(const path of ['/',...slugs.map(s=>`/case-studies/${s}/`)]){
+  await page.goto(path);
+  for(const href of await page.locator('a[href^="/"]').evaluateAll(els=>els.map(el=>el.getAttribute('href').split('#')[0]||'/')))paths.add(href);
+ }
+ for(const path of paths)expect((await request.get(path)).status(),path).toBe(200);
+ for(const kind of ['Resume','Portfolio']){const path=`/documents/Andrew_Fonseka_${kind}.pdf`;const res=await request.get(path);expect(hash(await res.body())).toBe(hash(readFileSync('public'+path)));expect(res.headers()['content-type']).toContain('application/pdf');}
+ const sitemap=await request.get('/sitemap.xml');expect(await sitemap.text()).toContain('https://andrewfonseka.com/case-studies/university/');
+ expect(await (await request.get('/robots.txt')).text()).toContain('Sitemap: https://andrewfonseka.com/sitemap.xml');
+ const response=await page.goto('/missing-page/');expect(response.status()).toBe(404);await expect(page.locator('meta[name=robots]')).toHaveAttribute('content','noindex');await page.getByRole('link',{name:'See the case studies'}).click();await expect(page).toHaveURL('/#work');
 });
 
-test("Aegon shows process and responsibilities without result figures", async ({ page }) => {
-  await page.goto("/case-studies/aegon/");
-  await expect(page.locator("main")).toContainText("Illustrative process. No employer results or figures are shown.");
-  await expect(page.locator(".pipeline li")).toHaveCount(6);
-  await expect(page.locator(".journey__steps li")).toHaveCount(6);
-  await expect(page.locator(".systems-list li")).toHaveCount(5);
-  await expect(page.locator(".build-steps li")).toHaveCount(4);
-  await expect(page.locator("main")).toContainText("Legal and compliance kept final approval");
-  await expect(page.locator("main")).not.toContainText("account-based");
-  await expect(page.locator("main")).not.toContainText("eliminated");
-  await expect(page.locator(".case-stat")).toHaveCount(0);
-  await expect(page.locator("main")).not.toContainText("US$");
-  await page.goto("/case-studies/dats/");
-  await expect(page.locator(".case-hero .chips")).toContainText("Independent project");
-  await expect(page.locator(".case-hero .chips")).not.toContainText("Independent projects");
-});
-
-test("journey entries and testimonials respond to input", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.locator(".role")).toHaveCount(6);
-  await expect(page.locator(".role[open]")).toHaveCount(0);
-  await page.locator("#role-kites-global summary").click();
-  await expect(page.locator("#role-kites-global")).toHaveAttribute("open", "");
-  await expect(page.locator("#role-kites-global")).toContainText("Godrej India");
-  // Plain and linked client chips share the same inner padding.
-  const pads = await page.locator("#role-kites-global .client-chip").evaluateAll((els) => els.map((el) => getComputedStyle(el).paddingLeft));
-  expect(new Set(pads).size).toBe(1);
-  expect(parseFloat(pads[0])).toBeGreaterThan(8);
-  await expect(page.locator("#role-university-canada-west")).toContainText("Jun 2023 – Oct 2024");
-  await expect(page.locator("#role-aegon")).toContainText("Intermediate Channel Marketing Specialist (Paid Media)");
-  await expect(page.locator("#role-independent-projects")).toContainText("Jan 2026 – Sep 2026");
-
-  // Two excerpts, both visible, each a verbatim part of the full recommendation.
-  await expect(page.locator(".ref")).toHaveCount(3);
-  await expect(page.locator(".ref__label")).toHaveText(["Excerpt", "Excerpt", "Excerpt"]);
-  for (const t of testimonials) {
-    expect(t.quote.includes(t.excerpt)).toBe(true);
-    await expect(page.locator(".ref", { hasText: t.name })).toContainText(t.excerpt);
-  }
-
-});
-
-test("every page fits small screens and passes automated WCAG 2.1 AA checks", async ({ page }) => {
-  // Measure settled colours, not frames caught mid-fade.
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  for (const viewport of [
-    { width: 1440, height: 1000 },
-    { width: 375, height: 812 },
-  ]) {
-    await page.setViewportSize(viewport);
-    for (const path of [...pages, "/missing-page/"]) {
-      await page.goto(path);
-      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
-      expect(overflow, `${path} at ${viewport.width}`).toBeLessThanOrEqual(0);
-      const results = await new AxeBuilder({ page })
-        .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
-        .exclude(".ss-stage")
-        .analyze();
-      expect(results.violations.map((v) => `${path}: ${v.id}`)).toEqual([]);
-    }
-  }
-});
-
-test("content and evidence remain readable without JavaScript", async ({ browser }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false });
-  const page = await context.newPage();
-  for (const path of pages) {
-    await page.goto(path);
-    await expect(page.locator("h1")).toBeVisible();
-    const hidden = await page.evaluate(
-      () => [...document.querySelectorAll("[data-rise]")].filter((el) => getComputedStyle(el).opacity === "0").length,
-    );
-    expect(hidden, path).toBe(0);
-  }
-  await page.goto("/");
-  await expect(page.locator(".metrics")).toContainText("~US$97");
-  await expect(page.locator("#work")).toContainText("312");
-  await expect(page.locator(".role")).toHaveCount(6);
-  await page.goto("/case-studies/university/");
-  await expect(page.locator("main")).toContainText("821");
-  await expect(page.locator(".data-table tbody tr")).toHaveCount(3);
-  await context.close();
-});
-
-test("reduced motion shows final figures and finished charts immediately", async ({ browser }) => {
-  const context = await browser.newContext({ reducedMotion: "reduce" });
-  const page = await context.newPage();
-  await page.goto("/");
-  await expect(page.locator(".metrics [data-count]")).toHaveText(["~US$20", "~US$97", "+19%"]);
-  await page.goto("/case-studies/university/");
-  const scales = await page.locator(".brief .bar-fill").evaluateAll((els) => els.map((el) => getComputedStyle(el).transform));
-  expect(scales.every((t) => t !== "matrix(0, 0, 0, 1, 0, 0)")).toBe(true);
-  await page.goto("/");
-  const risen = await page.evaluate(
-    () => [...document.querySelectorAll("[data-rise]")].every((el) => getComputedStyle(el).opacity === "1"),
-  );
-  expect(risen).toBe(true);
-  await context.close();
-});
-
-test("counters count up once and land on the real figure", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.locator(".metrics [data-count]")).toHaveText(["~US$20", "~US$97", "+19%"], { timeout: 4000 });
-  const feature = page.locator(".feature [data-count]").first();
-  await feature.scrollIntoViewIfNeeded();
-  await expect(feature).toHaveText("312", { timeout: 4000 });
-});
-
-test("unknown pages recover to the work and email", async ({ page }) => {
-  const response = await page.goto("/missing-page/");
-  expect(response.status()).toBe(404);
-  await expect(page.locator('main a[href="/#work"]')).toBeVisible();
-  await expect(page.locator(`main a[href^="${email}"]`)).toBeVisible();
-});
-
-test("hiring-evidence pass: role, ownership and corrected claims", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.locator(".hero__role")).toHaveText("Paid Media & Performance Marketing Specialist");
-  await expect(page.locator(".hero .actions a")).toHaveText(["Email me", "View case studies"]);
-  await expect(page.locator(".card__role")).toHaveCount(4);
-  await expect(page.locator(".card--process")).toHaveCount(0);
-  await expect(page.locator('#systems a[href="/case-studies/aegon/"]')).toHaveCount(1);
-  await expect(page.locator("#approach .approach__steps li h3")).toHaveText(["Audit", "Define", "Test", "Report"]);
-  await expect(page.locator("main")).not.toContainText("Liveline");
-  await expect(page.locator("main")).not.toContainText("Demand Gen");
-  await expect(page.locator("#experience")).toContainText("one QA pass instead of rework");
-
-  await page.goto("/case-studies/petmart/");
-  await expect(page.locator("main")).toContainText("not used to calculate the 4:1 first-order ROAS");
-  await expect(page.locator(".columns[aria-label*='US$50K']")).toHaveCount(0);
-  await expect(page.locator("main")).not.toContainText("boosted by");
-
-  await page.goto("/case-studies/university/");
-  await expect(page.locator(".who")).toContainText("audience structure, placements and a higher-intent lead form");
-  await expect(page.locator(".panel--limits")).toContainText("Its 167 covers every programme");
-
-  for (const slug of ["university", "panasia", "petmart", "dats"]) {
-    await page.goto(`/case-studies/${slug}/`);
-    await expect(page.locator(".panel--limits li")).not.toHaveCount(0);
-  }
-  await page.goto("/case-studies/panasia/");
-  await expect(page.locator(".case-hero .chips")).toContainText("Jan to Jun 2023");
-  await page.goto("/case-studies/dats/");
-  await expect(page.locator("main")).toContainText("including Microsoft Advertising");
-});
-
-test("interview facts: hands-on roles, agency scope and Aegon scale are stated", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.locator("#work .card__role").first()).toContainText("The partner agency ran day-to-day optimisation");
-  await expect(page.locator("#work")).toContainText("made the week-to-week changes in Meta and Google Ads");
-  await expect(page.locator("#systems .chips")).toContainText("Seven-figure annual budget");
-  await expect(page.locator("#systems")).not.toContainText("$");
-  await expect(page.locator("#experience .story")).toContainText("I led four client accounts");
-  await expect(page.locator("#experience .story")).toContainText("Agency work across several industries is my first choice, and I’m open to in-house teams too");
-  await expect(page.locator("#experience .story")).toContainText("I owned most of a seven-figure annual budget");
-  await expect(page.locator("#experience .story")).toContainText("with Aegon’s permission");
-  await page.locator("#role-independent-projects summary").click();
-  await expect(page.locator("#role-independent-projects")).toContainText("Done outside my hours at Aegon, with the employer’s permission.");
-  await page.locator("#role-kites-global summary").click();
-  await expect(page.locator("#role-kites-global")).toContainText("The bank approved it");
-  await expect(page.locator("#role-kites-global")).toContainText("Godrej India");
-  await page.locator("#role-enfection summary").click();
-  await expect(page.locator("#role-enfection")).toContainText("stayed with the agency");
-  await expect(page.locator("#toolkit")).toContainText("Google Ads, Meta Ads, LinkedIn Ads, TikTok Ads and Google Analytics 4");
-  await expect(page.locator(".ref").first()).toContainText("Nabi Zadeh");
-  await expect(page.locator("body")).not.toContainText("restructur");
-  await expect(page.locator("body")).not.toContainText("overspen");
-});
-
-test("storytelling pass: reader-first hook, proof in the first screen, a story line on every card", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.locator(".hero__lede")).toContainText("Want to know which ads became customers?");
-  await expect(page.locator(".hero__lede")).toContainText("312 fee-paid enrolments, 259 funded loans and a 4:1 first-order ROAS");
-  await expect(page.locator("#work .card__story")).toHaveCount(4);
-  await expect(page.locator("#work .head")).toContainText("filling the wrong colleges");
-  await expect(page.locator("#systems .head")).toContainText("I can show you the system I built");
-});
-
-test("credibility pass: claims match the case studies", async ({ page }) => {
-  await page.goto("/");
-  // The hero no longer says he follows leads into the CRM himself; clients own that matching.
-  await expect(page.locator(".hero__lede")).toContainText("judge every campaign on what the client’s own system records");
-  await expect(page.locator("main")).not.toContainText("follow every lead into the CRM");
-  await expect(page.locator("main")).not.toContainText("I followed the lead");
-  // No unsupported revenue claim, no "3 years" filler, no "test me" line.
-  await expect(page.locator("body")).not.toContainText("US$300K");
-  await expect(page.locator(".metrics")).not.toContainText("3 years");
-  await expect(page.locator("#toolkit")).not.toContainText("Test me");
-  // The university decision is told in the results, not again in "How I work".
-  await expect(page.locator("#approach")).not.toContainText("17 enrolments");
-  await expect(page.locator("#approach")).toContainText("pre-launch checklist");
+test('essential content and navigation work without JavaScript',async({browser})=>{
+ const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const page=await context.newPage();await page.goto('http://127.0.0.1:4326/');await expect(page.locator('h1')).toBeVisible();await page.locator('.timeline-entry summary').first().click();await expect(page.locator('.timeline-content').first()).toBeVisible();await page.getByRole('link',{name:'Read the case study: Private university',exact:true}).click();await expect(page.locator('h1')).toBeVisible();await context.close();
 });

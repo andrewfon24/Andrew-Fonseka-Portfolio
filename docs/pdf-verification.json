@@ -1,0 +1,24 @@
+[
+  {
+    "file": "Andrew_Fonseka_Resume.pdf",
+    "pages": 1,
+    "text_identical": true,
+    "non_colour_artwork_identical": true,
+    "images_identical": true,
+    "links_identical": true,
+    "font_families_identical": true,
+    "page_sizes_identical": true,
+    "sha256": "68f9280046a7a68dc6c3c53631ec8d1640b7a8d2071f1f4b20b332e27b3f94a8"
+  },
+  {
+    "file": "Andrew_Fonseka_Portfolio.pdf",
+    "pages": 8,
+    "text_identical": true,
+    "non_colour_artwork_identical": true,
+    "images_identical": true,
+    "links_identical": true,
+    "font_families_identical": true,
+    "page_sizes_identical": true,
+    "sha256": "024b18f0b4e327f03e2d7b0fbd9c50b08b1007f0f0c57c5badb5c318348d913b"
+  }
+]

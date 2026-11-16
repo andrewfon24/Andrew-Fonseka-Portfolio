@@ -1,0 +1,20 @@
+---
+import { experience } from '../../content/editorial.js';
+const entries = experience.map(job => ({...job, summary: job.org === 'Aegon' ? 'Paid media across Canada and the U.S., CRM measurement and campaign automation.' : job.org === 'Independent projects' ? 'Education acquisition projects, including the Saudi university and DIMO Academy.' : job.org === 'Kites Global' ? 'Hands-on campaign strategy and delivery across banking, retail and education.' : job.org === 'Enfection' ? 'Supported Shopping, Performance Max and Meta campaigns across three markets.' : job.points[0]}));
+---
+<div class="career-timeline" aria-labelledby="career-title">
+  <div class="timeline-intro"><h3 id="career-title">The journey so far</h3><span>2019 – now</span></div>
+  <ol>{entries.map(job => <li><details class="timeline-entry">
+    <summary>
+      <span class="timeline-date">{job.date.replace(' to ', ' – ')}</span>
+      <span class="tag">{job.kind}</span>
+      <span class="timeline-title"><strong>{job.org}</strong><span class="timeline-role">{job.role}</span></span>
+      <span class="timeline-toggle" aria-hidden="true">+</span>
+    </summary>
+    <div class="timeline-content">
+      {job.place && <p class="timeline-place">{job.place}</p>}
+      {job.summary ? <p>{job.summary}</p> : <p>{job.role}, {job.org}. Completed June 2022.</p>}
+      {job.footnote && <small>{job.footnote}</small>}
+    </div>
+  </details></li>)}</ol>
+</div>
