@@ -1,0 +1,42 @@
+---
+import { university } from '../../content/editorial.js';
+const { full = false } = Astro.props;
+const comparisons = [
+  { id: 'all', name: 'All campaigns', leads: 821, enrolled: 312, rate: 38, cpe: 20.02, text: 'Across all three campaigns, 821 leads became 312 fee-paid enrolments. The CRM outcome makes the media cost meaningful.' },
+  { ...university.campaigns[0], text: 'The dedicated campaign produced 125 enrolments for the two colleges that needed students. Its higher cost per enrolment served a specific admissions need.' },
+  { ...university.campaigns[2], text: 'The broad campaign produced 167 enrolments across all programmes, including 17 for the two priority colleges. A lower average cost did not solve that specific intake need.' },
+];
+---
+<div class="evidence" data-evidence>
+  <div class="evidence-heading"><h3>From enquiry to enrolment</h3><span>May–Aug 2026</span></div>
+  <div class="funnel" aria-label="Overall results from Meta Ads Manager and admissions CRM">
+    {university.funnel.map((step, i) => <div class="funnel-row"><span class="funnel-label">{step.label}</span><div class="track"><div class="bar" style={`--amount:${step.value / 821 * 100}%; --shade:${i}`} /></div><strong>{step.value}</strong></div>)}
+  </div>
+  <p class="source-note">Leads: Meta Ads Manager. Qualified leads and enrolments: admissions CRM. Fee-paid means the first-semester deposit and admission fee were paid.</p>
+  <details class="decision" open={full}>
+    <summary>Explore the budget decision <span aria-hidden="true">+</span></summary>
+    <div class="decision-inner">
+      <p class="decision-intro">The lowest cost per lead wasn’t the whole story. Compare the outcomes.</p>
+      <div class="campaign-controls" role="group" aria-label="Choose campaign">
+        {comparisons.map((c, i) => <button type="button" data-campaign={c.id} aria-pressed={i === 0 ? 'true' : 'false'}>{c.name}</button>)}
+      </div>
+      {comparisons.map((c,i) => <div class="campaign-panel" data-panel={c.id} hidden={i !== 0} role="region" aria-label={`${c.name} results`}>
+        <dl class="campaign-stats"><div><dt>Fee-paid enrolments</dt><dd>{c.enrolled}</dd></div><div><dt>Media cost / enrolment</dt><dd>US${c.cpe.toFixed(2)}</dd></div><div><dt>Lead-to-enrolment</dt><dd>{c.rate.toFixed(1)}%</dd></div></dl>
+        <p>{c.text}</p>
+      </div>)}
+      <p class="source-note">Different programmes and audiences; this is not a controlled test or proof of incremental lift. USD conversion: SAR 3.75. Enrolments were matched and de-duplicated by the university.</p>
+      <noscript><p>The comparison controls require JavaScript. All campaign figures are in the table below.</p></noscript>
+      <details class="data-table"><summary>Read the complete campaign table</summary><div class="table-scroll"><table><caption>Campaign results from the portfolio’s CRM reporting</caption><thead><tr><th scope="col">Campaign</th><th scope="col">Leads</th><th scope="col">Enrolments</th><th scope="col">Cost / enrolment</th></tr></thead><tbody>{university.campaigns.map(c=><tr><th scope="row">{c.name}</th><td>{c.leads}</td><td>{c.enrolled}</td><td>US${c.cpe.toFixed(2)}</td></tr>)}</tbody></table></div></details>
+    </div>
+  </details>
+</div>
+<script>
+  document.querySelectorAll('[data-evidence]').forEach(root => {
+    root.querySelectorAll<HTMLButtonElement>('[data-campaign]').forEach(button => {
+      button.addEventListener('click', () => {
+        root.querySelectorAll('[data-campaign]').forEach(control => control.setAttribute('aria-pressed', String(control === button)));
+        root.querySelectorAll<HTMLElement>('[data-panel]').forEach(panel => { panel.hidden = panel.dataset.panel !== button.dataset.campaign; });
+      });
+    });
+  });
+</script>

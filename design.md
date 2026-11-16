@@ -1,32 +1,30 @@
-# Design: Andrew Fonseka portfolio
+# Andrew Fonseka — approved editorial design
 
-Locked system for every page. Hallmark reads this file first; it overrides theme dealing.
+Approved for publication by Andrew on 15 November 2026 after local review of Version B.
 
-## Purpose
-Help hiring managers and marketing leaders see, in under a minute, that Andrew runs paid media judged on business outcomes, then email him. Positioning: Paid Media & Performance Marketing Specialist.
+## Purpose and content
 
-## Genre and posture
-Premium SaaS product page crossed with a personal brand site. Dark navy for the story-telling bands (hero, Aegon systems, contact); pale blue paper for evidence (case cards, charts). Minimal prose: every section leads with a visual (chart, product demo, timeline), with words as captions.
+Help hiring managers evaluate Andrew for paid media specialist roles in Greater Vancouver and remote within Canada. Email is the primary action, résumé the secondary. Keep the founder mindset grounded in acquisition cost, lead quality and commercial judgement; do not invent business outcomes or promise interviews.
 
-## Tokens
-All colour and type go through `src/styles/tokens.css`. Brand values come from the résumé and portfolio PDFs.
-- Navy ground `#061224`, navy `#0c2037`, raised navy `#12304d`.
-- Blue `#2c7ac9` (light surfaces, actions), sky `#5ba6e3` (accent words on dark).
-- Gold `#c08a2b` on light, `#d9a441` on dark: result figures only.
-- Paper `#eef5fc`, surface `#ffffff`, ink `#121c2a`, body `#3d4c61`, rule `#d6e0ea`.
-- Display: Archivo 800, tight tracking. Body: Inter 400/500/600.
-- Container 1200px, 24px gutters (16px under 640px). Radius 14px cards, 22px feature panels, 999px chips.
+Source facts remain in `src/content/site.js`, with concise homepage copy in `src/content/editorial.js`. Preserve confidentiality boundaries for Aegon. University screenshot supports Meta leads and spend; enrolments are separately attributed to the admissions CRM. Recommendations retain the source quotations.
 
-## Rules
-- Headline pattern from the PDF: a plain clause, then the accent clause in sky (dark) or blue (light). Never italic.
-- No eyebrows, no tracked capitals, no middle-dot meta strings, except where the owner's reference screenshots ask for them: the stack and credentials kicker and group labels, the journey list head, the contact meta line and the footer tagline. Elsewhere, meta is separate chips or a two-line label.
-- Result figures are gold and tabular. Every figure carries its source or qualification within one glance.
-- Charts are inline SVG or HTML with their values printed; they animate with transform and opacity only.
-- Product demos use the Stageshow kit (`src/kit`). Hallmark gate 47a (drawn app windows) is waived for these demos only: they illustrate a process, carry an "Illustrative" label and show no employer results.
-- Liveline renders the illustrative pacing line only: no axis values, no result figures.
+## Visual system
 
-## Motion
-Rich and purposeful. Sections reveal once on entry (opacity plus 16px rise, 600ms, ease-out); counters run 1.2s; charts draw on entry; cards respond to the pointer with a soft spotlight. Demos play when in view and pause when offscreen. Under `prefers-reduced-motion: reduce` everything renders in its final state and demos show their poster frame. Without JavaScript all content is visible.
+- Predominantly light #f7faff / white, navy #0c2037 and blue #2164a9. Pale accents #eef5fc, rules #d6e0ea. Navy contact ending. No gold accents.
+- Archivo display and Inter body, locally hosted. Clear hierarchy, restrained motion and generous spacing.
+- Full-width, constant-height sticky navigation. AF roundel and identity left, links centered on desktop, email action right. On narrow screens links occupy a second row.
+- Large personal introduction and square portrait. Three outcome links, one featured university story and four compact supporting cards.
+- Rounded rectangular case cards; pill-shaped actions with white/blue fills. Contact uses rectangular icon buttons from the owner's reference, email primary.
+- Results → What I bring → grouped tools and credentials → personal introduction beside collapsible career timeline → three recommendations → contact.
+- Native disclosures for career, recommendations and source evidence. Campaign comparison changes only on user input. No autoplay or ornamental animation.
+- Case return action has 64px desktop / 48px phone breathing room before contact.
 
-## Content boundaries
-The résumé and portfolio PDFs are the source of truth. Never invent results, testimonials, logos or client names. Aegon shows process and responsibilities, never figures. The Saudi university stays anonymous. Phone number stays off the site; email is andrew@andrewfonseka.com.
+## Production checks
+
+Astro static output: homepage, five case studies, custom 404 and sitemap. Canonical and social metadata use andrewfonseka.com. Preview-only chrome and paths are absent from production. Existing Vercel Analytics retained; optional GA4 configuration preserved.
+
+14 Playwright tests cover 320–1440px responsive layout, sticky header, links, documents, native keyboard controls, campaign controls, image integrity, no-JavaScript reading, reduced motion, 404 recovery and automated WCAG A/AA checks. Visual refinement review follows the requested Oil UI workflow. Impeccable, brand and motion guidance inform implementation; approved user choices take priority over generic template rules.
+
+## Documents
+
+The résumé remains one Letter page; portfolio remains eight landscape pages. Fonts, words, image bytes, links, geometry and all non-colour PDF drawing operations are preserved. Palette changes align opening pages with the light website; the portfolio closing contact page remains navy. Verification receipt: `docs/pdf-verification.json`.

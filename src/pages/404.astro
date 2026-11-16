@@ -1,21 +1,7 @@
 ---
-import SiteLayout from "../layouts/SiteLayout.astro";
-import Icon from "../components/Icon.astro";
-import { mailto } from "../content/site.js";
+import EditorialLayout from '../layouts/EditorialLayout.astro';
+import ActionIcon from '../components/editorial/ActionIcon.astro';
 ---
-
-<SiteLayout title="Page not found | Andrew Fonseka" noindex contact={false}>
-  <section class="band band--dark">
-    <div class="container not-found">
-      <h1>This page moved. <span class="accent">The work didn’t.</span></h1>
-      <div class="actions">
-        <a class="button button--primary" href="/#work">
-          See the case studies <Icon name="arrow-right" size={17} class="icon-nudge" />
-        </a>
-        <a class="button button--ghost" href={mailto} data-track="email_click" data-where="404">
-          <Icon name="mail" size={17} />Email Andrew
-        </a>
-      </div>
-    </div>
-  </section>
-</SiteLayout>
+<EditorialLayout title="Page not found — Andrew Fonseka" noindex>
+  <section class="case-page wrap section"><h1>This page moved.<br /><span>The work is still here.</span></h1><p style="margin-block:24px">Explore my selected work or get in touch about a paid media role.</p><a class="button" href="/#work">See the case studies <ActionIcon name="arrow" /></a></section>
+</EditorialLayout>
