@@ -20,7 +20,8 @@ const recommendations = [testimonials[1], testimonials[0], testimonials[2]];
     </div>
     <figure class="portrait-block"><img src="/images/andrew-fonseka-480.webp" srcset="/images/andrew-fonseka-480.webp 480w, /images/andrew-fonseka-720.webp 720w" sizes="(max-width: 380px) calc(100vw - 32px), (max-width: 760px) 300px, (max-width: 1000px) 28vw, 360px" width="480" height="480" alt="Andrew Fonseka, Paid Media Specialist" fetchpriority="high" /><figcaption><strong>Andrew Fonseka</strong><span>Agency experience. In-house perspective.</span><span>Greater Vancouver, BC</span></figcaption></figure>
   </section>
-  <div class="proof-strip wrap" aria-label="Selected campaign outcomes">
+  <div class="proof-strip proof-strip--budget wrap" aria-label="Advertising budget and selected campaign outcomes">
+    <a href={caseUrl('aegon')}><strong>Seven-figure</strong><span>annual ad budget<small>Aegon · managed with the team</small></span></a>
     <a href={caseUrl('university')}><strong>312</strong><span>fee-paid enrolments<small>Private university · CRM-matched</small></span></a>
     <a href={caseUrl('panasia')}><strong>259</strong><span>funded loans<small>Pan Asia Bank · client-reported</small></span></a>
     <a href={caseUrl('petmart')}><strong>4:1</strong><span>first-order ROAS<small>Petmart.lk · client-reported</small></span></a>
@@ -68,3 +69,11 @@ const recommendations = [testimonials[1], testimonials[0], testimonials[2]];
     </figure>)}</div>
   </section>
 </EditorialLayout>
+
+<style>
+.editorial .proof-strip--budget { grid-template-columns: repeat(4,minmax(0,1fr)); }
+.editorial .proof-strip--budget a { flex-direction: column; align-items: flex-start; gap: 12px; padding-inline: 24px; }
+.editorial .proof-strip--budget strong { font-size: 40px; white-space: nowrap; }
+@media(max-width:1000px) { .editorial .proof-strip--budget { grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; } .editorial .proof-strip--budget a { padding:0; border:0; } }
+@media(max-width:760px) { .editorial .proof-strip--budget { grid-template-columns:1fr; gap:0; } .editorial .proof-strip--budget a { display:flex; padding-block:24px; border-bottom:1px solid var(--line); } .editorial .proof-strip--budget strong { font-size:40px; } }
+</style>
