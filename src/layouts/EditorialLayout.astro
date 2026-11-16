@@ -43,7 +43,9 @@ const ga4 = import.meta.env.PUBLIC_GA4_ID;
     <meta name="generator" content={Astro.generator} />
     <script type="application/ld+json" set:html={JSON.stringify(person)} />
     {ga4 && <><script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4}`} /><script is:inline define:vars={{ga4}}>window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',ga4);</script></>}
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico?v=headshot-1" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-headshot.png" type="image/png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <title>{title}</title>
   </head>
   <body class:list={[direction, { 'home-page': home }]}>
