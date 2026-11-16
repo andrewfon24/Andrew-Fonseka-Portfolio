@@ -13,10 +13,10 @@ Source facts remain in `src/content/site.js`, with homepage copy in `src/content
 - Predominantly light #f7faff / white, navy #0c2037 and blue #2164a9. Pale accents #eef5fc, rules #d6e0ea. Navy contact ending. No gold accents.
 - Archivo display and Inter body, locally hosted. Clear hierarchy, restrained motion and generous spacing.
 - Full-width, constant-height sticky navigation. Solid at the top; 88% white with 16px backdrop blur after scrolling, with an opaque reduced-transparency fallback. AF roundel and identity left, links centered on desktop, email action right. On narrow screens links occupy a second row.
-- Large personal introduction and square portrait. Three prominent outcome links, one featured university story and four supporting cards. Outcome links stack into readable rows on phones.
+- Large personal introduction and square portrait. Close-cropped headshot favicons in multi-size ICO, 96px PNG and 180px Apple touch formats. Three prominent outcome links, one featured university story and four supporting cards. Outcome links stack into readable rows on phones.
 - Rounded rectangular case cards; pill-shaped actions with white/blue fills. Contact uses rectangular icon buttons from the owner's reference, email primary.
 - Results → What I bring → grouped tools and credentials → personal introduction beside collapsible career timeline → three recommendations → contact.
-- Compact three-column approach on desktop and stacked on phones. Recommendations feature the direct manager’s exact quote beside the teacher and colleague quotes, using pale blue and white cards. Native disclosures for career, recommendations and source evidence. Campaign comparison changes only on user input. No autoplay or ornamental animation.
+- Compact three-column approach on desktop with shared heading, paragraph and capability-label rows; naturally stacked on phones. Recommendations feature the direct manager’s exact quote beside the teacher and colleague quotes, using pale blue and white cards. Native disclosures for career, recommendations and source evidence. Campaign comparison changes only on user input. No autoplay or ornamental animation.
 - Case return action has 64px desktop / 48px phone breathing room before contact.
 
 ## Production checks
