@@ -2,7 +2,7 @@
 
 Production: https://andrewfonseka.com
 
-Astro static site using the approved light, navy and blue editorial design, Archivo and Inter fonts, and the owner's portrait. The homepage, five case studies and 404 page share a persistent full-width navigation and contact footer. Native disclosures provide the career timeline and recommendations; a small script powers the evidence comparison.
+Astro static site using the approved narrative design in light, navy and blue, Archivo and Inter fonts, and the owner's portrait. The homepage, five case studies and 404 page share a persistent full-width navigation and contact footer. Native disclosures provide the career timeline and recommendations; a small script powers the evidence comparison.
 
 ## Run
 
@@ -22,7 +22,7 @@ Vercel project `andrew-fonseka-portfolio`, Astro preset, build `npm run build`, 
 - `src/layouts/EditorialLayout.astro`: metadata, navigation, contact and analytics.
 - `src/components/editorial`: static components and evidence controls.
 - `src/content/site.js`, `src/content/editorial.js`, `src/testimonials.js`: content and source facts.
-- `src/styles/preview.css` and `editorial.css`: approved design's base and refinement styles; filename retained from local preview history.
+- `src/styles/preview.css`, `editorial.css` and `storytelling.css`: approved design's base and refinement styles; filename retained from local preview history.
 - `public/documents`: rebuilt résumé and portfolio downloads.
 - `docs/pdf-verification.json`: exact text, image, link, font and layout preservation checks.
 

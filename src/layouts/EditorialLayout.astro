@@ -1,4 +1,6 @@
 ---
+import interRegular from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
+import archivoMedium from '@fontsource/archivo/files/archivo-latin-500-normal.woff2?url';
 import '@fontsource/inter/latin-400.css';
 import '@fontsource/inter/latin-500.css';
 import '@fontsource/inter/latin-600.css';
@@ -8,6 +10,7 @@ import '@fontsource/archivo/latin-600.css';
 import '@fontsource/archivo/latin-700.css';
 import '../styles/preview.css';
 import '../styles/editorial.css';
+import '../styles/storytelling.css';
 import Analytics from '@vercel/analytics/astro';
 import ActionIcon from '../components/editorial/ActionIcon.astro';
 import { profile, mailto } from '../content/editorial.js';
@@ -25,6 +28,8 @@ const ga4 = import.meta.env.PUBLIC_GA4_ID;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {noindex && <meta name="robots" content="noindex" />}
+    <link rel="preload" href={interRegular} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={archivoMedium} as="font" type="font/woff2" crossorigin />
     <meta name="theme-color" content="#f7faff" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -54,7 +59,14 @@ const ga4 = import.meta.env.PUBLIC_GA4_ID;
       {direction === "editorial" && <a class="button nav-email" href={mailto}><ActionIcon name="mail" />Email me</a>}
     </header>
     <main id="main"><slot /></main>
-    {direction === "editorial" && <div class="contact-band"><section id="contact" class="contact-centered wrap" aria-labelledby="contact-title"><h2 id="contact-title">Let’s talk paid media</h2><p>Want to know which of your ads become customers? I can get into the account,<br class="contact-break" /> explain the recommendation and own the follow-through.<br />I’d love to hear about your team, agency or in-house.</p><div class="contact-buttons"><a class="contact-button contact-primary" href={mailto}><ActionIcon name="mail" />{profile.email}</a><a class="contact-button" href={profile.linkedin} target="_blank" rel="noopener"><img src="/images/brands/linkedin-icon.svg" alt="" width="18" height="18" />Connect on LinkedIn</a><a class="contact-button" href={profile.resume} download><ActionIcon name="file" />Download résumé</a><a class="contact-button" href={profile.portfolio} download><ActionIcon name="download" />Portfolio PDF</a></div><p class="contact-meta">Greater Vancouver, BC · Remote within Canada · Authorized to work in Canada</p></section><footer class="navy-footer"><span>© 2026 Andrew Fonseka</span><span>Paid media · Business growth · Account ownership</span><a href={base}>Back to top ↑</a></footer></div>}
+    {direction === "editorial" && <div class="contact-band"><section id="contact" class="contact-centered wrap" aria-labelledby="contact-title"><h2 id="contact-title">What’s the next chapter?</h2><p>I’m looking for a team with a business to grow and good questions to work through.<br class="contact-break" /> If you’re hiring in paid media, I’d love to hear what you’re building<br class="contact-break" /> and talk about where I could contribute.</p><div class="contact-buttons"><a class="contact-button contact-primary" href={mailto}><ActionIcon name="mail" />{profile.email}</a><a class="contact-button" href={profile.linkedin} target="_blank" rel="noopener"><img src="/images/brands/linkedin-icon.svg" alt="" width="18" height="18" />Connect on LinkedIn</a><a class="contact-button" href={profile.resume} download><ActionIcon name="file" />Download résumé</a><a class="contact-button" href={profile.portfolio} download><ActionIcon name="download" />Portfolio PDF</a></div><p class="contact-meta">Greater Vancouver, BC · Remote within Canada · Authorized to work in Canada</p></section><footer class="navy-footer"><span>© 2026 Andrew Fonseka</span><span>Paid media · Business growth · Account ownership</span><a href={base}>Back to top ↑</a></footer></div>}
+    <script>
+      const header = document.querySelector<HTMLElement>('.site-header');
+      const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
+      updateHeader();
+      window.addEventListener('scroll', updateHeader, { passive: true });
+      window.addEventListener('pageshow', updateHeader);
+    </script>
     <Analytics />
     <script>
       import { track } from '@vercel/analytics';

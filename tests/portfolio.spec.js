@@ -8,7 +8,7 @@ mkdirSync('test-results/review',{recursive:true});
 
 test('homepage positioning, header, actions and production metadata',async({page})=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');
- await expect(page.locator('h1')).toContainText('A founder’s care');
+ await expect(page.locator('h1')).toContainText('what happens next.');
  await expect(page.locator('.hero-actions .button')).toHaveText('Email Me');
  await expect(page.locator('.hero-actions .button')).toHaveAttribute('href',/^mailto:andrew@andrewfonseka.com/);
  await expect(page.locator('.monogram')).toHaveText('AF');
@@ -30,6 +30,7 @@ for(const width of [1440,1024,768,390,320])test(`responsive navigation, no overf
  if(width>1000){expect(Math.abs(nav.x+nav.width/2-width/2)).toBeLessThan(1);expect(identity.x+identity.width).toBeLessThan(nav.x);expect(email.x).toBeGreaterThan(nav.x+nav.width);}
  else expect(identity.x+identity.width).toBeLessThan(email.x);
  await page.emulateMedia({reducedMotion:'reduce'});await page.evaluate(()=>scrollTo(0,600));
+ await expect(page.locator('.site-header')).toHaveClass(/is-scrolled/);
  expect((await page.locator('.site-header').boundingBox()).y).toBe(0);expect((await page.locator('.site-header').boundingBox()).height).toBe(header.height);
  for(const [name,id] of [['Results','work'],['Approach','capabilities'],['About','about'],['Contact','contact']]){
   await page.locator('.site-header nav').getByRole('link',{name,exact:true}).click();
@@ -37,6 +38,8 @@ for(const width of [1440,1024,768,390,320])test(`responsive navigation, no overf
   expect((await page.locator('#'+id).boundingBox()).y).toBeGreaterThanOrEqual(header.height);
  }
  const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();expect(axe.violations).toEqual([]);
+ await page.locator('#toolkit').scrollIntoViewIfNeeded();
+ await page.waitForFunction(()=>[...document.querySelectorAll('#toolkit img')].every(i=>i.complete&&i.naturalWidth));
  expect(await page.evaluate(()=>[...document.images].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src))).toEqual([]);
  if([1440,390].includes(width)){
   await page.goto('/');await page.screenshot({path:`test-results/review/home-${width}.png`});await page.screenshot({path:`test-results/review/home-full-${width}.png`,fullPage:true});

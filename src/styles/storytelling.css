@@ -1,0 +1,222 @@
+/* Narrative refinement: retain the approved identity, introduce a calmer reading rhythm. */
+:root { --reading: 16px; --section-space: 104px; }
+p { text-wrap: pretty; }
+.editorial .wrap { width: min(1184px, calc(100% - 96px)); }
+.editorial .site-header { width: 100%; }
+.editorial .site-header { transition: background-color var(--fast) ease; }
+/* Retain an opaque surface when backdrop blur is unavailable. */
+@supports ((backdrop-filter: blur(16px)) or (-webkit-backdrop-filter: blur(16px))) {
+ .editorial .site-header.is-scrolled {
+  background-color: rgb(255 255 255 / 88%);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+ }
+}
+@media (prefers-reduced-transparency: reduce) {
+ .editorial .site-header.is-scrolled {
+  background-color: var(--white);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+ }
+}
+.editorial .hero { grid-template-columns: minmax(0,1.7fr) minmax(0,1fr); gap: 72px; padding-block: 80px 72px; }
+.editorial .hero h1 { font-size: clamp(46px,5.1vw,74px); line-height: 1.055; font-weight: 500; letter-spacing: -.04em; }
+.editorial .intro { font-size: 19px; line-height: 1.65; max-width: 49ch; margin-top: 28px; }
+.editorial .hero-detail { font-size: 16px; max-width: 52ch; margin-top: 18px; }
+.editorial .hero-actions { gap: 16px; }
+.editorial .availability { font-size: 12px; }
+.editorial .portrait-block { max-width: 360px; }
+.editorial .portrait-block figcaption { display: flex; padding-top: 22px; gap: 7px; }
+.editorial .portrait-block figcaption strong { font-size: 16px; }
+.editorial .portrait-block figcaption span { font-size: 12px; line-height: 1.5; }
+.editorial .proof-strip { padding-block: 40px; }
+.editorial .proof-strip a { gap: 24px; }
+.editorial .proof-strip strong { font-size: 48px; line-height: 1.1; color: var(--blue); }
+.editorial .proof-strip span { font-size: 16px; font-weight: 500; }
+.editorial .proof-strip small { font-size: 12px; font-weight: 400; margin-top: 6px; }
+.editorial .section { padding-block: var(--section-space); }
+.editorial h2 { font-size: clamp(32px,3.3vw,46px); line-height: 1.1; }
+.editorial .section-heading p { font-size: 16px; line-height: 1.7; max-width: 34ch; }
+.editorial .work-heading { margin-bottom: 44px; gap: 50px; }
+.editorial .featured { padding: 44px; border: 0; border-radius: 16px; gap: 48px; grid-template-columns: 1.1fr 1fr; }
+.editorial .featured h3 { font-size: 36px; line-height: 1.15; }
+.editorial .featured-copy > p { font-size: 16px; }
+.editorial .featured-copy .ownership { font-size: 13px; }
+.editorial .case-meta > span,.editorial .tag { font-size: 12px; }
+.editorial .feature-result { margin-block: 28px; }
+.editorial .feature-result strong { font-size: 64px; }
+.editorial .feature-result span { font-size: 14px; }
+.editorial .feature-result small { font-size: 12px; }
+.editorial .featured .evidence { padding-block: 26px; border-top: 1px solid #bacfe3; }
+.editorial .featured .evidence-heading h3 { font: 600 18px/1.35 var(--display); }
+.editorial .funnel-label { font-size: 13px; }
+.editorial .source-note { font-size: 12px; line-height: 1.7; }
+.editorial .supporting-work { margin-top: 36px; }
+.editorial .supporting-work > h3 { font-weight: 500; font-size: 17px; padding-block: 0 24px; }
+.editorial .case-grid { gap: 24px; }
+.editorial .case-card { padding: 32px; border-radius: 16px; }
+.editorial .case-card-top { margin-bottom: 30px; }
+.editorial .case-card h4 { font-size: 17px; }
+.editorial .case-card h5 { font-size: 29px; font-weight: 500; max-width: 24ch; }
+.editorial .case-card > p { font-size: 16px; max-width: 51ch; }
+.editorial .card-result { padding-top: 22px; border-top: 1px solid var(--line); width: 100%; margin-block: 28px; }
+.editorial .card-result strong { font-size: 27px; }
+.editorial .card-result span { font-size: 12px; }
+.editorial .capabilities { grid-template-columns: 1fr 1.45fr; gap: 96px; }
+.editorial .capability-list article { padding-block: 30px; }
+.editorial .capability-list article:first-child { padding-top: 0; }
+.editorial .capability-list h3 { font: 500 24px/1.3 var(--display); }
+.editorial .capability-list p { font-size: 16px; max-width: 64ch; }
+.editorial .capability-list .tool-line { font-size: 12px; color: var(--muted); margin-top: 16px; }
+.editorial .stack-heading { grid-template-columns: 1.15fr 1fr; gap: 80px; }
+.editorial .stack-intro { max-width: 52ch; font-size: 16px; }
+.editorial .stack-group h3 { font-size: 12px; line-height: 1.6; max-width: none; }
+.editorial .about { gap: 80px; grid-template-columns: 1.15fr 1fr; }
+.editorial .about-introduction h2 { font-size: clamp(32px,3.2vw,44px); line-height: 1.13; }
+.editorial .about-body p { font-size: 16px; line-height: 1.75; margin-bottom: 22px; }
+.editorial .about-body .about-lead { font-size: 20px; line-height: 1.6; }
+.editorial .founder-perspective { border: 0; border-block: 1px solid var(--line); padding: 26px 0; margin-block: 30px; }
+.editorial .founder-perspective h3 { font: 500 23px/1.3 var(--display); margin-bottom: 12px; color: var(--blue); }
+.editorial .founder-perspective p { margin: 0; }
+.editorial .recommendations .section-heading { margin-bottom: 48px; }
+.editorial .recommendations .section-heading p { max-width: 52ch; }
+.editorial .recommendation-grid { gap: 40px; }
+.editorial .recommendation-card { border: 0; border-radius: 0; background: transparent; padding: 28px 0 0; border-top: 1px solid var(--line); }
+.editorial .recommendation-card blockquote p { font-size: 21px; line-height: 1.6; }
+.editorial .recommendation-card figcaption strong { font-size: 14px; }
+.editorial .recommendation-card figcaption span { font-size: 12px; }
+.editorial .recommendation-card summary { font-size: 12px; }
+.editorial .contact-centered { padding-block: 100px 78px; }
+.editorial .contact-centered h2 { font-size: clamp(38px,4vw,56px); }
+.editorial .case-page { padding-top: 52px; }
+.editorial .case-page h1 { max-width: 1000px; font-size: clamp(38px,4.5vw,64px); line-height: 1.08; }
+.editorial .case-lede { max-width: 68ch; font-size: 21px; line-height: 1.7; }
+.editorial .case-numbers { margin-block: 44px 0; padding-block: 32px; }
+.editorial .case-numbers span { font-size: 14px; }
+.editorial .case-numbers small { font-size: 12px; }
+.editorial .case-body { grid-template-columns: minmax(0,1.35fr) minmax(0,1fr); gap: 80px; margin-top: 64px; padding-bottom: 32px; }
+.editorial .case-narrative section { margin-bottom: 40px; }
+.editorial .case-narrative h2 { font-size: 28px; line-height: 1.25; margin-bottom: 16px; }
+.editorial .case-narrative p, .editorial .case-narrative li { font-size: 16px; line-height: 1.8; max-width: 68ch; }
+.editorial .case-side { min-width: 0; }
+.editorial .case-side h2 { font-size: 22px; line-height: 1.3; }
+.editorial .case-side p,.editorial .case-side li { font-size: 14px; line-height: 1.75; }
+.editorial .case-side .evidence .source-note { font-size: 12px; }
+.editorial .story-takeaway { padding-block: 30px 0; border-top: 1px solid var(--line); }
+.editorial .story-takeaway h2 { color: var(--blue); }
+.editorial .source-image p { max-width: 85ch; font-size: 14px; }
+@media (max-width: 1000px) {
+ .editorial .proof-strip a { flex-direction: column; align-items: start; gap: 12px; }
+ .editorial .hero { gap: 40px; padding-block: 56px; }
+ .editorial .hero h1 { font-size: 53px; }
+ .editorial .featured { gap: 30px; padding: 32px; }
+ .editorial .featured h3 { font-size: 30px; }
+ .editorial .case-card { padding: 26px; }
+ .editorial .case-card h5 { font-size: 26px; }
+ .editorial .capabilities,.editorial .about,.editorial .case-body { gap: 40px; }
+ .editorial .stack-heading { gap: 40px; }
+ .editorial .recommendation-grid { gap: 28px; }
+ .editorial .recommendation-card blockquote p { font-size: 19px; }
+}
+@media (max-width: 760px) {
+ :root { --section-space: 64px; }
+ .editorial .wrap { width: calc(100% - 40px); }
+ .editorial .site-header { width: 100%; }
+ .editorial .hero { display: flex; flex-direction: column; align-items: stretch; gap: 40px; padding-block: 40px 44px; }
+ .editorial .hero h1 { font-size: clamp(39px,8.5vw,60px); }
+ .editorial .intro { font-size: 18px; margin-top: 24px; }
+ .editorial .hero-detail { font-size: 16px; }
+ .editorial .hero-actions { gap: 12px; flex-wrap: wrap; }
+ .editorial .portrait-block { max-width: 300px; }
+ .editorial .portrait-block figcaption { padding-top: 16px; }
+ .editorial .proof-strip { grid-template-columns: 1fr; gap: 0; padding-block: 4px; }
+ .editorial .proof-strip a { display: grid; grid-template-columns: 82px minmax(0,1fr); align-items: center; gap: 20px; padding: 24px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+ .editorial .proof-strip a:last-child { border-bottom: 0; }
+ .editorial .proof-strip strong { font-size: 44px; }
+ .editorial .work-heading { display: block; margin-bottom: 30px; }
+ .editorial .section-heading p { max-width: 52ch; }
+ .editorial .featured { display: block; padding: 26px; }
+ .editorial .featured h3 { font-size: 30px; }
+ .editorial .featured .evidence { padding-block: 24px 0; border-bottom: 0; margin-top: 32px; }
+ .editorial .featured .evidence-heading { flex-wrap: wrap; gap: 10px; }
+ .editorial .feature-result { gap: 16px; }
+ .editorial .feature-result strong { font-size: 54px; }
+ .editorial .case-card { padding: 26px; }
+ .editorial .case-card-top { margin-bottom: 22px; }
+ .editorial .case-card h5 { font-size: 28px; }
+ .editorial .capabilities,.editorial .about { display: block; }
+ .editorial .stack-heading { display: block; margin-bottom: 32px; }
+ .editorial .stack-intro { margin-top: 24px; }
+ .editorial .about-body .about-lead { font-size: 19px; }
+ .editorial .career-timeline { margin-top: 48px; }
+ .editorial .recommendations .section-heading { margin-bottom: 20px; }
+ .editorial .recommendation-grid { gap: 32px; }
+ .editorial .recommendation-card blockquote p { font-size: 21px; }
+ .editorial .contact-centered { padding-block: 64px 40px; }
+ .editorial .case-page { padding-top: 28px; }
+ .editorial .case-lede { font-size: 18px; }
+ .editorial .case-numbers { gap: 16px; }
+ .editorial .case-numbers span { font-size: 12px; }
+ .editorial .case-numbers strong { font-size: 26px; }
+ .editorial .case-numbers small { font-size: 11px; }
+ .editorial .case-body { display: block; margin-top: 40px; }
+ .editorial .case-narrative h2 { font-size: 26px; }
+ .editorial .case-narrative section { margin-bottom: 32px; }
+ .editorial .case-side { margin-top: 40px; }
+}
+@media (max-width: 380px) {
+ .editorial .wrap { width: calc(100% - 32px); }
+ .editorial .site-header { width: 100%; }
+ .editorial .featured,.editorial .case-card { padding: 22px; }
+ .editorial .hero-actions a { font-size: 12px; padding-inline: 17px; }
+ .editorial .feature-result { align-items: start; }
+ .editorial .feature-result strong { font-size: 44px; }
+}
+
+/* Final composition: a compact working sequence and a clear lead recommendation. */
+.editorial .capabilities { display: block; padding-block: 64px; }
+.editorial .capabilities .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 48px; margin-bottom: 32px; }
+.editorial .capabilities .section-heading p { margin: 0; max-width: 43ch; }
+.editorial .capabilities .editorial-only { display: none; }
+.editorial .capability-list { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 36px; margin-top: 0; }
+.editorial .capability-list article, .editorial .capability-list article:first-child, .editorial .capability-list article:last-child { padding: 24px 0 0; border: 0; border-top: 1px solid var(--line); }
+.editorial .capability-list h3 { font-size: 23px; line-height: 1.3; max-width: 25ch; }
+.editorial .capability-list p { line-height: 1.65; margin-top: 12px; }
+.editorial .capability-list .tool-line { margin-top: 16px; }
+.editorial .recommendations .section-heading { margin-bottom: 36px; }
+.editorial .recommendation-grid { grid-template-columns: minmax(0,1fr) minmax(0,1.15fr); gap: 20px; align-items: stretch; }
+.editorial .recommendation-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 28px 32px; }
+.editorial .recommendation-featured { grid-row: span 2; background: var(--pale); border-color: transparent; padding: 40px; }
+.editorial .quote-mark { flex: none; color: var(--blue); margin-bottom: 22px; }
+.editorial .recommendation-card:not(.recommendation-featured) .quote-mark { display: none; }
+.editorial .recommendation-card blockquote p { font-size: 20px; line-height: 1.6; }
+.editorial .recommendation-featured blockquote p { font-size: clamp(26px,2.3vw,33px); line-height: 1.45; letter-spacing: -.025em; }
+.editorial .recommendation-card figcaption { flex-direction: row; align-items: center; gap: 14px; padding-top: 26px; }
+.editorial .recommendation-card figcaption > div { display: grid; gap: 6px; }
+.editorial .recommendation-card .recommendation-initials { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--pale); color: var(--blue); font: 500 14px/1 var(--display); }
+.editorial .recommendation-featured .recommendation-initials { background: var(--white); }
+.editorial .recommendation-card details { margin-top: 20px; }
+.editorial .recommendation-card summary { min-height: 44px; display: list-item; padding-block: 14px; font-size: 12px; }
+@media (max-width: 1000px) {
+ .editorial .capabilities .section-heading { align-items: start; }
+ .editorial .capabilities .section-heading p { max-width: 34ch; }
+ .editorial .capability-list { gap: 24px; }
+ .editorial .capability-list h3 { font-size: 21px; }
+ .editorial .recommendation-card { padding: 26px; }
+ .editorial .recommendation-featured { padding: 32px; }
+}
+@media (max-width: 760px) {
+ .editorial .capabilities { padding-block: 48px; }
+ .editorial .capabilities .section-heading { display: block; margin-bottom: 24px; }
+ .editorial .capabilities .section-heading p { margin-top: 16px; max-width: 52ch; }
+ .editorial .capability-list { grid-template-columns: 1fr; gap: 22px; }
+ .editorial .capability-list article, .editorial .capability-list article:first-child, .editorial .capability-list article:last-child { padding-top: 22px; }
+ .editorial .capability-list h3 { max-width: none; font-size: 22px; }
+ .editorial .capability-list .tool-line { margin-top: 10px; }
+ .editorial .recommendation-grid { grid-template-columns: 1fr; gap: 16px; }
+ .editorial .recommendation-featured { grid-row: auto; padding: 28px; }
+ .editorial .recommendation-card { padding: 26px; }
+ .editorial .recommendation-featured blockquote p { font-size: 26px; }
+ .editorial .recommendation-card blockquote p { line-height: 1.55; }
+ .editorial .recommendations .section-heading { margin-bottom: 28px; }
+}

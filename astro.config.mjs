@@ -7,5 +7,5 @@ export default defineConfig({
   trailingSlash: "always",
   integrations: [react()],
   devToolbar: { enabled: false },
-  build: { inlineStylesheets: "auto" },
+  build: { inlineStylesheets: "always" },
 });

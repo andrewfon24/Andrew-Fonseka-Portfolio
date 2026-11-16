@@ -2,36 +2,39 @@
 import PreviewLayout from '../../layouts/EditorialLayout.astro';
 import ActionIcon from '../../components/editorial/ActionIcon.astro';
 import Evidence from '../../components/editorial/Evidence.astro';
+import { stories } from '../../content/stories.js';
 import { cases, builder, aegon } from '../../content/editorial.js';
 export function getStaticPaths() {
   return cases.map(c => ({params:{slug:c.id},props:{c}}));
 }
 const direction = 'editorial';
 const { c } = Astro.props;
+const story = stories[c.id];
 const isAegon = c.id === 'aegon';
 const isUniversity = c.id === 'university';
 // Do not repeat the existing source's all-prospecting claim: the attached export
 // explicitly labels one campaign Retargeting, and flight names are not dates.
 const limits = (c.limits || []).filter(item => !item.includes('prospecting audiences'));
 ---
-<PreviewLayout direction={direction} title={`${c.clientShort || c.client} — Andrew Fonseka`} description={c.summary}>
+<PreviewLayout direction={direction} title={`${c.clientShort || c.client} — Andrew Fonseka`} description={story.intro}>
   <article class="case-page wrap">
     <a class="back-link" href={'/#work'}>← Back to selected work</a>
-    <h1>{c.headline[0]} <span>{c.headline[1]}</span></h1>
+    <h1>{story.title[0]} <span>{story.title[1]}</span></h1>
     <div class="case-meta"><span>{c.clientShort || c.client}</span><span>{c.context}</span><span>{c.period}</span></div>
-    <p class="case-lede">{c.summary}</p>
+    <p class="case-lede">{story.intro}</p>
     {c.stats && <div class="case-numbers">{c.stats.map(s=><div><strong>{s.value}</strong><span>{s.label}</span>{s.sub && <small>{s.sub}</small>}</div>)}</div>}
     <div class="case-body">
       <div class="case-narrative">
-        <section><h2>The problem</h2><p>{c.problem || c.problemShort}</p></section>
-        <section><h2>The decision</h2><p>{c.decision || c.builtShort}</p></section>
-        <section><h2>What I owned</h2><p>{isAegon ? 'Managed Google Ads, Meta and LinkedIn campaigns for U.S. and Canadian financial products. I designed and wrote a Google Sheets and Apps Script campaign builder for naming, UTMs and compliance QA.' : c.role}</p></section>
-        {isUniversity && <section><h2>What the team owned</h2><p>The partner agency handled day-to-day optimisation. The university and partner agency matched leads to fee-paid enrolments and reported the admissions outcomes.</p></section>}
-        {isUniversity && <section><h2>The commercial tradeoff</h2><p>{c.whyCpl}</p><p style="margin-top:14px">The priority campaign’s US$28 cost per enrolment was higher than the broad campaign’s US$13. It addressed a different need: filling the two colleges with the weakest intake.</p></section>}
-        {c.actions && <section><h2>What changed</h2><ul>{c.actions.map(a=><li>{a}</li>)}</ul><p>{c.actionsNote}</p></section>}
+        <section><h2>{story.beginning}</h2><p>{story.problem}</p></section>
+        <section><h2>{story.turn}</h2><p>{story.decision}</p></section>
+        {isUniversity && <section><h2>A shared effort, with clear responsibilities.</h2><p>The partner agency handled day-to-day optimisation. The university and partner agency matched leads to fee-paid enrolments and reported the admissions outcomes.</p></section>}
+        {isUniversity && <section><h2>The tradeoff behind the result.</h2><p style="margin-top:14px">The priority campaign’s US$28 cost per enrolment was higher than the broad campaign’s US$13. It addressed a different need: filling the two colleges with the weakest intake.</p></section>}
+
+        <section><h2>{story.outcome}</h2><p>{story.result}</p></section>
         {isAegon && <section><h2>How it was validated</h2><p>{builder.steps[3].body}</p><p style="margin-top:14px">Legal and compliance retained final approval of each launch. The tool supported their review; it did not replace it.</p></section>}
         {c.id === 'petmart' && <section><h2>Reading the result</h2><p>The 4:1 result describes first-order return on ad spend for Shopping and Performance Max. It excludes customer lifetime value and does not establish incremental profit.</p></section>}
         {c.id === 'panasia' && <section><h2>Reading the result</h2><p>The bank reported 259 funded gold loans. The US$500K is principal lent, not bank revenue or profit. Channel-level funded-loan counts were not available.</p></section>}
+        <section class="story-takeaway"><h2>What I take from this.</h2><p>{story.takeaway}</p></section>
       </div>
       <aside class="case-side" aria-label="Evidence and interpretation">
         {isUniversity && <Evidence full />}
