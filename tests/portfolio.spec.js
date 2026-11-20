@@ -13,9 +13,12 @@ test('homepage positioning, header, actions and production metadata',async({page
  await expect(page.locator('.nav-email')).toHaveAttribute('href',/^mailto:andrew@andrewfonseka.com/);
  await expect(page.locator('.monogram')).toHaveText('AF');
  await expect(page.locator('.proof-strip a')).toHaveCount(4);
- for(const slug of slugs) expect(await page.locator('main a[href="/case-studies/' + slug + '/"]').count()).toBeGreaterThan(0);
+ await expect(page.locator('#work article')).toHaveCount(3);
+ expect(await page.locator('#work .case-button').evaluateAll(links=>links.map(a=>a.pathname))).toEqual(['/case-studies/university/','/case-studies/panasia/','/case-studies/aegon/']);
+ await expect(page.locator('.hero-actions .button')).toHaveAttribute('href',/^mailto:andrew@andrewfonseka.com/);
+ await expect(page.locator('#capabilities .button')).toHaveAttribute('href',/^mailto:andrew@andrewfonseka.com/);
  await expect(page.locator('.hero img[fetchpriority="high"]')).toHaveAttribute('src','/images/andrew-fonseka-480.webp');
- await expect(page.locator('.print-spread .campaign-figure')).toHaveCount(2);
+ await expect(page.locator('#work .campaign-figure')).toHaveCount(2);
  await expect(page.locator('.recommendation-card')).toHaveCount(3);
  await expect(page.locator('.preview-bar')).toHaveCount(0);
  await expect(page.locator('meta[name=robots]')).toHaveCount(0);
@@ -68,7 +71,7 @@ for(const slug of slugs)test(`case ${slug}: direct route, return pill spacing, m
  await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href',`https://andrewfonseka.com/case-studies/${slug}/`);
  for(const width of [1440,390,320]){
   await page.setViewportSize({width,height:1000});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width+1);
-  const pill=await page.locator('.case-next a').boundingBox();const contact=await page.locator('.contact-band').boundingBox();expect(contact.y-pill.y-pill.height).toBeGreaterThanOrEqual(47);
+  const pill=await page.locator('.case-next .text-link').boundingBox();const contact=await page.locator('.contact-band').boundingBox();expect(contact.y-pill.y-pill.height).toBeGreaterThanOrEqual(47);
  }
  await expect(page.getByRole('heading',{name:'My contribution'})).toBeVisible();
  await expect(page.locator('.case-visual')).toBeVisible();
@@ -79,7 +82,7 @@ for(const slug of slugs)test(`case ${slug}: direct route, return pill spacing, m
  if(slug==='aegon')await expect(page.locator('.case-page')).not.toContainText('$50');
  const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();expect(axe.violations).toEqual([]);
  if(slug==='aegon'){await page.setViewportSize({width:1440,height:1000});await page.locator('.case-next').screenshot({path:'test-results/review/case-return.png'});}
- await page.locator('.case-next a').click();await expect(page).toHaveURL('/#work');
+ await page.locator('.case-next .text-link').click();await expect(page).toHaveURL('/#work');
 });
 
 test('all local links, downloads, search files, images and 404 recovery',async({page,request})=>{

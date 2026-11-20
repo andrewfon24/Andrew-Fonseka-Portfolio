@@ -3,6 +3,7 @@ import EditorialLayout from '../layouts/EditorialLayout.astro';
 import ActionIcon from '../components/editorial/ActionIcon.astro';
 import Evidence from '../components/editorial/Evidence.astro';
 import TechStack from '../components/editorial/TechStack.astro';
+import Capabilities from '../components/editorial/Capabilities.astro';
 import CareerTimeline from '../components/editorial/CareerTimeline.astro';
 import CaseVisual from '../components/editorial/CaseVisual.astro';
 import CampaignFigure from '../components/editorial/CampaignFigure.astro';
@@ -16,7 +17,7 @@ const recommendations = [testimonials[1], testimonials[2], testimonials[0]];
       <h1 id="intro-title">I’m Andrew.<br />I like knowing<br /><span>what happens next.</span></h1>
       <p class="intro">Someone clicks an ad. Did they enrol, take out a loan, or place their first order? I’m a paid media specialist who follows those decisions from the ad account into the client’s sales records.</p>
       <p class="hero-detail">I plan and run paid search and social campaigns, build conversion tracking, and use CRM data and sales feedback to decide where the next dollar goes.</p>
-      <div class="hero-actions"><a class="button" href={mailto}>Email Me <ActionIcon name="arrow" /></a><a class="text-link" href={profile.resume} target="_blank" rel="noopener"><ActionIcon name="file" />View résumé</a></div>
+      <div class="hero-actions"><a class="button" href={mailto}>Email me about a role <ActionIcon name="arrow" /></a><a class="text-link" href={profile.resume} target="_blank" rel="noopener"><ActionIcon name="file" />View résumé</a></div>
       <p class="availability">Available now for hybrid or remote roles in Greater Vancouver</p>
     </div>
     <figure class="portrait-block"><img src="/images/andrew-fonseka-480.webp" srcset="/images/andrew-fonseka-480.webp 480w, /images/andrew-fonseka-720.webp 720w" sizes="(max-width: 380px) calc(100vw - 32px), (max-width: 760px) 300px, (max-width: 1000px) 28vw, 360px" width="480" height="480" alt="Andrew Fonseka, Paid Media Specialist" fetchpriority="high" /><figcaption><strong>Andrew Fonseka</strong><span>Agency experience. In-house perspective.</span><span>Greater Vancouver, BC</span></figcaption></figure>
@@ -27,53 +28,46 @@ const recommendations = [testimonials[1], testimonials[2], testimonials[0]];
     <a href={caseUrl('panasia')}><strong>259</strong><span>funded loans<small>Pan Asia Bank · client-reported</small></span></a>
     <a href={caseUrl('petmart')}><strong>4:1</strong><span>first-order ROAS<small>Petmart.lk · client-reported</small></span></a>
   </div>
-  <section id="work" class="wrap chapter two-column">
-    <div><p class="dateline">Pan Asia Bank · Colombo · 2023</p>
-      <h2>Which enquiries <em>became loans?</em></h2>
-      <p class="chapter-intro">At Kites Global, the bank gave me US$25,000 to spend on Gold2Cash. Its sales team had a piece of the puzzle I couldn’t see in either ad account. They were talking to the borrowers.</p>
-      <p>Their feedback favoured Meta. I set the split, ran both accounts and reviewed results with the bank. By June, the bank had counted 259 funded loans.</p>
-      <CaseVisual campaign="panasia" />
-      <a class="read" href="/case-studies/panasia/">Inside the Gold2Cash campaign <ActionIcon name="arrow" /></a>
-    </div><CampaignFigure campaign="panasia" />
-  </section>
-
-  <section class="agency wrap chapter">
-    <p class="dateline">Kites Global · Retail &amp; e-commerce</p>
-    <h2>Same agency. <em>Different briefs.</em></h2>
-    <p class="chapter-intro">Pan Asia Bank was one of four accounts I managed at Kites Global. For Petmart, the question was how much a first order brought in. For Godrej, it was how to introduce a hair colour to shoppers in India.</p>
-    <div class="print-spread">
-      <article><CampaignFigure campaign="petmart" /><h3>What was a first order worth?</h3><p>I built Petmart’s Merchant Center feed and split Shopping and Performance Max by new and returning buyers. On US$5,000 in spend, the client reported four dollars in first-order sales for every dollar spent.</p><a class="read" href="/case-studies/petmart/">Read the Petmart figures <ActionIcon name="arrow" /></a></article>
-      <article><CampaignFigure campaign="godrej" /><h3>A launch with 30 creators.</h3><p>I helped shape the Godrej Expert Rich Crème launch and ran the Meta and YouTube ads behind the creator programme. Godrej attributed about US$350,000 in sales to paid media that quarter.</p></article>
+  <section id="work" class="selected section wrap" aria-labelledby="work-title">
+    <div class="section-heading work-heading"><h2 id="work-title">The work that<br /><span>shaped my thinking.</span></h2><p>Three decisions from my work in paid media. Each one started with a question the ad account alone couldn’t answer.</p></div>
+    <article class="featured">
+      <div class="featured-copy">
+        <div class="case-meta"><span>Private university, Saudi Arabia</span><span>May–Aug 2026</span></div>
+        <h3>Why pay more per lead <span>when seats are still empty?</span></h3>
+        <p>The broad undergraduate campaign brought in 603 leads. Only 17 students from that campaign paid their fees at the two colleges with the most seats left.</p>
+        <p>I recommended a dedicated budget and helped build and manage a higher-intent Meta campaign with the partner agency. Admissions matched the students to their enrolments.</p>
+        <div class="feature-result"><strong>125</strong><span>fee-paid enrolments at the two colleges from the dedicated campaign<small>312 across all three campaigns · University admissions CRM</small></span></div>
+        <a class="case-button" href={caseUrl('university')}>See how admissions counted enrolments <ActionIcon name="arrow" /></a>
+      </div>
+      <div class="university-proof"><CampaignFigure campaign="university" /><Evidence /></div>
+    </article>
+    <div class="supporting-work case-grid">
+      <article class="case-card">
+        <div class="case-meta"><span>Pan Asia Bank</span><span>Agency · Kites Global</span></div>
+        <h3>Which enquiries became loans?</h3>
+        <p>I led the Gold2Cash account. The bank’s sales team said its Meta leads were stronger, so I put 60% of our US$25,000 there and 40% into Google Ads.</p>
+        <CampaignFigure campaign="panasia" />
+        <div class="card-result"><strong>259 funded loans</strong><span>Reported by the bank · About US$97 in media per funded loan</span></div>
+        <a class="case-button" href={caseUrl('panasia')}>See the budget decision <ActionIcon name="arrow" /></a>
+      </article>
+      <article class="case-card">
+        <div class="case-meta"><span>Aegon</span><span>In-house · Financial services</span></div>
+        <h3>What could the team safely automate?</h3>
+        <p>Running 10–20 campaigns a day meant repeating the same setup. I wrote a Google Apps Script builder that turned one brief into a campaign ready for compliance review.</p>
+        <CaseVisual campaign="aegon" />
+        <div class="card-result"><strong>~200 campaigns launched</strong><span>22 colleagues used the builder · Estimated 12 working days saved per year</span></div>
+        <a class="case-button" href={caseUrl('aegon')}>Inside the campaign builder <ActionIcon name="arrow" /></a>
+      </article>
     </div>
-    <p class="marginal"><strong>At the smaller end of my client list</strong> I built a Shopify store and product feed for a Sri Lankan apparel retailer. At about US$850 a month, Shopping and Meta beat its target of 100+ retailer leads by 20%.</p>
   </section>
 
-  <section id="capabilities" class="chapter inhouse"><div class="wrap two-column">
-    <div><p class="dateline">Aegon · Canada &amp; U.S. · 2025–26</p><h2>How do you run <em>20 campaigns in a day?</em></h2>
-    <p>At Aegon I ran 10–20 campaigns a day and co-managed a seven-figure annual budget. Each launch needed a name the reporting team could use, tracking that worked, and a compliance review.</p>
-    <p>I wrote a Google Apps Script builder so the team could turn one brief into a campaign ready for review. Legal and compliance still signed off on every launch.</p>
-    <a class="read" href="/case-studies/aegon/">Follow a campaign through the builder <ActionIcon name="arrow" /></a></div>
-    <div class="ledger" aria-label="Campaign builder usage"><div><strong>22</strong><span>colleagues used the builder</span></div><div><strong>~200</strong><span>campaigns launched through it</span></div><div><strong>12 days</strong><span>of work saved per year, estimated</span></div></div>
-  </div></section>
-
-  <section class="wrap chapter">
-    <p class="dateline">Freelance · Education · 2026</p>
-    <h2>Two colleges still <em>had seats to fill.</em></h2>
-    <div class="two-column">
-      <div><p class="chapter-intro">While I was at Aegon, I took on education projects with my employer’s approval. A Saudi university had an intake problem you could easily miss in Ads Manager.</p>
-        <p>The broad campaign brought in the cheapest leads, but few of those students enrolled at the two colleges with the most empty seats. I recommended a dedicated Meta campaign for those colleges and helped build and manage it through the partner agency.</p>
-        <CaseVisual campaign="university" />
-        <a class="read" href="/case-studies/university/">See how admissions counted enrolments <ActionIcon name="arrow" /></a>
-      </div><Evidence />
-    </div>
-    <div class="marginal"><h3>At DIMO Academy, the budget stayed at US$900 a month.</h3><p>I built a landing page and a shorter enquiry form, set up Microsoft Advertising and helped install a chat assistant. The academy counted 212 qualified leads from March to May, up from 178 the quarter before.</p><a class="read" href="/case-studies/dats/">Read about the DIMO rebuild <ActionIcon name="arrow" /></a></div>
-  </section>
+  <Capabilities />
 
   <section id="about" class="wrap chapter two-column">
     <div><p class="dateline">About Andrew</p><h2>From Colombo <em>to Vancouver.</em></h2>
       <p>I started at Enfection, supporting campaigns in Sri Lanka, Singapore and Malaysia. By 2023 I was managing four client accounts at Kites Global and supporting five more. I earned my MBA at University Canada West in 2024, then joined Aegon in Langley.</p>
       <p>I’m available now for hybrid or remote paid media specialist and coordinator roles in Greater Vancouver. I speak English and Sinhala and am authorized to work in Canada.</p>
-      <div class="story-links"><a href={profile.resume}>Read my résumé (PDF)</a><a href={profile.portfolio}>View the portfolio (PDF)</a></div>
+      <div class="story-links"><a class="text-link" href={profile.resume}>Read my résumé (PDF)</a><a class="text-link" href={profile.portfolio}>View the portfolio (PDF)</a></div>
     </div><CareerTimeline />
   </section>
 
@@ -85,7 +79,7 @@ const recommendations = [testimonials[1], testimonials[2], testimonials[0]];
       <blockquote><p>“{t.excerpt}”</p></blockquote><figcaption><span class="recommendation-initials" aria-hidden="true">{t.initials}</span><div><strong>{t.name}</strong><span>{t.role}</span></div></figcaption>
       <details><summary>Full recommendation</summary><p>“{t.quote}”</p></details>
     </figure>)}</div>
-    <a class="read" href={profile.linkedin + 'details/recommendations/'}>Recommendations on LinkedIn <ActionIcon name="arrow" /></a>
+    <a class="text-link" href={profile.linkedin + 'details/recommendations/'}>Recommendations on LinkedIn <ActionIcon name="arrow" /></a>
   </section>
 </EditorialLayout>
 <style is:global>

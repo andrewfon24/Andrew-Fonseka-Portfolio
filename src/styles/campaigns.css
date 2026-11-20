@@ -7,7 +7,7 @@
 .chapter .chapter-intro { font-size: clamp(18px,1.5vw,22px); line-height: 1.55; }
 .chapter p + p { margin-top: 16px; }
 .story-links { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 24px; }
-.story-links a, .read { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: #164f7c; font-size: .91rem; font-weight: 600; text-decoration-thickness: 1px; }
+.read { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: #164f7c; font-size: .91rem; font-weight: 600; text-decoration-thickness: 1px; }
 .chapter .read { margin-top: 8px; }
 .campaign-figure { margin: 0; min-width: 0; }
 .art-mat { display: grid; place-items: center; padding: clamp(18px,3vw,44px); background: #eae2d3; }
@@ -53,3 +53,19 @@
 .editorial .recommendation-featured figcaption .recommendation-initials { background: #e4eff8; color: #1e517c; }
 .editorial .recommendation-featured :focus-visible { outline-color: white; }
 @media (max-width: 760px) { .editorial .contribution { grid-template-columns: 1fr; } }
+
+.approach-invite { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px 32px; border-top: 1px solid var(--line); padding-top: 24px; margin-top: 32px; }
+.approach-invite p { max-width: 56ch; }
+.editorial .case-next { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.editorial .contact-button { border-radius: 999px; }
+.recommendations > .text-link { margin-top: 24px; }
+
+.editorial .selected .case-card h3 { margin: 16px 0 12px; font: 500 clamp(24px,2.3vw,32px)/1.18 var(--display); letter-spacing: -.025em; }
+.selected .case-card .campaign-figure, .selected .case-card .case-visual { width: 100%; margin: 22px 0 0; }
+.selected .case-card .art-panasia .art-mat { padding: 16px; }
+.selected .case-card .art-panasia img { max-width: 230px; }
+.selected .case-card .card-result { margin-top: auto; padding-top: 18px; }
+.selected .case-card .campaign-figure, .selected .case-card .case-visual { margin-bottom: 24px; }
+.selected .case-card .case-button { margin-top: 0; }
+.university-proof { min-width: 0; }
+.university-proof .campaign-figure { margin-bottom: 18px; }

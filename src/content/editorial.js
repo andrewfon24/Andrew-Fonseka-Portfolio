@@ -2,9 +2,21 @@ export { profile, mailto, cases, university, aegon, builder, experience } from '
 export { testimonials } from '../testimonials.js';
 
 export const capabilities = [
-  { title: 'Start with the business question.', body: 'Before I build, I want to understand what success means for your team: a first order, a qualified conversation, a funded loan. That gives the campaign a useful direction.', tools: 'Acquisition strategy · Audience planning · Budget allocation' },
-  { title: 'Get into the account and make it happen.', body: 'I enjoy the practical work: building campaigns, checking tracking, testing creative and watching the budget. I stay close enough to the detail to know what needs attention.', tools: 'Paid search · Paid social · Conversion tracking · Campaign QA' },
-  { title: 'Bring the learning back to the team.', body: 'I connect platform data with the signals available from sales or the CRM, explain the tradeoffs, and make a clear recommendation for the next test or budget decision.', tools: 'Lead quality · CRM measurement · Reporting · Budget pacing' },
+  {
+    title: 'Ask who actually became a customer.',
+    body: 'I start with the people who handle the enquiries. At Pan Asia Bank, the sales team’s experience with Meta leads helped me decide how to split US$25,000 across two channels.',
+    example: 'What I look at · Sales feedback and funded loans',
+  },
+  {
+    title: 'Check what the platforms are bidding on.',
+    body: 'At Aegon, someone who booked a call looked different in HubSpot from someone who just filled out a form. I sent those stages back to Google and Meta so bidding could use completed applications.',
+    example: 'What I build · CRM feedback and conversion tracking',
+  },
+  {
+    title: 'Make the trade-off explicit.',
+    body: 'The university’s broad campaign averaged about US$13 per enrolment. The dedicated campaign cost about US$28, but reached the two colleges with seats to fill. That’s the comparison I’d bring to a budget review.',
+    example: 'What I report · Cost per outcome and who it served',
+  },
 ];
 
 export const supportingWork = [

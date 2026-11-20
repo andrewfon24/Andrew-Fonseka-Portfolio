@@ -1,7 +1,19 @@
 ---
-import { capabilities } from '../../content/editorial.js';
+import { capabilities, mailto } from '../../content/editorial.js';
+import ActionIcon from './ActionIcon.astro';
 ---
-<section class="capabilities section wrap" id="capabilities">
-  <div class="section-heading"><h2>What I bring<br class="editorial-only" /> to your team.</h2><p>Those experiences shape how I work today. A clear question, hands-on delivery, and a useful next step.</p></div>
-  <div class="capability-list">{capabilities.map(c=><article><h3>{c.title}</h3><p>{c.body}</p><p class="tool-line">{c.tools}</p></article>)}</div>
+<section class="capabilities section wrap" id="capabilities" aria-labelledby="approach-title">
+  <div class="section-heading">
+    <h2 id="approach-title">How I decide <span>where to spend.</span></h2>
+    <p>When I take over an account, I want to know who follows up on a lead, where they record the outcome, and which decision those records can support.</p>
+  </div>
+  <div class="capability-list">{capabilities.map(step => <article>
+    <h3>{step.title}</h3>
+    <p>{step.body}</p>
+    <p class="tool-line">{step.example}</p>
+  </article>)}</div>
+  <div class="approach-invite">
+    <p>Have a paid media role in mind? I’d be happy to walk through one of these decisions in an interview.</p>
+    <a class="button" href={mailto}><ActionIcon name="mail" />Email me about the role</a>
+  </div>
 </section>
