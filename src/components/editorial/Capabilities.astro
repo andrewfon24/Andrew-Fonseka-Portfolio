@@ -1,19 +1,77 @@
 ---
-import { capabilities, mailto } from '../../content/editorial.js';
+import { mailto, university } from '../../content/editorial.js';
 import ActionIcon from './ActionIcon.astro';
+import Bars from '../charts/Bars.astro';
+
+const broad = university.campaigns.find(campaign => campaign.id === 'broad');
+const priority = university.campaigns.find(campaign => campaign.id === 'priority');
+const comparisons = [
+  {
+    title: 'Who enquired?',
+    source: 'Leads recorded by Meta',
+    rows: [
+      { label: 'Broad campaign', value: broad.leads },
+      { label: 'Dedicated campaign', value: priority.leads, tone: 'priority' },
+    ],
+  },
+  {
+    title: 'Who took a priority seat?',
+    source: 'Fee-paid enrolments at the two colleges',
+    rows: [
+      { label: 'Broad campaign', value: 17 },
+      { label: 'Dedicated campaign', value: priority.enrolled, tone: 'priority' },
+    ],
+  },
+];
 ---
 <section class="capabilities section wrap" id="capabilities" aria-labelledby="approach-title">
   <div class="section-heading">
     <h2 id="approach-title">How I decide <span>where to spend.</span></h2>
-    <p>When I take over an account, I want to know who follows up on a lead, where they record the outcome, and which decision those records can support.</p>
+    <p>I start with the team that handles the leads. At a Saudi university, admissions had a specific goal in mind. Two colleges needed students.</p>
   </div>
-  <div class="capability-list">{capabilities.map(step => <article>
-    <h3>{step.title}</h3>
-    <p>{step.body}</p>
-    <p class="tool-line">{step.example}</p>
-  </article>)}</div>
+  <figure class="decision-map">
+    <figcaption>One admissions brief, seen from two sides</figcaption>
+    <div class="comparison">
+      {comparisons.map(chart => <div class="panel">
+        <h3>{chart.title}</h3>
+        <p>{chart.source}</p>
+        <Bars rows={chart.rows} label={chart.source + '. ' + chart.rows.map(row => row.label + ', ' + row.value).join('. ')} />
+      </div>)}
+      <span class="handoff" aria-hidden="true"><ActionIcon name="arrow" /></span>
+    </div>
+    <div class="decision-note">
+      <h3>My budget decision</h3>
+      <p>I recommended giving those two colleges their own Meta budget and higher-intent form. The broad campaign drew more enquiries. The dedicated campaign delivered more paid enrolments where admissions needed them.</p>
+    </div>
+    <p class="source">May–August 2026 · Enrolments matched in the admissions CRM. The campaigns reached different audiences.</p>
+  </figure>
   <div class="approach-invite">
-    <p>Have a paid media role in mind? I’d be happy to walk through one of these decisions in an interview.</p>
+    <p>Have a paid media role in mind? I’d be happy to walk through a budget decision in an interview.</p>
     <a class="button" href={mailto}><ActionIcon name="mail" />Email me about the role</a>
   </div>
 </section>
+<style>
+  .decision-map { padding: clamp(20px,3vw,38px); border: 1px solid var(--line); border-radius: 16px; background: white; }
+  figcaption { margin-bottom: 24px; font: 500 clamp(22px,2.1vw,30px)/1.2 var(--display); letter-spacing: -.025em; }
+  .comparison { position: relative; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 64px; }
+  .panel { padding: clamp(16px,2vw,26px); background: var(--pale); border-radius: 8px; }
+  h3 { font: 600 1.12rem/1.35 var(--display); }
+  .panel p, .source { color: var(--muted); font-size: .83rem; }
+  .panel p { margin: 4px 0 20px; }
+  .handoff { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%; color: var(--blue); }
+  .panel :global(.bar-row) { display: grid; grid-template-columns: 1fr auto; gap: 5px; margin-top: 14px; font-size: .86rem; }
+  .panel :global(.bar-row__value) { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .panel :global(.bar-track) { grid-row: 2; grid-column: 1/-1; background: #dce6ee; border-radius: 3px; overflow: hidden; }
+  .panel :global(.bar-fill) { display: block; width: calc(100% * var(--v)); height: 10px; background: #5b7286; }
+  .panel :global(.bar-fill--priority) { background: var(--blue); }
+  .decision-note { display: grid; grid-template-columns: 1fr 3fr; gap: 18px; align-items: baseline; padding: 20px 24px; margin-top: 22px; color: white; background: #133554; border-radius: 8px; }
+  .decision-note p { color: #eff6fc; line-height: 1.6; }
+  .source { margin-top: 14px; }
+  @media(max-width: 760px) {
+    .comparison { grid-template-columns: 1fr; gap: 36px; }
+    .handoff { display: none; }
+    .panel + .panel { position: relative; }
+    .panel + .panel::before { content: '↓'; position: absolute; top: -33px; left: 50%; color: var(--blue); font-size: 20px; }
+    .decision-note { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>

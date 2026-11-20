@@ -61,11 +61,7 @@
 .recommendations > .text-link { margin-top: 24px; }
 
 .editorial .selected .case-card h3 { margin: 16px 0 12px; font: 500 clamp(24px,2.3vw,32px)/1.18 var(--display); letter-spacing: -.025em; }
-.selected .case-card .campaign-figure, .selected .case-card .case-visual { width: 100%; margin: 22px 0 0; }
-.selected .case-card .art-panasia .art-mat { padding: 16px; }
-.selected .case-card .art-panasia img { max-width: 230px; }
 .selected .case-card .card-result { margin-top: auto; padding-top: 18px; }
-.selected .case-card .campaign-figure, .selected .case-card .case-visual { margin-bottom: 24px; }
 .selected .case-card .case-button { margin-top: 0; }
 .university-proof { min-width: 0; }
 .university-proof .campaign-figure { margin-bottom: 18px; }

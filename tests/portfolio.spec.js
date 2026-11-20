@@ -18,7 +18,8 @@ test('homepage positioning, header, actions and production metadata',async({page
  await expect(page.locator('.hero-actions .button')).toHaveAttribute('href',/^mailto:andrew@andrewfonseka.com/);
  await expect(page.locator('#capabilities .button')).toHaveAttribute('href',/^mailto:andrew@andrewfonseka.com/);
  await expect(page.locator('.hero img[fetchpriority="high"]')).toHaveAttribute('src','/images/andrew-fonseka-480.webp');
- await expect(page.locator('#work .campaign-figure')).toHaveCount(2);
+ await expect(page.locator('#work .case-button')).toHaveText(Array(3).fill('Read the case study'));
+ await expect(page.locator('#work .art-university')).toBeVisible();
  await expect(page.locator('.recommendation-card')).toHaveCount(3);
  await expect(page.locator('.preview-bar')).toHaveCount(0);
  await expect(page.locator('meta[name=robots]')).toHaveCount(0);
@@ -49,7 +50,7 @@ for(const width of [1440,1024,768,390,320])test(`responsive navigation, no overf
  }
  if([1440,390].includes(width)){
   await page.goto('/');await page.screenshot({path:`test-results/review/home-${width}.png`});await page.screenshot({path:`test-results/review/home-full-${width}.png`,fullPage:true});
-  for(const id of ['about','toolkit','contact'])await page.locator('#'+id).screenshot({path:`test-results/review/${id}-${width}.png`});
+  for(const id of ['capabilities','about','toolkit','contact'])await page.locator('#'+id).screenshot({path:`test-results/review/${id}-${width}.png`});
  }
 });
 
@@ -68,6 +69,11 @@ test('keyboard disclosures, evidence controls and tool groups',async({page})=>{
 
 for(const slug of slugs)test(`case ${slug}: direct route, return pill spacing, mobile and accessibility`,async({page})=>{
  await page.goto(`/case-studies/${slug}/`);await page.reload();await expect(page.locator('h1')).toBeVisible();
+ if(['university','panasia','aegon'].includes(slug)){
+  await page.goto('/#work');
+  await page.locator('#work .case-button[href="/case-studies/' + slug + '/"]').click();
+  await expect(page).toHaveURL('/case-studies/' + slug + '/');
+ }
  await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href',`https://andrewfonseka.com/case-studies/${slug}/`);
  for(const width of [1440,390,320]){
   await page.setViewportSize({width,height:1000});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width+1);
@@ -99,5 +105,5 @@ test('all local links, downloads, search files, images and 404 recovery',async({
 });
 
 test('essential content and navigation work without JavaScript',async({browser})=>{
- const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const page=await context.newPage();await page.goto('http://127.0.0.1:4326/');await expect(page.locator('h1')).toBeVisible();await page.locator('.timeline-entry summary').first().click();await expect(page.locator('.timeline-content').first()).toBeVisible();await page.getByRole('link',{name:'See how admissions counted enrolments',exact:true}).click();await expect(page.locator('h1')).toBeVisible();await context.close();
+ const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const page=await context.newPage();await page.goto('http://127.0.0.1:4326/');await expect(page.locator('h1')).toBeVisible();await page.locator('.timeline-entry summary').first().click();await expect(page.locator('.timeline-content').first()).toBeVisible();await page.getByRole('link',{name:'Read the case study for Private university',exact:true}).click();await expect(page.locator('h1')).toBeVisible();await context.close();
 });
