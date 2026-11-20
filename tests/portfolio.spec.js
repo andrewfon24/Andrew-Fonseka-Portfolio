@@ -16,7 +16,8 @@ test('homepage positioning, header, actions and production metadata',async({page
  await expect(page.locator('#work article')).toHaveCount(3);
  expect(await page.locator('#work .case-button').evaluateAll(links=>links.map(a=>a.pathname))).toEqual(['/case-studies/university/','/case-studies/panasia/','/case-studies/aegon/']);
  await expect(page.locator('.hero-actions .button')).toHaveAttribute('href',/^mailto:andrew@andrewfonseka.com/);
- await expect(page.locator('#capabilities .button')).toHaveAttribute('href',/^mailto:andrew@andrewfonseka.com/);
+ await expect(page.locator('#capabilities a[href^="mailto:"]')).toHaveCount(0);
+ await expect(page.locator('#capabilities .skill-name')).toHaveText(['Paid search & social','Conversion measurement','Campaign operations']);
  await expect(page.locator('.hero img[fetchpriority="high"]')).toHaveAttribute('src','/images/andrew-fonseka-480.webp');
  await expect(page.locator('#work .case-button')).toHaveText(Array(3).fill('Read the case study'));
  await expect(page.locator('#work .art-university')).toBeVisible();
@@ -79,6 +80,7 @@ for(const slug of slugs)test(`case ${slug}: direct route, return pill spacing, m
   await page.setViewportSize({width,height:1000});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width+1);
   const pill=await page.locator('.case-next .text-link').boundingBox();const contact=await page.locator('.contact-band').boundingBox();expect(contact.y-pill.y-pill.height).toBeGreaterThanOrEqual(47);
  }
+ await expect(page.locator('.case-next a[href^="mailto:"], #contact')).toHaveCount(0);
  await expect(page.getByRole('heading',{name:'My contribution'})).toBeVisible();
  await expect(page.locator('.case-visual')).toBeVisible();
  if(slug==='university'){

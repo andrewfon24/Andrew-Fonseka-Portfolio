@@ -5,20 +5,25 @@ import CampaignFigure from '../../components/editorial/CampaignFigure.astro';
 import CaseVisual from '../../components/editorial/CaseVisual.astro';
 import Evidence from '../../components/editorial/Evidence.astro';
 import { stories } from '../../content/stories.js';
-import { cases, mailto } from '../../content/editorial.js';
+import { cases } from '../../content/editorial.js';
 export function getStaticPaths() {
   return cases.map(c => ({params:{slug:c.id},props:{c}}));
 }
 const direction = 'editorial';
 const { c } = Astro.props;
 const story = stories[c.id];
+const nextChapter = {
+  university: { href: '/case-studies/panasia/', label: 'Next story · Pan Asia Bank' },
+  panasia: { href: '/case-studies/aegon/', label: 'Next story · Aegon' },
+  aegon: { href: '/#capabilities', label: 'How I work' },
+}[c.id];
 const isAegon = c.id === 'aegon';
 const isUniversity = c.id === 'university';
 // Do not repeat the existing source's all-prospecting claim: the attached export
 // explicitly labels one campaign Retargeting, and flight names are not dates.
 const limits = (c.limits || []).filter(item => !item.includes('prospecting audiences'));
 ---
-<PreviewLayout direction={direction} title={`${c.clientShort || c.client} — Andrew Fonseka`} description={story.intro}>
+<PreviewLayout showContact={false} direction={direction} title={`${c.clientShort || c.client} — Andrew Fonseka`} description={story.intro}>
   <article class="case-page wrap">
     <a class="back-link text-link" href={'/#work'}>← Back to selected work</a>
     <h1>{story.title[0]} <span>{story.title[1]}</span></h1>
@@ -41,6 +46,6 @@ const limits = (c.limits || []).filter(item => !item.includes('prospecting audie
       </aside>
     </div>
     {isUniversity && <details class="source-image"><summary>Inspect the Meta Ads Manager evidence</summary><p>Owner-supplied export for 1 May–31 August 2026: 821 leads and SAR 23,421.20 spent. This screenshot supports ad-platform leads and spend. The enrolment figures come separately from the admissions CRM reporting in the portfolio.</p><p>Month labels in campaign names are not verified flight dates. View the complete export below, or <a href="/evidence/meta-ads-may-aug-2026.png" target="_blank" rel="noopener">open the full-resolution screenshot ↗</a>.</p><div class="image-scroll"><img src="/evidence/meta-ads-may-aug-2026.png" alt="Meta Ads Manager, 1 May to 31 August 2026. Priority colleges: 161 leads, SAR 13,152.79 spent. Retargeting: 57 leads, SAR 2,383.93. Broad undergraduate: 603 leads, SAR 7,884.48. Total: 821 leads, SAR 23,421.20." width="2048" height="369" loading="lazy" /></div></details>}
-    <div class="case-next"><a class="button" href={mailto}><ActionIcon name="mail" />Email me about a role</a><a class="text-link" href={'/#work'}>Explore the other case studies <ActionIcon name="arrow" /></a></div>
+    <div class="case-next"><a class="text-link" href={'/#work'}>Explore the other case studies</a>{nextChapter && <a class="case-button" href={nextChapter.href}>{nextChapter.label} <ActionIcon name="arrow" /></a>}</div>
   </article>
 </PreviewLayout>

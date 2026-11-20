@@ -54,8 +54,6 @@
 .editorial .recommendation-featured :focus-visible { outline-color: white; }
 @media (max-width: 760px) { .editorial .contribution { grid-template-columns: 1fr; } }
 
-.approach-invite { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px 32px; border-top: 1px solid var(--line); padding-top: 24px; margin-top: 32px; }
-.approach-invite p { max-width: 56ch; }
 .editorial .case-next { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
 .editorial .contact-button { border-radius: 999px; }
 .recommendations > .text-link { margin-top: 24px; }
@@ -65,3 +63,5 @@
 .selected .case-card .case-button { margin-top: 0; }
 .university-proof { min-width: 0; }
 .university-proof .campaign-figure { margin-bottom: 18px; }
+#about .about-lead { font: 400 clamp(18px,1.6vw,22px)/1.55 Georgia,serif; color: var(--ink); }
+#about .story-links { margin-top: 18px; }

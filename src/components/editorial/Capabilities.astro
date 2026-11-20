@@ -1,77 +1,48 @@
 ---
-import { mailto, university } from '../../content/editorial.js';
-import ActionIcon from './ActionIcon.astro';
-import Bars from '../charts/Bars.astro';
-
-const broad = university.campaigns.find(campaign => campaign.id === 'broad');
-const priority = university.campaigns.find(campaign => campaign.id === 'priority');
-const comparisons = [
+const skills = [
   {
-    title: 'Who enquired?',
-    source: 'Leads recorded by Meta',
-    rows: [
-      { label: 'Broad campaign', value: broad.leads },
-      { label: 'Dedicated campaign', value: priority.leads, tone: 'priority' },
-    ],
+    skill: 'Paid search & social',
+    title: 'Start with the conversation.',
+    body: 'Before I open an ad account, I ask the people who handle enquiries what makes a good one. Their answer shapes the audience I choose, the promise in the ad and the question I put on the form.',
   },
   {
-    title: 'Who took a priority seat?',
-    source: 'Fee-paid enrolments at the two colleges',
-    rows: [
-      { label: 'Broad campaign', value: 17 },
-      { label: 'Dedicated campaign', value: priority.enrolled, tone: 'priority' },
-    ],
+    skill: 'Conversion measurement',
+    title: 'Follow a lead past the form.',
+    body: 'A form submission is where the customer’s story gets interesting. I trace the tags and CRM stages through to a booked call, an application or a sale. Then I can tell the team which outcome Google or Meta is actually learning from.',
+  },
+  {
+    skill: 'Campaign operations',
+    title: 'Leave the team with a better way to work.',
+    body: 'When several people have to enter the same campaign name or rebuild the same tracking link, I write a script for it. That leaves the team more time to review the creative, question a budget split and decide what to test next.',
   },
 ];
 ---
-<section class="capabilities section wrap" id="capabilities" aria-labelledby="approach-title">
-  <div class="section-heading">
-    <h2 id="approach-title">How I decide <span>where to spend.</span></h2>
-    <p>I start with the team that handles the leads. At a Saudi university, admissions had a specific goal in mind. Two colleges needed students.</p>
-  </div>
-  <figure class="decision-map">
-    <figcaption>One admissions brief, seen from two sides</figcaption>
-    <div class="comparison">
-      {comparisons.map(chart => <div class="panel">
-        <h3>{chart.title}</h3>
-        <p>{chart.source}</p>
-        <Bars rows={chart.rows} label={chart.source + '. ' + chart.rows.map(row => row.label + ', ' + row.value).join('. ')} />
-      </div>)}
-      <span class="handoff" aria-hidden="true"><ActionIcon name="arrow" /></span>
-    </div>
-    <div class="decision-note">
-      <h3>My budget decision</h3>
-      <p>I recommended giving those two colleges their own Meta budget and higher-intent form. The broad campaign drew more enquiries. The dedicated campaign delivered more paid enrolments where admissions needed them.</p>
-    </div>
-    <p class="source">May–August 2026 · Enrolments matched in the admissions CRM. The campaigns reached different audiences.</p>
-  </figure>
-  <div class="approach-invite">
-    <p>Have a paid media role in mind? I’d be happy to walk through a budget decision in an interview.</p>
-    <a class="button" href={mailto}><ActionIcon name="mail" />Email me about the role</a>
-  </div>
+<section class="working-method wrap" id="capabilities" aria-labelledby="approach-title">
+  <header class="method-opening">
+    <p class="dateline">My approach</p>
+    <h2 id="approach-title">From the client call <em>to the ad account.</em></h2>
+    <p class="method-intro">I like being the person who can sit with a client, hear what’s getting in the way, then open the account and do something about it. Here’s how that plays out in my work.</p>
+  </header>
+  <ol class="method-sequence" role="list">
+    {skills.map(step => <li>
+      <p class="skill-name">{step.skill}</p>
+      <h3>{step.title}</h3>
+      <p>{step.body}</p>
+    </li>)}
+  </ol>
 </section>
 <style>
-  .decision-map { padding: clamp(20px,3vw,38px); border: 1px solid var(--line); border-radius: 16px; background: white; }
-  figcaption { margin-bottom: 24px; font: 500 clamp(22px,2.1vw,30px)/1.2 var(--display); letter-spacing: -.025em; }
-  .comparison { position: relative; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 64px; }
-  .panel { padding: clamp(16px,2vw,26px); background: var(--pale); border-radius: 8px; }
-  h3 { font: 600 1.12rem/1.35 var(--display); }
-  .panel p, .source { color: var(--muted); font-size: .83rem; }
-  .panel p { margin: 4px 0 20px; }
-  .handoff { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%; color: var(--blue); }
-  .panel :global(.bar-row) { display: grid; grid-template-columns: 1fr auto; gap: 5px; margin-top: 14px; font-size: .86rem; }
-  .panel :global(.bar-row__value) { font-weight: 600; font-variant-numeric: tabular-nums; }
-  .panel :global(.bar-track) { grid-row: 2; grid-column: 1/-1; background: #dce6ee; border-radius: 3px; overflow: hidden; }
-  .panel :global(.bar-fill) { display: block; width: calc(100% * var(--v)); height: 10px; background: #5b7286; }
-  .panel :global(.bar-fill--priority) { background: var(--blue); }
-  .decision-note { display: grid; grid-template-columns: 1fr 3fr; gap: 18px; align-items: baseline; padding: 20px 24px; margin-top: 22px; color: white; background: #133554; border-radius: 8px; }
-  .decision-note p { color: #eff6fc; line-height: 1.6; }
-  .source { margin-top: 14px; }
-  @media(max-width: 760px) {
-    .comparison { grid-template-columns: 1fr; gap: 36px; }
-    .handoff { display: none; }
-    .panel + .panel { position: relative; }
-    .panel + .panel::before { content: '↓'; position: absolute; top: -33px; left: 50%; color: var(--blue); font-size: 20px; }
-    .decision-note { grid-template-columns: 1fr; gap: 8px; }
-  }
+  .working-method { padding-block: clamp(44px,6vw,88px); display: grid; grid-template-columns: minmax(0,.88fr) minmax(0,1.12fr); gap: clamp(36px,7vw,100px); align-items: start; border-top: 1px solid var(--line); }
+  .method-opening h2 { font: 500 clamp(38px,4.2vw,62px)/1.05 var(--display); letter-spacing: -.05em; margin: 14px 0 22px; }
+  .method-opening em { display: block; font-family: Georgia,serif; font-weight: 400; color: #215884; }
+  .method-intro { max-width: 38ch; font: 400 clamp(18px,1.4vw,21px)/1.6 var(--text); }
+  .method-sequence { margin: 0; padding: 0; list-style: none; }
+  .method-sequence li { position: relative; margin-left: 6px; padding: 0 0 28px 28px; border-left: 2px solid #bbcfdf; }
+  .method-sequence li:last-child { padding-bottom: 0; border-color: transparent; }
+  .method-sequence li::before { content: ''; position: absolute; top: 5px; left: -6px; width: 10px; height: 10px; border: 2px solid var(--blue); border-radius: 50%; background: var(--paper); }
+  .method-sequence li:last-child::before { background: var(--blue); }
+  .skill-name { font-size: .82rem; font-weight: 600; color: var(--blue); }
+  h3 { margin: 4px 0 8px; font: 500 clamp(21px,2vw,27px)/1.2 var(--display); letter-spacing: -.025em; }
+  li > p:last-child { max-width: 61ch; line-height: 1.65; }
+  @media(max-width: 760px) { .working-method { grid-template-columns: minmax(0,1fr); gap: 32px; } }
 </style>
