@@ -1,18 +1,11 @@
 /* Campaign photographs and print-like captions share a consistent margin. */
-.editorial-root { --paper: #fbfaf7; }
-.editorial .opening, .two-column, .print-spread { display: grid; grid-template-columns: minmax(0,1.12fr) minmax(0,1fr); gap: clamp(32px,6vw,90px); align-items: start; }
-.editorial .opening { align-items: center; padding-block: clamp(36px,6vw,90px); }
-.opening h1, .chapter h2 { font-family: var(--display); letter-spacing: -.055em; font-weight: 500; }
-.editorial .opening h1 { font-size: clamp(52px,6.7vw,98px); line-height: .99; margin-block: 19px 26px; max-width: 13ch; }
-.opening h1 em, .chapter h2 em { font-family: Georgia, serif; font-weight: 400; color: #215884; }
+.two-column, .print-spread { display: grid; grid-template-columns: minmax(0,1.12fr) minmax(0,1fr); gap: clamp(32px,6vw,90px); align-items: start; }
+.chapter h2 { font-family: var(--display); letter-spacing: -.055em; font-weight: 500; }
+.chapter h2 em { font-family: Georgia, serif; font-weight: 400; color: #215884; }
 .dateline { font-size: .81rem; font-weight: 600; letter-spacing: .035em; color: var(--muted); }
-.opening p:not(.dateline), .chapter p:not(.dateline) { max-width: 64ch; }
-.opening .opening-lede, .chapter .chapter-intro { font-size: clamp(18px,1.5vw,22px); line-height: 1.55; }
-.opening p + p, .chapter p + p { margin-top: 16px; }
-.byline { display: flex; align-items: center; gap: 12px; margin-block: 26px 12px; }
-.byline img { border-radius: 50%; }
-.byline span, .byline strong { display: block; font-size: .85rem; line-height: 1.6; }
-.byline span { color: var(--muted); }
+.chapter p:not(.dateline) { max-width: 64ch; }
+.chapter .chapter-intro { font-size: clamp(18px,1.5vw,22px); line-height: 1.55; }
+.chapter p + p { margin-top: 16px; }
 .story-links { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 24px; }
 .story-links a, .read { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: #164f7c; font-size: .91rem; font-weight: 600; text-decoration-thickness: 1px; }
 .chapter .read { margin-top: 8px; }
@@ -38,16 +31,25 @@
 .ledger div + div { border-top: 1px solid #c4d0da; }
 .ledger strong { color: #1e5075; font: 500 clamp(34px,3vw,48px)/1 var(--display); font-variant-numeric: tabular-nums; }
 .ledger span { font-size: .94rem; }
-.chapter .credentials { margin: 20px 0 8px; border-block: 1px solid var(--line); }
-.credentials summary { padding-block: 14px; font-weight: 600; }
-.credentials li { line-height: 1.7; color: var(--body); }
 .chapter .timeline-intro h3 { margin: 0; }
 .case-side .campaign-figure { margin-bottom: 28px; }
 .art-university .art-mat { background: white; padding: 0; }
 @media (max-width: 760px) {
- .editorial .opening, .two-column, .print-spread { grid-template-columns: minmax(0,1fr); gap: 30px; }
- .opening .campaign-figure { max-width: 475px; }
+ .two-column, .print-spread { grid-template-columns: minmax(0,1fr); gap: 30px; }
  .print-spread .art-mat { height: clamp(260px,78vw,365px); }
- .editorial .opening h1 { max-width: 14ch; }
- .byline { margin-top: 18px; }
 }
+.editorial .contribution { display: grid; grid-template-columns: minmax(145px, .35fr) minmax(0, 1fr); gap: 12px 28px; align-items: baseline; margin-top: 28px; border-block: 1px solid var(--line); padding-block: 20px; }
+.editorial .contribution h2 { font-size: 1.15rem; color: var(--blue); }
+.contribution p { max-width: 70ch; }
+.case-narrative .case-visual { margin-bottom: 32px; }
+.case-callout { border-left: 2px solid #8caccc; padding: 8px 20px; }
+.case-callout strong { display: block; color: var(--blue); font: 500 clamp(46px,5vw,70px)/1.05 var(--display); }
+.case-callout span { display: block; max-width: 27ch; margin-top: 8px; }
+.case-side .limits summary { padding-block: 14px; font-weight: 600; }
+.editorial .recommendation-featured { background: #133554; color: white; }
+.editorial .recommendation-featured blockquote p { font-family: Georgia, serif; color: white; }
+.editorial .recommendation-featured figcaption span, .editorial .recommendation-featured details p { color: #e0ebf5; }
+.editorial .recommendation-featured summary { color: white; }
+.editorial .recommendation-featured figcaption .recommendation-initials { background: #e4eff8; color: #1e517c; }
+.editorial .recommendation-featured :focus-visible { outline-color: white; }
+@media (max-width: 760px) { .editorial .contribution { grid-template-columns: 1fr; } }

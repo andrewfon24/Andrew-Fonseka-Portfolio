@@ -1,0 +1,66 @@
+---
+import Bars from '../charts/Bars.astro';
+import Split from '../charts/Split.astro';
+
+const { campaign } = Astro.props;
+const comparisons = {
+  university: {
+    title: 'Who filled the seats at the two priority colleges?',
+    rows: [{ label: 'Broad campaign', value: 17 }, { label: 'Dedicated campaign', value: 125 }],
+    caption: 'Fee-paid enrolments matched in the university CRM. The campaigns reached different audiences.',
+  },
+  dats: {
+    title: 'Qualified enquiries at the same monthly spend',
+    rows: [{ label: 'Dec 2025–Feb 2026', value: 178 }, { label: 'Mar–May 2026', value: 212 }],
+    caption: 'DIMO’s CRM qualification rule stayed the same. Media spend held at about US$900 per month.',
+  },
+  petmart: {
+    title: 'What each ad dollar brought back',
+    rows: [{ label: 'Media spend', value: 1, display: 'US$1' }, { label: 'First-order sales', value: 4, display: 'US$4' }],
+    caption: 'Client-reported return on Shopping and Performance Max, March–May 2023.',
+  },
+};
+const chart = comparisons[campaign];
+const workflow = [
+  ['Brief', 'A marketer enters the campaign details once.'],
+  ['Build', 'My script generates names, tracking links, copy and A/B variants.'],
+  ['Review', 'The builder flags compliance checks. Legal and compliance give final approval.'],
+  ['Launch and pace', 'Campaigns go live. I track spend and report to senior management every two weeks.'],
+];
+---
+<figure class="case-visual">
+  {campaign === 'aegon' && <>
+    <figcaption>From one brief to a live campaign</figcaption>
+    <ol class="workflow">{workflow.map(([title, body]) => <li><strong>{title}</strong><span>{body}</span></li>)}</ol>
+    <p class="visual-note">Illustration of the launch process at Aegon.</p>
+  </>}
+  {campaign === 'panasia' && <>
+    <figcaption>How I split the US$25,000 budget</figcaption>
+    <Split />
+    <p class="visual-note">The bank reported funded loans across both channels combined.</p>
+  </>}
+  {chart && <>
+    <figcaption>{chart.title}</figcaption>
+    <Bars rows={chart.rows} label={chart.rows.map(row => row.label + ' ' + (row.display ?? row.value)).join(', ')} />
+    <p class="visual-note">{chart.caption}</p>
+  </>}
+</figure>
+<style>
+  .case-visual { padding: clamp(18px, 2.3vw, 32px); margin: 24px 0; border: 1px solid #c8d8e5; background: #f1f6fa; border-radius: 8px; }
+  figcaption { color: var(--ink); font: 600 1.12rem/1.35 var(--display); margin-bottom: 20px; }
+  .case-visual .visual-note { font-size: .8rem; line-height: 1.55; color: var(--muted); margin: 14px 0 0; }
+  .case-visual :global(.bar-row) { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: baseline; gap: 4px 8px; margin-block: 14px; font-size: .94rem; }
+  .case-visual :global(.bar-track) { grid-column: 1 / -1; grid-row: 2; width: 100%; background: #dce7ee; }
+  .case-visual :global(.bar-fill) { display: block; height: 12px; background: #2164a9; width: calc(100% * var(--v)); }
+  .case-visual :global(.bar-row__value) { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .case-visual :global(.split__bar), .case-visual :global(.split__legend) { display: flex; font-variant-numeric: tabular-nums; }
+  .case-visual :global(.split__seg) { display: grid; place-items: center; min-height: 44px; font-size: .9rem; font-weight: 600; background: #17598f; color: white; }
+  .case-visual :global(.split__seg--dark) { background: #c1d8e9; color: #132d43; }
+  .case-visual :global(.split__legend) { text-align: center; margin-top: 6px; font-size: .85rem; }
+  .workflow { list-style: none; padding: 0; margin: 0; }
+  .workflow li { position: relative; padding: 0 0 18px 25px; border-left: 2px solid #9ebfd6; margin-left: 5px; }
+  .workflow li:last-child { padding-bottom: 0; border-color: transparent; }
+  .workflow li::before { content: ''; position: absolute; left: -6px; top: .34em; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .workflow strong, .workflow span { display: block; }
+  .workflow span { line-height: 1.5; color: var(--body); }
+</style>

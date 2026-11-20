@@ -8,12 +8,13 @@ mkdirSync('test-results/review',{recursive:true});
 
 test('homepage positioning, header, actions and production metadata',async({page})=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');
- await expect(page.locator('h1')).toHaveText('Which enquiries became loans?');
- await expect(page.locator('.opening')).toContainText('259 funded loans');
+ await expect(page.locator('h1')).toContainText('what happens next.');
+ await expect(page.locator('#work')).toContainText('259 funded loans');
  await expect(page.locator('.nav-email')).toHaveAttribute('href',/^mailto:andrew@andrewfonseka.com/);
  await expect(page.locator('.monogram')).toHaveText('AF');
- await expect(page.locator('main a[href^="/case-studies/"]')).toHaveCount(5);
- await expect(page.locator('.opening img[fetchpriority="high"]')).toHaveAttribute('src','/images/campaigns/gold2cash.webp');
+ await expect(page.locator('.proof-strip a')).toHaveCount(4);
+ for(const slug of slugs) expect(await page.locator('main a[href="/case-studies/' + slug + '/"]').count()).toBeGreaterThan(0);
+ await expect(page.locator('.hero img[fetchpriority="high"]')).toHaveAttribute('src','/images/andrew-fonseka-480.webp');
  await expect(page.locator('.print-spread .campaign-figure')).toHaveCount(2);
  await expect(page.locator('.recommendation-card')).toHaveCount(3);
  await expect(page.locator('.preview-bar')).toHaveCount(0);
@@ -33,7 +34,7 @@ for(const width of [1440,1024,768,390,320])test(`responsive navigation, no overf
  await page.emulateMedia({reducedMotion:'reduce'});await page.evaluate(()=>scrollTo(0,600));
  await expect(page.locator('.site-header')).toHaveClass(/is-scrolled/);
  expect((await page.locator('.site-header').boundingBox()).y).toBe(0);expect((await page.locator('.site-header').boundingBox()).height).toBe(header.height);
- for(const [name,id] of [['Campaigns','work'],['At Aegon','capabilities'],['About','about'],['Contact','contact']]){
+ for(const [name,id] of [['Results','work'],['Approach','capabilities'],['About','about'],['Contact','contact']]){
   await page.locator('.site-header nav').getByRole('link',{name,exact:true}).click();
   expect(new URL(page.url()).hash).toBe('#'+id);
   expect((await page.locator('#'+id).boundingBox()).y).toBeGreaterThanOrEqual(header.height);
@@ -56,8 +57,8 @@ test('keyboard disclosures, evidence controls and tool groups',async({page})=>{
  await page.locator('.recommendation-card details').first().locator('summary').click();await expect(page.locator('.recommendation-card details').first().locator('p')).toBeVisible();
  await page.locator('.decision > summary').click();
  for(const name of ['Priority colleges','Broad undergraduate','All campaigns']){const button=page.getByRole('button',{name,exact:true});await button.click();await expect(button).toHaveAttribute('aria-pressed','true');}
- await page.locator('#toolkit summary').focus();await page.keyboard.press('Enter');
- await expect(page.locator('#toolkit li')).toHaveCount(5);
+ await expect(page.locator('#toolkit .stack-column li img')).toHaveCount(26);
+ await expect(page.locator('.recommendation-featured')).toContainText('Don Chanaka Perera');
  await expect(page.locator('#toolkit')).toContainText('Google Ads Search');
 
 });
@@ -69,6 +70,8 @@ for(const slug of slugs)test(`case ${slug}: direct route, return pill spacing, m
   await page.setViewportSize({width,height:1000});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width+1);
   const pill=await page.locator('.case-next a').boundingBox();const contact=await page.locator('.contact-band').boundingBox();expect(contact.y-pill.y-pill.height).toBeGreaterThanOrEqual(47);
  }
+ await expect(page.getByRole('heading',{name:'My contribution'})).toBeVisible();
+ await expect(page.locator('.case-visual')).toBeVisible();
  if(slug==='university'){
   await page.locator('.source-image > summary').click();const img=page.locator('.source-image img');await img.evaluate(i=>i.decode());
   const size=await img.evaluate(i=>({w:i.width,h:i.height,nw:i.naturalWidth,nh:i.naturalHeight}));expect(Math.abs(size.w/size.h-size.nw/size.nh)).toBeLessThan(.05);

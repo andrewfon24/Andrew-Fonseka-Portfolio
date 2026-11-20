@@ -2,9 +2,10 @@
 import PreviewLayout from '../../layouts/EditorialLayout.astro';
 import ActionIcon from '../../components/editorial/ActionIcon.astro';
 import CampaignFigure from '../../components/editorial/CampaignFigure.astro';
+import CaseVisual from '../../components/editorial/CaseVisual.astro';
 import Evidence from '../../components/editorial/Evidence.astro';
 import { stories } from '../../content/stories.js';
-import { cases, builder, aegon } from '../../content/editorial.js';
+import { cases } from '../../content/editorial.js';
 export function getStaticPaths() {
   return cases.map(c => ({params:{slug:c.id},props:{c}}));
 }
@@ -23,24 +24,20 @@ const limits = (c.limits || []).filter(item => !item.includes('prospecting audie
     <h1>{story.title[0]} <span>{story.title[1]}</span></h1>
     <div class="case-meta"><span>{c.clientShort || c.client}</span><span>{c.context}</span><span>{c.period}</span></div>
     <p class="case-lede">{story.intro}</p>
-    {c.stats && <div class="case-numbers">{c.stats.map(s=><div><strong>{s.value}</strong><span>{s.label}</span>{s.sub && <small>{s.sub}</small>}</div>)}</div>}
+    <section class="contribution" aria-labelledby="contribution-title"><h2 id="contribution-title">My contribution</h2><p>{story.contribution}</p></section>
     <div class="case-body">
       <div class="case-narrative">
-        <section><h2>{story.beginning}</h2><p>{story.problem}</p></section>
         <section><h2>{story.turn}</h2><p>{story.decision}</p></section>
-        {isUniversity && <section><h2>The tradeoff behind the result.</h2><p style="margin-top:14px">The priority campaign’s US$28 cost per enrolment was higher than the broad campaign’s US$13. It addressed a different need: filling the two colleges with the weakest intake.</p></section>}
-
+        <CaseVisual campaign={c.id} />
         <section><h2>{story.outcome}</h2><p>{story.result}</p></section>
-        {isAegon && <section><h2>How it was validated</h2><p>{builder.steps[3].body}</p><p style="margin-top:14px">Alongside the builder, I fixed about 30 conversion actions and tags. Meta Event Match Quality rose from 5.5 to 7.0. I sent HubSpot stages back to Google and Meta so bidding could use completed applications.</p></section>}
-        {c.id === 'petmart' && <section><h2>Reading the result</h2><p>The 4:1 result describes first-order return on ad spend for Shopping and Performance Max. It excludes customer lifetime value and does not establish incremental profit.</p></section>}
-        {c.id === 'panasia' && <section><h2>Reading the result</h2><p>The bank reported 259 funded gold loans. The roughly US$500K is principal lent, not bank revenue or profit. Channel-level funded-loan counts were not available.</p></section>}
-        <section class="story-takeaway"><h2>What I take from this.</h2><p>{story.takeaway}</p></section>
+        <section class="story-takeaway"><h2>What I’d take into the next brief</h2><p>{story.takeaway}</p></section>
       </div>
-      <aside class="case-side" aria-label="Evidence and interpretation">
+      <aside class="case-side" aria-label="Campaign evidence">
         {['panasia', 'petmart', 'university'].includes(c.id) && <CampaignFigure campaign={c.id} />}
         {isUniversity && <Evidence full />}
-        {isAegon && <><h2>Inside the operating process</h2><ol class="process-list">{aegon.systems.filter(s=>['Automation','Tracking rebuild','Budget pacing'].includes(s.title)).map(s=><li><h3>{s.title}</h3><p>{s.body}</p></li>)}</ol></>}
-        <div class="limits"><h2>{isAegon ? 'Confidentiality' : 'Sources & limits'}</h2><p>{c.note}</p>{limits.length>0 && <ul>{limits.map(l=><li>{l}</li>)}</ul>}</div>
+        {isAegon && <div class="case-callout"><strong>~200</strong><span>campaigns launched through the builder by 22 colleagues</span></div>}
+        {c.id === 'dats' && <div class="case-callout"><strong>+34</strong><span>qualified enquiries over three months at the same monthly spend</span></div>}
+        <details class="limits"><summary>{isAegon ? 'What I can share publicly' : 'Sources and measurement'}</summary><p>{c.note}</p>{limits.length>0 && <ul>{limits.map(l=><li>{l}</li>)}</ul>}</details>
       </aside>
     </div>
     {isUniversity && <details class="source-image"><summary>Inspect the Meta Ads Manager evidence</summary><p>Owner-supplied export for 1 May–31 August 2026: 821 leads and SAR 23,421.20 spent. This screenshot supports ad-platform leads and spend. The enrolment figures come separately from the admissions CRM reporting in the portfolio.</p><p>Month labels in campaign names are not verified flight dates. View the complete export below, or <a href="/evidence/meta-ads-may-aug-2026.png" target="_blank" rel="noopener">open the full-resolution screenshot ↗</a>.</p><div class="image-scroll"><img src="/evidence/meta-ads-may-aug-2026.png" alt="Meta Ads Manager, 1 May to 31 August 2026. Priority colleges: 161 leads, SAR 13,152.79 spent. Retargeting: 57 leads, SAR 2,383.93. Broad undergraduate: 603 leads, SAR 7,884.48. Total: 821 leads, SAR 23,421.20." width="2048" height="369" loading="lazy" /></div></details>}
