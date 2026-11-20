@@ -8,12 +8,13 @@ mkdirSync('test-results/review',{recursive:true});
 
 test('homepage positioning, header, actions and production metadata',async({page})=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');
- await expect(page.locator('h1')).toContainText('what happens next.');
- await expect(page.locator('.hero-actions .button')).toHaveText('Email Me');
- await expect(page.locator('.hero-actions .button')).toHaveAttribute('href',/^mailto:andrew@andrewfonseka.com/);
+ await expect(page.locator('h1')).toHaveText('Which enquiries became loans?');
+ await expect(page.locator('.opening')).toContainText('259 funded loans');
+ await expect(page.locator('.nav-email')).toHaveAttribute('href',/^mailto:andrew@andrewfonseka.com/);
  await expect(page.locator('.monogram')).toHaveText('AF');
- await expect(page.locator('.nav-email')).toHaveText('Email me');
- await expect(page.locator('.case-button')).toHaveCount(5);
+ await expect(page.locator('main a[href^="/case-studies/"]')).toHaveCount(5);
+ await expect(page.locator('.opening img[fetchpriority="high"]')).toHaveAttribute('src','/images/campaigns/gold2cash.webp');
+ await expect(page.locator('.print-spread .campaign-figure')).toHaveCount(2);
  await expect(page.locator('.recommendation-card')).toHaveCount(3);
  await expect(page.locator('.preview-bar')).toHaveCount(0);
  await expect(page.locator('meta[name=robots]')).toHaveCount(0);
@@ -32,15 +33,16 @@ for(const width of [1440,1024,768,390,320])test(`responsive navigation, no overf
  await page.emulateMedia({reducedMotion:'reduce'});await page.evaluate(()=>scrollTo(0,600));
  await expect(page.locator('.site-header')).toHaveClass(/is-scrolled/);
  expect((await page.locator('.site-header').boundingBox()).y).toBe(0);expect((await page.locator('.site-header').boundingBox()).height).toBe(header.height);
- for(const [name,id] of [['Results','work'],['Approach','capabilities'],['About','about'],['Contact','contact']]){
+ for(const [name,id] of [['Campaigns','work'],['At Aegon','capabilities'],['About','about'],['Contact','contact']]){
   await page.locator('.site-header nav').getByRole('link',{name,exact:true}).click();
   expect(new URL(page.url()).hash).toBe('#'+id);
   expect((await page.locator('#'+id).boundingBox()).y).toBeGreaterThanOrEqual(header.height);
  }
  const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();expect(axe.violations).toEqual([]);
- await page.locator('#toolkit').scrollIntoViewIfNeeded();
- await page.waitForFunction(()=>[...document.querySelectorAll('#toolkit img')].every(i=>i.complete&&i.naturalWidth));
- expect(await page.evaluate(()=>[...document.images].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src))).toEqual([]);
+ for(const img of await page.locator('img').all()){
+  await img.scrollIntoViewIfNeeded();await img.evaluate(i=>i.decode());
+  expect(await img.evaluate(i=>i.naturalWidth)).toBeGreaterThan(0);
+ }
  if([1440,390].includes(width)){
   await page.goto('/');await page.screenshot({path:`test-results/review/home-${width}.png`});await page.screenshot({path:`test-results/review/home-full-${width}.png`,fullPage:true});
   for(const id of ['about','toolkit','contact'])await page.locator('#'+id).screenshot({path:`test-results/review/${id}-${width}.png`});
@@ -54,8 +56,10 @@ test('keyboard disclosures, evidence controls and tool groups',async({page})=>{
  await page.locator('.recommendation-card details').first().locator('summary').click();await expect(page.locator('.recommendation-card details').first().locator('p')).toBeVisible();
  await page.locator('.decision > summary').click();
  for(const name of ['Priority colleges','Broad undergraduate','All campaigns']){const button=page.getByRole('button',{name,exact:true});await button.click();await expect(button).toHaveAttribute('aria-pressed','true');}
- await expect(page.locator('.stack-group').filter({has:page.getByRole('heading',{name:'Email & CRM',exact:true})})).toContainText('Dynamics 365');
- const tools=await page.locator('.stack-column li span').allTextContents();expect(new Set(tools).size).toBe(tools.length);expect(tools).toHaveLength(26);
+ await page.locator('#toolkit summary').focus();await page.keyboard.press('Enter');
+ await expect(page.locator('#toolkit li')).toHaveCount(5);
+ await expect(page.locator('#toolkit')).toContainText('Google Ads Search');
+
 });
 
 for(const slug of slugs)test(`case ${slug}: direct route, return pill spacing, mobile and accessibility`,async({page})=>{
@@ -89,5 +93,5 @@ test('all local links, downloads, search files, images and 404 recovery',async({
 });
 
 test('essential content and navigation work without JavaScript',async({browser})=>{
- const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const page=await context.newPage();await page.goto('http://127.0.0.1:4326/');await expect(page.locator('h1')).toBeVisible();await page.locator('.timeline-entry summary').first().click();await expect(page.locator('.timeline-content').first()).toBeVisible();await page.getByRole('link',{name:'Read the case study: Private university',exact:true}).click();await expect(page.locator('h1')).toBeVisible();await context.close();
+ const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const page=await context.newPage();await page.goto('http://127.0.0.1:4326/');await expect(page.locator('h1')).toBeVisible();await page.locator('.timeline-entry summary').first().click();await expect(page.locator('.timeline-content').first()).toBeVisible();await page.getByRole('link',{name:'See how admissions counted enrolments',exact:true}).click();await expect(page.locator('h1')).toBeVisible();await context.close();
 });

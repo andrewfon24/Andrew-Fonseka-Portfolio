@@ -5,7 +5,7 @@
 
 export const profile = {
   name: "Andrew Fonseka",
-  title: "Paid Media & Performance Marketing Specialist",
+  title: "Paid Media Specialist",
   email: "andrew@andrewfonseka.com",
   linkedin: "https://www.linkedin.com/in/andrewfonseka/",
   location: "Greater Vancouver, BC",
@@ -78,13 +78,12 @@ export const cases = [
     summary:
       "Paid media for annuity, life insurance, pension and wealth products in the U.S. and Canada, with the tracking, CRM signal and automation behind it.",
     // Owner, Nov 2026: the budget may be stated as "seven-figure annual" and
-    // nothing more specific; he owned most of it and managed it with the team.
-    // No other Aegon figure is shown.
+    // no exact budget is public. The new portfolio includes operating figures.
     scale: "Seven-figure annual budget",
-    role: "Managed Google Ads, Meta and LinkedIn campaigns for U.S. and Canadian financial products on a seven-figure annual budget, most of which I owned and managed with the team. I also helped develop and launch a LinkedIn lead-generation program for high-net-worth investors with the team.",
+    role: "Managed Google Ads, Meta and LinkedIn campaigns for U.S. and Canadian financial products on a co-managed seven-figure annual budget. I also helped develop and launch a LinkedIn lead-generation program for high-net-worth investors with the team.",
     roleShort: "Managed Google Ads, Meta and LinkedIn; built the team's campaign builder.",
     lede: "Then I went in-house, and the stakes got bigger. I can’t show you Aegon’s results. I can show you the system I built to launch every campaign there.",
-    note: "Illustrative process. No employer results or figures are shown.",
+    note: "Operational figures cover the builder and tracking work. Aegon’s business results are confidential.",
     caseType: "Confidential operating-process case",
     problemShort: "Hand-built launches meant inconsistent names and UTMs, and slow manual compliance checks.",
     builtShort: "A Sheet and Apps Script campaign builder that generates names and UTMs and runs compliance QA before launch.",
@@ -109,7 +108,7 @@ export const cases = [
     role: "Recommended the strategy, including the separate priority-colleges campaign and budget, and built the campaigns in Meta Ads Manager: the audience structure, the placements and a higher-intent lead form. I also had input on the creative.",
     // One-line story for the homepage card: the problem, then the move.
     hook: "Two colleges needed students. The cheap leads were filling other programmes, so I funded those two colleges directly.",
-    roleShort: "I set the strategy and built the campaigns: audience structure, placements and a higher-intent lead form. The partner agency ran day-to-day optimisation.",
+    roleShort: "I set the strategy and built the campaigns: audience structure, placements and a higher-intent lead form. I helped manage the Meta campaigns through the partner agency.",
     ownership: {
       me: [
         "Recommended a separate campaign and budget for the two priority colleges.",
@@ -165,7 +164,7 @@ export const cases = [
     stats: [
       { value: "259", count: 259, label: "funded gold loans", sub: "Client-reported" },
       { value: "~US$97", count: 97, prefix: "~US$", label: "media cost per funded loan" },
-      { value: "US$500K", count: 500, prefix: "US$", suffix: "K", label: "loan principal lent", sub: "Client-reported" },
+      { value: "~US$500K", count: 500, prefix: "US$", suffix: "K", label: "loan principal lent", sub: "Client-reported" },
     ],
     note: "Funded loans and principal are client-reported. Loan principal is not bank revenue or profit, and the principal-to-media ratio is not ROAS. Channel-level funded-loan counts are not available.",
     channels: ["Meta Ads", "Google Ads"],
@@ -212,7 +211,7 @@ export const cases = [
     clientShort: "DIMO Academy",
     sector: "Trades education",
     context: "Independent project",
-    period: "Mar to May 2026",
+    period: "Jan to May 2026",
     headline: ["More qualified leads.", "Same budget."],
     summary:
       "Google Ads and Meta rebuilt around CRM-qualified leads, Microsoft Advertising added, at an unchanged ~US$900 a month.",
@@ -220,7 +219,7 @@ export const cases = [
       "The college needed more enrolment-ready prospects at the same budget.",
     decision:
       "Judge campaigns on CRM-qualified leads, rebuild Google Ads and Meta around them, and add Microsoft Advertising as a new intent source.",
-    role: "Advised on acquisition strategy, supported the Google Ads and Meta rebuild and made the in-platform changes week to week. Deployed the AI chat assistant and added Microsoft Advertising.",
+    role: "Advised on acquisition strategy, supported the Google Ads and Meta rebuild and made the in-platform changes week to week. Helped install the AI chat assistant and added Microsoft Advertising.",
     hook: "The college needed more enrolment-ready prospects without spending more. We rebuilt the campaigns around CRM-qualified leads.",
     roleShort: "Acquisition strategy and the week-to-week changes in the accounts. I added Microsoft Ads and the AI assistant.",
     limits: [
@@ -236,7 +235,7 @@ export const cases = [
     actions: [
       "Rebuilt Google Ads and Meta around qualified leads, with a new landing page and shorter form.",
       "Added Microsoft Advertising as a new source.",
-      "Deployed an AI chat assistant.",
+      "Helped install an AI chat assistant.",
     ],
     actionsNote: "Launched together as one combined change.",
     note: "Client-reported before-and-after comparison of consecutive quarters (Dec 2025 to Feb 2026 vs Mar to May 2026), not a controlled test. Total media about US$900 a month throughout, including Microsoft Advertising.",
@@ -350,7 +349,7 @@ export const experience = [
     date: "Jan 2025 to Oct 2026",
     start: 2025,
     points: [
-      "Launched and managed Google Ads, Meta and LinkedIn campaigns for annuity, life insurance, pension and wealth products in the U.S. and Canada. I owned most of the seven-figure annual budget and managed it with the team.",
+      "Launched and managed Google Ads, Meta and LinkedIn campaigns for annuity, life insurance, pension and wealth products in the U.S. and Canada. I co-managed the seven-figure annual budget.",
       "Helped develop and launch a LinkedIn lead-generation program for high-net-worth investors, with the team.",
       "Aligned web, product and compliance reviewers on a pre-launch checklist I owned, so launches went through one QA pass instead of rework.",
       "Connected HubSpot offline conversions to Smart Bidding and Meta: lower cost per lead and more completed applications at flat spend.",
@@ -362,10 +361,10 @@ export const experience = [
   },
   {
     org: "Independent projects",
-    role: "Freelance Marketing Consultant",
+    role: "Freelance Paid Media Consultant",
     kind: "Independent",
     place: "Greater Vancouver, BC",
-    date: "Jan 2026 to Sep 2026",
+    date: "Jan 2026 to Aug 2026",
     start: 2026,
     points: [
       "Saudi private university (via partner agency, May to Aug 2026): recommended the Meta lead-generation strategy and set up the campaigns.",
@@ -405,7 +404,7 @@ export const experience = [
     clients: [
       { name: "Pan Asia Bank", detail: "Account lead, Meta and Google Ads", href: "/case-studies/panasia/" },
       { name: "Petmart.lk", detail: "Shopping and Performance Max", href: "/case-studies/petmart/" },
-      { name: "Godrej India", detail: "30-creator influencer program and TikTok Ads" },
+      { name: "Godrej India", detail: "30-creator influencer program with Meta and YouTube ads" },
       { name: "B2B apparel retailer", detail: "Beat the lead target by 20%; built the Shopify store" },
     ],
   },
@@ -476,7 +475,6 @@ export const certifications = [
   { title: "Google Ads Search", issuer: "Google", year: "2026", domain: "google.com" },
   { title: "Google Ads Measurement", issuer: "Google", year: "2026", domain: "google.com" },
   { title: "Meta Marketing Analytics", issuer: "Meta", domain: "meta.com" },
-  { title: "Data Analysis with Spreadsheets and SQL", issuer: "Coursera", domain: "coursera.org" },
   { title: "Google AI Essentials", issuer: "Google", domain: "google.com" },
   { title: "Email Marketing", issuer: "HubSpot", domain: "hubspot.com" },
 ];

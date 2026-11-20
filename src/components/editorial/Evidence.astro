@@ -26,7 +26,7 @@ const comparisons = [
       </div>)}
       <p class="source-note">Different programmes and audiences; this is not a controlled test or proof of incremental lift. USD conversion: SAR 3.75. Enrolments were matched and de-duplicated by the university.</p>
       <noscript><p>The comparison controls require JavaScript. All campaign figures are in the table below.</p></noscript>
-      <details class="data-table"><summary>Read the complete campaign table</summary><div class="table-scroll"><table><caption>Campaign results from the portfolio’s CRM reporting</caption><thead><tr><th scope="col">Campaign</th><th scope="col">Leads</th><th scope="col">Enrolments</th><th scope="col">Cost / enrolment</th></tr></thead><tbody>{university.campaigns.map(c=><tr><th scope="row">{c.name}</th><td>{c.leads}</td><td>{c.enrolled}</td><td>US${c.cpe.toFixed(2)}</td></tr>)}</tbody></table></div></details>
+      <details class="data-table"><summary>Read the complete campaign table</summary><div class="table-scroll"><table><caption>Enrolments matched by the university’s admissions team</caption><thead><tr><th scope="col">Campaign</th><th scope="col">Leads</th><th scope="col">Enrolments</th><th scope="col">Cost / enrolment</th></tr></thead><tbody>{university.campaigns.map(c=><tr><th scope="row">{c.name}</th><td>{c.leads}</td><td>{c.enrolled}</td><td>US${c.cpe.toFixed(2)}</td></tr>)}</tbody></table></div></details>
     </div>
   </details>
 </div>

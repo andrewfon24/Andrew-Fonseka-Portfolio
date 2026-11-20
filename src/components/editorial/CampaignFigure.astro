@@ -1,0 +1,14 @@
+---
+const artwork = {
+  panasia: { file: 'gold2cash', width: 554, height: 554, alt: 'Gold bangles beside the Gold2Cash headline “Make your gold work for you”.', caption: 'Gold2Cash · Pan Asia Bank, January–June 2023' },
+  petmart: { file: 'petmart', width: 640, height: 800, alt: 'Golden retriever surrounded by red hearts on Petmart’s Pawfect Partner poster.', caption: 'Petmart × Sugar Beach · Valentine’s activation, February 2023. The Shopping results cover March–May.' },
+  godrej: { file: 'godrej', width: 800, height: 800, alt: 'Godrej Expert Rich Crème ad styled as a 404 error. The missing item is grey hair.', caption: 'Godrej Expert Rich Crème · India launch creative, 2023' },
+  university: { file: 'university', width: 910, height: 176, alt: 'Meta Ads Manager lists 161 leads for the priority colleges, 57 for retargeting and 603 for broad undergraduate recruitment.', caption: 'Meta Ads Manager · Enrolments were matched separately in the admissions CRM.' },
+};
+const { campaign, priority = false } = Astro.props;
+const art = artwork[campaign];
+---
+<figure class:list={['campaign-figure', 'art-' + campaign]}>
+  <div class="art-mat"><img src={'/images/campaigns/' + art.file + '.webp'} width={art.width} height={art.height} alt={art.alt} loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : undefined} /></div>
+  <figcaption>{art.caption}</figcaption>
+</figure>
