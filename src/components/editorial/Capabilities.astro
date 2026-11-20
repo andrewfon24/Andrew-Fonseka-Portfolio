@@ -1,48 +1,86 @@
 ---
-const skills = [
+import { MessagesSquare, SlidersHorizontal, MousePointer2, PanelsTopLeft, ListFilter, Check, Braces, ClipboardCheck } from 'lucide-react';
+
+const strengths = [
   {
-    skill: 'Paid search & social',
-    title: 'Start with the conversation.',
-    body: 'Before I open an ad account, I ask the people who handle enquiries what makes a good one. Their answer shapes the audience I choose, the promise in the ad and the question I put on the form.',
+    title: 'Listen to the sales team',
+    body: 'I ask which enquiries are worth a follow-up and why. Those conversations shape who I target and what I say in the ad.',
+    icon: MessagesSquare, detail: ListFilter,
   },
   {
-    skill: 'Conversion measurement',
-    title: 'Follow a lead past the form.',
-    body: 'A form submission is where the customer’s story gets interesting. I trace the tags and CRM stages through to a booked call, an application or a sale. Then I can tell the team which outcome Google or Meta is actually learning from.',
+    title: 'Build the campaign myself',
+    body: 'I turn the brief into keywords, audiences and ad copy. Then I follow the click to see whether the landing page delivers on the ad’s promise.',
+    icon: PanelsTopLeft, detail: MousePointer2,
   },
   {
-    skill: 'Campaign operations',
-    title: 'Leave the team with a better way to work.',
-    body: 'When several people have to enter the same campaign name or rebuild the same tracking link, I write a script for it. That leaves the team more time to review the creative, question a budget split and decide what to test next.',
+    title: 'Teach bidding what counts',
+    body: 'I connect CRM stages to Google and Meta so a booked call or completed application can guide the next bid.',
+    icon: SlidersHorizontal, detail: Check,
+  },
+  {
+    title: 'Give the team time back',
+    body: 'I script the repetitive parts of campaign setup, from naming ads to building tracking links. That leaves more time to review the creative before launch.',
+    icon: Braces, detail: ClipboardCheck,
   },
 ];
 ---
-<section class="working-method wrap" id="capabilities" aria-labelledby="approach-title">
-  <header class="method-opening">
-    <p class="dateline">My approach</p>
-    <h2 id="approach-title">From the client call <em>to the ad account.</em></h2>
-    <p class="method-intro">I like being the person who can sit with a client, hear what’s getting in the way, then open the account and do something about it. Here’s how that plays out in my work.</p>
+<section class="working-method wrap chapter" id="capabilities" aria-labelledby="approach-title">
+  <header>
+    <h2 id="approach-title">How I <span class="chapter-accent">work</span></h2>
+    <p class="chapter-intro">My best work starts with a question for the people who speak to customers. What they tell me changes what I build in the account.</p>
   </header>
-  <ol class="method-sequence" role="list">
-    {skills.map(step => <li>
-      <p class="skill-name">{step.skill}</p>
-      <h3>{step.title}</h3>
-      <p>{step.body}</p>
-    </li>)}
-  </ol>
+  <ul class="strengths" role="list">
+    {strengths.map(({ title, body, icon: Icon, detail: Detail }) => (
+      <li>
+        <div class="illustration" aria-hidden="true">
+          <span class="drawing"><Icon size={40} strokeWidth={1.6} /></span>
+          <span class="detail"><Detail size={19} strokeWidth={2} /></span>
+        </div>
+        <div><h3>{title}</h3><p>{body}</p></div>
+      </li>
+    ))}
+  </ul>
 </section>
 <style>
-  .working-method { padding-block: clamp(44px,6vw,88px); display: grid; grid-template-columns: minmax(0,.88fr) minmax(0,1.12fr); gap: clamp(36px,7vw,100px); align-items: start; border-top: 1px solid var(--line); }
-  .method-opening h2 { font: 500 clamp(38px,4.2vw,62px)/1.05 var(--display); letter-spacing: -.05em; margin: 14px 0 22px; }
-  .method-opening em { display: block; font-family: Georgia,serif; font-weight: 400; color: #215884; }
-  .method-intro { max-width: 38ch; font: 400 clamp(18px,1.4vw,21px)/1.6 var(--text); }
-  .method-sequence { margin: 0; padding: 0; list-style: none; }
-  .method-sequence li { position: relative; margin-left: 6px; padding: 0 0 28px 28px; border-left: 2px solid #bbcfdf; }
-  .method-sequence li:last-child { padding-bottom: 0; border-color: transparent; }
-  .method-sequence li::before { content: ''; position: absolute; top: 5px; left: -6px; width: 10px; height: 10px; border: 2px solid var(--blue); border-radius: 50%; background: var(--paper); }
-  .method-sequence li:last-child::before { background: var(--blue); }
-  .skill-name { font-size: .82rem; font-weight: 600; color: var(--blue); }
-  h3 { margin: 4px 0 8px; font: 500 clamp(21px,2vw,27px)/1.2 var(--display); letter-spacing: -.025em; }
-  li > p:last-child { max-width: 61ch; line-height: 1.65; }
-  @media(max-width: 760px) { .working-method { grid-template-columns: minmax(0,1fr); gap: 32px; } }
+  .working-method header { max-width: 65ch; }
+  .strengths {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: clamp(24px, 3vw, 38px) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .strengths li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: clamp(18px, 2vw, 28px);
+    padding: clamp(22px, 2.6vw, 36px);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: white;
+  }
+  .working-method .strengths h3 { margin: 0 0 8px; font: 600 clamp(20px, 1.7vw, 25px)/1.18 var(--display); letter-spacing: -.03em; }
+  .strengths p { margin: 0; line-height: 1.55; }
+  .illustration {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 84px;
+    height: 84px;
+    background-color: var(--pale);
+    background-image: radial-gradient(#bed1e4 .85px, transparent .95px);
+    background-size: 8px 8px;
+    border-radius: 16px;
+    color: var(--blue);
+  }
+  .drawing { display: grid; place-items: center; width: 57px; height: 54px; background: white; border: 1.5px solid #9bb7d1; border-radius: 7px; transform: rotate(-5deg); box-shadow: 2px 3px 0 #d2e0ec; }
+  .detail { position: absolute; right: 1px; bottom: 4px; display: grid; place-items: center; width: 30px; height: 30px; background: var(--blue); color: white; border: 2px solid white; border-radius: 50%; }
+  @media (max-width: 900px) and (min-width: 661px) { .strengths li { grid-template-columns: 1fr; align-content: start; } }
+  @media (max-width: 660px) {
+    .strengths { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+    .strengths li { grid-template-columns: 56px 1fr; align-items: start; gap: 15px; padding: 22px 16px; }
+    .illustration { transform-origin: top left; transform: scale(.67); margin-bottom: -28px; }
+  }
 </style>

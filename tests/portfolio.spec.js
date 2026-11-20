@@ -17,7 +17,12 @@ test('homepage positioning, header, actions and production metadata',async({page
  expect(await page.locator('#work .case-button').evaluateAll(links=>links.map(a=>a.pathname))).toEqual(['/case-studies/university/','/case-studies/panasia/','/case-studies/aegon/']);
  await expect(page.locator('.hero-actions .button')).toHaveAttribute('href',/^mailto:andrew@andrewfonseka.com/);
  await expect(page.locator('#capabilities a[href^="mailto:"]')).toHaveCount(0);
- await expect(page.locator('#capabilities .skill-name')).toHaveText(['Paid search & social','Conversion measurement','Campaign operations']);
+ await expect(page.locator('#capabilities h3')).toHaveText(['Listen to the sales team','Build the campaign myself','Teach bidding what counts','Give the team time back']);
+ await expect(page.getByRole('heading',{level:2,name:'About Andrew',exact:true})).toBeVisible();
+ const family=selector=>page.locator(selector).first().evaluate(el=>getComputedStyle(el).fontFamily);
+ expect(await family('#about h2')).toBe(await family('#work h2'));
+ expect(await family('#about .chapter-intro')).toBe(await family('.hero .intro'));
+ expect(await family('#about .chapter-intro + p')).toBe(await family('.hero .hero-detail'));
  await expect(page.locator('.hero img[fetchpriority="high"]')).toHaveAttribute('src','/images/andrew-fonseka-480.webp');
  await expect(page.locator('#work .case-button')).toHaveText(Array(3).fill('Read the case study'));
  await expect(page.locator('#work .art-university')).toBeVisible();

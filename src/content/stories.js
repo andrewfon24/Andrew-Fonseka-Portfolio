@@ -31,7 +31,7 @@ export const stories = {
   },
   university: {
     title: ['Which colleges did', 'the students enrol in?'],
-    intro: 'A private university in Saudi Arabia had 603 leads from its broad undergraduate campaign. Admissions records showed that only 17 of those students had paid their fees at the two colleges with the most seats left.',
+    intro: 'Two colleges at a private university in Saudi Arabia still had seats to fill. Before we launched the Meta campaigns, I worked with the partner agency on a plan to reach prospective students for those specific programmes.',
     contribution: 'Through a partner agency, I recommended a dedicated budget for the two colleges, helped build the Meta campaigns and managed them with the agency. I worked on the audiences, placements and higher-intent form. The university matched enrolments in its CRM.',
     turn: 'What was a seat worth?',
     decision: 'The broad campaign cost about US$13 per enrolment across all programmes. The dedicated campaign cost about US$28 per enrolment and reached students interested in the two colleges that needed them.',

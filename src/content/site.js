@@ -73,7 +73,7 @@ export const cases = [
     client: "Aegon",
     sector: "Financial services",
     context: "In-house",
-    period: "2025 to 2026",
+    period: "Jan 2025 to Oct 2026",
     headline: ["Trust the data.", "Then automate the routine."],
     summary:
       "Paid media for annuity, life insurance, pension and wealth products in the U.S. and Canada, with the tracking, CRM signal and automation behind it.",
@@ -356,7 +356,7 @@ export const experience = [
       "Rebuilt tracking with GA4, GTM, Enhanced Conversions and Meta Conversions API.",
       "Built a Google Apps Script campaign builder adopted team-wide, cutting compliance review time.",
     ],
-    footnote: "Performance figures withheld at the employer’s request.",
+    footnote: "Aegon’s business results are confidential. The case study covers campaign operations and tracking.",
     clients: [],
   },
   {

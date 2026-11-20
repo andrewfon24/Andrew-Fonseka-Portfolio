@@ -63,5 +63,6 @@
 .selected .case-card .case-button { margin-top: 0; }
 .university-proof { min-width: 0; }
 .university-proof .campaign-figure { margin-bottom: 18px; }
-#about .about-lead { font: 400 clamp(18px,1.6vw,22px)/1.55 Georgia,serif; color: var(--ink); }
+.chapter-accent { color: var(--blue); }
+.editorial .chapter h2:is(#about-title, #approach-title) { margin: 0 0 16px; }
 #about .story-links { margin-top: 18px; }
