@@ -1,0 +1,20 @@
+---
+// Zero-baseline horizontal bars. Bar length is exactly value ÷ largest value,
+// so comparisons stay truthful. Labels and values are real text.
+const { title, rows = [], note, card = false, highlight } = Astro.props;
+const hi = highlight ?? rows.length - 1;
+const max = Math.max(...rows.map((r) => r[1]));
+---
+<figure class:list={['mini-bars', { 'card case-figure': card, chart: !card }]}>
+  <figcaption class="chart-title">{title}</figcaption>
+  <ul>
+    {rows.map(([label, value, display], i) => (
+      <li>
+        <span class="mb-label">{label}</span>
+        <span class="mb-track" aria-hidden="true"><span class:list={['mb-bar', { 'is-blue': i === hi }]} style={`width:${((value / max) * 100).toFixed(1)}%`}></span></span>
+        <strong class="num">{display}</strong>
+      </li>
+    ))}
+  </ul>
+  {note && <p class="chart-note">{note}</p>}
+</figure>

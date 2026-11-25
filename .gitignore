@@ -1,0 +1,26 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+test-results/
+playwright-report/
+
+.astro/
+work/
+
+.env
+.env.*
+!.env.example
+.vercel/
+
+# Local interview working brief
+/PRODUCT.md
+
+# Private design review captures and records
+.hallmark/
+
+# Local Claude preview config
+.claude/
+
+# Generated PDF sources and previews
+documents/.build/

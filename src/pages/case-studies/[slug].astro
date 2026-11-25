@@ -1,0 +1,320 @@
+---
+import Site from '../../layouts/Site.astro';
+import Icon from '../../components/v3/Icon.astro';
+import MiniBars from '../../components/v3/MiniBars.astro';
+import Evidence from '../../components/v3/Evidence.astro';
+import CrmDiagram from '../../components/v3/CrmDiagram.astro';
+import BuilderDemo from '../../components/v3/BuilderDemo.tsx';
+import { stories, periods } from '../../content/v3.js';
+export function getStaticPaths() {
+  return stories.map((s) => ({ params: { slug: s.id }, props: { s } }));
+}
+const { s } = Astro.props;
+const next = s.next && stories.find((x) => x.id === s.next.id);
+const id = s.id;
+---
+<Site title={`${s.short}: ${s.title} | Andrew Fonseka`} description={s.description}>
+  <div class="wrap case-top">
+    <a class="pill pill-quiet" href="/#results"><Icon name="back" size={18} />All results</a>
+  </div>
+  <div class="wrap case-layout">
+    <article class="case-article">
+      <header>
+        <span class="chapter">Case study {s.number} of 4, {s.short}</span>
+        <h1>{s.title}</h1>
+        <p class="case-lede">{s.lede}</p>
+        <p class="meta">{s.meta}</p>
+      </header>
+
+      {id === 'aegon' && (
+        <>
+          <section class="case-section" aria-labelledby="c1">
+            <h2 id="c1"><span class="n">1</span>Context</h2>
+            <p>When the advertising platforms and downstream CRM records did not align, it was difficult to evaluate campaign quality consistently. Our team needed to optimize for outcomes beyond form fills.</p>
+          </section>
+          <section class="case-section" aria-labelledby="c2">
+            <h2 id="c2"><span class="n">2</span>My role</h2>
+            <p>As an Intermediate Channel Marketing Specialist, I worked across strategy, execution, measurement and reporting. I led tracking implementation with support from colleagues, while sharing campaign execution and optimization responsibilities within the team.</p>
+          </section>
+          <section id="measurement" class="case-section" aria-labelledby="c3">
+            <h2 id="c3"><span class="n">3</span>What we did</h2>
+            <p>We improved conversion tracking and used CRM lead stages to inform eligible advertising conversion signals. I contributed to testing lead-form variants, including the number of qualifying questions and the design, using HubSpot qualified-lead rate to evaluate them. We also refined the acquisition process and campaign operations.</p>
+            <div class="flow">
+              <div class="flow-box"><strong>Fix tracking</strong>GA4, server-side GTM, Enhanced Conversions and Meta CAPI. March to May 2026.</div>
+              <span class="flow-arrow" aria-hidden="true"><Icon name="arrow" size={16} /></span>
+              <div class="flow-box"><strong>Connect the CRM</strong>HubSpot lead stages mapped to conversion actions on eligible platforms.</div>
+              <span class="flow-arrow" aria-hidden="true"><Icon name="arrow" size={16} /></span>
+              <div class="flow-box is-blue"><strong>Test the leads</strong>Lead-form variants, a new post-submit page, Meta Audience Network removed. June 2026.</div>
+            </div>
+            <p class="chart-note">The form variants changed both the question count and the design, so the test can’t isolate either one. Sample sizes aren’t published.</p>
+            <CrmDiagram />
+          </section>
+          <section id="outcome" class="case-section" aria-labelledby="c4">
+            <h2 id="c4"><span class="n">4</span>Outcome</h2>
+            <div class="tiles is-3">
+              <div class="tile is-lead"><span class="stat-value num">−18%</span><small>cost per application</small></div>
+              <div class="card tile"><span class="stat-value num">+17 pp</span><small>qualified lead rate (percentage points)</small></div>
+              <div class="card tile"><span class="stat-value num">+22%</span><small>applications at the same media spend</small></div>
+            </div>
+            <p>Across the account, our team recorded 22% more applications at the same paid media spend. Cost per application was about 18% lower, cost per lead was 15% lower and the qualified lead rate rose by 17 percentage points.</p>
+            <MiniBars card title={`Efficiency, indexed (Jul–Dec 2025 = 100, lower is better)`} highlight={1} rows={[['Jul–Dec 2025 baseline, both measures', 100, '100'], ['Cost per application, Jan–Jun 2026', 82, '82'], ['Cost per lead, Jan–Jun 2026', 85, '85']]} note="Indexed values, not raw costs. Bars start at zero." />
+            <Evidence items={[
+              ['Source', 'Ad platform and HubSpot CRM reporting, recalculated with consistent conversion definitions for both periods.'],
+              ['Period', `${periods.aegonLong}. Two six-month periods with the same paid media spend.`],
+              ['Metric', 'Cost per application = media spend ÷ applications. With equal spend and 22% more applications, it falls to 1 ÷ 1.22, about 18% lower. Qualified lead rate change is in percentage points.'],
+              ['Scope', 'The whole paid media account across platforms; spend and applications cover the same campaigns.'],
+            ]} />
+          </section>
+          <section class="case-section" aria-labelledby="c5">
+            <h2 id="c5"><span class="n">5</span>What this doesn’t show</h2>
+            <p>These results don’t prove that the tracking rebuild, the form test, one platform or I alone caused the improvement. Product mix, seasonality, budget pacing, audience changes and other team decisions may also have contributed, and several changes rolled out during the second period. An application isn’t a funded policy or revenue.</p>
+          </section>
+          <section class="callout is-pale" aria-labelledby="c6">
+            <h2 id="c6" style="font-size:24px">Next time</h2>
+            <p>I would validate the measurement architecture and CRM conversion definitions before scaling, then evaluate whether conversion volume and value data support further downstream bidding.</p>
+          </section>
+          <section id="builder" class="case-section builder-section" aria-labelledby="c-builder">
+            <span class="chapter">Also at Aegon</span>
+            <h2 id="c-builder">The campaign builder</h2>
+            <p>Preparing copy, targeting, keywords, naming and tracking parameters by hand for every launch is slow, and repeated manual work invites inconsistencies. I built an AI-assisted campaign preparation workflow: a marketer enters the brief, the tool drafts ad copy, hooks, targeting suggestions, keywords, naming and UTMs, and a person reviews and edits everything. For suitable Google Ads bulk campaigns it also produces a CSV that can be imported through Google Ads Editor, where the campaign is checked and launched through the normal approval process.</p>
+            <p>The result was a more standardized, reviewable preparation process. It prepares campaigns; it doesn’t buy media, launch anything on its own or certify compliance.</p>
+            <div class="js-only"><BuilderDemo client:visible /></div>
+            <noscript>
+              <div class="card bd-static">
+                <p><b>Synthetic demonstration (static version).</b> The interactive demo needs JavaScript. Here is what it produces for a fictional brief, “Northwind Pet Supplies, spring dog food sale, Canada, online sales”:</p>
+                <ul>
+                  <li>Headlines: Northwind Pet Supplies · Spring dog food sale · Shop the Sale Online</li>
+                  <li>Keywords: "dog food sale", [premium dog food], "grain free dog food", [dog food delivery]</li>
+                  <li>Naming: NWPS_CA_SALES_SEARCH_DEMO, with UTM parameters on the final URL</li>
+                  <li>Then: human review and sign-off, an example Google Ads Editor CSV, import and validation in Ads Editor, and launch by a marketer</li>
+                </ul>
+              </div>
+            </noscript>
+          </section>
+        </>
+      )}
+
+      {id === 'panasia' && (
+        <>
+          <figure class="creative">
+            <img src="/images/campaigns/gold2cash.webp" width="554" height="554" alt="Gold2Cash ad for Pan Asia Bank: gold jewellery on a cobwebbed stand under the headline Make your gold work for you" style="max-width:560px" />
+            <figcaption><b>The insight:</b> gold kept at home earns nothing. The cobwebs say it before the headline does. Creative concept developed with the Kites Global designers.</figcaption>
+          </figure>
+          <section class="case-section" aria-labelledby="c1">
+            <h2 id="c1"><span class="n">1</span>Context</h2>
+            <p>The bank’s objective was funded gold loans, not form fills. Cost per lead was the easiest number to watch, but it couldn’t show which leads became loans. When the client questioned our cost per lead, the obvious move would have been to chase cheaper leads.</p>
+          </section>
+          <section class="case-section" aria-labelledby="c2">
+            <h2 id="c2"><span class="n">2</span>My role</h2>
+            <p>As the agency account lead, I owned strategy, execution, optimization and reporting, with support from my manager. I also collaborated with the agency designers on the creative concept.</p>
+          </section>
+          <section id="budget-decision" class="case-section" aria-labelledby="c3">
+            <h2 id="c3"><span class="n">3</span>The decision</h2>
+            <p>I explained why lower-cost leads were not necessarily more valuable, defended the targeting approach and reviewed budget allocation every month using platform performance, qualification data and the sales team’s feedback.</p>
+            <figure class="card case-figure" aria-labelledby="cycle-cap">
+              <figcaption id="cycle-cap" class="chart-title">The monthly review loop</figcaption>
+              <ol class="cycle">
+                <li><strong>Platform reporting</strong>Spend, leads, cost per lead</li>
+                <li><strong>Qualification and sales feedback</strong>Which leads moved toward a loan</li>
+                <li><strong>Client discussion</strong>Explain the trade-off</li>
+                <li><strong>Budget adjustment</strong>Shift between Meta and Google</li>
+                <li class="is-blue"><strong>Next monthly review</strong>Repeat with new data</li>
+              </ol>
+              <div class="loop-return" aria-hidden="true"></div>
+            </figure>
+            <figure class="card case-figure">
+              <figcaption class="chart-title">Cumulative media allocation, February to June 2023</figcaption>
+              <div class="split"><span style="flex:60;background:var(--blue);color:var(--white)">Meta 60% · US$15K</span><span style="flex:40;background:var(--pale-2);color:var(--ink);justify-content:flex-end">Google 40% · US$10K</span></div>
+              <p class="chart-note">Totals across the five months, not a fixed or final split. Monthly allocations changed with each review.</p>
+            </figure>
+          </section>
+          <section id="outcome" class="case-section" aria-labelledby="c4">
+            <h2 id="c4"><span class="n">4</span>Outcome</h2>
+            <div class="tiles is-3">
+              <div class="tile is-lead"><span class="stat-value num">259</span><small>funded gold loans, reported by the bank’s CRM</small></div>
+              <div class="card tile"><span class="stat-value num">~2.45×</span><small>monthly paid-media funded loans vs the prior baseline</small></div>
+              <div class="card tile"><span class="stat-value num">~US$97</span><small>media cost per funded loan</small></div>
+            </div>
+            <p>The bank’s CRM reported 259 funded gold loans on US$25,000 of media spend, about US$97 per funded loan. Average monthly paid-media funded-loan volume was about 2.45 times the bank-estimated historical baseline. The funded principal was about US$500,000: loan value, not bank revenue or return.</p>
+            <MiniBars card title="Funded gold loans per month" rows={[['Before: ~127 loans in 6 months (bank estimate)', 21.2, '~21.2 a month'], ['During: 259 loans in 5 months (Feb to Jun 2023)', 51.8, '51.8 a month']]} note="Different window lengths, so the comparison is per month. Bars start at zero." />
+            <Evidence items={[
+              ['Source', 'The bank’s CRM, counting advertising-generated funded loans. The baseline is the bank’s own estimate for paid media.'],
+              ['Period', 'February to June 2023 (live campaign, prepared in January) vs the previous six months.'],
+              ['Metric', 'Funded loans per month: 259 ÷ 5 = 51.8 vs ~127 ÷ 6 ≈ 21.2. Media cost per funded loan: US$25,000 ÷ 259 ≈ US$97.'],
+              ['Limitations', 'Historical media spend and channel-level funded-loan cost are unavailable. An observational comparison, not an incrementality test.'],
+            ]} />
+          </section>
+          <section class="case-section" aria-labelledby="c5">
+            <h2 id="c5"><span class="n">5</span>What this doesn’t show</h2>
+            <p>Because earlier spend isn’t known, the higher monthly volume doesn’t prove better efficiency than before, or incremental lift. It also doesn’t show that Meta produced cheaper funded loans than Google: my evidence was qualification data and sales feedback, not a channel-by-channel loan report.</p>
+          </section>
+          <section class="callout is-pale" aria-labelledby="c6">
+            <h2 id="c6" style="font-size:24px">Next time</h2>
+            <p>I would establish a reliable CRM-to-platform feedback process and measure funded-loan cost by channel where matching and consent permit, instead of relying mainly on periodic sales feedback.</p>
+          </section>
+        </>
+      )}
+
+      {id === 'godrej' && (
+        <>
+          <figure class="creative">
+            <img src="/images/campaigns/godrej.webp" width="800" height="800" alt="Godrej Expert Rich Crème ad: a pixelated Error 404 with the line Sorry, no grey hair found" style="max-width:560px" />
+            <figcaption><b>The insight:</b> “zero grey hair” gets scrolled past. A 404 joke gets noticed, and makes the same promise. Creative by the Kites Global team.</figcaption>
+          </figure>
+          <section class="case-section" aria-labelledby="c1">
+            <h2 id="c1"><span class="n">1</span>Context</h2>
+            <p>In a competitive hair colour launch, where every brand already promises full grey coverage, the team needed a creative idea that communicated grey coverage in a memorable way.</p>
+          </section>
+          <section class="case-section" aria-labelledby="c2">
+            <h2 id="c2"><span class="n">2</span>My role</h2>
+            <p>I owned the paid media strategy and execution across Meta and YouTube, with a US$23,000 media investment. I contributed to the agency’s collaborative creative strategy and worked within a wider 30-creator campaign; colleagues managed the creators and supplied the promo codes.</p>
+          </section>
+          <section class="case-section" aria-labelledby="c3">
+            <h2 id="c3"><span class="n">3</span>What we did</h2>
+            <p>Our agency combined creator partnerships with paid amplification to distribute the concept. Creator-specific promo codes gave us a way to track retail redemptions from both paid and organic audiences.</p>
+            <figure class="card case-figure" aria-labelledby="paths-cap">
+              <figcaption id="paths-cap" class="chart-title">Two routes to the same promo codes</figcaption>
+              <div class="paths">
+                <div class="flow-box"><strong>Creator posts</strong>Organic reach from 30 creators</div>
+                <span class="flow-arrow" aria-hidden="true"><Icon name="arrow" size={16} /></span>
+                <div class="flow-box is-blue paths-end"><strong>Creator promo codes</strong>Redeemed at retailers: ~US$350K tracked sales</div>
+                <div class="flow-box"><strong>Paid amplification</strong>Meta and YouTube, US$23K, run by me</div>
+                <span class="flow-arrow" aria-hidden="true"><Icon name="arrow" size={16} /></span>
+              </div>
+              <p class="chart-note">Both routes end in the same codes, so tracked sales can’t be split between paid and organic.</p>
+            </figure>
+            <figure class="card case-figure">
+              <figcaption class="chart-title">Total campaign cost: US$30,000</figcaption>
+              <div class="split"><span style="flex:23;background:var(--blue);color:var(--white)">Paid media US$23K</span><span style="flex:7;background:var(--pale-2);color:var(--ink);justify-content:flex-end">US$7K</span></div>
+              <p class="chart-note">US$23,000 Meta and YouTube media, plus US$7,000 influencer costs.</p>
+            </figure>
+          </section>
+          <section id="outcome" class="case-section" aria-labelledby="c4">
+            <h2 id="c4"><span class="n">4</span>Outcome</h2>
+            <div class="tiles is-3">
+              <div class="tile is-lead"><span class="stat-value num">~11.7×</span><small>tracked retail sales per total campaign dollar</small></div>
+              <div class="card tile"><span class="stat-value num">3.25%</span><small>Meta click-through rate, campaign-wide average</small></div>
+              <div class="card tile"><span class="stat-value num">45%</span><small>YouTube view rate, campaign-wide average</small></div>
+            </div>
+            <p>About US$350,000 in retail sales was tracked through creator promo codes against US$30,000 in total campaign investment, about 11.7 times tracked sales per campaign dollar. Meta recorded a campaign-wide 3.25% click-through rate and YouTube a 45% view rate.</p>
+            <MiniBars card title="Total campaign cost vs. retail sales tracked by creator promo codes" rows={[['Total campaign cost (media and influencers)', 30, 'US$30K'], ['Tracked retail sales (paid and organic)', 350, '~US$350K']]} note="Bars start at zero." />
+            <Evidence items={[
+              ['Source', 'Retail promo-code redemptions for the creator codes; Meta and YouTube platform reporting for click-through and view rates.'],
+              ['Period', 'February to July 2023.'],
+              ['Metric', '~US$350,000 tracked retail sales ÷ US$30,000 total campaign cost ≈ 11.7×. Not ROAS, ROI or profit.'],
+              ['Limitations', 'Codes were available to organic and paid audiences, so paid media’s own contribution, incremental lift and profitability weren’t measured. Retail sales aren’t the brand’s revenue.'],
+            ]} />
+          </section>
+          <section class="case-section" aria-labelledby="c5">
+            <h2 id="c5"><span class="n">5</span>What this doesn’t show</h2>
+            <p>It doesn’t show that paid media generated US$350,000 on US$23,000. Dividing all tracked sales by media spend alone would overstate paid media, because the codes also captured organic creator sales.</p>
+          </section>
+          <section class="callout is-pale" aria-labelledby="c6">
+            <h2 id="c6" style="font-size:24px">Next time</h2>
+            <p>I would separate paid and organic tracking where feasible and design a holdout or another suitable incrementality study before attributing overall sales to paid distribution.</p>
+          </section>
+        </>
+      )}
+
+      {id === 'petmart' && (
+        <>
+          <figure class="creative">
+            <img src="/images/campaigns/petmart.webp" width="640" height="800" alt="Petmart and Sugar Beach Valentine’s ad: a golden retriever in a heart collar under the headline Pawfect Partner" style="max-width:480px" />
+            <figcaption><b>The insight:</b> pet owners don’t want to leave the dog at home on date night.</figcaption>
+          </figure>
+          <section class="case-section" aria-labelledby="c1">
+            <h2 id="c1"><span class="n">1</span>Context</h2>
+            <p>Petmart wanted to grow its audience and drive in-store sales around Valentine’s Day, then build ongoing e-commerce acquisition.</p>
+          </section>
+          <section class="case-section" aria-labelledby="c2">
+            <h2 id="c2"><span class="n">2</span>My role</h2>
+            <p>I led the campaign strategy and execution, coordinating an organic giveaway, an in-person activation and paid promotion. I later built the Merchant Center feed and worked with Shopping and Performance Max, using customer acquisition goals and audience signals.</p>
+          </section>
+          <section class="case-section" aria-labelledby="c3">
+            <h2 id="c3"><span class="n">3</span>What we did</h2>
+            <figure class="card case-figure" aria-label="Campaign timeline">
+              <ol class="timeline-h" style="grid-template-columns:repeat(4,minmax(0,1fr));list-style:none;margin:0;padding:0">
+                <li><span class="dot"></span><span class="when">January</span><strong>Giveaway</strong><span>3.5 weeks, organic</span></li>
+                <li><span class="dot is-key"></span><span class="when">February 14</span><strong>The event</strong><span>Sugar Beach terrace, coupons handed out</span></li>
+                <li><span class="dot"></span><span class="when">Late February</span><strong>Paid promotion</strong><span>2 weeks, US$500</span></li>
+                <li><span class="dot"></span><span class="when">March to May</span><strong>Always-on</strong><span>Shopping and Performance Max</span></li>
+              </ol>
+            </figure>
+            <h3 class="phase-label">Phase 1: Activation</h3>
+            <p>The campaign reported 1,700 giveaway entries and US$25,000 in in-store sales tracked through event coupon codes. Valentine’s paid promotion cost US$500. The event results reflect the giveaway, the partner event and the promotion together, not the isolated effect of advertising.</p>
+            <h3 id="acquisition" class="phase-label">Phase 2: Acquisition</h3>
+            <p>For the always-on phase I built the Merchant Center feed and ran Shopping and Performance Max with customer acquisition goals and audience signals. Across the campaign, ad-attributed revenue was four times the total media spend.</p>
+            <figure class="card case-figure">
+              <figcaption class="chart-title">Total media spend: US$5,000, February to May 2023</figcaption>
+              <div class="split"><span style="flex:1;background:var(--ink);color:var(--white);padding:0" aria-hidden="true"></span><span style="flex:9;background:var(--blue);color:var(--white)">Rest of the campaign US$4,500</span></div>
+              <p class="chart-note">The navy sliver is the US$500 Valentine’s promotion, part of the US$5,000 total rather than extra. The 4× ROAS uses the full US$5,000.</p>
+            </figure>
+          </section>
+          <section id="outcome" class="case-section" aria-labelledby="c4">
+            <h2 id="c4"><span class="n">4</span>Outcome</h2>
+            <div class="tiles is-3">
+              <div class="tile is-lead"><span class="stat-value num">4×</span><small>ROAS across the campaign, February to May</small></div>
+              <div class="card tile"><span class="stat-value num">US$25K</span><small>in-store sales on event coupons</small></div>
+              <div class="card tile"><span class="stat-value num">1,700</span><small>giveaway entries</small></div>
+            </div>
+            <Evidence items={[
+              ['Source', 'Ad platform revenue attribution for the 4×; event coupon redemptions reported by the client for store sales.'],
+              ['Period', 'February to May 2023 (giveaway in January).'],
+              ['Metric', 'ROAS = ad-attributed revenue across both phases ÷ US$5,000 total media spend, including the US$500 Valentine’s promotion. The coupon sales are reported separately and aren’t part of the 4×.'],
+              ['Limitations', 'Event sales reflect combined activities. The 4× isn’t first-order ROAS, profit or a controlled lift estimate. The two figures aren’t added together.'],
+            ]} />
+          </section>
+          <section class="case-section" aria-labelledby="c5">
+            <h2 id="c5"><span class="n">5</span>What this doesn’t show</h2>
+            <p>The US$25,000 in coupon sales wasn’t produced by the US$500 of advertising alone, and the 4× doesn’t show new-customer acquisition cost or margin. Giveaway entries are entries, not unique people or customers.</p>
+          </section>
+          <section class="callout is-pale" aria-labelledby="c6">
+            <h2 id="c6" style="font-size:24px">Next time</h2>
+            <p>I would align spend and revenue windows by phase, keep event and always-on results apart from the start, capture consented first-party customer data where appropriate, and validate acquisition reporting by customer type.</p>
+          </section>
+        </>
+      )}
+    </article>
+
+    <aside class="card case-aside" aria-label="Project facts">
+      {id === 'aegon' && (
+        <>
+          <dl><dt>Employer</dt><dd>Aegon, insurance and investments</dd><dt>My role</dt><dd>Intermediate Channel Marketing Specialist (Paid Media)</dd><dt>When</dt><dd class="num">January 2025 to October 2026</dd><dt>Team</dt><dd>Shared campaign execution and optimization; I led tracking implementation with colleague support</dd><dt>Markets</dt><dd>Canada and the U.S.</dd><dt>Channels</dt><dd>Google Ads, Meta, LinkedIn</dd></dl>
+          <div class="block"><b>Also at Aegon</b><p>Designed the strategy, target account list, audiences and reporting for a LinkedIn account-based marketing program aimed at high-net-worth investors, measured on investment deposits.</p><p>Built budget pacing dashboards and presented biweekly results to senior leadership.</p><p><a href="#builder">Try the campaign builder demo</a></p></div>
+        </>
+      )}
+      {id === 'panasia' && (
+        <>
+          <dl><dt>Client</dt><dd>Pan Asia Bank, Gold2Cash gold loans</dd><dt>Agency</dt><dd>Kites Global</dd><dt>My role</dt><dd>Agency account lead</dd><dt>When</dt><dd class="num">February to June 2023 (prepared in January)</dd><dt>Media spend</dt><dd class="num">US$25,000 actual</dd><dt>Channels</dt><dd>Meta and Google</dd></dl>
+          <div class="block"><b>Credits</b><p>Strategy, execution, optimization and reporting: Andrew, with manager support. Creative concept: Andrew with the Kites Global design team.</p></div>
+        </>
+      )}
+      {id === 'godrej' && (
+        <>
+          <dl><dt>Client</dt><dd>Godrej Expert Rich Crème, India launch</dd><dt>Agency</dt><dd>Kites Global</dd><dt>My role</dt><dd>Paid media lead, Meta and YouTube</dd><dt>When</dt><dd class="num">February to July 2023</dd><dt>Media spend</dt><dd class="num">US$23,000</dd><dt>Total cost</dt><dd class="num">US$30,000 incl. US$7,000 influencers</dd></dl>
+          <div class="block"><b>Credits</b><p>Paid media strategy and execution: Andrew. Creative strategy: the agency team, with Andrew. Creators and promo codes: managed by colleagues. Design: Kites Global.</p></div>
+        </>
+      )}
+      {id === 'petmart' && (
+        <>
+          <dl><dt>Client</dt><dd>Petmart × Sugar Beach</dd><dt>Agency</dt><dd>Kites Global</dd><dt>My role</dt><dd>Campaign lead, strategy and execution</dd><dt>When</dt><dd class="num">January to May 2023</dd><dt>Media spend</dt><dd class="num">US$5,000 total, incl. US$500 Valentine’s promotion</dd><dt>Channels</dt><dd>Instagram, Facebook, Google Shopping and Performance Max</dd></dl>
+          <div class="block"><b>Credits</b><p>Concept, partnership, social and paid media: Andrew. Design: Kites Global design team.</p></div>
+        </>
+      )}
+    </aside>
+  </div>
+
+  <nav class="wrap" aria-label="Next story">
+    {next ? (
+      <a class="card next-story" href={`/case-studies/${next.id}/`}>
+        <span><span class="meta">Next: {s.next.teaser}</span><b>{next.short}: {next.title}</b></span>
+        <span class="pill pill-line">Read the case study<Icon name="arrow" size={18} /></span>
+      </a>
+    ) : (
+      <a class="card next-story" href="/#approach">
+        <span><span class="meta">That’s all four case studies</span><b>See the approach behind them</b></span>
+        <span class="pill pill-line">Approach<Icon name="arrow" size={18} /></span>
+      </a>
+    )}
+  </nav>
+</Site>

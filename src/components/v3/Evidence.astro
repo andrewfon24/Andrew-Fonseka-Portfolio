@@ -1,0 +1,11 @@
+---
+// Visible evidence note, kept next to the figures it qualifies.
+// items: [label, text][] e.g. Source, Period, Metric, Scope, Limitations.
+const { items = [], title = 'Evidence note' } = Astro.props;
+---
+<div class="evidence" role="note" aria-label={title}>
+  <b>{title}</b>
+  <dl>
+    {items.map(([k, v]) => (<><dt>{k}</dt><dd>{v}</dd></>))}
+  </dl>
+</div>
