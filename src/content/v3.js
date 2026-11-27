@@ -1,7 +1,5 @@
-// Single source for public site copy: homepage tiles, problem cards, case cards,
-// case pages and the PDF documents all read from here, so figures cannot drift.
-// Public claims only. The full claims register (sources, permissions, private
-// values) lives outside this public repository. See docs/career-facts.md.
+// Single source for public site copy. Figures match Andrew’s résumé and portfolio
+// PDFs (Drive masters dated 27 Nov 2026) in public/documents. See docs/career-facts.md.
 
 export const profile = {
   name: 'Andrew Fonseka',
@@ -17,74 +15,25 @@ export const profile = {
 
 export const brand = (file) => `/images/brands/${file}.svg`;
 
-// Comparison windows, written out in full wherever a figure appears.
-export const periods = {
-  aegon: 'Jul–Dec 2025 vs Jan–Jun 2026',
-  aegonLong: 'July–December 2025 compared with January–June 2026',
-  panasia: 'Feb–Jun 2023',
-  godrej: 'Feb–Jul 2023',
-  petmart: 'Feb–May 2023',
-};
+// Aegon comparison window, written the same way on the site and in the PDFs.
+export const periods = { aegon: 'H2 2025 to H1 2026' };
 
 export const metrics = [
-  { value: '−18%', label: 'cost per application', source: `Aegon, ${periods.aegon}, same media spend`, href: '/case-studies/aegon/#outcome', lead: true },
-  { value: '+17 pp', label: 'qualified lead rate', source: `Aegon, same periods. Percentage points, not percent`, href: '/case-studies/aegon/#outcome' },
-  { value: '~2.4×', label: 'monthly funded loans', source: 'Pan Asia Bank, 259 loans vs the bank’s prior estimate', href: '/case-studies/panasia/#outcome' },
-  { value: '4×', label: 'ROAS across the campaign', source: `Petmart, ${periods.petmart}, ad revenue ÷ all US$5K media spend`, href: '/case-studies/petmart/#outcome' },
+  { value: '−15%', label: 'cost per lead at flat spend', source: 'Aegon, H2 2025 to H1 2026', href: '/case-studies/aegon/', lead: true },
+  { value: '+17 pts', label: 'qualified lead rate', source: 'Aegon, H2 2025 to H1 2026', href: '/case-studies/aegon/' },
+  { value: '259', label: 'funded gold loans', source: 'Pan Asia Bank, ~2.4× prior monthly volume', href: '/case-studies/panasia/' },
+  { value: '22', label: 'colleagues used my campaign builder', source: 'Aegon, ~200 campaigns launched', href: '/case-studies/aegon/' },
 ];
 
-export const problems = [
-  {
-    id: 'measurement',
-    label: 'Measurement and optimization',
-    client: 'Aegon',
-    title: 'The ad platforms and the CRM disagreed.',
-    problem: 'Platform counts and HubSpot outcomes didn’t line up, so campaign quality was hard to judge.',
-    did: 'I led the tracking implementation with colleagues, helped connect CRM lead stages to campaign decisions and contributed to lead-form testing.',
-    outcome: [['−18%', 'cost per application'], ['+17 pp', 'qualified lead rate']],
-    note: `${periods.aegon}. Same media spend, consistent measurement. A team result across several changes.`,
-    chart: { title: 'Cost per application, indexed', rows: [['Jul–Dec 2025', 100, '100'], ['Jan–Jun 2026', 82, '82']] },
-    href: '/case-studies/aegon/#measurement',
-    cta: 'Read the measurement case',
-  },
-  {
-    id: 'budget',
-    label: 'Account ownership',
-    client: 'Pan Asia Bank',
-    title: 'The client wanted cheaper leads. The business needed funded loans.',
-    problem: 'The bank questioned our cost per lead, but cost per lead couldn’t show which leads became loans.',
-    did: 'I owned strategy, execution, optimization and client reporting, with manager support. I used qualification data and sales feedback to defend the targeting and reviewed channel budgets monthly.',
-    outcome: [['259', 'funded gold loans, bank CRM reported'], ['~2.4×', 'prior monthly paid-media volume']],
-    note: 'Feb–Jun 2023 vs the bank’s estimate for the previous six months. Not a controlled test; earlier spend unavailable.',
-    chart: { title: 'Funded loans per month', rows: [['Before (estimate)', 21.2, '~21.2'], ['Campaign', 51.8, '51.8']] },
-    href: '/case-studies/panasia/#budget-decision',
-    cta: 'Read the budget decision',
-  },
-  {
-    id: 'acquisition',
-    label: 'Campaign leadership and e-commerce',
-    client: 'Petmart',
-    title: 'A one-day event doesn’t build a customer base.',
-    problem: 'Petmart wanted Valentine’s Day attention and in-store sales, then ongoing online customers.',
-    did: 'I led a dog-friendly Valentine’s date night with Sugar Beach (giveaway, event and US$500 of paid promotion), then built the Merchant Center feed and ran Shopping and Performance Max with customer acquisition goals.',
-    outcome: [['US$25K', 'in-store sales on event coupons'], ['4×', 'ROAS across the campaign']],
-    note: `${periods.petmart}. ROAS = ad-attributed revenue ÷ all US$5K media spend. Coupon sales are counted separately and reflect the whole event, not ads alone.`,
-    phases: [['Jan', 'Giveaway'], ['Feb 14', 'Event'], ['Mar–May', 'Always-on']],
-    href: '/case-studies/petmart/#acquisition',
-    cta: 'Read the Petmart case',
-  },
-];
-
+// Toolkit and certifications match the portfolio PDF (toolkit) and résumé (certifications).
 export const toolGroups = [
   [
-    { name: 'Paid media platforms', tools: [['Google Ads', 'google-ads'], ['Meta Ads', 'meta-icon'], ['Microsoft Advertising', 'bing'], ['LinkedIn Ads', 'linkedin-icon'], ['TikTok Ads', 'tiktok-icon']] },
-    { name: 'Productivity, project management & automation', tools: [['Microsoft 365', 'microsoft-365'], ['Google Workspace', 'google-icon'], ['Asana', 'asana-icon'], ['ClickUp', 'clickup'], ['Notion', 'notion-icon'], ['Jira', 'jira'], ['Zapier', 'zapier-icon']] },
-    { name: 'CMS, e-commerce & design', tools: [['Shopify', 'shopify-symbol'], ['Canva', 'canva']] },
+    { name: 'Ad platforms', tools: [['Google Ads', 'google-ads'], ['Meta Ads', 'meta-icon'], ['LinkedIn Ads', 'linkedin-icon']] },
+    { name: 'Google Ads campaign types', tools: [['Search', 'google-ads'], ['Shopping', 'google-ads'], ['Performance Max', 'google-ads'], ['Demand Gen', 'google-ads'], ['YouTube (Video)', 'google-ads']] },
   ],
   [
-    { name: 'Analytics & tracking', tools: [['Google Analytics 4', 'google-analytics'], ['Google Search Console', 'google-search-console'], ['Google Tag Manager', 'google-tag-manager'], ['Microsoft Clarity', 'microsoft-icon'], ['Looker Studio', 'looker-icon']] },
-    { name: 'Email & CRM', tools: [['Dynamics 365', 'dynamics-365'], ['HubSpot', 'hubspot-symbol'], ['Mailchimp', 'mailchimp-freddie'], ['Klaviyo', 'klaviyo']] },
-    { name: 'SEO & search research', tools: [['Ahrefs', 'ahrefs'], ['SEMrush', 'semrush'], ['Screaming Frog', 'screaming-frog']] },
+    { name: 'Measurement and tracking', tools: [['GA4', 'google-analytics'], ['Server-side GTM', 'google-tag-manager'], ['Enhanced Conversions', 'google-ads'], ['Meta CAPI', 'meta-icon'], ['Meta Conversion Lift', 'meta-icon'], ['Looker Studio', 'looker-icon']] },
+    { name: 'CRM and automation', tools: [['HubSpot', 'hubspot-symbol'], ['Merchant Center', 'google-icon'], ['Shopify', 'shopify-symbol'], ['Google Ads API', 'google-ads'], ['Google Apps Script', 'google-apps-script'], ['Google Ads Scripts', 'google-ads'], ['Zapier', 'zapier-icon']] },
   ],
 ];
 
@@ -92,15 +41,13 @@ export const certifications = [
   ['Google Ads Search', 'Google, 2026', 'google-icon'],
   ['Google Ads Measurement', 'Google, 2026', 'google-icon'],
   ['Meta Marketing Analytics', 'Meta', 'meta-icon'],
-  ['Google AI Essentials', 'Google', 'google-icon'],
-  ['Email Marketing', 'HubSpot', 'hubspot-symbol'],
 ];
 
 export const career = [
-  { years: 'Jan 2025 to Oct 2026', org: 'Aegon, Langley, BC', role: 'Intermediate Channel Marketing Specialist (Paid Media). Canadian and U.S. financial services. Led tracking implementation with colleagues.', icon: 'building', current: true },
-  { years: 'Jul 2023 to Oct 2024', org: 'University Canada West, Vancouver', role: 'MBA.', icon: 'cap' },
-  { years: 'Jan to Aug 2023', org: 'Kites Global, Colombo', role: 'Digital Marketing Strategist. Owned four client accounts and supported five more.', icon: 'briefcase' },
-  { years: 'Jul to Dec 2022', org: 'Enfection, Colombo', role: 'Digital Marketing Intern. Shopping, Performance Max, Discovery and Meta for CDB Bank, Costa Coffee Singapore and Keells.', icon: 'spark' },
+  { years: '2025 to 2026', org: 'Aegon, Langley, BC', role: 'Intermediate Channel Marketing Specialist (Paid Media). 50+ insurance and investment products in Canada and the U.S. Connected the CRM to bidding.', icon: 'building', current: true },
+  { years: '2023 to 2024', org: 'University Canada West, Vancouver', role: 'MBA. Moved to Canada and completed my MBA, July 2023 to October 2024.', icon: 'cap' },
+  { years: '2023', org: 'Kites Global, Colombo', role: 'Digital Marketing Strategist. Ran four client accounts. Learned to judge campaigns by sales, not leads.', icon: 'briefcase' },
+  { years: '2022', org: 'Enfection, Colombo', role: 'Digital Marketing Intern. Shopping, Performance Max and Discovery for CDB Bank, Costa Coffee Singapore and Keells.', icon: 'spark' },
   { years: 'Graduated June 2022', org: 'University of London', role: 'BSc (Hons), Management and Digital Innovation.', icon: 'book' },
 ];
 
@@ -115,44 +62,40 @@ export const stories = [
     id: 'aegon',
     number: 1,
     short: 'Aegon',
-    meta: 'Aegon, insurance and investments, Google, Meta and LinkedIn, Canada and U.S., January 2025 to October 2026',
-    role: 'Intermediate Channel Marketing Specialist (Paid Media), in-house',
-    title: 'Better measurement. Better leads. More applications.',
-    lede: 'Our ad platforms and our CRM disagreed about what a good lead was. We fixed the measurement, fed CRM lead stages back to eligible platforms and tested the lead forms. Across the account, applications rose 22% at the same media spend.',
-    description: 'How Andrew Fonseka’s team at Aegon recorded 22% more applications and about 18% lower cost per application at the same media spend, by fixing measurement and feeding CRM lead stages back to ad platforms.',
-    next: { id: 'panasia', teaser: 'When the client questioned cost per lead' },
+    meta: 'Aegon, insurance and investments, Google, Meta and LinkedIn, Canada and U.S., 2025 to 2026',
+    title: 'First, make the numbers match. Then make them grow.',
+    lede: 'Three platforms counted leads three different ways, and none of them agreed with HubSpot. I fixed the count, taught bidding what a good lead looks like, and then fixed the leads themselves.',
+    description: 'How Andrew Fonseka cut cost per lead 15% at flat spend and raised the qualified lead rate 17 points for Aegon (H2 2025 to H1 2026) by connecting HubSpot to Google, Meta and LinkedIn bidding.',
+    next: { id: 'panasia', teaser: 'When the scoreboard is a funded loan, not a lead' },
   },
   {
     id: 'panasia',
     number: 2,
     short: 'Pan Asia Bank',
     meta: 'Pan Asia Bank, banking, Meta and Google, Sri Lanka, February to June 2023',
-    role: 'Agency account lead, Kites Global',
-    title: 'The cheapest lead wasn’t the most valuable lead.',
-    lede: 'Pan Asia Bank needed funded gold loans. When the client questioned our cost per lead, I looked past the form fill to qualification data and the bank’s sales feedback, and defended the targeting.',
-    description: 'How Andrew Fonseka defended lead quality over cost per lead for Pan Asia Bank: 259 bank-reported funded gold loans, about 2.45 times the prior monthly volume, at about US$97 of media per loan.',
+    title: 'Gold in a drawer earns nothing. That was the idea.',
+    lede: 'The bank needed funded gold loans. Cost per lead was the easy scoreboard, but a lead isn’t a loan, so I moved the budget toward the leads that became loans.',
+    description: 'How Andrew Fonseka helped Pan Asia Bank fund 259 gold loans at US$97 of media each, about 2.4 times its prior monthly volume.',
     next: { id: 'godrej', teaser: 'One joke on a crowded beauty shelf' },
   },
   {
     id: 'godrej',
     number: 3,
     short: 'Godrej',
-    meta: 'Godrej Expert Rich Crème, consumer goods, Meta and YouTube, India, February to July 2023',
-    role: 'Paid media lead (Meta and YouTube), Kites Global',
+    meta: 'Godrej Expert Rich Crème, consumer goods, Meta and YouTube, India, 2023',
     title: 'Error 404: grey hair not found.',
-    lede: 'A hair colour launch on a crowded shelf. Our team turned the grey-coverage promise into a 404 joke, thirty creators posted it, and I ran the paid amplification on Meta and YouTube.',
-    description: 'Error 404: a creator-led Godrej hair colour launch where Andrew Fonseka ran Meta and YouTube. Creator promo codes tracked about US$350K in retail sales against a US$30K total campaign cost.',
+    lede: 'A hair colour launch on one of India’s most crowded beauty shelves. A 404 joke got stopped for, thirty creators posted it, and I ran Meta and YouTube behind them.',
+    description: 'How a 404 joke and 30 creators turned a US$30K paid media budget into about US$350K in promo-code-tracked sales for Godrej Expert Rich Crème.',
     next: { id: 'petmart', teaser: 'The Valentine’s date where the dog was invited' },
   },
   {
     id: 'petmart',
     number: 4,
     short: 'Petmart',
-    meta: 'Petmart × Sugar Beach, pet retail, Instagram, Facebook and Google, Sri Lanka, January to May 2023',
-    role: 'Campaign lead, strategy and execution, Kites Global',
-    title: 'From a Valentine’s activation to always-on customer acquisition.',
-    lede: 'Pet owners don’t want to leave the dog at home on date night, so we invited it. Then I turned the attention into always-on Shopping and Performance Max.',
-    description: 'A Valentine’s activation with Sugar Beach drove US$25K in coupon-tracked store sales for Petmart, followed by always-on Shopping and Performance Max at 4× ROAS across the campaign.',
+    meta: 'Petmart × Sugar Beach, pet retail, Instagram, Facebook and Google, Sri Lanka, January to April 2023',
+    title: 'Valentine’s date? Bring the dog.',
+    lede: 'Pet owners don’t want to leave the dog at home on date night. So we invited it, then turned the attention into always-on Shopping and Performance Max.',
+    description: 'How a Valentine’s partnership with Sugar Beach drove US$25K in coupon-tracked sales for Petmart, followed by 4:1 ROAS on Shopping and Performance Max.',
     next: null,
   },
 ];

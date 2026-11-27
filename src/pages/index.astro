@@ -1,15 +1,14 @@
 ---
 import Site from '../layouts/Site.astro';
 import Icon from '../components/v3/Icon.astro';
-import MiniBars from '../components/v3/MiniBars.astro';
 import { profile, brand, metrics, toolGroups, certifications, career, references, periods } from '../content/v3.js';
 const caseUrl = (id) => `/case-studies/${id}/`;
 const [featured, ...otherRefs] = references;
-const steps = [
-  { icon: 'target', title: 'Start with the business objective', text: 'Define the outcome and what counts as success.' },
-  { icon: 'shield', title: 'Check the measurement', text: 'Validate tracking, conversion definitions, attribution and CRM reconciliation where available.' },
-  { icon: 'loop', title: 'Optimize for quality', text: 'Use the best available conversion signals and test changes against a meaningful KPI.' },
-  { icon: 'bars', title: 'Allocate and review', text: 'Adjust budgets within approved limits, report what is and isn’t known, and repeat.', navy: true },
+const loop = [
+  { icon: 'target', title: 'Start from the business number', text: 'Loans, applications, sales. Not clicks.' },
+  { icon: 'shield', title: 'Make the numbers true', text: 'Tracking that matches the CRM.' },
+  { icon: 'loop', title: 'Feed quality back', text: 'CRM stages and their values train the bidding.' },
+  { icon: 'bars', title: 'Move money to winners', text: 'Budget follows customers.', navy: true },
 ];
 ---
 <Site>
@@ -18,12 +17,12 @@ const steps = [
       <p class="eyebrow">Andrew Fonseka, MBA · Paid Media Specialist</p>
       <h1 id="hero-title">Most ad reports stop at the click. <span>Mine start there.</span></h1>
       <p>I follow every campaign past the click to the loan, the application or the sale. I’ve owned client accounts at an agency in Colombo and run paid media for Canadian and U.S. financial services at Aegon, across Google, Meta and LinkedIn, with conversion tracking and CRM data behind every decision.</p>
-      <p>I also built an AI-assisted campaign builder that gets campaigns ready for review and launch.</p>
+      <p>I also built a campaign builder with AI-assisted coding, linked to Google Ads and Sheets, that 22 colleagues used to launch about 200 campaigns.</p>
       <div class="actions">
         <a class="pill pill-fill" href={profile.mailto}><Icon name="mail" size={18} />Contact me</a>
         <a class="pill pill-line" href={profile.resume} target="_blank" rel="noopener"><Icon name="file" size={18} />View résumé (PDF)</a>
       </div>
-      <p class="availability">Open to paid media roles.</p>
+      <p class="availability">Based in Greater Vancouver. Open to paid media roles.</p>
     </div>
     <figure class="hero-portrait">
       <img src="/images/andrew-fonseka-480.webp" srcset="/images/andrew-fonseka-480.webp 480w, /images/andrew-fonseka-720.webp 720w" sizes="(max-width: 900px) 360px, 440px" width="720" height="900" alt="Andrew Fonseka in a navy suit" fetchpriority="high" />
@@ -53,8 +52,8 @@ const steps = [
     <article id="aegon" class="card story-card" aria-labelledby="aegon-title">
       <div class="story-top">
         <div style="display:flex;flex-direction:column;gap:16px">
-          <span class="meta">Aegon, insurance and investments, Canada and U.S., 2025 to 2026. In-house, Intermediate Channel Marketing Specialist (Paid Media)</span>
-          <h3 id="aegon-title">Better measurement. Better leads. More applications.</h3>
+          <span class="meta">Aegon, insurance and investments, Canada and U.S., 2025 to 2026</span>
+          <h3 id="aegon-title">First, make the numbers match. Then make them grow.</h3>
           <ul class="tags" style="list-style:none;margin:0;padding:0">
             <li class="tag"><img src={brand('google-ads')} alt="" width="18" height="18" />Google Ads</li>
             <li class="tag"><img src={brand('meta-icon')} alt="" width="18" height="18" />Meta</li>
@@ -62,7 +61,7 @@ const steps = [
             <li class="tag"><img src={brand('hubspot-symbol')} alt="" width="18" height="18" />HubSpot</li>
           </ul>
         </div>
-        <figure class="loop-figure" aria-label="How CRM lead stages feed back to ad platforms">
+        <figure class="loop-figure" aria-label="The CRM-to-bidding loop">
           <div class="flow">
             <div class="flow-box"><strong>Ad</strong>Google, Meta, LinkedIn</div>
             <span class="flow-arrow" aria-hidden="true"><Icon name="arrow" size={16} /></span>
@@ -71,16 +70,16 @@ const steps = [
             <div class="flow-box is-blue"><strong>HubSpot</strong>Qualified, booked call, application</div>
           </div>
           <div class="loop-return" aria-hidden="true"></div>
-          <figcaption>CRM lead stages inform eligible platforms’ conversion signals, where configured</figcaption>
-          <span class="badge-float"><span class="num">−18%</span> cost per application</span>
+          <figcaption>Lead stages go back to each platform as offline conversions, so bidding looks for people who resemble applicants</figcaption>
+          <span class="badge-float"><span class="num">−15%</span> cost per lead</span>
         </figure>
       </div>
       <div class="story3">
-        <div><b>The problem</b><p>Ad platforms and HubSpot counted leads differently, so it was hard to judge campaign quality or optimize beyond form fills.</p></div>
-        <div><b class="is-blue">My part</b><p>I led the tracking implementation with colleagues, shared campaign execution and optimization within the team, and built an AI-assisted campaign builder.</p></div>
-        <div><b class="is-blue">What moved</b><p style="color:var(--ink)"><strong class="num">−18%</strong> cost per application, <strong class="num">+17 pp</strong> qualified lead rate.</p><small class="source-note">{periods.aegon}, same media spend. Team result.</small></div>
+        <div><b>The problem</b><p>50+ products, 20 to 25 live campaigns and three platforms, each counting leads its own way. Nothing lined up with HubSpot.</p></div>
+        <div><b class="is-blue">What I did</b><p>Rebuilt tracking, sent HubSpot stages and their values back into bidding, and A/B-tested the lead forms. Then I wrote the campaign builder 22 colleagues used.</p></div>
+        <div><b class="is-blue">What moved</b><p style="color:var(--ink)"><strong class="num">−15%</strong> cost per lead at flat spend, <strong class="num">+17 pts</strong> qualified lead rate, <strong class="num">+22%</strong> applications.</p><small class="source-note">{periods.aegon}, same spend.</small></div>
       </div>
-      <div><a class="pill pill-line" href={caseUrl('aegon')}>Read the Aegon case study<Icon name="arrow" size={18} /></a></div>
+      <div><a class="pill pill-line" href={caseUrl('aegon')}>Read the Aegon story<Icon name="arrow" size={18} /></a></div>
     </article>
 
     <div class="agency-head">
@@ -94,53 +93,64 @@ const steps = [
     <article id="panasia" class="card feature" aria-labelledby="panasia-title">
       <figure class="creative">
         <img src="/images/campaigns/gold2cash.webp" width="554" height="554" loading="lazy" alt="Gold2Cash ad for Pan Asia Bank: gold jewellery on a cobwebbed stand under the headline Make your gold work for you" />
-        <figcaption><b>The insight:</b> gold kept at home earns nothing. The cobwebs say it before the headline does. Concept developed with the agency designers.</figcaption>
+        <figcaption><b>The insight:</b> gold kept at home earns nothing. The cobwebs say it before the headline does.</figcaption>
       </figure>
       <div class="feature-body">
-        <span class="meta">Pan Asia Bank, banking, Meta and Google, February to June 2023. Agency account lead</span>
-        <h4 id="panasia-title">The cheapest lead wasn’t the most valuable lead.</h4>
-        <p style="font-size:17px">The bank needed funded gold loans. When it questioned our cost per lead, I looked past the form fill to qualification data and the sales team’s feedback, defended the targeting and reviewed the budget every month.</p>
-        <MiniBars title="Funded gold loans per month" rows={[['Before (bank estimate, 6 months)', 21.2, '~21.2'], ['During the campaign (5 months)', 51.8, '51.8']]} />
-        <div class="stat-row is-2">
-          <div><span class="stat-value num">259</span><small>funded gold loans, reported by the bank’s CRM</small></div>
-          <div><span class="stat-value num">~US$97</span><small>media cost per funded loan</small></div>
+        <span class="meta">Pan Asia Bank, banking, Meta and Google, February to June 2023</span>
+        <h4 id="panasia-title">Gold in a drawer earns nothing. That was the idea.</h4>
+        <p style="font-size:17px">The bank needed funded gold loans, not leads. When they asked why our cost per lead was so high, I showed them the cheaper leads weren’t becoming loans, and held the targeting.</p>
+        <figure class="chart">
+          <figcaption class="chart-title" style="color:var(--ink)">Funded gold loans per month</figcaption>
+          <div class="bar-row"><span>Before (bank estimate)</span><span class="bar-track"><span class="bar" style="width:40%"></span><strong class="num">~21</strong></span></div>
+          <div class="bar-row"><span>During the campaign</span><span class="bar-track"><span class="bar bar-blue" style="width:88%"></span><strong class="num">~52</strong></span></div>
+        </figure>
+        <div class="stat-row">
+          <div><span class="stat-value num">259</span><small>funded gold loans, traced through the lead form</small></div>
+          <div><span class="stat-value num">~US$500K</span><small>in funded loans</small></div>
+          <div><span class="stat-value num">US$97</span><small>media cost per funded loan</small></div>
         </div>
-        <div><a class="pill pill-line" href={caseUrl('panasia')}>Read the Pan Asia Bank case study<Icon name="arrow" size={18} /></a></div>
+        <div><a class="pill pill-line" href={caseUrl('panasia')}>Read the Pan Asia Bank story<Icon name="arrow" size={18} /></a></div>
       </div>
     </article>
 
     <div class="duo">
       <article id="godrej" class="card" aria-labelledby="godrej-title">
         <img class="thumb" src="/images/campaigns/godrej.webp" width="800" height="800" loading="lazy" alt="Godrej Expert Rich Crème ad: a pixelated Error 404 with the line Sorry, no grey hair found" />
-        <span class="meta">Godrej Expert Rich Crème, India launch, Meta and YouTube, February to July 2023</span>
+        <span class="meta">Godrej Expert Rich Crème, India launch, Meta and YouTube</span>
         <h4 id="godrej-title">Error 404: grey hair not found.</h4>
-        <p>Every brand on the shelf promised full grey coverage. Our team turned the promise into a 404 joke, thirty creators posted it, and I ran the paid amplification on Meta and YouTube.</p>
-        <MiniBars title="Campaign cost vs. sales tracked by creator promo codes" rows={[['Total campaign cost', 30, 'US$30K'], ['Tracked retail sales', 350, '~US$350K']]} />
-        <div class="stat-row is-2">
-          <div><span class="stat-value num">~11.7×</span><small>tracked retail sales per campaign dollar, paid and organic</small></div>
-          <div><span class="stat-value num">3.25%</span><small>Meta click-through rate, campaign-wide</small></div>
+        <p>Every brand on the shelf promised full grey coverage. A 404 joke got stopped for and made the same promise. Thirty creators posted it; I ran Meta and YouTube behind them.</p>
+        <figure class="chart">
+          <figcaption class="chart-title" style="color:var(--ink)">Paid media budget vs. sales tracked by creator promo codes</figcaption>
+          <div class="bar-track"><span class="bar" style="width:9%;height:20px"></span><strong class="num">US$30K budget</strong></div>
+          <div class="bar-track"><span class="bar bar-blue" style="width:78%;height:20px"></span><strong class="num">~US$350K sales</strong></div>
+        </figure>
+        <div class="stat-row">
+          <div><span class="stat-value num">~11.7×</span><small>tracked sales per ad dollar</small></div>
+          <div><span class="stat-value num">3.25%</span><small>Meta click-through rate</small></div>
+          <div><span class="stat-value num">45%</span><small>YouTube view rate</small></div>
         </div>
-        <div class="push-end"><a class="pill pill-line" href={caseUrl('godrej')}>Read the Godrej case study<Icon name="arrow" size={18} /></a></div>
+        <div class="push-end"><a class="pill pill-line" href={caseUrl('godrej')}>Read the Godrej story<Icon name="arrow" size={18} /></a></div>
       </article>
 
       <article id="petmart" class="card" aria-labelledby="petmart-title">
         <img class="thumb" src="/images/campaigns/petmart.webp" width="640" height="800" loading="lazy" style="object-position:50% 30%" alt="Petmart and Sugar Beach Valentine’s ad: a golden retriever in a heart collar under the headline Pawfect Partner" />
-        <span class="meta">Petmart × Sugar Beach, pet retail, January to May 2023. Campaign lead</span>
-        <h4 id="petmart-title">From a Valentine’s activation to always-on customer acquisition.</h4>
-        <p>Pet owners don’t want to leave the dog at home on date night, so we invited it. Then I turned the attention into always-on Shopping and Performance Max.</p>
+        <span class="meta">Petmart × Sugar Beach, pet retail, January to April 2023</span>
+        <h4 id="petmart-title">Valentine’s date? Bring the dog.</h4>
+        <p>Pet owners don’t want to leave the dog at home on date night. So we invited it, then turned the attention into always-on Shopping and Performance Max.</p>
         <figure class="chart" aria-label="Campaign timeline">
           <ol class="timeline-h" style="grid-template-columns:repeat(4,minmax(0,1fr));list-style:none;margin:0;padding:0">
             <li><span class="dot"></span><strong>Giveaway</strong><span>January</span></li>
             <li><span class="dot is-key"></span><strong>The event</strong><span>February 14</span></li>
-            <li><span class="dot"></span><strong>Paid promo</strong><span>Late February</span></li>
-            <li><span class="dot"></span><strong>Always-on</strong><span>March to May</span></li>
+            <li><span class="dot"></span><strong>Paid ads</strong><span>Late February</span></li>
+            <li><span class="dot"></span><strong>Always-on</strong><span>March to April</span></li>
           </ol>
         </figure>
-        <div class="stat-row is-2">
+        <div class="stat-row">
           <div><span class="stat-value num">US$25K</span><small>in-store sales on event coupons</small></div>
-          <div><span class="stat-value num">4×</span><small>ROAS across the campaign, Feb to May</small></div>
+          <div><span class="stat-value num">1,700</span><small>giveaway entries</small></div>
+          <div><span class="stat-value num">4:1</span><small>ROAS on Shopping and Performance Max, March to April</small></div>
         </div>
-        <div class="push-end"><a class="pill pill-line" href={caseUrl('petmart')}>Read the Petmart case study<Icon name="arrow" size={18} /></a></div>
+        <div class="push-end"><a class="pill pill-line" href={caseUrl('petmart')}>Read the Petmart story<Icon name="arrow" size={18} /></a></div>
       </article>
     </div>
   </section>
@@ -150,31 +160,31 @@ const steps = [
       <div class="section-head">
         <span class="chapter">Approach</span>
         <h2 id="approach-title" class="h2">Better signals. Better decisions.</h2>
-        <p>Ad platforms optimize toward the conversions you tell them to count. Count only form fills and you can get plenty of cheap ones that never become customers. So I start with the outcome the business counts and work back to the best signal the account can support.</p>
+        <p>Ask for form fills, and you get form fills. Lots of them. Cheap ones. Most of those people never buy, so I ask the platforms for something else.</p>
       </div>
       <div class="card compare">
-        <span class="compare-label">A click-first account</span>
+        <span class="compare-label">What most accounts optimize for</span>
         <div class="flow">
           <div class="flow-box is-grey"><strong>Form fills</strong>The platform’s default goal</div>
           <span class="flow-arrow" aria-hidden="true" style="color:var(--slate)"><Icon name="arrow" size={16} /></span>
-          <div class="flow-box is-grey"><strong>Cheap leads</strong>Looks good in the report</div>
+          <div class="flow-box is-grey"><strong>Lots of cheap leads</strong>Looks great in the report</div>
           <span class="flow-arrow" aria-hidden="true" style="color:var(--slate)"><Icon name="arrow" size={16} /></span>
-          <div class="flow-box is-grey"><strong>Unclear outcomes</strong>Hard to tell what worked</div>
+          <div class="flow-box is-grey"><strong>Few customers</strong>Sales chases dead ends</div>
         </div>
-        <span class="compare-label is-blue">How I set accounts up</span>
+        <span class="compare-label is-blue">What I optimize for</span>
         <div class="flow">
-          <div class="flow-box is-blue"><strong>Business outcome</strong>Agreed with the business</div>
+          <div class="flow-box is-blue"><strong>Customers</strong>Signals from the CRM</div>
           <span class="flow-arrow" aria-hidden="true"><Icon name="arrow" size={16} /></span>
-          <div class="flow-box is-blue"><strong>Quality signals</strong>The best the data supports</div>
+          <div class="flow-box is-blue"><strong>Fewer, better leads</strong>Higher intent, higher cost</div>
           <span class="flow-arrow" aria-hidden="true"><Icon name="arrow" size={16} /></span>
-          <div class="flow-box is-navy"><strong>Evidence-led budget</strong>Spend follows outcomes</div>
+          <div class="flow-box is-navy"><strong>More revenue</strong>The number the business counts</div>
         </div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:18px">
-      <h3 style="font-size:24px">Four steps, every account</h3>
+      <h3 style="font-size:24px">The loop I run in every account</h3>
       <ol class="loop">
-        {steps.map((s, i) => (
+        {loop.map((s, i) => (
           <li class:list={['card', { 'is-navy': s.navy }]}>
             <span class="ico"><Icon name={s.icon} size={24} /></span>
             <span class="step">Step {i + 1}</span>
@@ -213,7 +223,7 @@ const steps = [
   <section id="toolkit" class="wrap section" aria-labelledby="tools-title" style="display:flex;flex-direction:column;gap:48px">
     <div class="toolkit-head">
       <h2 id="tools-title" class="h2">From the first ad<br /><span>to the next decision.</span></h2>
-      <p>I use Google Ads, Meta Ads, LinkedIn Ads, TikTok Ads and Google Analytics 4 to run campaigns and measure what happens after a click. At Aegon, HubSpot lead stages fed back to eligible ad platforms, so optimization could look past the form fill.</p>
+      <p>I use Google Ads, Meta Ads, LinkedIn Ads and Google Analytics 4 to run campaigns and measure what happens after a click. At Aegon, connecting HubSpot to the ad platforms let me bid on completed applications.</p>
     </div>
     <div class="tool-columns">
       {toolGroups.map((column) => (

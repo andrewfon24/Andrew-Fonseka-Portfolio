@@ -4,11 +4,10 @@ import { mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const slugs = ['aegon', 'panasia', 'godrej', 'petmart'];
-const anchors = { aegon: ['measurement', 'outcome', 'builder'], panasia: ['budget-decision', 'outcome'], godrej: ['outcome'], petmart: ['acquisition', 'outcome'] };
 mkdirSync('test-results/review', { recursive: true });
 
-// Restricted, stale or withdrawn claims that must never reach the public build.
-const banned = ['22 colleagues', '22 marketers', '200 campaigns', '~200', '12 working days', '50+', 'H1 to H2', 'H2 2026', 'flat spend', 'seven-figure', 'multi-million', 'Event Match Quality', 'nearly eliminated', 'nearly disappeared', 'compliance rejections', 'settled', 'per ad dollar', '4:1', 'new and returning', 'Saudi', 'DIMO', 'DATS', 'freelance', 'B2B apparel', 'Greater Vancouver', 'Authorized to work', 'Available immediately', 'coordinator', 'traced through the lead form', 'Contact me about a role'];
+// Freelance work, the wrong Aegon periods and the corrected EMQ score must never reach the public build.
+const banned = ['Saudi', 'DIMO', 'DATS', 'freelance', 'B2B apparel', 'H1 to H2', 'H2 2026', 'H1 2026 = 100', 'Contact me about a role', 'TikTok', 'coordinator', 'Hiring a Paid Media Specialist', 'client-reported', 'first-order'];
 
 const noOverflow = async (page, width) => {
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width + 1);
@@ -28,22 +27,24 @@ test('homepage: role, proof, sections, navigation and metadata', async ({ page }
   await expect(page.locator('h1')).toHaveText('Most ad reports stop at the click. Mine start there.');
   await expect(page.locator('.hero .pill-fill')).toHaveText('Contact me');
   await expect(page.locator('.hero .pill-fill')).toHaveAttribute('href', /^mailto:andrew@andrewfonseka\.com\?subject=Paid%20Media%20Specialist%20role/);
-  await expect(page.locator('.hero .availability')).toHaveText('Open to paid media roles.');
+  await expect(page.locator('.hero .availability')).toHaveText('Based in Greater Vancouver. Open to paid media roles.');
   await expect(page.locator('.site-nav a')).toHaveText(['Results', 'Approach', 'About', 'References', 'Contact']);
   await expect(page.locator('.site-header .pill-fill')).toHaveAttribute('href', /^mailto:andrew@andrewfonseka.com/);
-  await expect(page.locator('.metric .stat-value')).toHaveText(['−18%', '+17 pp', '~2.4×', '4×']);
+  await expect(page.locator('.metric .stat-value')).toHaveText(['−15%', '+17 pts', '259', '22']);
+  await expect(page.locator('.metric small').first()).toHaveText('Aegon, H2 2025 to H1 2026');
   await expect(page.locator('#problems')).toHaveCount(0);
   await expect(page.locator('#results h2')).toHaveText('Agency experience. In-house discipline. Business outcomes.');
   await expect(page.locator('#approach h2')).toHaveText('Better signals. Better decisions.');
+  await expect(page.locator('#aegon h3')).toHaveText('First, make the numbers match. Then make them grow.');
   await expect(page.locator('#about h2')).toHaveText('Agency roots. In-house experience.');
   const order = await page.locator('main > section[id]').evaluateAll((s) => s.map((x) => x.id));
   expect(order).toEqual(['results', 'approach', 'about', 'toolkit', 'references']);
   expect(await page.locator('#results a.pill').evaluateAll((a) => a.map((x) => x.pathname))).toEqual(slugs.map((s) => `/case-studies/${s}/`));
   await expect(page.locator('.timeline li')).toHaveCount(5);
-  await expect(page.locator('.timeline')).toContainText('Jul 2023 to Oct 2024');
-  await expect(page.locator('#toolkit .chip')).toHaveCount(31);
+  await expect(page.locator('.timeline')).toContainText('July 2023 to October 2024');
+  await expect(page.locator('#toolkit .chip')).toHaveCount(24);
   await expect(page.locator('.quote')).toHaveCount(3);
-  await expect(page.locator('#contact h2')).toHaveText('Hiring a Paid Media Specialist?');
+  await expect(page.locator('#contact h2')).toHaveText('Let’s talk about what happens after the click.');
   await expect(page.locator('#contact p').first()).toContainText('an agency managing client accounts or an in-house team');
   await expect(page.locator('#about')).toContainText('whether at an agency or in-house');
   await expect(page.locator('#contact .pill-white')).toHaveText('Contact me');
@@ -58,17 +59,12 @@ test('homepage: role, proof, sections, navigation and metadata', async ({ page }
   expect(errors).toEqual([]);
 });
 
-test('proof-strip links land on real anchors', async ({ page }) => {
+test('proof-strip links open case studies', async ({ page, request }) => {
   await page.goto('/');
-  const hrefs = await page.locator('.metric').evaluateAll((a) => a.map((x) => x.getAttribute('href')));
-  for (const href of hrefs) {
-    const [path, hash] = href.split('#');
-    await page.goto(path);
-    await expect(page.locator(`#${hash}`), href).toHaveCount(1);
-  }
+  for (const href of await page.locator('.metric').evaluateAll((a) => a.map((x) => x.getAttribute('href')))) expect((await request.get(href)).status(), href).toBe(200);
 });
 
-test('no restricted, stale or location claims anywhere in the built site', async ({ page }) => {
+test('no withdrawn or incorrect claims anywhere in the built site', async ({ page }) => {
   const sources = files('dist').filter((f) => /\.(html|js|css|xml|txt|json)$/.test(f));
   for (const f of sources) {
     const text = readFileSync(f, 'utf8');
@@ -77,7 +73,7 @@ test('no restricted, stale or location claims anywhere in the built site', async
   for (const path of ['/', ...slugs.map((s) => `/case-studies/${s}/`)]) {
     await page.goto(path);
     const body = await page.locator('body').innerText();
-    for (const n of ['7.8', '5.5', '2× qualified', 'Vancouver, BC']) expect(body.includes(n), `${n} on ${path}`).toBe(false);
+    expect(body.includes('7.8'), `EMQ 7.8 on ${path}`).toBe(false);
   }
 });
 
@@ -105,10 +101,8 @@ for (const slug of slugs) {
     page.on('pageerror', (e) => errors.push(e.message));
     await page.goto(`/case-studies/${slug}/`);
     await expect(page.locator('h1')).toBeVisible();
-    await expect(page.locator('.case-section h2')).toContainText(['Context', 'My role', 'Outcome', 'What this doesn’t show']);
-    await expect(page.locator('.evidence')).toBeVisible();
+    await expect(page.locator('.case-section h2')).toContainText(['Problem', 'What I built', 'What moved']);
     await expect(page.locator('.case-aside')).not.toContainText('Hiring for a paid media role');
-    for (const a of anchors[slug]) await expect(page.locator(`#${a}`)).toHaveCount(1);
     expect(await page.locator('.case-article figure, .case-article .flow, .case-article .tiles').count()).toBeGreaterThanOrEqual(3);
     await expect(page.locator('.next-story')).toBeVisible();
     await axe(page);
@@ -121,49 +115,12 @@ for (const slug of slugs) {
   });
 }
 
-test('Aegon CRM diagram has a text equivalent on desktop and becomes a list on phones', async ({ page }) => {
+test('Aegon case shows the corrected period and EMQ', async ({ page }) => {
   await page.goto('/case-studies/aegon/');
-  await expect(page.locator('.arch-svg')).toBeVisible();
-  await expect(page.locator('.arch-legend li')).toHaveCount(8);
-  await expect(page.locator('.arch figcaption')).toContainText('No employer data shown');
-  await page.setViewportSize({ width: 390, height: 900 });
-  await expect(page.locator('.arch-svg')).toBeHidden();
-  await expect(page.locator('.arch-legend li').first()).toBeVisible();
-});
-
-test('synthetic builder demo: draft, human approval gate, example CSV', async ({ page }) => {
-  const requests = [];
-  await page.goto('/case-studies/aegon/#builder');
-  page.on('request', (r) => requests.push(r.url()));
-  const demo = page.locator('.bd');
-  await expect(demo.locator('.bd-banner')).toContainText('Synthetic demonstration');
-  await demo.getByLabel('Dental clinic, new patients').check();
-  await expect(demo.getByLabel('Product or brand')).toHaveValue('Brightside Dental');
-  await demo.getByRole('button', { name: 'Generate draft' }).click();
-  await expect(demo.getByRole('heading', { name: '2. Draft campaign assets' })).toBeFocused();
-  await expect(demo).toContainText('BSD_US_LEADS_SEARCH_DEMO');
-  await demo.getByRole('button', { name: 'Send to human review' }).click();
-  const approve = demo.getByRole('button', { name: 'Approve draft' });
-  await expect(approve).toBeDisabled();
-  await demo.getByLabel('Headline 1').fill('This headline is far too long for the limit');
-  for (const box of await demo.locator('.bd-review input[type=checkbox]').all()) await box.check();
-  await expect(approve).toBeDisabled();
-  await demo.getByLabel('Headline 1').fill('Brightside Dental');
-  await expect(approve).toBeEnabled();
-  await approve.click();
-  await expect(demo.locator('.bd-table tbody tr')).toHaveCount(5);
-  await expect(demo).toContainText('Illustrative layout only');
-  const download = page.waitForEvent('download');
-  await demo.getByRole('button', { name: 'Download example CSV' }).click();
-  expect((await download).suggestedFilename()).toBe('example-bsd_us_leads_search_demo.csv');
-  await demo.getByRole('button', { name: 'What happens next' }).click();
-  await expect(demo).toContainText('never connects to an ad account');
-  await demo.getByRole('button', { name: 'Start over' }).click();
-  await expect(demo.getByRole('button', { name: 'Generate draft' })).toBeVisible();
-  expect(requests.filter((u) => !u.startsWith('http://127.0.0.1:4326') && !u.startsWith('blob:') && !u.startsWith('data:'))).toEqual([]);
-  await page.setViewportSize({ width: 390, height: 900 });
-  await noOverflow(page, 390);
-  await axe(page);
+  await expect(page.locator('.case-article')).toContainText('Cost per lead, indexed (H2 2025 = 100)');
+  await expect(page.locator('.case-article')).toContainText('H1 2026, new form');
+  await expect(page.locator('.case-article')).toContainText('Meta Event Match Quality');
+  await expect(page.locator('.case-article .bar-row strong').filter({ hasText: '7.0' })).toHaveCount(1);
 });
 
 test('every local link, image and document resolves; 404 recovers', async ({ page, request }) => {
@@ -200,7 +157,6 @@ test('content reads without JavaScript, with a static builder fallback', async (
   await expect(page.locator('#results .story-card')).toBeVisible();
   await expect(page.locator('#references blockquote').first()).toBeVisible();
   await page.goto('/case-studies/aegon/');
-  await expect(page.locator('.bd-static')).toBeVisible();
-  await expect(page.locator('.js-only')).toBeHidden();
+  await expect(page.locator('.mock')).toBeVisible();
   await context.close();
 });

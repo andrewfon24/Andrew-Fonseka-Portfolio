@@ -13,7 +13,7 @@ import Icon from '../components/v3/Icon.astro';
 import { profile, brand } from '../content/v3.js';
 const {
   title = 'Andrew Fonseka | Paid Media Specialist',
-  description = 'Paid Media Specialist with agency and in-house experience in CRM-connected measurement, performance optimization and campaign operations. Explore four case studies and contact Andrew about a role.',
+  description = 'Paid Media Specialist with agency and in-house experience in CRM-connected measurement, performance optimization and campaign operations. Based in Greater Vancouver. Explore four case studies.',
   noindex = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -65,7 +65,7 @@ const nav = [['Results', '/#results'], ['Approach', '/#approach'], ['About', '/#
     <main id="main"><slot /></main>
     <footer id="contact" class="contact">
       <div class="wrap contact-inner">
-        <h2>Hiring a Paid Media Specialist?</h2>
+        <h2>Let’s talk about what happens after the click.</h2>
         <p>Whether you’re an agency managing client accounts or an in-house team growing your own, I can help connect paid media to the outcomes that matter: qualified leads, applications and sales.</p>
         <div class="actions">
           <a class="pill pill-white" href={profile.mailto}><Icon name="mail" size={18} />Contact me</a>

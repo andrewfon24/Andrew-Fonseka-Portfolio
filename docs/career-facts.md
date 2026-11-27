@@ -1,30 +1,45 @@
 # Public career facts
 
-These are the only claims cleared for the public site and PDFs (24 November 2026, from Andrew’s Final Implementation Specification v2.0 and his interview answers the same day). `src/content/v3.js` holds the wording; the PDFs are built from the same file.
+Source of truth (27 November 2026): Andrew’s Drive masters, copied unchanged into `public/documents/`:
+- Résumé: `My Drive/Career Development/Resume/2026-11-27_Fonseka_Resume_Master-Design.pdf` → `Andrew_Fonseka_Resume.pdf`
+- Portfolio: `My Drive/Career Development/Portfolio/2026-11-27_Fonseka_Portfolio_Paid-Media.pdf` → `Andrew_Fonseka_Portfolio.pdf`
 
-This repository is public. The full claims register, with sources, permissions and values that must stay private, is kept outside the repository. Never add internal Aegon counts, budgets, raw scores or freelance work here.
+The site’s wording in `src/content/v3.js`, `src/pages/index.astro` and `src/pages/case-studies/[slug].astro` follows these PDFs. Andrew confirmed on 26 November 2026 that the Aegon figures in them are cleared to share and that the PDFs keep his phone, location and availability.
 
-## Career
+## Corrections applied to the 25 November masters
 
-| Topic | Public detail |
+| Topic | Correct public wording |
 | --- | --- |
-| Target | Paid Media Specialist (individual contributor): agency roles first, in-house roles second. Contact and About copy address both. The site says only “Open to paid media roles”: no location, availability or work authorization. The résumé header shows Greater Vancouver, BC. |
-| Aegon | Intermediate Channel Marketing Specialist (Paid Media), Jan 2025 to Oct 2026, Canadian and U.S. financial services. Shared campaign execution and optimization; led tracking implementation with colleague support. Public extras: LinkedIn ABM program (qualitative), budget pacing dashboards and biweekly leadership reporting, the AI-assisted campaign builder. |
-| Kites Global | Digital Marketing Strategist, Colombo, Jan to Aug 2023. Four client accounts owned, five supported. |
-| Enfection | Digital Marketing Intern, Colombo, Jul to Dec 2022. Shopping, Performance Max, Discovery (the 2022 name) and Meta. |
-| Education | MBA, University Canada West, Jul 2023 to Oct 2024. BSc (Hons) Management and Digital Innovation, University of London, June 2022. |
+| Aegon comparison period | H2 2025 to H1 2026, same spend in both halves (not “H1 to H2 2026”). Charts index H2 2025 = 100. |
+| Meta Event Match Quality | 5.5 to 7.0 (not 7.8). |
+
+## Four-way consistency decisions (27 November 2026)
+
+LinkedIn, the résumé, the portfolio PDF and the site follow these rules:
+
+| Topic | Rule |
+| --- | --- |
+| Aegon dates | January 2025 to October 2026 everywhere (Andrew corrected LinkedIn). |
+| MBA | July 2023 to October 2024 everywhere (conferral month). |
+| Client names | Named everywhere, LinkedIn included: Pan Asia Bank, Godrej, Petmart; CDB Bank, Costa Coffee Singapore, Keells. |
+| Pan Asia Bank | “Traced through the lead form”, not “client-reported”. |
+| Petmart | 4:1 ROAS on Shopping and Performance Max, March to April, on US$5K. Not “first-order”. “Paid sales up 40%” appears on the résumé only. |
+| LinkedIn numbers | Formal tone; Aegon entry carries −15% CPL, +17 pts qualified lead rate, +22% applications (H2 2025 vs H1 2026) and 22 colleagues / ~200 campaigns. |
+| Location and roles | Greater Vancouver (on-site, hybrid or remote); paid media specialist roles only, no “coordinator”, no “across Canada”. Site hero: “Based in Greater Vancouver. Open to paid media roles.” No phone on the site. |
+| Contact heading | “Let’s talk about what happens after the click.” on the site and the portfolio’s last page. |
+| In-house move | Andrew helped move most paid media processes from an external agency in-house, for control, lower cost and efficiency through automation and agentic workflows. On the site’s Aegon case, the résumé and LinkedIn. |
+| Toolkit | Site matches the portfolio toolkit; certifications match the résumé (Google Ads Search, Google Ads Measurement, Meta Marketing Analytics). No TikTok. |
+| Hook lines | Each document keeps its own opening line; all make the same after-the-click point. |
 
 ## Campaign claims
 
-| Story | Public figures and required context |
+| Story | Figures |
 | --- | --- |
-| Aegon | −18% cost per application (calculated: 1 ÷ 1.22), +17 pp qualified lead rate, +22% applications, −15% cost per lead (supporting). Jul–Dec 2025 vs Jan–Jun 2026, same paid media spend, consistent definitions, whole account. Team result across several changes; not a controlled test. Tracking rebuild Mar–May 2026, form test Jun 2026 (question count and design both changed). |
-| Pan Asia Bank | Feb–Jun 2023 live (Jan prep). US$25K actual media spend. 259 funded gold loans reported by the bank’s CRM. ~2.45× monthly volume (51.8 vs ~21.2, bank-estimated prior six months); use ~2.4× in tiles. ~US$97 media per funded loan. ~US$500K funded principal (not revenue). 60/40 Meta/Google is cumulative, not a final split. Creative concept shared with agency designers. |
-| Godrej | Feb–Jul 2023. US$30K total campaign cost = US$23K media + US$7K influencers. ~US$350K retail sales tracked by creator codes (paid and organic). ~11.7× tracked sales per total campaign dollar; never call it ROAS or divide by media alone. 3.25% Meta CTR and 45% YouTube view rate, campaign-wide platform averages. Colleagues managed creators and codes. |
-| Petmart | Jan–May 2023. US$500 Valentine’s promotion inside US$5K total media. US$25K in-store sales on event coupons (combined activities). 1,700 giveaway entries. 4× ROAS = ad-attributed revenue across both phases ÷ US$5K total media, Feb–May 2023; coupon sales are separate. Customer acquisition goals and audience signals (no strict new/returning split). No subscription or paid-sales growth figures. |
+| Aegon, Jan 2025 to Oct 2026 | Helped move most paid media processes in-house from an external agency. −15% cost per lead at flat spend, +17 pts qualified lead rate, +22% applications (H2 2025 to H1 2026). A/B winner 2× qualified-lead rate. EMQ 5.5 to 7.0. HubSpot stage values fed value-based bidding; Meta Conversion Lift with CRM data. Apps Script builder with AI-assisted coding, linked to Google Ads and Sheets via API: 22 colleagues, ~200 campaigns, ~12 working days a year; compliance checks signed off by the launcher and compliance. 50+ products, 20–25 live campaigns, multi-million-dollar budget co-managed; led LinkedIn, a seven-figure channel. LinkedIn ABM program; budget pacing dashboards. |
+| Pan Asia Bank, Feb to Jun 2023 | 259 funded gold loans traced through the lead form, ~US$500K funded, US$97 media per funded loan, ~2.4× prior monthly volume (~21 to ~52 a month). US$25K budget settled 60/40 Meta/Google. |
+| Godrej Expert Rich Crème, 2023 | US$30K Meta and YouTube; ~US$350K promo-code-tracked launch-quarter sales (~11.7× per ad dollar); 3.25% Meta CTR; 45% YouTube view rate. |
+| Petmart × Sugar Beach, Jan to Apr 2023 | US$25K in-store sales on event coupons, 1,700 giveaway entries, Instagram +1.2K and Facebook +965 followers, 4:1 ROAS on Shopping and Performance Max (Mar to Apr). |
 
 ## Never publish
 
-Internal Aegon counts (products, live campaigns, colleagues, campaigns built, days saved, conversion actions), Meta Event Match Quality scores, the A/B “2×” result, compliance-rejection claims, budget amounts or bands, freelance clients, or anything not listed above.
-
-References are quoted exactly from the LinkedIn recommendations. The toolkit and certifications match the previous live site at Andrew’s request.
+Freelance work (Saudi university, DIMO, B2B apparel). The old period wording “H1 to H2 2026” and EMQ 7.8.
