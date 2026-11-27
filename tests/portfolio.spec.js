@@ -7,7 +7,7 @@ const slugs = ['aegon', 'panasia', 'godrej', 'petmart'];
 mkdirSync('test-results/review', { recursive: true });
 
 // Freelance work, the wrong Aegon periods and the corrected EMQ score must never reach the public build.
-const banned = ['Saudi', 'DIMO', 'DATS', 'freelance', 'B2B apparel', 'H1 to H2', 'H2 2026', 'H1 2026 = 100', 'Contact me about a role', 'TikTok', 'coordinator', 'Hiring a Paid Media Specialist', 'client-reported', 'first-order'];
+const banned = ['Saudi', 'DIMO', 'DATS', 'freelance', 'B2B apparel', 'H1 to H2', 'H2 2026', 'H1 2026 = 100', 'Contact me about a role', 'TikTok', 'coordinator', 'Hiring a Paid Media Specialist', 'client-reported', 'first-order', '22 marketers', 'US$850'];
 
 const noOverflow = async (page, width) => {
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width + 1);

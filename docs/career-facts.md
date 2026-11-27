@@ -30,6 +30,7 @@ LinkedIn, the résumé, the portfolio PDF and the site follow these rules:
 | In-house move | Andrew helped move most paid media processes from an external agency in-house, for control, lower cost and efficiency through automation and agentic workflows. On the site’s Aegon case, the résumé and LinkedIn. |
 | Toolkit | Site matches the portfolio toolkit; certifications match the résumé (Google Ads Search, Google Ads Measurement, Meta Marketing Analytics). No TikTok. |
 | Hook lines | Each document keeps its own opening line; all make the same after-the-click point. |
+| Wording | Aegon title is “Intermediate Channel Marketing Specialist (Paid Media)” everywhere. Builder users are “22 colleagues”. Qualified lead rate is “17 pts” in documents and on the site, “17 percentage points” in full sentences (LinkedIn, search snippets). Canadian spelling (behaviour, favour, colour). The portfolio cover says “from a US$5K retail budget to a seven-figure LinkedIn channel” (no US$850 account). |
 
 ## Campaign claims
 

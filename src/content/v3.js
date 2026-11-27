@@ -65,7 +65,7 @@ export const stories = [
     meta: 'Aegon, insurance and investments, Google, Meta and LinkedIn, Canada and U.S., 2025 to 2026',
     title: 'First, make the numbers match. Then make them grow.',
     lede: 'Three platforms counted leads three different ways, and none of them agreed with HubSpot. I fixed the count, taught bidding what a good lead looks like, and then fixed the leads themselves.',
-    description: 'How Andrew Fonseka cut cost per lead 15% at flat spend and raised the qualified lead rate 17 points for Aegon (H2 2025 to H1 2026) by connecting HubSpot to Google, Meta and LinkedIn bidding.',
+    description: 'How Andrew Fonseka cut cost per lead 15% at flat spend and raised the qualified lead rate 17 percentage points for Aegon (H2 2025 to H1 2026) by connecting HubSpot to Google, Meta and LinkedIn bidding.',
     next: { id: 'panasia', teaser: 'When the scoreboard is a funded loan, not a lead' },
   },
   {
