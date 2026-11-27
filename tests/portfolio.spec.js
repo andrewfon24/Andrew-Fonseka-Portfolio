@@ -7,7 +7,7 @@ const slugs = ['aegon', 'panasia', 'godrej', 'petmart'];
 mkdirSync('test-results/review', { recursive: true });
 
 // Freelance work, the wrong Aegon periods and the corrected EMQ score must never reach the public build.
-const banned = ['Saudi', 'DIMO', 'DATS', 'freelance', 'B2B apparel', 'H1 to H2', 'H2 2026', 'H1 2026 = 100', 'Contact me about a role', 'TikTok', 'coordinator', 'Hiring a Paid Media Specialist', 'client-reported', 'first-order', '22 marketers', 'US$850'];
+const banned = ['Saudi', 'DIMO', 'DATS', 'freelance', 'B2B apparel', 'H1 to H2', 'H2 2026', 'H1 2026 = 100', 'Contact me about a role', 'coordinator', 'Hiring a Paid Media Specialist', 'client-reported', 'first-order', '22 marketers', 'US$850', 'Dynamics 365', 'Google Ads API'];
 
 const noOverflow = async (page, width) => {
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width + 1);
@@ -42,7 +42,7 @@ test('homepage: role, proof, sections, navigation and metadata', async ({ page }
   expect(await page.locator('#results a.pill').evaluateAll((a) => a.map((x) => x.pathname))).toEqual(slugs.map((s) => `/case-studies/${s}/`));
   await expect(page.locator('.timeline li')).toHaveCount(5);
   await expect(page.locator('.timeline')).toContainText('July 2023 to October 2024');
-  await expect(page.locator('#toolkit .chip')).toHaveCount(24);
+  await expect(page.locator('#toolkit .chip')).toHaveCount(30);
   await expect(page.locator('.quote')).toHaveCount(3);
   await expect(page.locator('#contact h2')).toHaveText('Let’s talk about what happens after the click.');
   await expect(page.locator('#contact p').first()).toContainText('an agency managing client accounts or an in-house team');

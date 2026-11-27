@@ -25,15 +25,18 @@ export const metrics = [
   { value: '22', label: 'colleagues used my campaign builder', source: 'Aegon, ~200 campaigns launched', href: '/case-studies/aegon/' },
 ];
 
-// Toolkit and certifications match the portfolio PDF (toolkit) and résumé (certifications).
+// Toolkit: Andrew's broader working stack (27 Nov 2026), wider than the portfolio PDF's list.
+// Certifications match the résumé.
 export const toolGroups = [
   [
-    { name: 'Ad platforms', tools: [['Google Ads', 'google-ads'], ['Meta Ads', 'meta-icon'], ['LinkedIn Ads', 'linkedin-icon']] },
-    { name: 'Google Ads campaign types', tools: [['Search', 'google-ads'], ['Shopping', 'google-ads'], ['Performance Max', 'google-ads'], ['Demand Gen', 'google-ads'], ['YouTube (Video)', 'google-ads']] },
+    { name: 'Paid media platforms', tools: [['Google Ads', 'google-ads'], ['Meta Ads', 'meta-icon'], ['Microsoft Advertising', 'bing'], ['LinkedIn Ads', 'linkedin-icon'], ['TikTok Ads', 'tiktok-icon']] },
+    { name: 'Productivity, project management & automation', tools: [['Microsoft 365', 'microsoft-365'], ['Google Workspace', 'google-icon'], ['Asana', 'asana-icon'], ['ClickUp', 'clickup'], ['Notion', 'notion-icon'], ['Jira', 'jira'], ['Zapier', 'zapier-icon'], ['Google Apps Script', 'google-apps-script'], ['Google Ads Scripts', 'google-ads']] },
+    { name: 'CMS, e-commerce & design', tools: [['Shopify', 'shopify-symbol'], ['Canva', 'canva']] },
   ],
   [
-    { name: 'Measurement and tracking', tools: [['GA4', 'google-analytics'], ['Server-side GTM', 'google-tag-manager'], ['Enhanced Conversions', 'google-ads'], ['Meta CAPI', 'meta-icon'], ['Meta Conversion Lift', 'meta-icon'], ['Looker Studio', 'looker-icon']] },
-    { name: 'CRM and automation', tools: [['HubSpot', 'hubspot-symbol'], ['Merchant Center', 'google-icon'], ['Shopify', 'shopify-symbol'], ['Google Ads API', 'google-ads'], ['Google Apps Script', 'google-apps-script'], ['Google Ads Scripts', 'google-ads'], ['Zapier', 'zapier-icon']] },
+    { name: 'Analytics & tracking', tools: [['Google Analytics 4', 'google-analytics'], ['Google Search Console', 'google-search-console'], ['Google Tag Manager', 'google-tag-manager'], ['Microsoft Clarity', 'microsoft-icon'], ['Looker Studio', 'looker-icon']] },
+    { name: 'Email & CRM', tools: [['HubSpot', 'hubspot-symbol'], ['Mailchimp', 'mailchimp-freddie'], ['Klaviyo', 'klaviyo']] },
+    { name: 'SEO & search research', tools: [['Ahrefs', 'ahrefs'], ['SEMrush', 'semrush'], ['Screaming Frog', 'screaming-frog']] },
   ],
 ];
 
