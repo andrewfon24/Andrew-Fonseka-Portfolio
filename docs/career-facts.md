@@ -34,7 +34,7 @@ LinkedIn, the résumé, the portfolio PDF and the site follow these rules:
 
 ## Positioning and messaging (27 November 2026)
 
-Andrew chose these in an interview based on Scott Bair’s branding playbook (positioning, messaging hierarchy, voice). The site follows them now; LinkedIn, the résumé and the portfolio PDF follow in a later pass.
+Andrew chose these in an interview based on Scott Bair’s branding playbook (positioning, messaging hierarchy, voice). All four documents follow them (27 Nov): the résumé profiles end with “build the automation to run it at scale” (Paid Social: “Agency-side, Meta-led: 259 funded bank loans.” to fit the line); the portfolio cover names “the automation to run it at scale” and its story page reads “Each move added a layer. A digital innovation degree set the direction. Then execution, account ownership, the business lens and scale.”; LinkedIn About adds the one-liner and “Enfection taught me execution”.
 
 | Topic | Decision |
 | --- | --- |
