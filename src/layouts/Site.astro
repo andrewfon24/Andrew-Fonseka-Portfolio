@@ -6,14 +6,13 @@ import '@fontsource/inter/latin-500.css';
 import '@fontsource/inter/latin-600.css';
 import '@fontsource/archivo/latin-500.css';
 import '@fontsource/archivo/latin-600.css';
-import '@fontsource/archivo/latin-700.css';
 import '../styles/v3.css';
 import Analytics from '@vercel/analytics/astro';
 import Icon from '../components/v3/Icon.astro';
 import { profile, brand } from '../content/v3.js';
 const {
   title = 'Andrew Fonseka | Paid Media Specialist',
-  description = 'Paid Media Specialist with agency and in-house experience in CRM-connected measurement, performance optimization and campaign operations. Based in Greater Vancouver. Explore four case studies.',
+  description = 'Paid Media Specialist who measures campaigns to the sale, with the automation to run them at scale. Agency and in-house experience. Based in Greater Vancouver. Explore four case studies.',
   noindex = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -69,12 +68,12 @@ const nav = [['Results', '/#results'], ['Approach', '/#approach'], ['About', '/#
         <p>Whether you’re an agency managing client accounts or an in-house team growing your own, I can help connect paid media to the outcomes that matter: qualified leads, applications and sales.</p>
         <div class="actions">
           <a class="pill pill-white" href={profile.mailto}><Icon name="mail" size={18} />Contact me</a>
-          <a class="pill pill-ghost" href={profile.resume} target="_blank" rel="noopener"><Icon name="file" size={18} />View résumé (PDF)</a>
           <a class="pill pill-ghost" href={profile.linkedin} target="_blank" rel="noopener"><img src={brand('linkedin-icon')} alt="" width="18" height="18" />Connect on LinkedIn</a>
+          <a class="pill pill-ghost" href={profile.resume} target="_blank" rel="noopener"><Icon name="file" size={18} />View résumé (PDF)</a>
           <a class="pill pill-ghost" href={profile.portfolio} target="_blank" rel="noopener"><Icon name="download" size={18} />Portfolio (PDF)</a>
         </div>
       </div>
-      <div class="footer-bar"><div class="footer-inner"><span>© 2026 Andrew Fonseka</span><span>Paid media, business growth, account ownership</span><a href="#main">Back to top</a></div></div>
+      <div class="footer-bar"><div class="footer-inner"><span>© 2026 Andrew Fonseka</span><span>Paid media measured to the sale</span><a href="#main">Back to top</a></div></div>
     </footer>
     <Analytics />
     <script>

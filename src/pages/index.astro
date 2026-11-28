@@ -16,8 +16,8 @@ const loop = [
     <div class="hero-copy">
       <p class="eyebrow">Andrew Fonseka, MBA · Paid Media Specialist</p>
       <h1 id="hero-title">Most ad reports stop at the click. <span>Mine start there.</span></h1>
+      <p class="hero-line">Paid media measured to the sale, with the automation to run it at scale.</p>
       <p>I follow every campaign past the click to the loan, the application or the sale. I’ve owned client accounts at an agency in Colombo and run paid media for Canadian and U.S. financial services at Aegon, across Google, Meta and LinkedIn, with conversion tracking and CRM data behind every decision.</p>
-      <p>I also built a campaign builder with AI-assisted coding, linked to Google Ads and Sheets, that 22 colleagues used to launch about 200 campaigns.</p>
       <div class="actions">
         <a class="pill pill-fill" href={profile.mailto}><Icon name="mail" size={18} />Contact me</a>
         <a class="pill pill-line" href={profile.resume} target="_blank" rel="noopener"><Icon name="file" size={18} />View résumé (PDF)</a>
@@ -45,7 +45,7 @@ const loop = [
   <section id="results" class="wrap section results" aria-labelledby="results-title">
     <div class="section-head">
       <span class="chapter">Results</span>
-      <h2 id="results-title" class="h2">Agency experience. In-house discipline. Business outcomes.</h2>
+      <h2 id="results-title" class="h2">Agency experience. <span class="nowrap">In-house</span> discipline. Business outcomes.</h2>
       <p class="lead">I have worked on both sides of the client–agency relationship. These projects show how I approach measurement, campaign optimization, creative distribution and accountability to business results.</p>
     </div>
 
@@ -173,9 +173,9 @@ const loop = [
         </div>
         <span class="compare-label is-blue">What I optimize for</span>
         <div class="flow">
-          <div class="flow-box is-blue"><strong>Customers</strong>Signals from the CRM</div>
+          <div class="flow-box is-pale"><strong>Customers</strong>Signals from the CRM</div>
           <span class="flow-arrow" aria-hidden="true"><Icon name="arrow" size={16} /></span>
-          <div class="flow-box is-blue"><strong>Fewer, better leads</strong>Higher intent, higher cost</div>
+          <div class="flow-box is-pale"><strong>Fewer, better leads</strong>Higher intent, higher cost</div>
           <span class="flow-arrow" aria-hidden="true"><Icon name="arrow" size={16} /></span>
           <div class="flow-box is-navy"><strong>More revenue</strong>The number the business counts</div>
         </div>
@@ -186,7 +186,7 @@ const loop = [
       <ol class="loop">
         {loop.map((s, i) => (
           <li class:list={['card', { 'is-navy': s.navy }]}>
-            <span class="ico"><Icon name={s.icon} size={24} /></span>
+            <span class="ico"><Icon name={s.icon} size={20} /></span>
             <span class="step">Step {i + 1}</span>
             <strong>{s.title}</strong>
             <span class="txt">{s.text}</span>
@@ -200,8 +200,8 @@ const loop = [
   <section id="about" class="wrap section about" aria-labelledby="about-title">
     <div class="about-story">
       <span class="chapter">About</span>
-      <h2 id="about-title" class="h2">Agency roots. In-house experience.</h2>
-      <p>I began in digital marketing agencies in Colombo, where I learned to manage client accounts and connect campaign performance to business outcomes. After completing my MBA in Vancouver, I joined Aegon and worked on paid media for Canadian and US financial services. That experience strengthened my approach to conversion measurement, CRM integration, compliance-aware campaign operations and teamwork. I am now looking to bring that combination to a Paid Media Specialist role, whether at an agency or in-house.</p>
+      <h2 id="about-title" class="h2">Each move added a layer.</h2>
+      <p>My degree in Management and Digital Innovation at the University of London set the direction, and each move since has added a layer. At Enfection I learned execution, hands-on across Google, Meta, Shopping and Performance Max. At Kites Global I owned client accounts and learned to judge campaigns by sales, not leads. My MBA in Vancouver added the business lens. At Aegon I brought it together at scale: CRM-connected measurement for regulated financial services, and the automation to run it. Next, I want to bring that to a Paid Media Specialist role, whether at an agency or in-house.</p>
       <div class="actions" style="padding-top:8px">
         <a class="pill pill-fill" href={profile.resume} target="_blank" rel="noopener"><Icon name="download" size={18} />Résumé (PDF)</a>
         <a class="pill pill-line" href={profile.portfolio} target="_blank" rel="noopener"><Icon name="portfolio" size={18} />Portfolio (PDF)</a>
@@ -212,8 +212,8 @@ const loop = [
       <ol>
         {career.map((c) => (
           <li class:list={{ 'is-current': c.current }}>
-            <span class="node"><Icon name={c.icon} size={20} /></span>
-            <span class="entry"><span class="tag num">{c.years}</span><strong>{c.org}</strong><span>{c.role}</span></span>
+            <span class="node"><Icon name={c.icon} size={18} /></span>
+            <span class="entry"><span class="when num">{c.years}</span><strong>{c.org}</strong><span>{c.role}</span></span>
           </li>
         ))}
       </ol>
@@ -252,14 +252,14 @@ const loop = [
       <figure class="card quote is-featured">
         <span class="mark" aria-hidden="true">“</span>
         <blockquote>{featured.quote}</blockquote>
-        <figcaption><span class="avatar" aria-hidden="true">{featured.initials}</span><span><strong>{featured.name}</strong><span class="tag">{featured.role}</span></span></figcaption>
+        <figcaption><span class="avatar" aria-hidden="true">{featured.initials}</span><span><strong>{featured.name}</strong><span class="role">{featured.role}</span></span></figcaption>
       </figure>
       <div class="quotes-side">
         {otherRefs.map((r) => (
           <figure class="card quote">
             <span class="mark" aria-hidden="true">“</span>
             <blockquote>{r.quote}</blockquote>
-            <figcaption><span class="avatar" aria-hidden="true">{r.initials}</span><span><strong>{r.name}</strong><span class="tag">{r.role}</span></span></figcaption>
+            <figcaption><span class="avatar" aria-hidden="true">{r.initials}</span><span><strong>{r.name}</strong><span class="role">{r.role}</span></span></figcaption>
           </figure>
         ))}
       </div>

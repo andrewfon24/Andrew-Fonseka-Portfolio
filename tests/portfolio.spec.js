@@ -36,7 +36,8 @@ test('homepage: role, proof, sections, navigation and metadata', async ({ page }
   await expect(page.locator('#results h2')).toHaveText('Agency experience. In-house discipline. Business outcomes.');
   await expect(page.locator('#approach h2')).toHaveText('Better signals. Better decisions.');
   await expect(page.locator('#aegon h3')).toHaveText('First, make the numbers match. Then make them grow.');
-  await expect(page.locator('#about h2')).toHaveText('Agency roots. In-house experience.');
+  await expect(page.locator('#about h2')).toHaveText('Each move added a layer.');
+  await expect(page.locator('.hero .hero-line')).toHaveText('Paid media measured to the sale, with the automation to run it at scale.');
   const order = await page.locator('main > section[id]').evaluateAll((s) => s.map((x) => x.id));
   expect(order).toEqual(['results', 'approach', 'about', 'toolkit', 'references']);
   expect(await page.locator('#results a.pill').evaluateAll((a) => a.map((x) => x.pathname))).toEqual(slugs.map((s) => `/case-studies/${s}/`));

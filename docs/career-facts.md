@@ -32,6 +32,36 @@ LinkedIn, the résumé, the portfolio PDF and the site follow these rules:
 | Hook lines | Each document keeps its own opening line; all make the same after-the-click point. |
 | Wording | Aegon title is “Intermediate Channel Marketing Specialist (Paid Media)” everywhere. Builder users are “22 colleagues”. Qualified lead rate is “17 pts” in documents and on the site, “17 percentage points” in full sentences (LinkedIn, search snippets). Canadian spelling (behaviour, favour, colour). The portfolio cover says “from a US$5K retail budget to a seven-figure LinkedIn channel” (no US$850 account). |
 
+## Positioning and messaging (27 November 2026)
+
+Andrew chose these in an interview based on Scott Bair’s branding playbook (positioning, messaging hierarchy, voice). The site follows them now; LinkedIn, the résumé and the portfolio PDF follow in a later pass.
+
+| Topic | Decision |
+| --- | --- |
+| Category | Paid media plus automation: a Paid Media Specialist who measures campaigns to the sale and builds the automation to run them at scale. |
+| Audience | Agency roles managing multiple client accounts first; in-house paid media teams second. |
+| The one thing to remember | Measurement to the sale: CRM data connected to bidding, so platforms optimize for real customers. |
+| Hook (site) | “Most ad reports stop at the click. Mine start there.” |
+| One-liner | “Paid media measured to the sale, with the automation to run it at scale.” |
+| Career arc | “Each move added a layer.” Degree (Management and Digital Innovation, University of London, the program’s second cohort) set the direction; Enfection added execution; Kites Global added account ownership judged on sales; the MBA in Vancouver added the business lens; Aegon brought it together at scale in regulated financial services, with CRM measurement and automation. The About timeline stays as it is. |
+| Automation on the site | Supporting proof in the hero one-liner, the “22 colleagues” metric and the Aegon story and case page (the hero builder sentence was removed on 27 Nov at Andrew’s request). No separate section. |
+| Visual signature | None for now; the unslop polish of 27 Nov stands. |
+
+### Core messages and proof
+
+1. **Measured to the sale.** −15% cost per lead at flat spend, +17 pts qualified lead rate, +22% applications (Aegon, H2 2025 to H1 2026); 259 funded gold loans traced through the lead form (Pan Asia Bank).
+2. **I build the systems behind the campaigns.** Apps Script campaign builder used by 22 colleagues for ~200 campaigns; helped move most paid media processes in-house with automation and agentic workflows.
+3. **Agency range, in-house depth.** Four client accounts of my own and five supported at Kites Global across banking, consumer goods, retail and e-commerce; a multi-million-dollar in-house program at Aegon, leading a seven-figure LinkedIn channel.
+
+### Voice
+
+| Attribute | Is | Isn’t |
+| --- | --- | --- |
+| Direct | Says what happened and what it was worth, in plain words. | Blunt about clients or colleagues. |
+| Evidence-led | Every claim carries a figure, period or source. | Hype words, unverifiable superlatives. |
+| Professional | Formal enough for LinkedIn and a hiring manager. | Stiff or jargon-heavy. |
+| Confident | States availability once, as a fact. | Needy (“looking for any opportunity”, repeated asks). |
+
 ## Campaign claims
 
 | Story | Figures |
